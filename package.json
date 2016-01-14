@@ -1,11 +1,11 @@
 {
-  "name": "meanjs",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-  "version": "0.4.2",
+  "name": "VegetableGardenPlanner",
+  "description": "Free vegetable garden planning app",
+  "version": "0.0.1",
   "meanjs-version": "0.4.2",
   "private": false,
   "author": "https://github.com/meanjs/mean/graphs/contributors",
-  "license": "MIT",
+  "license": "GPL3",
   "repository": {
     "type": "git",
     "url": "https://github.com/meanjs/mean.git"
