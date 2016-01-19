@@ -1,11 +1,11 @@
 {
   "name": "VegetableGardenPlanner",
-  "description": "Free vegetable garden planning app",
+  "description": "Making growing your own food easier than ever.",
   "version": "0.0.1",
   "meanjs-version": "0.4.2",
   "private": false,
   "author": "https://github.com/meanjs/mean/graphs/contributors",
-  "license": "GPL3",
+  "license": "AGPL-3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/meanjs/mean.git"
@@ -62,7 +62,8 @@
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.3.7",
     "swig": "^1.4.2",
-    "validator": "^3.41.2"
+    "validator": "^3.41.2",
+		"gm": "~1.21.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.4",

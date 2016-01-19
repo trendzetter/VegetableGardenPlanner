@@ -1,0 +1,21 @@
+<section>
+  <div class="page-header">
+    <h1>plantfamilies</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="plantfamily in vm.plantfamilies" ui-sref="plantfamilies.view({ plantFamilyId: plantfamily._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="plantfamily.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="plantfamily.user" ng-bind="plantfamily.user.displayName"></span>
+        <span ng-if="!plantfamily.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="plantfamily.title"></h4>
+      <p class="list-group-item-text" ng-bind="plantfamily.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.plantfamilies.$resolved && !vm.plantfamilies.length">
+    No plantfamilies yet, why don't you <a ui-sref="plantfamilies.create">create one</a>?
+  </div>
+</section>
