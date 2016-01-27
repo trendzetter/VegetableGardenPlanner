@@ -1,0 +1,21 @@
+<section>
+  <div class="page-header">
+    <h1>crops</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="crop in vm.crops" ui-sref="crops.view({ cropId: crop._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="crop.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="crop.user" ng-bind="crop.user.displayName"></span>
+        <span ng-if="!crop.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="crop.name"></h4>
+      <p class="list-group-item-text" ng-bind="crop.plantfamily.name"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.crops.$resolved && !vm.crops.length">
+    No crops yet, why don't you <a ui-sref="crops.create">create one</a>?
+  </div>
+</section>
