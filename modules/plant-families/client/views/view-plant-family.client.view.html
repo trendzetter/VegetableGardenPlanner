@@ -1,6 +1,6 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.plantfamily.title"></h1>
+    <h1 ng-bind="vm.plantfamily.name"></h1>
   </div>
   <div class="pull-right" ng-show="vm.authentication.user._id == vm.plantfamily.user._id">
     <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
@@ -19,5 +19,4 @@
       <span ng-if="!vm.plantfamily.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.plantfamily.content"></p>
 </section>

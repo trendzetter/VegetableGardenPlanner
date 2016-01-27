@@ -11,8 +11,7 @@
         <span ng-if="plantfamily.user" ng-bind="plantfamily.user.displayName"></span>
         <span ng-if="!plantfamily.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="plantfamily.title"></h4>
-      <p class="list-group-item-text" ng-bind="plantfamily.content"></p>
+      <h4 class="list-group-item-heading" ng-bind="plantfamily.name"></h4>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.plantfamilies.$resolved && !vm.plantfamilies.length">
