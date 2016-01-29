@@ -1,0 +1,90 @@
+.dragtool {
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+}
+
+.worksheet {
+    top: 50px;
+    left: 50px;
+}
+
+.hweg {
+    background: url('/modules/gardens/img/hweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
+}
+
+.vweg {
+    background: url('/modules/gardens/img/vweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
+}
+
+.hbed {
+    background: url('/modules/gardens/img/bed.jpeg') repeat scroll 0 0 transparent;
+}
+
+.vbed {
+    background: url('/modules/gardens/img/bed.jpeg') repeat scroll 0 0 transparent;
+}
+
+.akke {
+    background: url('/modules/gardens/img/akker.gif') repeat scroll 0 0 transparent;
+}
+
+.gardenpart {
+    z-index: 1;
+    position: absolute;
+}
+.content {
+    margin-top: 0;
+}
+
+.creategarden {
+    position: relative;
+    background-color: green;
+}
+
+.layoutgarden {
+    position: relative;
+  /*  background: url("/modules/gardens/img/il-grid-trans.png") repeat scroll left top #CCFF99 ;*/
+    background-color: rgba(126,224,81,0.5);
+}
+
+.garden {
+    position: absolute;
+    clear: both;
+    background-color: green;
+}
+
+.ui-toolbox-hweg {
+    background: rgba(0, 0, 0, 0) url("/modules/gardens/img/hweg.gif") no-repeat scroll 0 0 / 100% 100%;
+    height: 35px;
+    padding: 0;
+    width: 140px;
+}
+.ui-toolbox-vweg {
+    background: rgba(0, 0, 0, 0) url("/modules/gardens/img/vweg.gif") no-repeat scroll 0 0 / 100% 100%;
+    height: 140px;
+    padding: 0;
+    width: 35px;
+}
+.ui-toolbox-vbed {
+    background: transparent url("/modules/gardens/img/bed.jpeg") repeat scroll 0 0;
+    height: 120px;
+    padding: 0;
+    width: 60px;
+}
+.ui-toolbox-toolboxvfix {
+    float: right;
+    padding-right: 20px;
+}
+.ui-toolbox-hbed {
+  background: transparent url("/modules/gardens/img/bed.jpeg") repeat scroll 0 0;
+  height: 60px;
+  padding: 0;
+  width: 120px;
+}
+.ui-toolbox-akker {
+    background: transparent url("/modules/gardens/img/akker.gif") repeat scroll 0 0;
+    height: 80px;
+    padding: 0;
+    width: 80px;
+}

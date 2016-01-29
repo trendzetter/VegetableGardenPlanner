@@ -10,21 +10,25 @@ var mongoose = require('mongoose'),
  * Crop Schema
  */
 var CropSchema = new Schema({
+  appVersion: {
+    type: String,
+    default: GLOBAL.version
+  },
+  name: {
+    type: String,
+    default: '',
+    required: 'Please fill Plant family name',
+    trim: true
+  },
   created: {
     type: Date,
     default: Date.now
   },
-  title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
+	plantfamily: {
+	  type: Schema.ObjectId,
+	  ref: 'PlantFamily',
+	  required: 'Please select a plant family'
+	},
   user: {
     type: Schema.ObjectId,
     ref: 'User'

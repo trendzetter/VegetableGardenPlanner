@@ -1,0 +1,81 @@
+.grid {
+    background: url("/modules/gardens/client/img/il-grid-trans.png") repeat scroll left top #fff;
+}
+body {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	margin: 0;
+
+	padding-left: 50px;
+	padding-top: 100px;
+}
+.ruler {
+    background-color: red;
+	background: rgba(255,255,255,1);
+	color: #444;
+	font-family: source code pro, "Arial Narrow", "Helvetica Neue", Helvetica, Arial, Veranda, sans-serif;
+	font-size: 12px;
+	line-height: 14px;
+	overflow: hidden;
+}
+
+.hRule {
+	position: absolute;
+	width: 100%;
+	background-image: url('/modules/gardens/client/img/meetlat_h.gif');
+    top:75px;height: 25px;
+	z-index: 9;
+}
+
+.hRule1 {
+    position:absolute;
+    width: 100%;
+    z-index: 9;
+    top:50px;
+    height: 25px;
+    margin-left: -4px;
+}
+
+.hRuleBox {
+    height: 25px;
+    width: 50px;
+    display: block;
+    float:left;
+}
+
+.vRuleBox {
+    height: 50px;
+    width: 25px;
+    display: block;
+}
+
+.vRule1 {
+    position: absolute;
+    min-height: 100%;
+    left: 0;
+    z-index: 9;
+    width: 25px;
+    top:100px;
+    height: 25px;
+    margin-top: -8px;
+}
+
+.vRule {
+	position: absolute;
+	min-height: 100%;
+    background-image: url('/modules/gardens/client/img/meetlat_v.gif');
+	z-index: 9;
+    top:100px;width: 25px; left: 25px; height: 100%;
+}
+.corner {
+	position: absolute;
+    top:50px;width: 50px; height: 50px;
+	left: 0;
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+	z-index: 8;
+}

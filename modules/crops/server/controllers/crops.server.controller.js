@@ -41,6 +41,7 @@ exports.update = function (req, res) {
 
   crop.title = req.body.title;
   crop.content = req.body.content;
+  crop.plantfamily = mongoose.Types.ObjectId(req.body.plantfamily._id);
 
   crop.save(function (err) {
     if (err) {
