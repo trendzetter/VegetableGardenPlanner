@@ -10,23 +10,23 @@
 }
 
 .hweg {
-    background: url('/modules/gardens/img/hweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
+    background: url('/modules/gardens/client/img/hweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
 }
 
 .vweg {
-    background: url('/modules/gardens/img/vweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
+    background: url('/modules/gardens/client/img/vweg.gif') no-repeat scroll 0 0 / 100% 100% rgba(0, 0, 0, 0);
 }
 
 .hbed {
-    background: url('/modules/gardens/img/bed.jpeg') repeat scroll 0 0 transparent;
+    background: url('/modules/gardens/client/img/bed.jpeg') repeat scroll 0 0 transparent;
 }
 
 .vbed {
-    background: url('/modules/gardens/img/bed.jpeg') repeat scroll 0 0 transparent;
+    background: url('/modules/gardens/client/img/bed.jpeg') repeat scroll 0 0 transparent;
 }
 
 .akke {
-    background: url('/modules/gardens/img/akker.gif') repeat scroll 0 0 transparent;
+    background: url('/modules/gardens/client/img/akker.gif') repeat scroll 0 0 transparent;
 }
 
 .gardenpart {
@@ -55,19 +55,19 @@
 }
 
 .ui-toolbox-hweg {
-    background: rgba(0, 0, 0, 0) url("/modules/gardens/img/hweg.gif") no-repeat scroll 0 0 / 100% 100%;
+    background: rgba(0, 0, 0, 0) url("/modules/gardens/client/img/hweg.gif") no-repeat scroll 0 0 / 100% 100%;
     height: 35px;
     padding: 0;
     width: 140px;
 }
 .ui-toolbox-vweg {
-    background: rgba(0, 0, 0, 0) url("/modules/gardens/img/vweg.gif") no-repeat scroll 0 0 / 100% 100%;
+    background: rgba(0, 0, 0, 0) url("/modules/gardens/client/img/vweg.gif") no-repeat scroll 0 0 / 100% 100%;
     height: 140px;
     padding: 0;
     width: 35px;
 }
 .ui-toolbox-vbed {
-    background: transparent url("/modules/gardens/img/bed.jpeg") repeat scroll 0 0;
+    background: transparent url("/modules/gardens/client/img/bed.jpeg") repeat scroll 0 0;
     height: 120px;
     padding: 0;
     width: 60px;
@@ -77,13 +77,13 @@
     padding-right: 20px;
 }
 .ui-toolbox-hbed {
-  background: transparent url("/modules/gardens/img/bed.jpeg") repeat scroll 0 0;
+  background: transparent url("/modules/gardens/client/img/bed.jpeg") repeat scroll 0 0;
   height: 60px;
   padding: 0;
   width: 120px;
 }
 .ui-toolbox-akker {
-    background: transparent url("/modules/gardens/img/akker.gif") repeat scroll 0 0;
+    background: transparent url("/modules/gardens/client/img/akker.gif") repeat scroll 0 0;
     height: 80px;
     padding: 0;
     width: 80px;

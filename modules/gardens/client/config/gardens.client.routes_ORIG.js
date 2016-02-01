@@ -22,7 +22,7 @@
       })
       .state('gardens.create', {
         url: '/create',
-        templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
+        templateUrl: 'modules/gardens/client/views/create-garden.client.view.html',
         data: {
           roles: ['user', 'admin']
         }

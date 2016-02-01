@@ -1,23 +1,42 @@
-<section>
-  <div class="page-header">
-    <h1 ng-bind="vm.garden.title"></h1>
-  </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.garden.user._id">
-    <a class="btn btn-primary" ui-sref="gardens.edit({ gardenId: vm.garden._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.garden.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.garden.user" ng-bind="vm.garden.user.displayName"></span>
-      <span ng-if="!vm.garden.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.garden.content"></p>
-</section>
+<section class="content">
+    <section class="container">
+<section data-ng-controller="GardensController" data-ng-init="findOne()" >
+	<div class="page-header">
+    <div class="pull-right" >
+        Select date: <input calendar="edit" ng-model='selectedDate' />
+        <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/edit/{{selectedDate}}">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/layout/{{selectedDate}}">
+            <i class="glyphicon glyphicon-pencil"></i>
+        </a>
+      <!--  <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/access">
+            <i class="glyphicon glyphicon-leaf"></i>
+        </a>-->
+        <a class="btn btn-primary" ng-really-message="Are you sure you want to delete {{garden.name}}? All plantings will be lost forever." ng-really-click="remove()">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+		<h1 data-ng-bind="garden.name"></h1>
+
+	</div>
+
+    <div class="col-md-12">
+        <div id="garden" style="width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px;" class="garden" >
+            <a data-ng-href="#!/gardenparts/{{gardenpart.bk}}/{{selectedDate}}" gardenpart ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" >
+                <div planting ng-repeat="planting in gardenpart.plantings" ng-init="planting=planting"
+                     popover-template="modules/gardens/views/planting-popover.client.view.html" popover-template-trigger="customEvent"
+                     ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" class="planting" style="background: url({{planting.plantVariety.image}}); width: {{ planting.elemwidth }}px; height: {{ planting.elemheight }}px; top: {{ planting.elemtop }}px; left: {{ planting.elemleft }}px;" />
+            </a>
+    </div>
+
+
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="garden.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="garden.user.displayName"></span>
+		</em>
+	</small>
+</section>        </section></section>

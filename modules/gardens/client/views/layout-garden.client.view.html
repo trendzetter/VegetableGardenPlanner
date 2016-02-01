@@ -1,0 +1,31 @@
+<rulers />
+<section data-ng-controller="GardenversionsController" data-ng-init="findOneVersion()"  id="garden" style="width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px; top: {{ garden.elemtop }}px; left: {{ garden.elemleft }}px;" class="layoutgarden">
+        <div popover-template-placement="right" popover-template="modules/gardens/views/popover.client.view.html" popover-template-trigger="customEvent"
+             ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" context-menu="menuOptions"
+             id="id{{gardenpart._id}}" gardenpart='layout' ng-repeat="gardenpart in gardenparts"  ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" />
+    <div data-ng-controller="ToolboxController" ng-init="toolboxInit()">
+
+        <div  toolbox dragtool="4" id="toolbox" >
+                <form style="padding:20px" class="form-horizontal" data-ng-submit="updateParts()" novalidate >
+                    <fieldset>
+                            <input type="submit" value="Update" class="btn btn-default">
+                            <a class="btn btn-primary" href="javascript:history.back()">
+                                <i class="glyphicon glyphicon-step-backward"></i>
+                            </a>
+
+                        <div data-ng-show="error" class="text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                    </fieldset>
+                </form>
+            <br /><div title="Paden zijn 30 cm breed zodat ze bewandelbaar zijn." class="tool ui-widget-content ui-toolbox-hweg" id="hweg"><h6 class="ui-widget-header">Horizontaal pad</h6></div>
+            <br /><div title="Een zaaibed is maximum 120cm breed zodat het steeds overal bereikbaar is voor het wieden." class="tool ui-widget-content ui-toolbox-hbed" id="hbed"><h6 class="ui-widget-header">Horizontaal zaaibed</h6></div>
+            <div>
+                <div id="toolboxvfix" class="ui-toolbox-toolboxvfix"><br /><div title="Paden zijn 30 cm breed zodat ze bewandelbaar zijn." class="tool ui-widget-content ui-toolbox-vweg" id="vweg"><h6 class="ui-widget-header">Verti- kaal pad</h6></div></div>
+                <br /><div title="Een zaaibed is maximum 120cm breed zodat het steeds overal bereikbaar is voor het wieden." class="tool ui-widget-content ui-toolbox-vbed" id="vbed"><h6 class="ui-widget-header">Vertikaal zaaibed</h6></div>
+            </div>
+            <br /><div class="tool ui-widget-content ui-toolbox-akker" id="akke"><h6 class="ui-widget-header">Akker</h6></div>
+            <hr>
+        </div>
+    </div>
+</section>

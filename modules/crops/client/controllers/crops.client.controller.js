@@ -18,9 +18,9 @@
     vm.save = save;
 
     //adding the list of plantfamilies
-    if($state.current.name === 'crops.edit'){
+  //  if($state.current.name === 'crops.edit'){
       vm.plantfamilies = PlantFamilyService.query();
-    }
+    //}
 
     // Remove existing Crop
     function remove() {

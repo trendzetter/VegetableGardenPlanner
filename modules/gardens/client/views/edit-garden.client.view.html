@@ -1,0 +1,43 @@
+<rulers />
+<div data-ng-controller="GardenversionsController" data-ng-init="findOneVersion()" garden id="garden" style="z-index: 1040; width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px; top: {{ garden.elemtop }}px; left: {{ garden.elemleft }}px;" class="layoutgarden" >
+    <div gardenpart  ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" />
+
+</div>
+<form  data-ng-controller="EditformController" dragtool="2" class="form-horizontal" data-ng-submit="updateGarden()" novalidate>
+    <fieldset>
+        <br />
+        <div class="input-group">
+            <input ng-click="updateGarden()" value="Update" class="btn btn-primary" >
+            <a class="btn btn-default" ui-sref="viewGarden({'bk': bk, 'selectedDate': selectedDate})">
+                <i class="glyphicon glyphicon-step-backward"></i>
+            </a>
+        </div>
+
+        <div class="input-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="garden.name" id="name" class="form-control" placeholder="Name" required>
+            </div>
+            <label class="control-label" for="name">Keepers</label>
+            <div class="controls">
+              <input type="text" myenter data-ng-model="newkeeper" />
+            </div>
+            <div class="controls">
+                <span ng-repeat="keeper in garden.keepers" >{{keeper.username}}<el ng-show="!$last">,<el></span>
+            </div>
+            <label class="control-label" for="name">Visitors</label>
+            <div class="controls">
+              <input type="text" myenter data-ng-model="newvisitor" />
+            </div>
+            <div class="controls">
+                <span ng-repeat="visitor in garden.visitors" >{{visitor.username}}<el ng-show="!$last">,<el></span>
+            </div>
+        </div>
+
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+        <br />
+    </fieldset>
+    <br />
+</form>

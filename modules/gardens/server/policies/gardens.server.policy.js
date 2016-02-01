@@ -29,6 +29,18 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/gardens/:gardenId',
       permissions: ['get']
+    }, {
+      resources: '/api/gardens/:bk/:selectedDate',
+      permissions: ['get','put']
+    }, {
+      resources: '/api/gardenversions/:gardenId/:selectedDate',
+      permissions: ['get']
+    }, {
+      resources: '/api/gardenparts/:bk/:selectedDate',
+      permissions: ['put', 'post']
+    }, {
+      resources: '/api/gardenparts/delete/:bk/:selectedDate',
+      permissions: ['post']
     }]
   }, {
     roles: ['guest'],

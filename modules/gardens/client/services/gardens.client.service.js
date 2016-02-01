@@ -5,11 +5,12 @@
     .module('gardens.services')
     .factory('GardensService', GardensService);
 
-  GardensService.$inject = ['$resource'];
+  GardensService.$inject = ['$resource','$stateParams'];
 
-  function GardensService($resource) {
-    return $resource('api/gardens/:gardenId', {
-      gardenId: '@_id'
+  function GardensService($resource,$stateParams) {
+    return $resource('api/gardens/:bk/:selectedDate', {
+      bk: '@bk',
+      selectedDate: $stateParams.selectedDate
     }, {
       update: {
         method: 'PUT'
