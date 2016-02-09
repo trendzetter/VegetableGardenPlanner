@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gardens').controller('GardenpartController', ['$scope', '$stateParams', '$location', 'Authentication', 'Gardenpart',
+angular.module('gardens').controller('GardenpartController', ['$scope', '$stateParams', '$location', 'Authentication', 'GardenpartService',
 	function($scope, $stateParams, $location, Authentication, Gardenpart) {
         $scope.menuOptions = [];
         /* For new plantings */

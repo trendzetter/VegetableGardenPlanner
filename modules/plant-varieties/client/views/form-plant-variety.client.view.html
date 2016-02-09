@@ -1,0 +1,76 @@
+<section class="content">
+  <section class="container">
+    <section>
+      <div class="page-header">
+        <h1>{{vm.plantvariety._id ? 'Edit PlantVariety' : 'New PlantVariety'}}</h1>
+      </div>
+      <div class="col-md-12">
+        <form name="vm.form.plantvarietyForm" class="form-horizontal" ng-submit="vm.save(vm.form.plantvarietyForm.$valid)" novalidate>
+          <fieldset>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="name">Naam</label>
+              <input name="title" type="text" ng-model="vm.plantvariety.name" id="name" class="form-control" placeholder="Naam" required>
+              <div ng-messages="vm.form.plantvarietyForm.name.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">PlantVariety name is required.</p>
+              </div>
+            </div>
+            <label class="control-label" for="crop">Groente:</label>
+            <div class="controls">
+              <select data-ng-options="crop._id as crop.name for crop in vm.crops" data-ng-model="vm.plantvariety.crop" id="crop"></select>
+            </div>
+            <label class="control-label" for="DOYstartSow">Start zaaitijd (dag van het jaar)</label>
+            <div class="controls">
+              <input doypicker type="text" data-ng-model="vm.plantvariety.DOYstartSow" id="DOYstartSow" class="form-control" required>
+            </div>
+            <label class="control-label" for="DOYendSow">Einde zaaitijd (dag van het jaar)</label>
+            <div class="controls">
+              <input doypicker  type="text" data-ng-model="vm.plantvariety.DOYendSow" id="DOYendSow" class="form-control" required>
+            </div>
+            <label class="control-label" for="minGrowthDuration">Minimum aantal dagen groei:</label>
+            <div class="controls">
+              <input   type="text" data-ng-model="vm.plantvariety.minGrowthDuration" id="minGrowthDuration" class="form-control" required>
+            </div>
+            <label class="control-label" for="maxGrowthDuration">Maximum dagen groei:</label>
+            <div class="controls">
+              <input type="text" data-ng-model="vm.plantvariety.maxGrowthDuration" id="maxGrowthDuration" class="form-control" required>
+            </div>
+            <label class="control-label" for="cmInRow">Afstand in de rij (cm)</label>
+            <div class="controls">
+              <input   type="text" data-ng-model="vm.plantvariety.cmInRow" id="cmInRow" class="form-control" required>
+            </div>
+            <label class="control-label" for="cmBetweenRow">Afstand tussen de rijen (cm)</label>
+            <div class="controls">
+              <input type="text" data-ng-model="vm.plantvariety.cmBetweenRow" id="cmBetweenRow" class="form-control" required>
+            </div>
+            <label class="control-label" for="file">Afbeelding</label>
+            <div class="text-center form-group">
+              <div class="text-center img-container col-md-4">
+                <img ng-cropper ng-options="options" ng-show="{{showEvent}}" ng-hide="{{hideEvent}}" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:300px">
+              </div>
+              <span class="btn btn-default btn-file">
+                  Select Image <input type="file" nv-file-select uploader="uploader" class="ng-pristine ng-invalid ng-invalid-required">
+              </span>
+              <i class="" ng-show="varietyForm.file.$error.required">*required</i>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="file">Voorbeeld</label>
+              <div class="preview-container col-md-4">
+                <img ng-show="vm.plantvariety.image" ng-src="{{vm.plantvariety.image}}">
+              </div>
+            </div>
+            <div ng-show="error" class="text-center text-danger">
+              <strong ng-bind="error"></strong>
+            </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">{{vm.plantvariety._id ? 'Update' : 'Create'}}</button>
+            <a class="btn btn-default" ui-sref="plant-varieties.view({'plantVarietyId': vm.plantvariety._id})" >Annuleren</a>
+          </div>
+          <div ng-show="vm.error" class="text-danger">
+            <strong ng-bind="vm.error"></strong>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+</section>
+</section>

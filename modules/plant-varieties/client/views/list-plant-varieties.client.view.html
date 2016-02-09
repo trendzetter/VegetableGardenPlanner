@@ -1,0 +1,25 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>PlantVarieties</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="plantvariety in vm.plantvarieties" ui-sref="plant-varieties.view({ plantVarietyId: plantvariety._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="plantvariety.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="plantvariety.user" ng-bind="plantvariety.user.displayName"></span>
+        <span ng-if="!plantvariety.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="plantvariety.name"></h4>
+      <p class="list-group-item-text" ng-bind="plantvariety.crop.name"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.plant-varieties.$resolved && !vm.plant-varieties.length">
+    No plant-varieties yet, why don't you <a ui-sref="plant-varieties.create">create one</a>?
+  </div>
+</section>
+</section>
+</section>

@@ -9,9 +9,8 @@ angular.module('gardens').controller('EditformController', ['$scope','$rootScope
         };
         $scope.garden = Gardendata.getGarden();
 				$scope.garden.$promise.then(function(){
-					console.log('garden'+$scope.garden.bk)
 					$scope.bk = $scope.garden.bk;
-				})
+				});
 
 
 				$scope.addKeeper = function(){

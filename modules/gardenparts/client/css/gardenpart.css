@@ -1,0 +1,20 @@
+.planting {
+    position: absolute;
+}
+
+.newPlanting {
+    color:  rgba(0, 0, 255, 1);
+}
+.plantingpart {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+body > .dropdown {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-backdrop {
+    bottom: 0;
+    position: fixed;
+}
+

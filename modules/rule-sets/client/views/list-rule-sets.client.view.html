@@ -1,0 +1,25 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>Articles</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="ruleset in vm.rulesets" ui-sref="rulesets.view({ ruleSetId: ruleset._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="ruleset.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="ruleset.user" ng-bind="ruleset.user.displayName"></span>
+        <span ng-if="!ruleset.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="ruleset.title"></h4>
+      <p class="list-group-item-text" ng-bind="ruleset.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.rulesets.$resolved && !vm.rulesets.length">
+    No rulesets yet, why don't you <a ui-sref="rulesets.create">create one</a>?
+  </div>
+</section>
+</section>
+</section>

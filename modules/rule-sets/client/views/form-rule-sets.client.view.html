@@ -1,0 +1,58 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>{{vm.ruleset._id ? 'Edit rule set' : 'New rule set'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.rulesetForm" class="form-horizontal" ng-submit="vm.save(vm.form.rulesetForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Naam</label>
+          <input name="title" type="text" ng-model="vm.ruleset.name" id="title" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.rulesetForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Rule set name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="name">Orden de gewassen in groentengroepen:</label>
+            <div class="controls">
+              <div class="panel panel-default col-md-6" ng-repeat="cropgroup in vm.cropgroups">
+                <div class="panel-heading"><input type="text" ng-model="cropgroup.name" /></div>
+                <div class="panel-body" btf-dragon="crop in cropgroup.crops">
+                  <div class="btn btn-xs btn-success" >{{crop.name}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="controls">
+              <input class="btn btn-default" ng-click="newCropgroup()" value="Groetengroep toevoegen">
+          </div>
+          <br />
+        <div class="form-group">
+        <div class="controls" ng-repeat="rule in vm.ruleSet.rotationrules">
+            Type van regel:   <select  data-ng-model="rule.ruletype">
+                                <option value="SuccessiveCrop">Opeenvolgende gewassen</option>
+                                <option value="YearsBetweenCultivation">Jaren tussen teelten</option>
+                            </select>
+            Groentengroep: <select data-ng-options="cropgroup.name for cropgroup in vm.cropgroups" data-ng-model="rule.cropgroup"></select>
+            Vorige groetengroep: <select data-ng-options="cropgroup.name for cropgroup in vm.cropgroups" data-ng-model="rule.previousCropgroup"></select>
+            <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" >Years: <select  data-ng-model="rule.yearsBetween">
+                <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            </select></span>
+        </div>
+        <div class="controls">
+            <input class="btn btn-default" ng-click="newRule()" value="Regel toevoegen">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.ruleset._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+</section>
+</section>

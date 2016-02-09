@@ -6,7 +6,9 @@ module.exports = {
       css: [
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-        'public/lib/jquery-ui/themes/smoothness/jquery-ui.css'
+        'public/lib/jquery-ui/themes/smoothness/jquery-ui.css',
+        'public/lib/cropper/dist/cropper.css',
+        'public/lib/ng-cropper/dist/ngCropper.all.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.js',
@@ -18,7 +20,10 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/angular-dragon-drop/dragon-drop.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/cropper/dist/cropper.js',
+        'public/lib/ng-cropper/dist/ngCropper.all.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']

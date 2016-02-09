@@ -1,0 +1,5 @@
+<section data-ng-controller="PlantingpopoverController">
+    <label class="control-label" >{{ (planting.elemwidth/planting.cmBetweenRow*planting.elemheight/planting.cmInRow) | number: 0 }} {{planting.plantVariety.name}} </label>
+    <p>Planted on: {{ planting.validFrom | date: 'd-M-yy'}}</p>
+    <img class="thumb ng-hide" ng-src="{{planting.plantVariety.image}}" ng-show="planting.plantVariety.image != null">
+</section>

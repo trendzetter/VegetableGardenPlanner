@@ -1,0 +1,59 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.plantvariety.title"></h1>
+  </div>
+  <div class="pull-right" ng-show="vm.authentication.user._id == vm.plantvariety.user._id">
+    <a class="btn btn-primary" ui-sref="plant-varieties.list">
+      <i class="glyphicon glyphicon-step-backward"></i>
+    </a>
+    <a class="btn btn-default" ui-sref="plant-varieties.edit({ plantVarietyId: vm.plantvariety._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-danger" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <label class="control-label" >Start zaaitijd (dag van het jaar): </label>
+  <div class="controls">
+      {{ vm.plantvariety.DOYstartSow | date: 'MMMM d' }}
+  </div>
+  <label class="control-label" >Einde zaaitijd (dag van het jaar):</label>
+  <div class="controls">
+      {{ vm.plantvariety.DOYendSow | date: 'MMMM d' }}
+  </div>
+  <label class="control-label" >Minimum aantal dagen groei:</label>
+  <div class="controls">
+      {{ vm.plantvariety.minGrowthDuration }}
+  </div>
+  <label class="control-label" >Maximum aantal dagen groei:</label>
+  <div class="controls">
+      {{ vm.plantvariety.maxGrowthDuration }}
+  </div>
+  <label class="control-label" >Afstand in de rij (cm):</label>
+  <div class="controls">
+      {{ vm.plantvariety.cmInRow }}
+  </div>
+  <label class="control-label" >Afstand tussen de rijen (cm):</label>
+  <div class="controls">
+      {{ vm.plantvariety.cmBetweenRow }}
+  </div>
+  <div class="controls">
+          <div class="preview-container col-md-6">
+              <img ng-src="{{ vm.plantvariety.image }}">
+          </div>
+    </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.plantvariety.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.plantvariety.user" ng-bind="vm.plantvariety.user.displayName"></span>
+      <span ng-if="!vm.plantvariety.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.plantvariety.content"></p>
+</section>
+</section>
+</section>

@@ -23,7 +23,7 @@
 
     <div class="col-md-12">
         <div id="garden" style="width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px;" class="garden" >
-            <a data-ng-href="#!/gardenparts/{{gardenpart.bk}}/{{selectedDate}}" gardenpart ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" >
+            <a data-ng-href="/gardenparts/{{gardenpart.bk}}/{{selectedDate}}" gardenpart ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" >
                 <div planting ng-repeat="planting in gardenpart.plantings" ng-init="planting=planting"
                      popover-template="modules/gardens/views/planting-popover.client.view.html" popover-template-trigger="customEvent"
                      ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" class="planting" style="background: url({{planting.plantVariety.image}}); width: {{ planting.elemwidth }}px; height: {{ planting.elemheight }}px; top: {{ planting.elemtop }}px; left: {{ planting.elemleft }}px;" />
