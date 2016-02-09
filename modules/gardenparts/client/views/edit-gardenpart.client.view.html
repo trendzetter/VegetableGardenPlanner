@@ -15,53 +15,31 @@
         <form class="form-horizontal" data-ng-submit="updatePlantings()" novalidate>
             <fieldset>
                 <div class="input-group">
-                    <input type="submit" value="Save" class="btn btn-default">
-                    <a class="btn btn-primary" ng-click="zoomIn()">
+                    <a class="btn btn-default" ng-click="zoomIn()">
                         <i class="glyphicon glyphicon-zoom-in"></i>
                     </a>
-                    <a class="btn btn-primary" ng-click="zoomOut()">
+                    <a class="btn btn-default" ng-click="zoomOut()">
                         <i class="glyphicon glyphicon-zoom-out"></i>
                     </a>
-                    <a class="btn btn-primary" href="/#!/gardens/{{garden.bk}}/{{date}}">
+                    <a class="btn btn-default" ui-sref="viewGarden({'bk': garden.bk, 'selectedDate': date})">
                         <i class="glyphicon glyphicon-step-backward"></i>
                     </a>
+                    <input type="submit" value="Save" class="btn btn-primary">
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>
                 </div>
             </fieldset>
         </form>
-        <uib-accordion id="a1">
-            <uib-accordion-group ng-repeat="crop in crops" heading="{{crop.name}}">
-                <uib-accordion id="a2">
-                    <uib-accordion-group heading="Nested Section 1">Foo</uib-accordion-group>
-                    <uib-accordion-group heading="Nested Section 2">Foo</uib-accordion-group>
-                    <uib-accordion-group heading="Nested Section 3">Foo</uib-accordion-group>
+        <uib-accordion id="crops">
+            <uib-accordion-group ng-repeat="crop in crops" heading="{{crop.name}}" ng-init="status.open = $first" is-open="status.open">
+                <uib-accordion id="plantvarieties">
+                    <uib-accordion-group ng-repeat="plantvariety in crop.plantvarieties" ng-init="file=plantvariety.image" heading="{{plantvariety.name}}" ng-init="status.open = $first" is-open="status.open">
+                      <img plantvarietyimage ng-click="plantVarietyClicked()" class="thumb ng-hide" ng-src="{{plantvariety.image}}" ng-show="file != null" >
+                      Afstand tussen de rijen: {{ plantvariety.cmBetweenRow }}
+                    </uib-accordion-group>
                  </uib-accordion>
             </uib-accordion-group>
         </uib-accordion>
-
-      <!--  <v-accordion class="vAccordion--default" onexpand="expandCallback(index, id)"  control="accordion">
-            <v-pane ng-repeat="crop in crops" >
-                <v-pane-header>
-                    {{ crop.name }}
-                </v-pane-header>
-                <v-pane-content>
-                     <v-accordion ng-if="crop.plantvarieties">
-                         <v-pane ng-repeat="plantvariety in crop.plantvarieties" ng-init="file=plantvariety.image" expanded="$first">
-                             <v-pane-header>
-                                 {{ plantvariety.name }}
-                             </v-pane-header>
-                             <v-pane-content >
-                                <img plantvarietyimage ng-click="plantVarietyClicked()" class="thumb ng-hide" ng-src="{{plantvariety.image}}" ng-show="file != null">
-                                Afstand tussen de rijen: {{ plantvariety.cmBetweenRow }}
-                             </v-pane-content>
-                         </v-pane>
-                     </v-accordion>
-                </v-pane-content>
-            </v-pane>
-
-        </v-accordion>-->
-
     </div>
 </section>

@@ -8,7 +8,7 @@ angular.module('gardens').directive('dragtool', [
     return {
       restrict: 'A',
       link: function postLink(scope, elem, attrs) {
-        var css = { 'z-index': '1040','left': window.innerWidth/2, 'width': '220px'};
+        var css = { 'z-index': '1040','left': window.innerWidth/2, 'width': '240px'};
         elem.css(css);
         elem.draggable(draggableConfig);
         elem.addClass('col-md-'+attrs.dragtool+' panel panel-default dragtool');

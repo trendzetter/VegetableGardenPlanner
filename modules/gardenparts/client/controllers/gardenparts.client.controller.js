@@ -194,7 +194,6 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 													var planting = pp[j];
 													planting.elemtop = parseInt(planting.elemtop) - gardenparttop;
 													planting.elemleft = parseInt(planting.elemleft) - gardenpartleft;
-													//planting.color = 'FFFF00';
 													//assign a cropgroup to the past plantings
 													for(var m=0;m<ruleSet.cropgroups.length;m++){
 														if(ruleSet.cropgroups[m].crops.indexOf(planting.plantVariety.crop)!==-1){
