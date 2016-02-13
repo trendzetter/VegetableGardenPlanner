@@ -19,7 +19,7 @@
             <div class="controls">
               <div class="panel panel-default col-md-6" ng-repeat="cropgroup in vm.cropgroups">
                 <div class="panel-heading"><input type="text" ng-model="cropgroup.name" /></div>
-                <div class="panel-body" btf-dragon="crop in cropgroup.crops">
+                <div class="panel-body" data-dragon="crop in cropgroup.crops">
                   <div class="btn btn-xs btn-success" >{{crop.name}}</div>
                 </div>
               </div>

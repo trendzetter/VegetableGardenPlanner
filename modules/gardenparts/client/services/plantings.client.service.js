@@ -2,7 +2,7 @@
 
 angular.module('gardenparts').factory('Plantings', ['$resource',
     function($resource) {
-        return $resource('plantings/:bk/:selectedDate', { selectedDate: '@selectedDate', bk: '@bk' //gardenId: '@_id',
+        return $resource('api/plantings/:bk/:selectedDate', { selectedDate: '@selectedDate', bk: '@bk' //gardenId: '@_id',
         }, {
             createPlantings: {
                 method: 'PUT',
