@@ -15,22 +15,27 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 				$scope.cropClicked = function(crop){
 					console.log('crop: '+JSON.stringify(crop));
 					$scope.rotationAdvice(crop);
-				}
-
-				$scope.expandCallback = function (index, id) {
-					console.log('crop: '+$scope.crops[index]._id);
-					$scope.rotationAdvice($scope.crops[index]._id);
 				};
 
-				$scope.rotationAdvice = function(crop){
-					console.log("calculating the advice!");
+				function cropgroupByCrop(crop){
 					var cropgroup=false;
+					loop:
 					for(var c=0;c<$scope.ruleSet.cropgroups.length;c++){
-						if($scope.ruleSet.cropgroups[c].crops.indexOf(crop)!==-1){
-							cropgroup = $scope.ruleSet.cropgroups[c]._id;
-							break;
-						}
+							var crops = $scope.ruleSet.cropgroups[c].crops;
+							for(var d=0; d<crops.length;d++){
+								if(crops[d]._id === crop){
+									cropgroup = $scope.ruleSet.cropgroups[c]._id;
+									break loop;
+								}
+							}
 					}
+					return cropgroup;
+				}
+
+				$scope.rotationAdvice = function(crop){
+					console.log("calculating the advice! crop:" +crop);
+					var cropgroup = cropgroupByCrop(crop);
+					console.log("calculating the advice! cropgroup:" +cropgroup);
 					for(var i = 0;i<$scope.pastplantings.length;i++){
 						var planting = $scope.pastplantings[i];
 						planting.greenlevel = null; planting.redlevel = null;
@@ -39,16 +44,17 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 						//opacity inverse linked to time past since planting
 						planting.opacity = 1-(yearsApart*yearsApart/36);
 
-						if(yearsApart < 2  && cropgroup ===planting.cropgroup){
+						if(yearsApart < 2  && cropgroup === planting.cropgroup){
 							planting.greenlevel = 0; planting.redlevel = 255;
 							continue;
 						}
 
 						for(var k=0;k<$scope.ruleSet.rotationrules.length;k++){
 							console.log('cropgroup'+cropgroup +
-							 '$scope.ruleSet.rotationrules[k].cropgroup'+$scope.ruleSet.rotationrules[k].cropgroup);
-
+							 'rotationrules[k].cropgroup'+$scope.ruleSet.rotationrules[k].cropgroup);
+							 console.log('previousCropgroup:'+$scope.ruleSet.rotationrules[k].previousCropgroup+' planting.cropgroup: '+planting.cropgroup);
 							if(cropgroup===$scope.ruleSet.rotationrules[k].cropgroup&&$scope.ruleSet.rotationrules[k].previousCropgroup === planting.cropgroup){
+								console.log('rule applies, checking time');
 								if($scope.ruleSet.rotationrules[k].yearsBetween>yearsApart){
 									planting.greenlevel = 0; planting.redlevel = 255;
 								}else{
@@ -179,20 +185,9 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
                 }
                 $scope.plantings = gardenpart.plantings;
 
-								$scope.ruleSets = RuleSets.query();
+								$scope.ruleSet = RuleSets.get({'ruleSetId': '5688553504e0daf62b4b8906'});
 
-								$scope.ruleSets.$promise.then(function(ruleSets){
-									var ruleSet = true;
-									if(gardenpart.ruleset === undefined){
-										gardenpart.ruleset='5688553504e0daf62b4b8906';
-									}
-									for(var r=0;r<ruleSets.length;r++){
-										if(ruleSets[r]._id === gardenpart.ruleset){
-											$scope.ruleSet = ruleSet = ruleSets[r];
-											break;
-										}
-									}
-
+								$scope.ruleSet.$promise.then(function(ruleSet){
 									$scope.pastplantings = PastPlantings.get({
 											bk: $stateParams.bk,
 											selectedDate: $stateParams.selectedDate
@@ -205,12 +200,7 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 													planting.elemtop = parseInt(planting.elemtop) - gardenparttop;
 													planting.elemleft = parseInt(planting.elemleft) - gardenpartleft;
 													//assign a cropgroup to the past plantings
-													for(var m=0;m<ruleSet.cropgroups.length;m++){
-														if(ruleSet.cropgroups[m].crops.indexOf(planting.plantVariety.crop)!==-1){
-															planting.cropgroup = ruleSet.cropgroups[m]._id;
-															break;
-														}
-													}
+													planting.cropgroup = cropgroupByCrop(planting.plantVariety.crop);
 											}
 											$scope.rotationAdvice($scope.crops[0]._id);
 											$scope.$emit('plantingsLoaded');

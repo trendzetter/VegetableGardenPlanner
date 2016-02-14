@@ -5,13 +5,12 @@
 </div>
 <form  data-ng-controller="EditformController" dragtool="2" class="form-horizontal" data-ng-submit="updateGarden()" novalidate>
     <fieldset>
-        <br />
-        <div class="input-group">
-            <input ng-click="updateGarden()" value="Update" class="btn btn-primary" >
+          <br />
+          <input type="submit" value="Update" class="btn btn-primary">
+
             <a class="btn btn-default" ui-sref="viewGarden({'bk': bk, 'selectedDate': selectedDate})">
                 <i class="glyphicon glyphicon-step-backward"></i>
             </a>
-        </div>
 
         <div class="input-group">
             <label class="control-label" for="name">Name</label>

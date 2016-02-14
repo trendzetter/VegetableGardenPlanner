@@ -302,7 +302,7 @@ gulp.task('protractor', ['webdriver_update'], function () {
 
 // Lint CSS and JavaScript files.
 gulp.task('lint', function (done) {
-  runSequence('less', 'sass', ['csslint', 'eslint', 'jshint'], done);
+  runSequence('less', 'sass', ['csslint', 'jshint'], done);
 });
 
 // Lint project files and minify them into two production files.
@@ -320,7 +320,7 @@ gulp.task('test:server', function (done) {
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
-// optional arguments: 
+// optional arguments:
 //    --onlyChanged - optional argument for specifying that only the tests in a changed Server Test file will be run
 // example usage: gulp test:server:watch --onlyChanged
 gulp.task('test:server:watch', function (done) {
