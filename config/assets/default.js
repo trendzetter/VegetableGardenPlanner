@@ -20,6 +20,7 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/angular-bootstrap-contextmenu/contextMenu.js',
         'public/lib/dragon-drop/dragon-drop.js',
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/cropper/dist/cropper.js',

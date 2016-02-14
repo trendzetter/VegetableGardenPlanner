@@ -2,7 +2,7 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1>Articles</h1>
+    <h1>Rule sets</h1>
   </div>
   <div class="list-group">
     <a ng-repeat="ruleset in vm.rulesets" ui-sref="rulesets.view({ ruleSetId: ruleset._id })" class="list-group-item">
@@ -13,8 +13,7 @@
         <span ng-if="ruleset.user" ng-bind="ruleset.user.displayName"></span>
         <span ng-if="!ruleset.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="ruleset.title"></h4>
-      <p class="list-group-item-text" ng-bind="ruleset.content"></p>
+      <h4 class="list-group-item-heading" ng-bind="ruleset.name"></h4>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.rulesets.$resolved && !vm.rulesets.length">

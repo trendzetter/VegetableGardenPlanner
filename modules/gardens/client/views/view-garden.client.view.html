@@ -4,16 +4,19 @@
 	<div class="page-header">
     <div class="pull-right" >
         Select date: <input calendar="edit" ng-model='selectedDate' />
-        <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/edit/{{selectedDate}}">
+        <a class="btn btn-default" ui-sref="viewGarden({'bk': garden.bk, 'selectedDate': selectedDate})">
+            <i class="glyphicon glyphicon-step-backward"></i>
+        </a>
+        <a class="btn btn-default" href="/#!/gardens/{{garden._id}}/edit/{{selectedDate}}">
             <i class="glyphicon glyphicon-edit"></i>
         </a>
-        <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/layout/{{selectedDate}}">
+        <a class="btn btn-default" href="/#!/gardens/{{garden._id}}/layout/{{selectedDate}}">
             <i class="glyphicon glyphicon-pencil"></i>
         </a>
       <!--  <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/access">
             <i class="glyphicon glyphicon-leaf"></i>
         </a>-->
-        <a class="btn btn-primary" ng-really-message="Are you sure you want to delete {{garden.name}}? All plantings will be lost forever." ng-really-click="remove()">
+        <a class="btn btn-danger" ng-really-message="Are you sure you want to delete {{garden.name}}? All plantings will be lost forever." ng-really-click="remove()">
             <i class="glyphicon glyphicon-trash"></i>
         </a>
     </div>

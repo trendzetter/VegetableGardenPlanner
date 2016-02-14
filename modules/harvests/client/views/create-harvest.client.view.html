@@ -1,0 +1,45 @@
+
+    <div class="modal-header">
+        <h1>Nieuwe oogst</h1>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" ng-init="newHarvest()" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="panel-group">
+                    <label class="control-label" for="quantity">Hoeveelheid:</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="harvest.quantity" id="quantity" class="form-control" >
+                    </div>
+                    <label class="control-label" >Eenheid:</label>
+                    <div class="controls">
+                        <input type="radio" ng-model="harvest.unit" value="piece">stuks
+                        <input type="radio" ng-model="harvest.unit" value="g"> gram
+                        <input type="radio" ng-model="harvest.unit" value="kg"> kilogram
+                        <label class="control-label"  data-ng-bind="planting.plantVariety.name" ></label>
+                        <img class="thumb ng-hide" ng-src="{{planting.plantVariety.image}}" ng-show="planting.plantVariety.image != null">
+                    </div>
+
+                    <label  class="control-label" >Problemen</label>
+                    <div class="controls" ng-repeat="issue in harvest.issues">
+                        <textarea data-ng-model="issue.text" class="form-control" placeholder="Omschrijving van het probleem" ></textarea>
+                    </div>
+                    <div class="controls">
+                        <input class="btn btn-default" ng-click="newIssue()" value="Probleem toevoegen">
+                    </div>
+                    <label class="control-label" >Lessen</label>
+                    <div class="controls" ng-repeat="gotcha in harvest.gotchas">
+                        <textarea data-ng-model="gotcha.text" class="form-control" placeholder="Wat wil je zeker onthouden voor de volgende keer" ></textarea>
+                    </div>
+                    <div class="controls">
+                        <input class="btn btn-default" ng-click="newGotcha()" value="Probleem toevoegen">
+                    </div>
+                </div>
+                <div class="panel-group">
+                    <input type="submit" class="btn btn-default" value="Opslaan">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>

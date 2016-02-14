@@ -26,7 +26,7 @@ angular.module('gardenparts').controller('PlantingController', ['$scope','$uibMo
             $scope.menuOptions.push(['Harvest', function () {
                 var size = 'lg';
                 var modalInstance = $uibModal.open({
-                    templateUrl: 'modules/harvests/views/create-harvest.client.view.html',
+                    templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
                     controller: 'HarvestsController',
                     size: size,
                     resolve: {

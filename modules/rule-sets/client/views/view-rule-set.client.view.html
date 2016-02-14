@@ -1,0 +1,47 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.ruleset.title"></h1>
+  </div>
+  <div class="pull-right" ng-show="vm.authentication.user._id == vm.ruleset.user._id">
+    <a class="btn btn-primary" ui-sref="rulesets.edit({ ruleSetId: vm.ruleset._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <label class="control-label" for="name">Groentengroepen:</label>
+<div class="controls">
+  <div class="panel panel-default col-md-6" ng-repeat="cropgroup in vm.ruleset.cropgroups">
+    <div class="panel-heading" data-ng-bind="cropgroup.name"></div>
+    <div class="panel-body" >
+      <div class="btn btn-xs btn-success" ng-repeat="crop in cropgroup.crops">{{crop.name}}</div>
+    </div>
+  </div>
+</div>
+          <div class="controls" ng-repeat="rule in vm.ruleset.rotationrules">
+              Type of rule:   <select  data-ng-model="rule.ruletype" disabled>
+              <option value="SuccessiveCrop">Successive crops</option>
+              <option value="YearsBetweenCultivation">Years between cultivations</option>
+          </select>
+              Cropgroup: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup" disabled></select>
+              Previous cropgroup: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup" disabled></select>
+              <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" >Years: <select ng-model="rule.yearsBetween" to-number>
+                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              </select></span>
+          </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.ruleset.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.ruleset.user" ng-bind="vm.ruleset.user.displayName"></span>
+      <span ng-if="!vm.ruleset.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.ruleset.content"></p>
+</section>
+</section>
+</section>

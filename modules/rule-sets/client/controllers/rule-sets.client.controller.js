@@ -9,7 +9,6 @@
 
   function RuleSetsController($scope, $state, ruleset, Authentication,Crops) {
     var vm = this;
-
     vm.ruleset = ruleset;
     vm.authentication = Authentication;
     vm.error = null;
@@ -17,24 +16,27 @@
     vm.remove = remove;
     vm.save = save;
 
-    vm.cropgroups = [];
-    vm.ruleSet = {};
-    vm.ruleSet.rotationrules = [];
-    newRule();
-    vm.crops = Crops.query();
-    vm.crops.$promise.then(function(crops) {
-      loop:
-      for(var i=0;i<crops.length;i++){
-          for(var j=0;j<vm.cropgroups.length;j++){
-            if(vm.cropgroups[j].name === crops[i].plantfamily.name){
-              vm.cropgroups[j].crops.push(crops[i]);
-              continue loop;
+    if (!ruleset._id){
+      console.log('nieuwe ruleset');
+      vm.ruleset.cropgroups = [];
+      vm.ruleset.rotationrules = [];
+      newRule();
+      vm.crops = Crops.query();
+      vm.crops.$promise.then(function(crops) {
+        loop:
+        for(var i=0;i<crops.length;i++){
+            for(var j=0;j<vm.ruleset.cropgroups.length;j++){
+              if(vm.ruleset.cropgroups[j].name === crops[i].plantfamily.name){
+                vm.ruleset.cropgroups[j].crops.push(crops[i]);
+                continue loop;
+              }
             }
-          }
-          var cropgroup = newCropgroup(crops[i].plantfamily.name);
-          cropgroup.crops.push(crops[i]);
-      }
-    });
+            var cropgroup = newCropgroup(crops[i].plantfamily.name);
+            cropgroup.crops.push(crops[i]);
+        }
+      });
+    }
+
 
   function newCropgroup (name){
       var cropgroup = {};
@@ -45,7 +47,7 @@
       }
 
       cropgroup.crops = [];
-      vm.cropgroups.push(cropgroup);
+      vm.ruleset.cropgroups.push(cropgroup);
       return cropgroup;
     }
 
@@ -53,7 +55,7 @@
 
     function newRule(){
       var rule = {};
-      vm.ruleSet.rotationrules.push(rule);
+      vm.ruleset.rotationrules.push(rule);
     }
 
     $scope.newRule = newRule;

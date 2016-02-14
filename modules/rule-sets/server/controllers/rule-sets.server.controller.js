@@ -121,7 +121,7 @@ exports.delete = function(req, res) {
 /**
  * List of Rule sets
  */
-exports.list = function(req, res) { RuleSet.find().sort('-created').populate('user', 'displayName').populate('rotationrules').exec(function(err, ruleSets) {
+exports.list = function(req, res) { RuleSet.find().sort('-created').populate('user', 'displayName').exec(function(err, ruleSets) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
@@ -135,7 +135,7 @@ exports.list = function(req, res) { RuleSet.find().sort('-created').populate('us
 /**
  * Rule set middleware
  */
-exports.ruleSetByID = function(req, res, next, id) { RuleSet.findById(id).populate('user', 'displayName').exec(function(err, ruleSet) {
+exports.ruleSetByID = function(req, res, next, id) { RuleSet.findById(id).populate('user', 'displayName').populate('rotationrules').exec(function(err, ruleSet) {
 		Cropgroup.populate(ruleSet,{
 						path:'cropgroups.crops',
 						model: 'Crop',

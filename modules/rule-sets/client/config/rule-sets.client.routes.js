@@ -22,7 +22,7 @@
       })
       .state('rulesets.create', {
         url: '/create',
-        templateUrl: 'modules/rule-sets/client/views/form-rule-sets.client.view.html',
+        templateUrl: 'modules/rule-sets/client/views/form-rule-set.client.view.html',
         controller: 'RuleSetsController',
         controllerAs: 'vm',
         resolve: {
