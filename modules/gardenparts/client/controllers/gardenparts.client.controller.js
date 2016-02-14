@@ -12,12 +12,18 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
         $scope.changes = [];
 				$scope.crops = [];
 
+				$scope.cropClicked = function(crop){
+					console.log('crop: '+JSON.stringify(crop));
+					$scope.rotationAdvice(crop);
+				}
+
 				$scope.expandCallback = function (index, id) {
 					console.log('crop: '+$scope.crops[index]._id);
 					$scope.rotationAdvice($scope.crops[index]._id);
 				};
 
 				$scope.rotationAdvice = function(crop){
+					console.log("calculating the advice!");
 					var cropgroup=false;
 					for(var c=0;c<$scope.ruleSet.cropgroups.length;c++){
 						if($scope.ruleSet.cropgroups[c].crops.indexOf(crop)!==-1){
@@ -125,21 +131,25 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
             $scope.plantvarieties.$promise.then(function(plantvarieties){
                 for(var i=0;i<plantvarieties.length;i++){
                     var plant = plantvarieties[i];
-                    var add = true;
-                    for(var j =0;j<$scope.crops.length;j++){
-                        var crop = $scope.crops[j];
-                        if(crop._id === plant.crop._id){
-                            add = false;
-                            crop.plantvarieties.push(plant);
-                            break;
-                        }
-                    }
-                    if(add){
-                        plant.crop.plantvarieties = [];
-                        plant.crop.plantvarieties.push(plant);
-                        $scope.crops.push(plant.crop);
-                    }
 
+                    var newCrop = true;
+										var j =0;
+										while(newCrop===true && j<$scope.crops.length){
+											var crop = $scope.crops[j];
+											if(crop._id === plant.crop._id){
+													plant.crop = plant.crop._id; //Avoid recursion
+													newCrop = false;
+													crop.plantvarieties.push(plant);
+											}
+											j++;
+										}
+										if(newCrop){
+											var addcrop = plant.crop;
+											plant.crop = plant.crop._id; //Avoid recursion
+											addcrop.plantvarieties = [];
+											addcrop.plantvarieties.push(plant);
+											$scope.crops.push(addcrop);
+										}
                 }
             });
         };
@@ -173,7 +183,6 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 
 								$scope.ruleSets.$promise.then(function(ruleSets){
 									var ruleSet = true;
-
 									if(gardenpart.ruleset === undefined){
 										gardenpart.ruleset='5688553504e0daf62b4b8906';
 									}
@@ -183,6 +192,7 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 											break;
 										}
 									}
+
 									$scope.pastplantings = PastPlantings.get({
 											bk: $stateParams.bk,
 											selectedDate: $stateParams.selectedDate
@@ -202,7 +212,7 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 														}
 													}
 											}
-								//			$scope.accordion.expand(0);
+											$scope.rotationAdvice($scope.crops[0]._id);
 											$scope.$emit('plantingsLoaded');
 									});
 								});

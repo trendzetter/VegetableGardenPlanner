@@ -32,7 +32,7 @@
             </fieldset>
         </form>
         <uib-accordion id="crops">
-            <uib-accordion-group ng-repeat="crop in crops" heading="{{crop.name}}" ng-init="status.open = $first" is-open="status.open">
+            <uib-accordion-group ng-repeat="crop in crops" heading="{{crop.name}}" ng-init="status.open = $first"  is-open="status.open" ng-click="cropClicked(crop._id)">
                 <uib-accordion id="plantvarieties">
                     <uib-accordion-group ng-repeat="plantvariety in crop.plantvarieties" ng-init="file=plantvariety.image" heading="{{plantvariety.name}}" ng-init="status.open = $first" is-open="status.open">
                       <img plantvarietyimage ng-click="plantVarietyClicked()" class="thumb ng-hide" ng-src="{{plantvariety.image}}" ng-show="file != null" >

@@ -5,7 +5,6 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
 function($scope, $stateParams, $location, Authentication, Gardens, Gardenpart,Gardendata,$rootScope) {
 
 	$scope.authentication = Authentication;
-	console.log('authentication: ' + JSON.stringify($scope.authentication.user));
 	$scope.gardenparts = [];
 
 	$scope.tooltiptext = 'testtooltip';
