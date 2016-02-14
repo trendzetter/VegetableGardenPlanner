@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
+  fs = require('fs'),
   defaultAssets = require('./config/assets/default'),
   testAssets = require('./config/assets/test'),
   glob = require('glob'),
@@ -202,20 +203,39 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('public/dist/img'));
 });
 
+// Copy local development environment config example
+gulp.task('copyLocalEnvConfig', function () {
+  var src = [];
+  var renameTo = 'local-development.js';
+
+  // only add the copy source if our destination file doesn't already exist
+  if (!fs.existsSync('config/env/' + renameTo)) {
+    src.push('config/env/local.example.js');
+  }
+
+  return gulp.src(src)
+    .pipe(plugins.rename(renameTo))
+    .pipe(gulp.dest('config/env'));
+});
+
+// Make sure upload directory exists
+gulp.task('makeUploadsDir', function () {
+  return fs.mkdir('modules/users/client/img/profile/uploads', function (err) {
+    if (err && err.code !== 'EEXIST') {
+      console.log(err);
+    }
+  });
+});
+
 // Angular template cache task
 gulp.task('templatecache', function () {
-  var re = new RegExp('\\' + path.sep + 'client\\' + path.sep, 'g');
-
   return gulp.src(defaultAssets.client.views)
     .pipe(plugins.templateCache('templates.js', {
       root: 'modules/',
       module: 'core',
       templateHeader: '(function () {' + endOfLine + '	\'use strict\';' + endOfLine + endOfLine + '	angular' + endOfLine + '		.module(\'<%= module %>\'<%= standalone %>)' + endOfLine + '		.run(templates);' + endOfLine + endOfLine + '	templates.$inject = [\'$templateCache\'];' + endOfLine + endOfLine + '	function templates($templateCache) {' + endOfLine,
       templateBody: '		$templateCache.put(\'<%= url %>\', \'<%= contents %>\');',
-      templateFooter: '	}' + endOfLine + '})();' + endOfLine,
-      transformUrl: function (url) {
-        return url.replace(re, path.sep);
-      }
+      templateFooter: '	}' + endOfLine + '})();' + endOfLine
     }))
     .pipe(gulp.dest('build'));
 });
@@ -312,11 +332,11 @@ gulp.task('build', function (done) {
 
 // Run the project tests
 gulp.task('test', function (done) {
-  runSequence('env:test', 'lint', 'mocha', 'karma', 'nodemon', 'protractor', done);
+  runSequence('env:test', 'test:server', 'karma', 'nodemon', 'protractor', done);
 });
 
 gulp.task('test:server', function (done) {
-  runSequence('env:test', 'lint', 'mocha', done);
+  runSequence('env:test', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', 'mocha', done);
 });
 
 // Watch all server files for changes & run server tests (test:server) task on changes
@@ -337,15 +357,15 @@ gulp.task('test:e2e', function (done) {
 
 // Run the project in development mode
 gulp.task('default', function (done) {
-  runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in debug mode
 gulp.task('debug', function (done) {
-  runSequence('env:dev', 'lint', ['nodemon', 'watch'], done);
+  runSequence('env:dev', ['copyLocalEnvConfig', 'makeUploadsDir'], 'lint', ['nodemon', 'watch'], done);
 });
 
 // Run the project in production mode
 gulp.task('prod', function (done) {
-  runSequence('templatecache', 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
+  runSequence(['copyLocalEnvConfig', 'makeUploadsDir', 'templatecache'], 'build', 'env:prod', 'lint', ['nodemon', 'watch'], done);
 });
