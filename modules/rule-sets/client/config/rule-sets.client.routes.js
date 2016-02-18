@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('rule-sets.routes')
-    .config(routeConfig);
+  .module('rule-sets.routes')
+  .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];
 
@@ -18,7 +18,10 @@
         url: '',
         templateUrl: 'modules/rule-sets/client/views/list-rule-sets.client.view.html',
         controller: 'RuleSetsListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Rule sets list'
+        }
       })
       .state('rulesets.create', {
         url: '/create',
@@ -29,7 +32,8 @@
           ruleSetResolve: newRuleset
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle : 'Add Rule set'
         }
       })
       .state('rulesets.edit', {
@@ -41,7 +45,8 @@
           ruleSetResolve: getRuleSet
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Edit Rule set {{ ruleSetResolve.name }}'
         }
       })
       .state('rulesets.view', {
@@ -51,6 +56,9 @@
         controllerAs: 'vm',
         resolve: {
           ruleSetResolve: getRuleSet
+        },
+        data:{
+          pageTitle: 'Rule set {{ ruleSetResolve.name }}'
         }
       });
   }

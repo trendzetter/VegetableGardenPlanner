@@ -1,15 +1,14 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('plant-varieties')
     .controller('PlantVarietiesController', PlantVarietiesController);
 
-  PlantVarietiesController.$inject = ['$scope', '$state', '$timeout', '$window', 'plantVarietyResolve', 'Authentication','CropsService','FileUploader','Cropper'];
+  PlantVarietiesController.$inject = ['$scope', '$state', '$timeout', '$window', 'plantVarietyResolve', 'Authentication', 'CropsService', 'FileUploader', 'Cropper'];
 
-  function PlantVarietiesController($scope, $state, $timeout, $window, plantvariety, Authentication,CropsService,FileUploader,Cropper) {
+  function PlantVarietiesController($scope, $state, $timeout, $window, plantvariety, Authentication, CropsService, FileUploader, Cropper) {
     var vm = this;
-
     vm.plantvariety = plantvariety;
     vm.authentication = Authentication;
     vm.error = null;
@@ -18,16 +17,23 @@
     vm.save = save;
     vm.crops = CropsService.query();
 
+    if($state.current.name==='plant-varieties.view'){
+      var year = new Date().getFullYear();
+      var date = new Date(year,0);
+      vm.DOYstartSow = new Date(date.setDate(plantvariety.DOYstartSow));
+      vm.DOYendSow = new Date(date.setDate(plantvariety.DOYendSow));
+    }
+
     /**
-    * Object is used to pass options to initalize a cropper.
-    * More on options - https://github.com/fengyuanchen/cropper#options
-    */
-    var data,file;
+     * Object is used to pass options to initalize a cropper.
+     * More on options - https://github.com/fengyuanchen/cropper#options
+     */
+      var file, data;
     $scope.options = {
-      maximize: true,
+        maximize: true,
       aspectRatio: 1 / 1,
       // aspectRatio: 16 / 9,
-      done: function(dataNew) {
+    crop: function(dataNew) {
         data = dataNew;
         // $scope.scale(200);
         $scope.scale(128);
@@ -39,49 +45,52 @@
      * use as a source for an image element.
      */
     $scope.preview = function() {
-        if (!file || !data) return;
-        Cropper.crop(file, data).then(Cropper.encode).then(function(dataUrl) {
-            (vm.plantvariety || (vm.plantvariety = {})).image = dataUrl;
-        });
-    };
-
-    $scope.scale = function(width) {
-      Cropper.crop(file, data)
-      .then(function(blob) {
-        return Cropper.scale(blob, {width: width});
-      })
-      .then(Cropper.encode).then(function(dataUrl) {
+      if (!file || !data) return;
+      Cropper.crop(file, data).then(Cropper.encode).then(function(dataUrl) {
         (vm.plantvariety || (vm.plantvariety = {})).image = dataUrl;
       });
     };
 
+    $scope.scale = function(width) {
+      Cropper.crop(file, data)
+        .then(function(blob) {
+          return Cropper.scale(blob, {
+            width: width
+          });
+        })
+        .then(Cropper.encode).then(function(dataUrl) {
+          (vm.plantvariety || (vm.plantvariety = {})).image = dataUrl;
+        });
+    };
 
     /**
-    * Showing (initializing) and hiding (destroying) of a cropper are started by
-    * events. The scope of the `ng-cropper` directive is derived from the scope of
-    * the controller. When initializing the `ng-cropper` directive adds two handlers
-    * listening to events passed by `ng-show` & `ng-hide` attributes.
-    * To show or hide a cropper `$broadcast` a proper event.
-    */
+     * Showing (initializing) and hiding (destroying) of a cropper are started by
+     * events. The scope of the `ng-cropper` directive is derived from the scope of
+     * the controller. When initializing the `ng-cropper` directive adds two handlers
+     * listening to events passed by `ng-show` & `ng-hide` attributes.
+     * To show or hide a cropper `$broadcast` a proper event.
+     */
     $scope.showEvent = 'show';
     $scope.hideEvent = 'hide';
 
-    function showCropper() { $scope.$broadcast($scope.showEvent); }
-    function hideCropper() { $scope.$broadcast($scope.hideEvent); }
+    function showCropper() {
+      $scope.$broadcast($scope.showEvent);
+    }
+
+    function hideCropper() {
+      $scope.$broadcast($scope.hideEvent);
+    }
 
     // Create file uploader instance
     $scope.uploader = new FileUploader();
 
-
-
     // Called after the user selected a new picture file
-    $scope.uploader.onAfterAddingFile = function (fileItem) {
+    $scope.uploader.onAfterAddingFile = function(fileItem) {
       //$timeout(hideCropper);
       Cropper.encode((file = fileItem._file)).then(function(dataUrl) {
         $scope.dataUrl = dataUrl;
-        $timeout(showCropper);  // wait for $digest to set image's src
+        $timeout(showCropper); // wait for $digest to set image's src
       });
-
     };
 
     // Remove existing PlantVariety

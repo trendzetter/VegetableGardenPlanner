@@ -18,7 +18,10 @@
         url: '',
         templateUrl: 'modules/crops/client/views/list-crops.client.view.html',
         controller: 'CropsListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Crops list'
+        }
       })
       .state('crops.create', {
         url: '/create',
@@ -29,7 +32,8 @@
           cropResolve: newCrop
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Add crop'
         }
       })
       .state('crops.edit', {
@@ -41,7 +45,8 @@
           cropResolve: getCrop
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Edit crop {{ cropResolve.name }}'
         }
       })
       .state('crops.view', {
@@ -51,6 +56,9 @@
         controllerAs: 'vm',
         resolve: {
           cropResolve: getCrop
+        },
+        data:{
+          pageTitle: 'Crop {{ articleResolve.name }}'
         }
       });
   }

@@ -18,7 +18,10 @@
         url: '',
         templateUrl: 'modules/plant-families/client/views/list-plant-families.client.view.html',
         controller: 'PlantFamiliesListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Plant families list'
+        }
       })
       .state('plantfamilies.create', {
         url: '/create',
@@ -29,7 +32,8 @@
           plantFamilyResolve: newPlantFamily
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle : 'Add plant family'
         }
       })
       .state('plantfamilies.edit', {
@@ -41,7 +45,8 @@
           plantFamilyResolve: getPlantFamily
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Edit plant family {{ plantFamilyResolve.name }}'
         }
       })
       .state('plantfamilies.view', {
@@ -51,6 +56,9 @@
         controllerAs: 'vm',
         resolve: {
           plantFamilyResolve: getPlantFamily
+        },
+        data:{
+          pageTitle: 'Plant family {{ plantFamilyResolve.name }}'
         }
       });
   }

@@ -6,6 +6,9 @@ angular.module('users').factory('Users', ['$resource',
     return $resource('api/users', {}, {
       update: {
         method: 'PUT'
+      },
+      get:{
+        url: 'users/id/:name'
       }
     });
   }

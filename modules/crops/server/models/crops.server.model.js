@@ -24,11 +24,11 @@ var CropSchema = new Schema({
     type: Date,
     default: Date.now
   },
-	plantfamily: {
-	  type: Schema.ObjectId,
-	  ref: 'PlantFamily',
-	  required: 'Please select a plant family'
-	},
+  plantfamily: {
+    type: Schema.ObjectId,
+    ref: 'PlantFamily',
+    required: 'Please select a plant family'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

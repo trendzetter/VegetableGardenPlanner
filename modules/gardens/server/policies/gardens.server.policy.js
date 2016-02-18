@@ -31,7 +31,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/gardens/:bk/:selectedDate',
-      permissions: ['get','put']
+      permissions: ['get','put','delete']
     }, {
       resources: '/api/gardenversions/:gardenId/:selectedDate',
       permissions: ['get']

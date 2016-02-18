@@ -2,7 +2,7 @@
 
 //Setting up route
 angular.module('gardenparts').config(['$stateProvider',
-function($stateProvider) {
+  function($stateProvider) {
     // Gardenparts state routing
     $stateProvider.
     state('editGardenpart', {

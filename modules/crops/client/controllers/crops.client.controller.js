@@ -1,13 +1,13 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('crops')
     .controller('CropsController', CropsController);
 
-  CropsController.$inject = ['$scope', '$state', 'cropResolve', 'Authentication','PlantFamilyService'];
+  CropsController.$inject = ['$scope', '$state', 'cropResolve', 'Authentication', 'PlantFamilyService'];
 
-  function CropsController($scope, $state, crop, Authentication,PlantFamilyService) {
+  function CropsController($scope, $state, crop, Authentication, PlantFamilyService) {
     var vm = this;
 
     vm.crop = crop;
@@ -18,8 +18,8 @@
     vm.save = save;
 
     //adding the list of plantfamilies
-  //  if($state.current.name === 'crops.edit'){
-      vm.plantfamilies = PlantFamilyService.query();
+    //  if($state.current.name === 'crops.edit'){
+    vm.plantfamilies = PlantFamilyService.query();
     //}
 
     // Remove existing Crop

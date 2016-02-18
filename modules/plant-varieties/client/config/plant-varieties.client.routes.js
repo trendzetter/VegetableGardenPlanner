@@ -18,7 +18,10 @@
         url: '',
         templateUrl: 'modules/plant-varieties/client/views/list-plant-varieties.client.view.html',
         controller: 'PlantVarietiesListController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Plant varieties list'
+        }
       })
       .state('plant-varieties.create', {
         url: '/create',
@@ -29,7 +32,8 @@
           plantVarietyResolve: newPlantVariety
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle : 'Add plant variety'
         }
       })
       .state('plant-varieties.edit', {
@@ -41,7 +45,8 @@
           plantVarietyResolve: getPlantVariety
         },
         data: {
-          roles: ['user', 'admin']
+          roles: ['user', 'admin'],
+          pageTitle: 'Edit plant variety {{ plantVarietyResolve.title }}'
         }
       })
       .state('plant-varieties.view', {
@@ -51,6 +56,9 @@
         controllerAs: 'vm',
         resolve: {
           plantVarietyResolve: getPlantVariety
+        },
+        data:{
+          pageTitle: 'Plant variety {{ plantVarietyResolve.title }}'
         }
       });
   }

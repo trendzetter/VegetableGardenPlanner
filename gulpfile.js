@@ -322,7 +322,7 @@ gulp.task('protractor', ['webdriver_update'], function () {
 
 // Lint CSS and JavaScript files.
 gulp.task('lint', function (done) {
-  runSequence('less', 'sass', ['csslint', 'jshint'], done);
+  runSequence('less', 'sass', ['csslint','eslint', 'jshint'], done);
 });
 
 // Lint project files and minify them into two production files.

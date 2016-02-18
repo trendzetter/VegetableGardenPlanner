@@ -45,7 +45,7 @@
             <label class="control-label" for="file">Afbeelding</label>
             <div class="text-center form-group">
               <div class="text-center img-container col-md-4">
-                <img ng-cropper ng-options="options" ng-show="{{showEvent}}" ng-hide="{{hideEvent}}" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:300px">
+                <img ng-cropper ng-cropper-options="options" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:300px">
               </div>
               <span class="btn btn-default btn-file">
                   Select Image <input type="file" nv-file-select uploader="uploader" class="ng-pristine ng-invalid ng-invalid-required">
@@ -55,7 +55,7 @@
             <div class="form-group">
               <label class="control-label" for="file">Voorbeeld</label>
               <div class="preview-container col-md-4">
-                <img ng-show="vm.plantvariety.image" ng-src="{{vm.plantvariety.image}}">
+                <img ng-if="vm.plantvariety.image" ng-src="{{vm.plantvariety.image}}">
               </div>
             </div>
             <div ng-show="error" class="text-center text-danger">
@@ -63,7 +63,7 @@
             </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">{{vm.plantvariety._id ? 'Update' : 'Create'}}</button>
-            <a class="btn btn-default" ui-sref="plant-varieties.view({'plantVarietyId': vm.plantvariety._id})" >Annuleren</a>
+            <a class="btn btn-default" ui-sref="plant-varieties.list" >Annuleren</a>
           </div>
           <div ng-show="vm.error" class="text-danger">
             <strong ng-bind="vm.error"></strong>

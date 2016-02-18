@@ -25,20 +25,19 @@
       vm.crops.$promise.then(function(crops) {
         loop:
         for(var i=0;i<crops.length;i++){
-            for(var j=0;j<vm.ruleset.cropgroups.length;j++){
-              if(vm.ruleset.cropgroups[j].name === crops[i].plantfamily.name){
-                vm.ruleset.cropgroups[j].crops.push(crops[i]);
-                continue loop;
-              }
+          for(var j=0;j<vm.ruleset.cropgroups.length;j++){
+            if(vm.ruleset.cropgroups[j].name === crops[i].plantfamily.name){
+              vm.ruleset.cropgroups[j].crops.push(crops[i]);
+              continue loop;
             }
-            var cropgroup = newCropgroup(crops[i].plantfamily.name);
-            cropgroup.crops.push(crops[i]);
+          }
+          var cropgroup = newCropgroup(crops[i].plantfamily.name);
+          cropgroup.crops.push(crops[i]);
         }
       });
     }
 
-
-  function newCropgroup (name){
+    function newCropgroup (name){
       var cropgroup = {};
       if(name === undefined){
         cropgroup.name = 'Geef de groep een naam';
