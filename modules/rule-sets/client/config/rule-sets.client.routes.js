@@ -33,7 +33,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle : 'Add Rule set'
+      //    pageTitle : 'Add Rule set'
         }
       })
       .state('rulesets.edit', {

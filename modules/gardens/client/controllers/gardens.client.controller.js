@@ -140,6 +140,5 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
         $scope.$emit('gardenpartsLoaded');
       });
     };
-
   }
 ]);

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('gardens').controller('GardenversionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'GardensService', 'Gardenversions', 'GardenpartsService', 'Gardendata',
-  function($scope, $stateParams, $location, Authentication, Gardens, Gardenversions, Gardenpart, Gardendata) {
+angular.module('gardens').controller('GardenversionsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'GardensService', 'Gardenversions', 'GardenpartsService', 'Gardendata',
+  function($scope, $state, $stateParams, $location, Authentication, Gardens, Gardenversions, Gardenpart, Gardendata) {
     $scope.authentication = Authentication;
     $scope.gardenparts = [];
     var newparts = [];
@@ -105,12 +105,19 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       }
       garden.keepers = leankeepers;
       console.log('garden.keepers' + garden.keepers);
-      Gardens.update(garden, function() {
-        $location.path('gardens/' + garden.bk + '/' + $scope.selectedDate);
-
-      }, function(errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
+      if($state.$current.data && $state.$current.data.name==='gardens.create') $stateParams.selectedDate=$scope.selectedDate;
+      garden.selectedDate  = $stateParams.selectedDate;
+      garden.$update({
+          selectedDate: $scope.selectedDate
+        },function (garden) {
+           console.log('success, got data: ', garden);
+           $state.go('viewGarden', {
+             bk: garden.bk,
+             selectedDate: $scope.selectedDate
+           });
+         }, function(errorResponse) {
+           $scope.error = errorResponse.data.message;
+         });
     });
 
     // Update existing Gardenparts
@@ -151,7 +158,7 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
         bk: garden.bk,
         selectedDate: $stateParams.selectedDate
       }, delparts);
-      $location.path('gardens/' + garden.bk + '/' + $stateParams.selectedDate);
+  //    $location.path('gardens/' + garden.bk + '/' + $stateParams.selectedDate);
     };
 
 

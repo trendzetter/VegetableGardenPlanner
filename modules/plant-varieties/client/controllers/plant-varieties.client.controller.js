@@ -17,9 +17,9 @@
     vm.save = save;
     vm.crops = CropsService.query();
 
-    if($state.current.name==='plant-varieties.view'){
+    if ($state.current.name === 'plant-varieties.view') {
       var year = new Date().getFullYear();
-      var date = new Date(year,0);
+      var date = new Date(year, 0);
       vm.DOYstartSow = new Date(date.setDate(plantvariety.DOYstartSow));
       vm.DOYendSow = new Date(date.setDate(plantvariety.DOYendSow));
     }
@@ -28,12 +28,12 @@
      * Object is used to pass options to initalize a cropper.
      * More on options - https://github.com/fengyuanchen/cropper#options
      */
-      var file, data;
+    var file, data;
     $scope.options = {
-        maximize: true,
+      maximize: true,
       aspectRatio: 1 / 1,
       // aspectRatio: 16 / 9,
-    crop: function(dataNew) {
+      crop: function(dataNew) {
         data = dataNew;
         // $scope.scale(200);
         $scope.scale(128);

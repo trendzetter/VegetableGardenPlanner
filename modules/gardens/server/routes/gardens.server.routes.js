@@ -32,7 +32,8 @@ module.exports = function(app) {
     .post(gardens.create);
 
   app.route('/api/gardenversions/:gardenId/:selectedDate').all(gardensPolicy.isAllowed)
-    .get(gardens.read);
+    .get(gardens.read)
+    .put(gardens.update);
 
   app.route('/api/gardenversions/:gardenId').all(gardensPolicy.isAllowed)
     .put(gardens.update)

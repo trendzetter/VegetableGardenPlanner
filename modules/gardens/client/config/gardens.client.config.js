@@ -18,13 +18,13 @@
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'gardens', {
       title: 'List Gardens',
-      state: 'gardens.list'
+      state: 'listGardens'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'gardens', {
       title: 'Create Garden',
-      state: 'gardens.create',
+      state: 'createGarden',
       roles: ['user']
     });
   }

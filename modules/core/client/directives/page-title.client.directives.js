@@ -27,7 +27,7 @@
       function getTitle(currentState) {
         var applicationCoreTitle = 'MEAN.js';
         var workingState = currentState;
-        if (currentState.data) {
+        if (currentState.data && currentState.data.pageTitle) {
           workingState = (typeof workingState.locals !== 'undefined') ? workingState.locals.globals : workingState;
           var stateTitle = $interpolate(currentState.data.pageTitle)(workingState);
           return applicationCoreTitle + ' - ' + stateTitle;

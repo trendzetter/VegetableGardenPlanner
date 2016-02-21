@@ -4,6 +4,11 @@
   <div class="page-header">
     <h1 ng-bind="vm.crop.name"></h1>
   </div>
+  <!-- <div class="pull-right" >
+   <a class="btn btn-primary" href="/#!/gardens/{{garden._id}}/access">
+        <i class="glyphicon glyphicon-leaf"></i>
+    </a>
+  </div>-->
   <div class="pull-right" ng-show="vm.authentication.user._id == vm.crop.user._id">
     <a class="btn btn-primary" ui-sref="crops.edit({ cropId: vm.crop._id })">
       <i class="glyphicon glyphicon-edit"></i>
