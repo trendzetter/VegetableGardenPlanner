@@ -6,8 +6,13 @@ angular.module('gardens').config(['$stateProvider',
     // Gardens state routing
     $stateProvider.
     state('listGardens', {
-      url: '/gardens',
-      templateUrl: 'modules/gardens/client/views/list-gardens.client.view.html'
+      url: '/gardens/:plant',
+      templateUrl: 'modules/gardens/client/views/list-gardens.client.view.html',
+      controller: 'GardensListController',
+      controllerAs: 'vm',
+      data: {
+        pageTitle: 'Articles List'
+      }
     }).
     state('plantListGardens', {
       url: '/gardens/plant/:plantVariety',

@@ -15,6 +15,11 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
+  <div class="pull-right" >
+   <a class="btn btn-primary" ui-sref="listGardens({plant: vm.plantvariety._id})">
+        <i class="glyphicon glyphicon-leaf"></i>
+    </a>
+  </div>
   <label class="control-label" >Start zaaitijd (dag van het jaar): </label>
   <div class="controls">
       {{ vm.DOYstartSow | date: 'MMMM d' }}

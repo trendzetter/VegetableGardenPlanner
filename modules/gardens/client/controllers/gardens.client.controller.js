@@ -76,14 +76,6 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
       }
     };
 
-    // Find a list of Gardens
-    $scope.find = function() {
-      $scope.gardens = Gardens.query({
-        selectedDate: null
-      });
-      $scope.plantVariety = $stateParams.plantVariety;
-    };
-
     // Find existing Garden
     $scope.findOne = function() {
       var bk;
