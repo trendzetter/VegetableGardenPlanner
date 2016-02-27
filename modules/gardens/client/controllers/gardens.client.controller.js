@@ -8,7 +8,8 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
     $scope.gardenparts = [];
 
     $scope.tooltiptext = 'testtooltip';
-    $scope.factor = 1;
+    //declare globally use from directives
+    $scope.zoom = 1;
 
     if (typeof $stateParams.selectedDate === 'undefined') {
       var today = new Date();

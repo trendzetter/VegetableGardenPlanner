@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gardenparts').directive('plantingpart', ['$rootScope',
+angular.module('gardenparts').directive('zoomable', ['$rootScope',
   function($rootScope) {
     return {
       restrict: 'A',
