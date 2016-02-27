@@ -6,17 +6,13 @@ angular.module('gardens').config(['$stateProvider',
     // Gardens state routing
     $stateProvider.
     state('listGardens', {
-      url: '/gardens/:plant',
+      url: '/gardens/list/:plant/:gardendate',
       templateUrl: 'modules/gardens/client/views/list-gardens.client.view.html',
       controller: 'GardensListController',
       controllerAs: 'vm',
       data: {
-        pageTitle: 'Articles List'
+        pageTitle: 'Gardens list'
       }
-    }).
-    state('plantListGardens', {
-      url: '/gardens/plant/:plantVariety',
-      templateUrl: 'modules/gardens/client/views/list-gardens.client.view.html'
     }).
     state('listGardenversions', {
       url: '/gardenversions',
@@ -28,6 +24,10 @@ angular.module('gardens').config(['$stateProvider',
     }).
     state('viewGarden', {
       url: '/gardens/:bk/:selectedDate',
+      templateUrl: 'modules/gardens/client/views/view-garden.client.view.html'
+    }).
+    state('plantGarden', {
+      url: '/gardens/plant/:bk/:selectedDate/:plant',
       templateUrl: 'modules/gardens/client/views/view-garden.client.view.html'
     }).
     state('viewGardenversion', {

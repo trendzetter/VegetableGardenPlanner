@@ -455,7 +455,7 @@ exports.gardenByBK = function(req, res, next, bk) {
       $lte: req.params.selectedDate
     },
     bk: bk
-  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, garden) { // hier stond nog .lean()
+  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, garden) { 
     if (err) return next(err);
     if (!garden) return next(new Error('Failed to load Garden ' + bk));
     req.garden = garden;

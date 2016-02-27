@@ -8,7 +8,7 @@
     <a class="btn btn-primary" ui-sref="plant-varieties.list">
       <i class="glyphicon glyphicon-step-backward"></i>
     </a>
-    <a class="btn btn-default" ui-sref="plant-varieties.edit({ plantVarietyId: vm.plantvariety._id })">
+    <a class="btn btn-default" ui-sref="plant-varieties.edit({ plantVarietyId: vm.plantvariety._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
     <a class="btn btn-danger" ng-click="vm.remove()">
@@ -16,7 +16,7 @@
     </a>
   </div>
   <div class="pull-right" >
-   <a class="btn btn-primary" ui-sref="listGardens({plant: vm.plantvariety._id})">
+   <a class="btn btn-primary" ui-sref="listGardens({plant: vm.plantvariety._id, gardendate: vm.gardendate })">
         <i class="glyphicon glyphicon-leaf"></i>
     </a>
   </div>

@@ -158,7 +158,10 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
         bk: garden.bk,
         selectedDate: $stateParams.selectedDate
       }, delparts);
-  //    $location.path('gardens/' + garden.bk + '/' + $stateParams.selectedDate);
+      $state.go('viewGarden', {
+        bk: garden.bk,
+        selectedDate: $scope.selectedDate
+      });
     };
 
 

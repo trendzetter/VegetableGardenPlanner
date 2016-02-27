@@ -22,6 +22,10 @@
       var date = new Date(year, 0);
       vm.DOYstartSow = new Date(date.setDate(plantvariety.DOYstartSow));
       vm.DOYendSow = new Date(date.setDate(plantvariety.DOYendSow));
+      var today = new Date(year, 0);
+      if( vm.DOYendSow < today) vm.gardendate = vm.DOYstartSow.getFullYear() + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
+      else
+      vm.gardendate = vm.DOYstartSow.getFullYear()+1 + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
     }
 
     /**

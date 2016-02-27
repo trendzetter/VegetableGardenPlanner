@@ -5,7 +5,18 @@
     <h1>Gardens</h1>
   </div>
   <div class="list-group">
-        <a data-ng-repeat="garden in vm.gardens"  ui-sref="viewGarden({bk: garden.bk, selectedDate: vm.date})" class="list-group-item">
+        <a ng-if="vm.plant" data-ng-repeat="garden in vm.gardens"  ui-sref="plantGarden({bk: garden.bk, selectedDate: vm.gardendate, plant: vm.plant})" class="list-group-item">
+          <small class="list-group-item-text">
+            Posted on
+            <span ng-bind="garden.created | date:'mediumDate'"></span>
+            by
+            <span ng-if="garden.user" ng-bind="garden.user.displayName"></span>
+            <span ng-if="!garden.user">Deleted User</span>
+          </small>
+          <h4 class="list-group-item-heading" ng-bind="garden.name"></h4>
+          <p class="list-group-item-text" ng-bind="garden.content"></p>
+        </a>
+        <a ng-if="!vm.plant" data-ng-repeat="garden in vm.gardens"  ui-sref="viewGarden({bk: garden.bk, selectedDate: vm.gardendate, plant: vm.plant})" class="list-group-item">
           <small class="list-group-item-text">
             Posted on
             <span ng-bind="garden.created | date:'mediumDate'"></span>
