@@ -3,7 +3,7 @@
 <layer style="postion:absolute">
 <form  data-ng-controller="FormController" id="submitForm" dragtool="2" class="form-horizontal" data-ng-submit="create()" novalidate>
     <fieldset>
-
+            <input calendar ng-model="garden.selectedDate"></input>
             <label class="control-label" for="name">Naam</label>
             <div class="controls">
                 <input type="text" data-ng-model="garden.name" id="name" class="form-control" placeholder="{{ authentication.user.firstName }}'s moestuin" required>

@@ -1,8 +1,8 @@
 'use strict';
 
 // Gardens controller
-angular.module('gardens').controller('GardensController', ['$scope', '$stateParams', '$location', 'Authentication', 'GardensService', 'GardenpartService', 'Gardendata', '$rootScope',
-  function($scope, $stateParams, $location, Authentication, Gardens, Gardenpart, Gardendata, $rootScope) {
+angular.module('gardens').controller('GardensController', ['$scope', '$stateParams','$state', '$location', 'Authentication', 'GardensService', 'GardenpartService', 'Gardendata', '$rootScope',
+  function($scope, $stateParams, $state, $location, Authentication, Gardens, Gardenpart, Gardendata, $rootScope) {
 
     $scope.authentication = Authentication;
     $scope.gardenparts = [];
@@ -15,9 +15,16 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
       var today = new Date();
       $scope.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
       $stateParams.selectedDate = $scope.selectedDate;
+      console.log('selected date! '+$scope.selectedDate);
     } else {
       $scope.selectedDate = $stateParams.selectedDate;
     }
+
+    $scope.back = function  (){
+      console.log('back!'+JSON.stringify($state.previous));
+      $state.go($state.previous.state.name,$state.previous.params);
+    };
+
 
     $scope.newGarden = function() {
       $scope.garden = {};
@@ -34,10 +41,7 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
       $scope.tooltiptext = 'breedte: ' + height + ' cm lengte: ' + width + ' cm ' + 'oppervlakte: ' + opp + ' m² ± ' + Math.round(height * width / 150000) + ' personen';
     };
 
-    $scope.setDate = function(date) {
-      $stateParams.selectedDate = date;
-      $scope.selectedDate = date;
-    };
+
 
     // Create new Garden
     $scope.$on('createGarden', function() {
@@ -53,7 +57,7 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
 
       // Redirect after save
       garden.$save(function(response) {
-        $location.path('gardens/' + response._id + '/layout/' + $stateParams.selectedDate);
+        $location.path('gardens/' + response._id + '/layout/' + $scope.garden.selectedDate);
       }, function(errorResponse) {
         Gardendata.setError(errorResponse.data.message);
         $rootScope.$broadcast('error');

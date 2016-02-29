@@ -16,5 +16,15 @@ angular.module('gardens').controller('FormController', ['$scope', 'Gardendata', 
     $scope.authentication = Authentication;
     $scope.garden = Gardendata.getGarden();
 
+    $scope.setDate = function(date) {
+      $scope.garden.selectedDate = date;
+    };
+
+    if ($scope.garden.selectedDate === 'undefined') {
+      var today = new Date();
+      $scope.garden.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
+      console.log('selected date! '+$scope.garden.selectedDate);
+    }
+
   }
 ]);

@@ -37,20 +37,9 @@ var getErrorMessage = function(err) {
 var addParts = function(next, req) {
   var rightCornerLeft = req.garden.elemleft + req.garden.elemwidth;
   var bottomCornerTop = req.garden.elemtop + req.garden.elemheight;
-
-  /* Gardenparts.find({validFrom: {$lte: req.params.selectedDate}
-           , garden: req.garden.bk
-           , $or:[ {'validTo':{$gt: req.params.selectedDate}}, {'validTo':null} ]
-       //TODO: other corners
-
-           //left right
-           , $and: [{'elemleft' : { $gte: req.garden.elemleft}}, {'elemleft': {$lt: rightCornerLeft }},{'elemtop' : { $gte: req.garden.elemtop}}, {'elemtop': {$lt: bottomCornerTop }}]
-          //top bottom?
-
-           } ).exec(function(err, parts) {
-       if (err) return next(err);
-       req.garden.gardenparts=parts;
-       next();*/
+  var dateArray = req.params.selectedDate.split('-');
+  var backUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
+  console.log('backUntil:' + backUntil);
   Gardenparts.find({
     $and: [{
       validFrom: {
@@ -61,7 +50,7 @@ var addParts = function(next, req) {
     }, {
       $or: [{
         'validTo': {
-          $gt: req.params.selectedDate
+          $gt: backUntil
         }
       }, {
         'validTo': null
@@ -455,7 +444,7 @@ exports.gardenByBK = function(req, res, next, bk) {
       $lte: req.params.selectedDate
     },
     bk: bk
-  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, garden) { 
+  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, garden) {
     if (err) return next(err);
     if (!garden) return next(new Error('Failed to load Garden ' + bk));
     req.garden = garden;
