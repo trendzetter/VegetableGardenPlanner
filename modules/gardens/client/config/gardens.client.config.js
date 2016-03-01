@@ -24,7 +24,7 @@
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'gardens', {
       title: 'Create Garden',
-      state: 'createGarden',
+      state: 'createGardens',
       roles: ['user']
     });
   }

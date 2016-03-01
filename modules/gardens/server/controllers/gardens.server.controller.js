@@ -37,9 +37,14 @@ var getErrorMessage = function(err) {
 var addParts = function(next, req) {
   var rightCornerLeft = req.garden.elemleft + req.garden.elemwidth;
   var bottomCornerTop = req.garden.elemtop + req.garden.elemheight;
-  var dateArray = req.params.selectedDate.split('-');
-  var backUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
-  console.log('backUntil:' + backUntil);
+  var plantBackUntil;
+  if(req.params.plant !== 'undefined'){
+    var dateArray = req.params.selectedDate.split('-');
+    plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
+  }else{
+    plantBackUntil = req.params.selectedDate;
+  }
+    console.log('plantBackUntil:' + plantBackUntil);
   Gardenparts.find({
     $and: [{
       validFrom: {
@@ -50,7 +55,7 @@ var addParts = function(next, req) {
     }, {
       $or: [{
         'validTo': {
-          $gt: backUntil
+          $gt: req.params.selectedDate
         }
       }, {
         'validTo': null
@@ -114,7 +119,7 @@ var addParts = function(next, req) {
       }, {
         $or: [{
           'validTo': {
-            $gt: req.params.selectedDate
+            $gt: plantBackUntil
           }
         }, {
           'validTo': null

@@ -24,6 +24,9 @@ module.exports = function(app) {
     .put(gardens.update)
     .delete(gardens.delete);
 
+  app.route('/api/gardens/:bk/:selectedDate/:plant').all(gardensPolicy.isAllowed)
+    .get(gardens.read);
+
   // Gardenversions Routes
   app.route('/api/gardenversions').all(gardensPolicy.isAllowed)
     .get(gardens.listversions);

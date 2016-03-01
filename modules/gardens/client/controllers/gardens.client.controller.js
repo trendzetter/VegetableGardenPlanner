@@ -91,7 +91,8 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
       }
       $scope.garden = Gardens.get({
         bk: bk,
-        selectedDate: $stateParams.selectedDate
+        selectedDate: $stateParams.selectedDate,
+        plant: $stateParams.plant
       });
       Gardendata.setGarden($scope.garden);
 
@@ -109,6 +110,7 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
           var partrightLeft = parseInt(part.elemleft) + parseInt(part.elemwidth);
 
           part.plantings = [];
+          part.pastplantings = [];
           var toRemove = [];
           for (var j = 0; j < plantings.length; j++) {
             var planting = plantings[j];
@@ -117,7 +119,7 @@ angular.module('gardens').controller('GardensController', ['$scope', '$statePara
             console.log('partrightLeft: ' + partrightLeft + ' > planting.elemleft ' + planting.elemleft + ' > part.elemleft > ' + part.elemleft);
 
             if (partbottomTop > planting.elemtop && planting.elemtop >= part.elemtop && partrightLeft > planting.elemleft && planting.elemleft >= part.elemleft) {
-              //convert position to relative for all plantings
+              //convert position to relative for all plantings and add to gardenparts
               planting.elemtop = parseInt(planting.elemtop) - parseInt(part.elemtop);
               planting.elemleft = parseInt(planting.elemleft) - parseInt(part.elemleft);
               part.plantings.push(planting);

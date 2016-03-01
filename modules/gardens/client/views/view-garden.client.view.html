@@ -11,7 +11,7 @@
           <a class="btn btn-default" ng-click="zoomOut()">
             <i class="glyphicon glyphicon-zoom-out"></i>
           </a>
-          <!--  <a class="btn btn-default" ui-sref="listGardens">-->
+          <!--  <a class="btn btn-default" ui-sref="gardens.list">-->
           <a class="btn btn-default" ng-click="back()">
             <i class="glyphicon glyphicon-step-backward"></i>
           </a>
@@ -33,6 +33,8 @@
         <div zoomable id="garden" style="width: {{ garden.elemwidth*zoom }}px; height: {{ garden.elemheight*zoom }}px;" class="garden">
           <a data-ng-href="/gardenparts/{{gardenpart.bk}}/{{selectedDate}}" gardenpart ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth*zoom }}px; height: {{ gardenpart.elemheight*zoom }}px; top: {{ gardenpart.elemtop*zoom }}px; left: {{ gardenpart.elemleft*zoom }}px;">
             <div planting ng-repeat="planting in gardenpart.plantings" ng-init="planting=planting" popover-template="modules/gardens/views/planting-popover.client.view.html" popover-template-trigger="customEvent" ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" class="planting" style="background: url({{planting.plantVariety.image}}); width: {{ planting.elemwidth*zoom }}px; height: {{ planting.elemheight*zoom }}px; top: {{ planting.elemtop*zoom }}px; left: {{ planting.elemleft*zoom }}px;"></div>
+            <div class="planting" ng-repeat="pastplanting in gardenpart.pastplantings" ng-init="pastplanting=pastplanting"
+                 style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*zoom }}px; height: {{ pastplanting.elemheight*zoom }}px; top: {{ pastplanting.elemtop*zoom }}px; left: {{ pastplanting.elemleft*zoom }}px;"></div>
           </a>
         </div>
 

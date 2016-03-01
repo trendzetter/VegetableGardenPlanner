@@ -68,10 +68,10 @@ angular.module('gardens').directive('garden', [
           if (mode !== 'create') {
             elem.resizable('option', 'minHeight', scope.minHeight);
             elem.resizable('option', 'minWidth', scope.minWidth);
-            ui.size.height = scope.garden.elemheight;
-            ui.position.top = scope.garden.elemtop;
-            ui.size.width = scope.garden.elemwidth;
-            ui.position.left = scope.garden.elemleft;
+            ui.size.height = scope.vm.garden.elemheight;
+            ui.position.top = scope.vm.garden.elemtop;
+            ui.size.width = scope.vm.garden.elemwidth;
+            ui.position.left = scope.vm.garden.elemleft;
           }
           scope.$apply();
         });
