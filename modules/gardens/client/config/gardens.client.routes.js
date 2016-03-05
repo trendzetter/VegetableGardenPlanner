@@ -89,7 +89,7 @@
     //  plant: $stateParams.plant
   });
     garden.$promise.then(function(garden) {
-      var gardenparts = garden.gardenparts;
+  /*    var gardenparts = garden.gardenparts;
       //convert position to relative for all gardenparts
       var gardentop = parseInt(garden.elemtop);
       var gardenleft = parseInt(garden.elemleft);
@@ -106,7 +106,45 @@
         plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardentop;
         plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenleft;
       }
-      garden.plantings = plantings;
+      garden.plantings = plantings;*/
+      var gardenparts = garden.gardenparts;
+      var plantings = garden.plantings;
+
+      //convert position to relative for all gardenparts and add the plantings
+      var gardentop = parseInt(garden.elemtop);
+      var gardenleft = parseInt(garden.elemleft);
+
+      for (var i = 0; i < gardenparts.length; i++) {
+        var part = gardenparts[i];
+        var partbottomTop = parseInt(part.elemtop) + parseInt(part.elemheight);
+        var partrightLeft = parseInt(part.elemleft) + parseInt(part.elemwidth);
+
+        part.plantings = [];
+        part.pastplantings = [];
+        var toRemove = [];
+        for (var j = 0; j < plantings.length; j++) {
+          var planting = plantings[j];
+          console.log('next: ');
+          console.log('partbottomTop: ' + partbottomTop + ' > planting.elemtop ' + planting.elemtop + ' > part.elemtop ' + part.elemtop);
+          console.log('partrightLeft: ' + partrightLeft + ' > planting.elemleft ' + planting.elemleft + ' > part.elemleft > ' + part.elemleft);
+
+          if (partbottomTop > planting.elemtop && planting.elemtop >= part.elemtop && partrightLeft > planting.elemleft && planting.elemleft >= part.elemleft) {
+            //convert position to relative for all plantings and add to gardenparts
+            planting.elemtop = parseInt(planting.elemtop) - parseInt(part.elemtop);
+            planting.elemleft = parseInt(planting.elemleft) - parseInt(part.elemleft);
+            part.plantings.push(planting);
+            console.log('planting pushed!');
+            toRemove.push(j);
+          }
+
+        }
+        while (toRemove.length > 0) {
+          plantings.splice(toRemove.pop(), 1);
+        }
+        //convert position to relative for all gardenparts
+        part.elemtop = parseInt(part.elemtop) - gardentop;
+        part.elemleft = parseInt(part.elemleft) - gardenleft;
+      }
       return garden;
     });
     return garden.$promise;
