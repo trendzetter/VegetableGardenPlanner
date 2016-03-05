@@ -1,51 +1,41 @@
 <section class="content">
   <section class="container">
-    <section data-ng-controller="GardensController" data-ng-init="findOne()">
-      <div class="page-header">
-        <div class="pull-right">
-          Select date:
-          <input calendar="edit" ng-model='selectedDate'/>
-          <a class="btn btn-default" ng-click="zoomIn()">
-            <i class="glyphicon glyphicon-zoom-in"></i>
-          </a>
-          <a class="btn btn-default" ng-click="zoomOut()">
-            <i class="glyphicon glyphicon-zoom-out"></i>
-          </a>
-          <!--  <a class="btn btn-default" ui-sref="gardens.list">-->
-          <a class="btn btn-default" ng-click="back()">
-            <i class="glyphicon glyphicon-step-backward"></i>
-          </a>
-          <a class="btn btn-default" href="/gardens/{{garden._id}}/edit/{{selectedDate}}">
-            <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a class="btn btn-default" href="/gardens/{{garden._id}}/layout/{{selectedDate}}">
-            <i class="glyphicon glyphicon-pencil"></i>
-          </a>
-          <a class="btn btn-danger" ng-really-message="Are you sure you want to delete {{garden.name}}? All plantings will be lost forever." ng-really-click="remove()">
-            <i class="glyphicon glyphicon-trash"></i>
-          </a>
-        </div>
-        <h1 data-ng-bind="garden.name"></h1>
-
-      </div>
-
-      <div class="col-md-12">
-        <div zoomable id="garden" style="width: {{ garden.elemwidth*zoom }}px; height: {{ garden.elemheight*zoom }}px;" class="garden">
-          <a data-ng-href="/gardenparts/{{gardenpart.bk}}/{{selectedDate}}" gardenpart ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth*zoom }}px; height: {{ gardenpart.elemheight*zoom }}px; top: {{ gardenpart.elemtop*zoom }}px; left: {{ gardenpart.elemleft*zoom }}px;">
-            <div planting ng-repeat="planting in gardenpart.plantings" ng-init="planting=planting" popover-template="modules/gardens/views/planting-popover.client.view.html" popover-template-trigger="customEvent" ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" class="planting" style="background: url({{planting.plantVariety.image}}); width: {{ planting.elemwidth*zoom }}px; height: {{ planting.elemheight*zoom }}px; top: {{ planting.elemtop*zoom }}px; left: {{ planting.elemleft*zoom }}px;"></div>
-            <div class="planting" ng-repeat="pastplanting in gardenpart.pastplantings" ng-init="pastplanting=pastplanting"
-                 style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*zoom }}px; height: {{ pastplanting.elemheight*zoom }}px; top: {{ pastplanting.elemtop*zoom }}px; left: {{ pastplanting.elemleft*zoom }}px;"></div>
-          </a>
-        </div>
-
-        <small>
-          <em class="text-muted">
-            Posted on
-            <span data-ng-bind="garden.created | date:'mediumDate'"></span>
-            by
-            <span data-ng-bind="garden.user.displayName"></span>
-          </em>
-        </small>
-      </section>
-    </section>
-  </section>
+<section>
+  <div class="page-header">
+    <div class="pull-right" ng-show="vm.garden.isAllowedEdit">
+      <a class="btn btn-default" ui-sref="editGarden({bk:vm.garden.bk, selectedDate: vm.selectedDate })">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-default" ui-sref="designGarden({gardenId:vm.garden._id, selectedDate: vm.selectedDate })">
+        <i class="glyphicon glyphicon-pencil"></i>
+      </a>
+      <a class="btn btn-danger" ng-click="vm.remove()">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <div class="pull-right">
+      Select date:
+      <input calendar="edit" ng-model='vm.selectedDate'/>
+    </div>
+    <h1 ng-bind="vm.garden.name"></h1>
+  </div>
+  <div zoomable id="garden" style="width: {{ vm.garden.elemwidth * vm.zoom }}px; height: {{ vm.garden.elemheight * vm.zoom }}px;" class="garden">
+    <div planting ng-repeat="planting in vm.garden.plantings" ng-init="planting=planting" popover-template="modules/gardens/views/planting-popover.client.view.html" popover-template-trigger="customEvent" ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" class="planting" style="background: url({{planting.plantVariety.image}}); width: {{ planting.elemwidth*vm.zoom }}px; height: {{ planting.elemheight*vm.zoom }}px; top: {{ planting.elemtop*vm.zoom }}px; left: {{ planting.elemleft*vm.zoom }}px;"></div>
+    <a data-ng-href="/gardenparts/{{gardenpart.bk}}/{{vm.selectedDate}}" gardenpart ng-repeat="gardenpart in vm.garden.gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth*vm.zoom }}px; height: {{ gardenpart.elemheight*vm.zoom }}px; top: {{ gardenpart.elemtop*vm.zoom }}px; left: {{ gardenpart.elemleft*vm.zoom }}px;">
+  <!--    <div class="planting" ng-repeat="pastplanting in gardenpart.pastplantings" ng-init="pastplanting=pastplanting"
+           style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*vm.zoom }}px; height: {{ pastplanting.elemheight*vm.zoom }}px; top: {{ pastplanting.elemtop*vm.zoom }}px; left: {{ pastplanting.elemleft*vm.zoom }}px;"></div>-->
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.garden.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.garden.user" ng-bind="vm.garden.user.displayName"></span>
+      <span ng-if="!vm.garden.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.garden.content"></p>
+</section>
+</section>
+</section>

@@ -8,10 +8,10 @@
   GardensService.$inject = ['$resource', '$stateParams'];
 
   function GardensService($resource, $stateParams) {
-    return $resource('api/gardens/:bk/:selectedDate/:plant', {
+    return $resource('api/gardens/:bk/:selectedDate', {
       bk: '@bk',
-      selectedDate: $stateParams.selectedDate,
-      plant: '@plant'
+      selectedDate: $stateParams.selectedDate//,
+    //  plant: '@plant'
     }, {
       update: {
         method: 'PUT'

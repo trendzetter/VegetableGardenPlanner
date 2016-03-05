@@ -1,5 +1,6 @@
 <rulers></rulers>
-<div class="layoutgarden" id="garden" garden="create" popover="{{tooltiptext}}" data-ng-init="init()" on-resize="updateGarden()" style="width: {{ vm.garden.elemwidth }}px; height: {{ vm.garden.elemheight }}px; top: {{ vm.garden.elemtop }}px; left: {{ vm.garden.elemleft }}px;" >
+<div class="layoutgarden" id="garden" garden="create" popover="{{tooltiptext}}" data-ng-init="init()" style="width: {{ vm.garden.elemwidth }}px; height: {{ vm.garden.elemheight }}px; top: {{ vm.garden.elemtop }}px; left: {{ vm.garden.elemleft }}px;" >
+<div gardenpart  ng-repeat="gardenpart in vm.garden.gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" ></div>
 </div>
 <layer style="postion:absolute">
   <form id="submitForm" dragtool="2" class="form-horizontal" name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>

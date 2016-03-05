@@ -26,7 +26,6 @@ angular.module('gardens').directive('gardenpart', ['$timeout',
         var updateCoordinates = function() {
           var co = getCoordinates(elem);
           scope.update(co.top, co.left, co.width, co.height);
-          //elem.qtip('option', 'content.text', scope.tooltiptext);
           scope.$apply();
         };
 

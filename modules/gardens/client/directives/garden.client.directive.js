@@ -1,8 +1,8 @@
 'use strict';
 /*global $:false */
 
-angular.module('gardens').directive('garden', [
-  function() {
+angular.module('gardens').directive('garden', ['$state',
+  function($state) {
     var resizableConfig = {
       grid: [5, 5],
       handles: 'all',
@@ -17,7 +17,7 @@ angular.module('gardens').directive('garden', [
       restrict: 'A',
       link: function postLink(scope, elem, attrs) {
         var mode = attrs.garden;
-        if (mode === 'create') {
+        if ($state.current.name === 'createGarden') {
           elem.addClass('creategarden');
           elem.draggable(draggableConfig);
           scope.updateCoordinates(50, 50, 250, 350);
@@ -26,12 +26,12 @@ angular.module('gardens').directive('garden', [
             scope.$apply();
           });
         } else {
-          scope.$on('gardenpartsLoaded', function() {
+        //  scope.$on('gardenpartsLoaded', function() {
             var topmin = Number.MAX_VALUE;
             var offsettop = Number.MIN_VALUE;
             var leftmin = Number.MAX_VALUE;
             var offsetleft = Number.MIN_VALUE;
-            angular.forEach(scope.gardenparts, function(gardenpart, key) {
+            angular.forEach(scope.vm.garden.gardenparts, function(gardenpart, key) {
               if (topmin > gardenpart.elemtop) {
                 topmin = gardenpart.elemtop;
               }
@@ -51,21 +51,20 @@ angular.module('gardens').directive('garden', [
             scope.minWidth = offsetleft - leftmin;
             scope.initialMinHeight = offsettop - topmin;
             scope.initialMinWidth = offsetleft - leftmin;
-            scope.initialTop = scope.garden.elemtop;
-            scope.initialLeft = scope.garden.elemleft;
-            scope.initialHeight = scope.garden.elemheight;
-            scope.initialWidth = scope.garden.elemwidth;
-
-            elem.resizable('option', 'minHeight', scope.minHeight);
-            elem.resizable('option', 'minWidth', scope.minWidth);
-          });
+            scope.initialTop = scope.vm.garden.elemtop;
+            scope.initialLeft = scope.vm.garden.elemleft;
+            scope.initialHeight = scope.vm.garden.elemheight;
+            scope.initialWidth = scope.vm.garden.elemwidth;
+            resizableConfig.minHeight = scope.minHeight;
+            resizableConfig.minWidth = scope.minWidth;
+//          });
         }
 
         elem.resizable(resizableConfig);
         elem.on('resize', function(evt, ui) {
           var cancel = scope.updateCoordinates(ui.position.top, ui.position.left, ui.size.height, ui.size.width);
 
-          if (mode !== 'create') {
+          if ($state.current.name !== 'createGarden') {
             elem.resizable('option', 'minHeight', scope.minHeight);
             elem.resizable('option', 'minWidth', scope.minWidth);
             ui.size.height = scope.vm.garden.elemheight;

@@ -199,6 +199,11 @@ exports.create = function(req, res) {
  * Show the current Garden
  */
 exports.read = function(req, res) {
+  // convert mongoose document to JSON
+//  var garden = req.garden ? req.article.toJSON() : {};
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  req.garden.isAllowedEdit = req.user && req.garden.user && req.garden.user._id.toString() === req.user._id.toString() ? true : false;
   res.jsonp(req.garden);
 };
 
@@ -228,8 +233,6 @@ exports.update = function(req, res) {
     garden._id = mongoose.Types.ObjectId();
 
     //Set the access for all versions of the garden
-
-
     Garden.update({
       bk: garden.bk
     }, {
