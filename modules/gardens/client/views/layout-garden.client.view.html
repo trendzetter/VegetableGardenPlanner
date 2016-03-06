@@ -1,7 +1,8 @@
 <rulers />
 <section data-ng-controller="GardenversionsController" data-ng-init="findOneVersion()"  id="garden" style="width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px; top: {{ garden.elemtop }}px; left: {{ garden.elemleft }}px;" class="layoutgarden">
-        <div popover-template-placement="right" popover-template="modules/gardens/views/popover.client.view.html" popover-template-trigger="customEvent"
-             ng-mouseenter="popoverEvent()" ng-mouseleave="popoverEvent()" context-menu="menuOptions"
+      <!--  <div uib-popover-template="modules/gardens/client/views/popover.client.view.html" popover-placement="right" popover-template-trigger="mouseenter"-->
+      <div uib-popover-template="'modules/gardens/client/views/popover.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
+           context-menu="menuOptions"
              id="id{{gardenpart._id}}" gardenpart='layout' ng-repeat="gardenpart in gardenparts"  ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" />
     <div data-ng-controller="ToolboxController" ng-init="toolboxInit()">
 

@@ -183,7 +183,6 @@ exports.create = function(req, res) {
   var garden = new Garden(req.body);
   garden.bk = mongoose.Types.ObjectId();
   garden.user = req.user;
-
   garden.save(function(err) {
     if (err) {
       return res.send(400, {
@@ -213,11 +212,28 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
   //Deze garden komt uit de database via de 'middleware'
   var garden = req.garden;
+  var keepers = req.body.keepers;
+    console.log('garden.keepers'+JSON.stringify(keepers));
   var oldvalid = req.garden.validFrom;
   var storevalid = oldvalid.getFullYear() + '-' + ('0' + (oldvalid.getMonth() + 1)).substr(-2) + '-' + ('0' + oldvalid.getDate()).substr(-2);
-  for (var i = 0; i < garden.keepers.length; i++) {
-    garden.keepers[i] = mongoose.Types.ObjectId(garden.keepers[i]);
+  garden.keepers = [];
+  for (var i = 0; i < keepers.length; i++) {
+    garden.keepers.push(mongoose.Types.ObjectId(keepers[i]));
   }
+  //Set the access for all versions of the garden
+  Garden.update({
+    bk: garden.bk
+  }, {
+    '$set': {
+      'keepers': garden.keepers,
+      'ruleset': new ObjectId(req.body.ruleset)
+    }
+  }, {multi: true}, function(){
+    console.log('keepers, ruleset failed');
+  },function(){
+    console.log('keepers,ruleset success');
+  });
+
   //Hier worden de gegevens van de webservice toegevoegd
   garden = _.extend(garden, req.body);
   var newvalid = req.garden.validFrom;
@@ -231,15 +247,6 @@ exports.update = function(req, res) {
     garden.validFrom = validFrom;
     garden.created = new Date();
     garden._id = mongoose.Types.ObjectId();
-
-    //Set the access for all versions of the garden
-    Garden.update({
-      bk: garden.bk
-    }, {
-      '$set': {
-        'keepers': garden.keepers
-      }
-    });
 
     // We need to  update the validTo of the gardenversion with an earlier date (if existing) and the
     // validfrom of a gardenversion with a later date
@@ -452,7 +459,7 @@ exports.gardenByBK = function(req, res, next, bk) {
       $lte: req.params.selectedDate
     },
     bk: bk
-  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, garden) {
+  }).populate('user', 'displayName').sort('-validFrom').populate('keepers', 'username').lean().exec(function(err, garden) {
     if (err) return next(err);
     if (!garden) return next(new Error('Failed to load Garden ' + bk));
     req.garden = garden;

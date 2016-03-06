@@ -5,20 +5,22 @@
     .module('gardens')
     .controller('GardensNgController', GardensNgController);
 
-  GardensNgController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService'];
+  GardensNgController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService','Users','RuleSetsService'];
 
-  function GardensNgController($scope, $state, garden, Authentication,$stateParams,GardenpartsService) {
+  function GardensNgController($scope, $state, garden, Authentication,$stateParams,GardenpartsService,Users,RuleSetsService) {
 
     var vm = this;
 
     vm.garden = garden;
     vm.authentication = Authentication;
-    vm.zoom = 1;
     vm.selectedDate = $stateParams.selectedDate;
+    vm.rulesets = RuleSetsService.query();
+    vm.zoom = 1;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+
     $scope.setDate = function(date) {
       vm.selectedDate = date;
     };
@@ -82,6 +84,10 @@
     }
 
     if($state.current.name === 'createGarden'){
+      var today = new Date();
+      vm.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
+      vm.garden.ruleset = '5688553504e0daf62b4b8906';
+      console.log('vm.selectedDate'+vm.selectedDate);
           // During create > resize
         $scope.updateCoordinates = function(top, left, height, width) {
           vm.garden.elemtop = top;
@@ -92,6 +98,25 @@
           $scope.tooltiptext = 'breedte: ' + height + ' cm lengte: ' + width + ' cm ' + 'oppervlakte: ' + opp + ' m² ± ' + Math.round(height * width / 150000) + ' personen';
         };
       }
+
+      $scope.addKeeper = function() {
+        vm.error = '';
+        if (vm.newkeeper === vm.authentication.user.username) {
+          vm.error = 'You don\'t need to add yourself';
+        } else {
+          Users.get({
+            name: vm.newkeeper
+          }).$promise.then(
+            function(user) {
+              if(!vm.garden.keepers) vm.garden.keepers = [];
+              vm.garden.keepers.push(user);
+              vm.newkeeper = '';
+            },
+            function(errorResponse) {
+              vm.error = errorResponse.data.message;
+            });
+        }
+      };
 
     // Remove existing garden
     function remove() {
@@ -143,12 +168,15 @@
           selectedDate: $scope.selectedDate
         });*/
       }
-
+      $scope.back = function  (){
+        console.log('back!'+JSON.stringify($state.previous));
+        $state.go($state.previous.state.name,$state.previous.params);
+      };
 
     // Save Article
     function save(isValid) {
       if (!isValid) {
-        $scope.$broadcast('show-errors-check-validity', 'vm.form.articleForm');
+        $scope.$broadcast('show-errors-check-validity', 'vm.form.gardenForm');
         return false;
       }
 
@@ -158,7 +186,8 @@
           var garden = vm.garden;
           garden.validFrom = $stateParams.selectedDate;
           var leankeepers = [];
-          var keepers = garden.keepers;
+          var keepers = vm.garden.keepers;
+          console.log('vm.garden.keepers: '+vm.garden.keepers);
           for (var i = 0; i < keepers.length; i++) {
             console.log('garden.keepers[i]' + keepers[i]._id);
             leankeepers.push(keepers[i]._id);

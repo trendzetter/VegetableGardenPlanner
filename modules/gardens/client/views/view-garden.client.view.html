@@ -16,6 +16,15 @@
     <div class="pull-right">
       Select date:
       <input calendar="edit" ng-model='vm.selectedDate'/>
+      <a class="btn btn-default" ng-click="zoomIn()">
+        <i class="glyphicon glyphicon-zoom-in"></i>
+      </a>
+      <a class="btn btn-default" ng-click="zoomOut()">
+        <i class="glyphicon glyphicon-zoom-out"></i>
+      </a>
+      <a class="btn btn-primary" ng-click="back()">
+        <i class="glyphicon glyphicon-step-backward"></i>
+      </a>
     </div>
     <h1 ng-bind="vm.garden.name"></h1>
   </div>

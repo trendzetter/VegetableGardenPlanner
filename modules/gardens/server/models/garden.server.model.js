@@ -57,7 +57,11 @@ var GardenSchema = new Schema({
   keepers: [{
     type: Schema.ObjectId,
     ref: 'User'
-  }]
+  }],
+  ruleset: {
+    type: Schema.ObjectId,
+    ref: 'RuleSet'
+  }
 });
 
 mongoose.model('Garden', GardenSchema);

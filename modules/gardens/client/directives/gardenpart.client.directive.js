@@ -19,6 +19,7 @@ angular.module('gardens').directive('gardenpart', ['$timeout',
 
         scope.popoverEvent = function() {
           $timeout(function() {
+            console.log('popoverevent');
             elem.trigger('customEvent');
           }, 0);
         };

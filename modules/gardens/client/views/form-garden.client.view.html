@@ -3,46 +3,62 @@
 <div gardenpart  ng-repeat="gardenpart in vm.garden.gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" ></div>
 </div>
 <layer style="postion:absolute">
-  <form id="submitForm" dragtool="2" class="form-horizontal" name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>
+  <form dragtool="2" class="form-horizontal" name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>
     <fieldset>
-      <label class="control-label" for="name">Regelset: (optioneel)</label>
+      <label class="control-label" for="ruleset">Regelset: (optioneel)</label>
       <div class="controls">
-        <select data-ng-options="crop._id as crop.name for crop in vm.crops" data-ng-model="vm.plantvariety.crop" id="crop"></select>
+        <select data-ng-options="set._id as set.name for set in vm.rulesets" ng-selected="{{ !vm.garden._id ? set._id === '5688553504e0daf62b4b8906': set._id === vm.garden.ruleset}}" data-ng-model="vm.garden.ruleset" id="ruleset"></select>
       </div>
-      <input calendar ng-model="vm.selectedDate"></input>
-      <label class="control-label" for="name">Naam</label>
-      <div class="controls">
-        <input type="text" data-ng-model="vm.garden.name" id="name" class="form-control" placeholder="{{ authentication.user.firstName }}'s moestuin" required>
+      <div class="input-group" ng-hide="vm.garden._id">
+        <label class="control-label" for="name">Startdatum: </label>
+        <div class="controls">
+          <input calendar ng-model="vm.selectedDate"></input>
+        </div>
+      </div>
+      <div class="input-group" show-errors>
+        <label class="control-label" for="name">Naam</label>
+        <input name="name" id="name" type="text" data-ng-model="vm.garden.name" class="form-control" placeholder="{{ vm.authentication.user.firstName }}'s moestuin" required>
+        <div ng-messages="vm.form.gardenForm.name.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Garden name is required.</p>
+        </div>
       </div>
       <label class="control-label" for="elemtop">Afstand van boven:</label>
       <div class="controls">
-        <input type="text" id="elemtop" class="form-control" data-ng-model="vm.garden.elemtop">
+        <input ng-disabled="vm.garden._id" type="text" id="elemtop" class="form-control" data-ng-model="vm.garden.elemtop">
       </div>
       <label class="control-label" for="elemleft">Afstand van links:</label>
       <div class="controls">
-        <input type="text" id="elemleft" class="form-control" data-ng-model="vm.garden.elemleft">
+        <input ng-disabled="vm.garden._id"  type="text" id="elemleft" class="form-control" data-ng-model="vm.garden.elemleft">
       </div>
       <label class="control-label" for="elemwidth">Lengte:</label>
       <div class="controls">
-        <input type="text" id="elemwidth" class="form-control" data-ng-model="vm.garden.elemwidth">
+        <input ng-disabled="vm.garden._id" type="text" id="elemwidth" class="form-control" data-ng-model="vm.garden.elemwidth">
       </div>
       <label class="control-label" for="elemheight">Breedte:</label>
       <div class="controls">
-        <input type="text" id="elemheight" class="form-control" data-ng-model="vm.garden.elemheight">
+        <input ng-disabled="vm.garden._id" type="text" id="elemheight" class="form-control" data-ng-model="vm.garden.elemheight">
       </div>
       <br/>
-
+      <label class="control-label" for="name">Keepers</label>
       <div class="controls">
-        <button type="submit" class="btn btn-success btn-lg btn-block">
+        <input type="text" myenter data-ng-model="vm.newkeeper" />
+      </div>
+      <div class="controls">
+          <span ng-repeat="keeper in vm.garden.keepers" >{{keeper.username}}<el ng-show="!$last">,<el></span>
+      </div>
+      <div class="controls">
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg">
           <span class="glyphicon glyphicon-ok"></span>
-          Opslaan
+          {{vm.garden._id ? 'Wijzigen' : 'Aanmaken'}}
+        </button>
+          <button class="btn btn-primary" ng-click="back()">
+          <i class="glyphicon glyphicon-step-backward"></i>
         </button>
       </div>
-
-      <div data-ng-show="error" class="text-danger">
-        <strong data-ng-bind="error"></strong>
-      </div>
-      <br/>
+      <br>
     </fieldset>
   </form>
 </layer>
@@ -66,9 +82,7 @@
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.garden._id ? 'Update' : 'Create'}}</button>
         </div>
-        <div ng-show="vm.error" class="text-danger">
-          <strong ng-bind="vm.error"></strong>
-        </div>
+
       </fieldset>
     </form>
   </div>-->
