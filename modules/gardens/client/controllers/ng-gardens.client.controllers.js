@@ -14,7 +14,6 @@
     vm.garden = garden;
     vm.authentication = Authentication;
     vm.selectedDate = $stateParams.selectedDate;
-    vm.rulesets = RuleSetsService.query();
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
@@ -24,6 +23,9 @@
       vm.selectedDate = date;
     };
 
+    if($state.current.name === 'editGarden' || $state.current.name === 'createGarden'){
+      vm.rulesets = RuleSetsService.query();
+    }
     if($state.current.name === 'editGarden'){
       // During edit > resize
       $scope.updateCoordinates = function(top, left, height, width) {
