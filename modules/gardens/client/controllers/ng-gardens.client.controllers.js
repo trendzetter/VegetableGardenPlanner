@@ -15,7 +15,6 @@
     vm.authentication = Authentication;
     vm.selectedDate = $stateParams.selectedDate;
     vm.rulesets = RuleSetsService.query();
-    vm.zoom = 1;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

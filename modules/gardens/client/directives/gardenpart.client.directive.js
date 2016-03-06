@@ -16,7 +16,6 @@ angular.module('gardens').directive('gardenpart', ['$timeout',
     return {
       restrict: 'A',
       link: function postLink(scope, elem, attrs) {
-
         scope.popoverEvent = function() {
           $timeout(function() {
             console.log('popoverevent');
@@ -110,6 +109,9 @@ angular.module('gardens').directive('gardenpart', ['$timeout',
             };
             draggableConfig.drag = updateCoordinates;
             elem.draggable(draggableConfig);
+            elem.effect('pulsate', function() {
+              scope.opacity = 1;
+            });
           }
         }
       }

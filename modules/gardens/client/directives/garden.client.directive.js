@@ -16,6 +16,10 @@ angular.module('gardens').directive('garden', ['$state',
     return {
       restrict: 'A',
       link: function postLink(scope, elem, attrs) {
+        scope.$on('updatedZoom', function(event, zoom) {
+          console.log('gardenDirective received zoom '+zoom);
+          scope.vm.zoom = zoom;
+        });
         var mode = attrs.garden;
         if ($state.current.name === 'createGarden') {
           elem.addClass('creategarden');
