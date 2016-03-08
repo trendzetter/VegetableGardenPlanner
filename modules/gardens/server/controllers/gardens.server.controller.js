@@ -229,9 +229,9 @@ exports.update = function(req, res) {
       'ruleset': new ObjectId(req.body.ruleset)
     }
   }, {multi: true}, function(){
-    console.log('keepers, ruleset failed');
+    console.log('keepers, ruleset success');
   },function(){
-    console.log('keepers,ruleset success');
+    console.log('keepers,ruleset failed');
   });
 
   //Hier worden de gegevens van de webservice toegevoegd
