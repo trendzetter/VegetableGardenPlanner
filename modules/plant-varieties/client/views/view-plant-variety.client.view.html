@@ -4,10 +4,8 @@
   <div class="page-header">
     <h1 ng-bind="vm.plantvariety.title"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.plantvariety.user._id">
-    <a class="btn btn-primary" ui-sref="plant-varieties.list">
-      <i class="glyphicon glyphicon-step-backward"></i>
-    </a>
+  <div class="pull-right" ng-show="vm.article.isCurrentUserOwner">>
+
     <a class="btn btn-default" ui-sref="plant-varieties.edit({ plantVarietyId: vm.plantvariety._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
@@ -16,6 +14,9 @@
     </a>
   </div>
   <div class="pull-right" >
+    <a class="btn btn-primary" ui-sref="plant-varieties.list">
+      <i class="glyphicon glyphicon-step-backward"></i>
+    </a>
    <a class="btn btn-primary" ui-sref="listGardens({plant: vm.plantvariety._id, selectedDate: vm.selectedDate })">
         <i class="glyphicon glyphicon-leaf"></i>
     </a>
