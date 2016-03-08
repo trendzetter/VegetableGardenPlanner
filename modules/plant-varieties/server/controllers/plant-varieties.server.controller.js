@@ -90,7 +90,7 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  plantVariety.isCurrentUserOwner = req.user && plantVariety.user && plantVariety.user._id.toString() === req.plantVariety._id.toString() ? true : false;
+  plantVariety.isCurrentUserOwner = req.user && plantVariety.user && plantVariety.user._id.toString() === req.user._id.toString() ? true : false;
   res.jsonp(plantVariety);
 };
 
