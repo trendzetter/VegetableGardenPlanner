@@ -25,7 +25,7 @@ module.exports = {
         'public/lib/angular-bootstrap-contextmenu/contextMenu.js',
         'public/lib/cropper/dist/cropper.min.js',
         'public/lib/ng-cropper/dist/ngCropper.all.min.js',
-        'public/lib/angular-dragon-drop/dragon-drop.js'
+        'public/lib/dragon-drop/dragon-drop.min.js'
       ]
     },
     css: 'public/dist/application.min.css',
