@@ -4,8 +4,7 @@
   <div class="page-header">
     <h1 ng-bind="vm.plantvariety.title"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.plantvariety.isCurrentUserOwner">>
-
+  <div class="pull-right" ng-show="vm.plantvariety.isCurrentUserOwner">
     <a class="btn btn-default" ui-sref="plant-varieties.edit({ plantVarietyId: vm.plantvariety._id})">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
