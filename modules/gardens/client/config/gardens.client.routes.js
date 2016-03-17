@@ -55,7 +55,16 @@
     }).
     state('plantGarden', {
       url: '/gardens/plant/:bk/:selectedDate/:plant',
-      templateUrl: 'modules/gardens/client/views/view-garden.client.view.html'
+      templateUrl: 'modules/gardens/client/views/view-garden.client.view.html',
+      controller: 'PlantGardenController',
+      controllerAs: 'vm',
+      resolve: {
+        gardenResolve: getGarden
+      },
+      data: {
+        roles: ['user', 'admin'],
+        pageTitle : 'Plant garden'
+      }
     }).
     state('viewGardenversion', {
       url: '/gardenversion/:gardenId/:selectedDate',
@@ -85,28 +94,10 @@
   function getGarden($stateParams, GardensService) {
     var garden = GardensService.get({
       bk: $stateParams.bk,
-      selectedDate: $stateParams.selectedDate//,
-    //  plant: $stateParams.plant
+      selectedDate: $stateParams.selectedDate,
+      plant: $stateParams.plant
   });
     garden.$promise.then(function(garden) {
-  /*    var gardenparts = garden.gardenparts;
-      //convert position to relative for all gardenparts
-      var gardentop = parseInt(garden.elemtop);
-      var gardenleft = parseInt(garden.elemleft);
-      for (var i = 0; i < gardenparts.length; i++) {
-        gardenparts[i].elemtop = parseInt(gardenparts[i].elemtop) - gardentop;
-        gardenparts[i].elemleft = parseInt(gardenparts[i].elemleft) - gardenleft;
-      }
-      garden.gardenparts = gardenparts;
-      var plantings = garden.plantings;
-      //convert position to relative for all plantings
-      var gardentop = parseInt(garden.elemtop);
-      var gardenleft = parseInt(garden.elemleft);
-      for (var i = 0; i < plantings.length; i++) {
-        plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardentop;
-        plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenleft;
-      }
-      garden.plantings = plantings;*/
       var gardenparts = garden.gardenparts;
       var plantings = garden.plantings;
 

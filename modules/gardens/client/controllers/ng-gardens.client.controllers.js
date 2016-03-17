@@ -136,17 +136,6 @@
           gardenparts[i].elemtop = parseInt(gardenparts[i].elemtop) + parseInt(garden.elemtop);
           gardenparts[i].elemleft = parseInt(gardenparts[i].elemleft) + parseInt(garden.elemleft);
         }
-
-    /*    GardenpartsService.createParts({
-          bk: garden.bk,
-          selectedDate: $stateParams.selectedDate
-        }, newparts);*/
-
-        //Update the modified parts
-        //Filter new parts
-    /*    var filtered = gardenparts.filter(function(x) {
-          return newparts.indexOf(x) < 0;
-        });*/
         var modified = [];
         for (i = 0; i < gardenparts.length; i++) {
           if (gardenparts[i].modified) {
@@ -159,15 +148,6 @@
             bk: garden.bk,
             selectedDate: $stateParams.selectedDate
           }, modified);
-
-    /*    GardenpartsService.deleteParts({
-          bk: garden.bk,
-          selectedDate: $stateParams.selectedDate
-        }, delparts);
-        $state.go('viewGarden', {
-          bk: garden.bk,
-          selectedDate: $scope.selectedDate
-        });*/
       }
       $scope.back = function  (){
         console.log('back!'+JSON.stringify($state.previous));
@@ -200,9 +180,6 @@
           garden.$update({
               selectedDate: $stateParams.selectedDate
             },successCallback, errorCallback);
-
-        //vm.garden.$update(successCallback, errorCallback);
-        //vm.garden.$update({selectedDate:$stateParams.selectedDate},successCallback, errorCallback);
       } else {
         vm.garden.validFrom = new Date(0);
         vm.garden.$save(successCallback, errorCallback);

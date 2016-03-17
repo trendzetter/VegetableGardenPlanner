@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   Garden = mongoose.model('Garden'),
   Gardenparts = mongoose.model('Gardenpart'),
   Plantings = mongoose.model('Planting'),
+  PlantVarieties = mongoose.model('PlantVariety'),
   ObjectId = mongoose.Types.ObjectId,
   _ = require('lodash');
 
@@ -38,13 +39,14 @@ var addParts = function(next, req) {
   var rightCornerLeft = req.garden.elemleft + req.garden.elemwidth;
   var bottomCornerTop = req.garden.elemtop + req.garden.elemheight;
   var plantBackUntil;
-  if(req.params.plant !== 'undefined'){
+  console.log('req.params.plant:' + req.params.plant);
+  if(req.params.plant !== undefined){
     var dateArray = req.params.selectedDate.split('-');
     plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
   }else{
     plantBackUntil = req.params.selectedDate;
   }
-    console.log('plantBackUntil:' + plantBackUntil);
+    console.log('plantBackUntil:' + plantBackUntil+req.params.plant);
   Gardenparts.find({
     $and: [{
       validFrom: {
@@ -170,8 +172,33 @@ var addParts = function(next, req) {
       }]
     }).populate('plantVariety').exec(function(err, plantings) {
       if (err) return next(err);
-      req.garden.plantings = plantings;
-      next();
+
+      if(req.params.plant !== undefined){
+        //put the past plantings in a seperate array for rotationadvice
+        req.garden.pastplantings = [];
+        var selectedDate = new Date(req.params.selectedDate);
+        var index = 0;
+        while(index<plantings.length){
+          if(plantings[index].validTo < selectedDate){
+            var plantingArray = plantings.splice(index,1);
+            req.garden.pastplantings.push(plantingArray[0]);
+          }else{
+            index++;
+          }
+        }
+        req.garden.plantings = plantings;
+
+        //Add the selected plantVariety for rotationadvice
+        PlantVarieties.findOne({'_id':req.params.plant}).exec(function(err, plantVariety) {
+          req.garden.plantVariety = plantVariety;
+          next();
+        });
+        console.log(req.garden.pastplantings);
+
+      }else{
+        req.garden.plantings = plantings;
+        next();
+      }
     });
   });
 };
@@ -198,8 +225,6 @@ exports.create = function(req, res) {
  * Show the current Garden
  */
 exports.read = function(req, res) {
-  // convert mongoose document to JSON
-//  var garden = req.garden ? req.article.toJSON() : {};
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
   req.garden.isAllowedEdit = req.user && req.garden.user && req.garden.user._id.toString() === req.user._id.toString() ? true : false;

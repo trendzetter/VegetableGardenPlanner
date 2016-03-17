@@ -13,11 +13,11 @@
     if($stateParams.plant){
       vm.selectedDate = $stateParams.selectedDate;
       vm.plant = $stateParams.plant;
+      vm.gardens = GardensService.getPlantGardens();
     }else{
       var today = new Date();
       vm.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
+      vm.gardens = GardensService.query();
     }
-
-    vm.gardens = GardensService.query();
   }
 })();

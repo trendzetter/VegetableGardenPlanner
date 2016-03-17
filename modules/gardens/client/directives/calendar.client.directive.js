@@ -6,6 +6,8 @@ angular.module('gardens').directive('calendar', ['$state',
       require: 'ngModel',
       link: function(scope, el, attr, ngModel) {
         el.datepicker({
+          changeMonth: true,
+          changeYear: true,
           dateFormat: 'yy-mm-dd',
           onSelect: function(dateText) {
             scope.$apply(function() {

@@ -36,6 +36,9 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/gardens/:bk/:selectedDate/:plant',
       permissions: ['get']
     }, {
+      resources: '/api/gardens/plant/:selectedDate/:plant',
+      permissions: ['get']
+    }, {
       resources: '/api/gardenversions/:gardenId/:selectedDate',
       permissions: ['get','put']
     }, {

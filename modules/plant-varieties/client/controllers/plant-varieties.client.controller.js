@@ -22,10 +22,22 @@
       var date = new Date(year, 0);
       vm.DOYstartSow = new Date(date.setDate(plantvariety.DOYstartSow));
       vm.DOYendSow = new Date(date.setDate(plantvariety.DOYendSow));
-      var today = new Date(year, 0);
-      if( vm.DOYendSow > today) vm.selectedDate = vm.DOYstartSow.getFullYear() + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
-      else
-      vm.selectedDate = vm.DOYstartSow.getFullYear()+1 + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
+      var today = new Date();
+      if( vm.DOYendSow < today){
+        console.log('Zaaien is al voorbij vm.DOYendSow: '+ vm.DOYendSow + '< today: ' + today);
+        vm.selectedDate = vm.DOYstartSow.getFullYear()+1 + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
+      }else{
+        if(vm.DOYstartSow < today){
+          console.log('Zaaien is al begonnen neem vandaag');
+           vm.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
+        }else{
+          console.log(' vm.DOYendSow: '+ vm.DOYendSow + '>= today: ' + today);
+          console.log(' vm.DOYstartSow: '+ vm.DOYstartSow + '>= today: ' + today);
+          console.log('Zaaien is al nog niet begonnen neem dit jaar zaaiperiode start');
+          vm.selectedDate = vm.DOYstartSow.getFullYear() + '-' + ('0' + (vm.DOYstartSow.getMonth() + 1)).substr(-2) + '-' + ('0' + vm.DOYstartSow.getDate()).substr(-2);
+        }
+      }
+
     }
 
     /**
