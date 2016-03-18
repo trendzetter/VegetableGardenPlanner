@@ -179,7 +179,7 @@ var addParts = function(next, req) {
         var selectedDate = new Date(req.params.selectedDate);
         var index = 0;
         while(index<plantings.length){
-          if(plantings[index].validTo < selectedDate){
+          if(plantings[index].validTo <= selectedDate){
             var plantingArray = plantings.splice(index,1);
             req.garden.pastplantings.push(plantingArray[0]);
           }else{

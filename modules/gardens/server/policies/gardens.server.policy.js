@@ -56,6 +56,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/gardens/:gardenId',
       permissions: ['get']
+    }, {
+      resources: '/api/gardens/plant/:selectedDate/:plant',
+      permissions: ['get']
     }]
   }]);
 };

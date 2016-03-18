@@ -16,6 +16,7 @@
       controller: 'GardensListController',
       controllerAs: 'vm',
       data: {
+        roles: ['user', 'admin'],
         pageTitle: 'Gardens list'
       }
     }).
