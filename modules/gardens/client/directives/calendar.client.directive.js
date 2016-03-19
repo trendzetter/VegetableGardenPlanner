@@ -27,7 +27,6 @@ angular.module('gardens').directive('calendar', ['$state','$stateParams',
 
               //In view reload met tuin op die datum
               if (mode === 'view' || mode === 'edit') {
-                //scope.findOne();
                 $state.go('viewGarden', {
                   bk: scope.vm.garden.bk,
                   selectedDate: dateText

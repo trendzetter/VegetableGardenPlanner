@@ -4,7 +4,7 @@
         <section class="plantingpart" zoomable data-ng-init="findOne()" style="width:{{gardenpart.elemwidth*zoom}}px;height:{{gardenpart.elemheight*zoom}}px;top:100px;left:50px; position: absolute">
                 <div uib-popover-template="'modules/gardenparts/client/views/popover.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
                     planting context-menu="menuOptions" ng-controller="PlantingController" ng-repeat="planting in plantings" ng-init="planting=planting"
-                     style="z-index: 15; opacity: 1; background: url('/api/image/{{horizontal*zoom}}/{{vertical*zoom}}/{{planting.orientation}}') repeat scroll 0 0 rgba(0, 0, 0, 0); width: {{ planting.elemwidth*zoom }}px; height: {{ planting.elemheight*zoom }}px; top: {{ planting.elemtop*zoom }}px; left: {{ planting.elemleft*zoom }}px;" />
+                     style="z-index: 15; opacity: 1; background: url('/api/image/{{horizontal*zoom}}/{{vertical*zoom}}/{{planting.orientation}}') repeat scroll 0 0 rgba(0, 0, 0, 0); box-shadow:0px 0px 0px 3px blue inset; width: {{ planting.elemwidth*zoom }}px; height: {{ planting.elemheight*zoom }}px; top: {{ planting.elemtop*zoom }}px; left: {{ planting.elemleft*zoom }}px;" />
                 <div class="planting" ng-repeat="pastplanting in pastplantings" ng-init="pastplanting=pastplanting"
                      style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*zoom }}px; height: {{ pastplanting.elemheight*zoom }}px; top: {{ pastplanting.elemtop*zoom }}px; left: {{ pastplanting.elemleft*zoom }}px;"
                         />
