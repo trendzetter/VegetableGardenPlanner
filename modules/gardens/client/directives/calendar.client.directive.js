@@ -1,7 +1,7 @@
 'use strict';
 /*global $:false */
-angular.module('gardens').directive('calendar', ['$state',
-  function($state) {
+angular.module('gardens').directive('calendar', ['$state','$stateParams',
+  function($state,$stateParams) {
     return {
       require: 'ngModel',
       link: function(scope, el, attr, ngModel) {
@@ -14,6 +14,16 @@ angular.module('gardens').directive('calendar', ['$state',
               ngModel.$setViewValue(dateText);
               scope.setDate(dateText);
               var mode = attr.calendar;
+
+              if($state.current.name === 'plantGarden'){
+                console.log('calendar $state.current.name :' + $state.current.name );
+                $state.go('plantGarden', {
+                  bk: scope.vm.garden.bk,
+                  selectedDate: dateText,
+                  plant: $stateParams.plant
+                });
+                return;
+              }
 
               //In view reload met tuin op die datum
               if (mode === 'view' || mode === 'edit') {
