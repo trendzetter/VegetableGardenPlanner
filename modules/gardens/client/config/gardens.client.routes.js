@@ -19,15 +19,7 @@
         roles: ['user', 'admin'],
         pageTitle: 'Gardens list'
       }
-    }).
-    state('listGardenversions', {
-      url: '/gardenversions',
-      templateUrl: 'modules/gardens/client/views/list-garden-versions.client.view.html'
     })
-  /* .state('createGardens', {
-      url: '/gardens/create',
-      templateUrl: 'modules/gardens/client/views/create-garden.client.view.html'
-    })*/
      .state('createGarden', {
       url: '/gardens/create',
       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
@@ -67,10 +59,6 @@
         pageTitle : 'Plant garden'
       }
     }).
-    state('viewGardenversion', {
-      url: '/gardenversion/:gardenId/:selectedDate',
-      templateUrl: 'modules/gardens/client/views/view-gardenversion.client.view.html'
-    }).
     state('editGarden', {
       url: '/gardens/:bk/edit/:selectedDate',
       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
@@ -99,40 +87,46 @@
       plant: $stateParams.plant
   });
     garden.$promise.then(function(garden) {
-      var gardenparts = garden.gardenparts;
-      var plantings = garden.plantings;
-
-      //convert position to relative for all gardenparts and add the plantings
       var gardentop = parseInt(garden.elemtop);
       var gardenleft = parseInt(garden.elemleft);
+      var gardenparts = garden.gardenparts;
+      var plantings = garden.plantings;
+      var pastplantings = garden.pastplantings;
 
       for (var i = 0; i < gardenparts.length; i++) {
         var part = gardenparts[i];
         var partbottomTop = parseInt(part.elemtop) + parseInt(part.elemheight);
         var partrightLeft = parseInt(part.elemleft) + parseInt(part.elemwidth);
 
+        //Adding the plantings to the gardenparts
         part.plantings = [];
-        part.pastplantings = [];
         var toRemove = [];
         for (var j = 0; j < plantings.length; j++) {
           var planting = plantings[j];
-          console.log('next: ');
-          console.log('partbottomTop: ' + partbottomTop + ' > planting.elemtop ' + planting.elemtop + ' > part.elemtop ' + part.elemtop);
-          console.log('partrightLeft: ' + partrightLeft + ' > planting.elemleft ' + planting.elemleft + ' > part.elemleft > ' + part.elemleft);
-
           if (partbottomTop > planting.elemtop && planting.elemtop >= part.elemtop && partrightLeft > planting.elemleft && planting.elemleft >= part.elemleft) {
             //convert position to relative for all plantings and add to gardenparts
             planting.elemtop = parseInt(planting.elemtop) - parseInt(part.elemtop);
             planting.elemleft = parseInt(planting.elemleft) - parseInt(part.elemleft);
             part.plantings.push(planting);
-            console.log('planting pushed!');
             toRemove.push(j);
           }
-
         }
+
         while (toRemove.length > 0) {
           plantings.splice(toRemove.pop(), 1);
         }
+
+        if(pastplantings){
+          //Adding the past plantings to the gardenpart
+          part.pastplantings = [];
+          for (var k = 0; k < pastplantings.length; k++) {
+            var pastplanting = pastplantings[k];
+            if (partbottomTop > pastplanting.elemtop && pastplanting.elemtop >= part.elemtop && partrightLeft > pastplanting.elemleft && pastplanting.elemleft >= part.elemleft) {
+              part.pastplantings.push(pastplanting);
+            }
+          }
+        }
+
         //convert position to relative for all gardenparts
         part.elemtop = parseInt(part.elemtop) - gardentop;
         part.elemleft = parseInt(part.elemleft) - gardenleft;
