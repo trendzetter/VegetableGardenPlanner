@@ -1,8 +1,8 @@
 'use strict';
 
 // Gardenparts controller
-angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$stateParams', '$location', 'Authentication', 'GardensService', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings', 'RuleSetsService',
-  function($scope, $stateParams, $location, Authentication, Gardens, Gardenpart, Plantvarieties, Plantings, PastPlantings, RuleSets) {
+angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'GardensService', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings', 'RuleSetsService',
+  function($scope, $state, $stateParams, $location, Authentication, Gardens, Gardenpart, Plantvarieties, Plantings, PastPlantings, RuleSets) {
     $scope.authentication = Authentication;
     $scope.date = $stateParams.selectedDate;
     $scope.plantings = [];
@@ -84,15 +84,20 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
       Plantings.createPlantings({
         bk: gardenpart.garden,
         selectedDate: $stateParams.selectedDate
-      }, $scope.newplantings);
-      Plantings.cancelPlantings({
-        bk: gardenpart.garden,
-        selectedDate: $stateParams.selectedDate
-      }, $scope.cancelPlantings);
-
-      for (i = 0; i < $scope.harvests.length; i++) {
-        $scope.harvests[i].$save();
-      }
+      }, $scope.newplantings, function(){
+        Plantings.cancelPlantings({
+          bk: gardenpart.garden,
+          selectedDate: $stateParams.selectedDate
+        }, $scope.cancelPlantings,function(){
+          for (i = 0; i < $scope.harvests.length; i++) {
+            $scope.harvests[i].$save();
+          }
+          $state.go('viewGarden', {
+            bk: gardenpart.garden,
+            selectedDate: $stateParams.selectedDate
+          });
+        });
+      });
 
       $location.path('gardens/' + gardenpart.garden + '/' + $stateParams.selectedDate);
     };

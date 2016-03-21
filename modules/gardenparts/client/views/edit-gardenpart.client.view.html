@@ -1,4 +1,3 @@
-
 <rulers style="transition: all 0.7s ease-out 0s;"/>
 <section class="container" data-ng-controller="GardenpartsController" >
         <section class="plantingpart" zoomable data-ng-init="findOne()" style="width:{{gardenpart.elemwidth*zoom}}px;height:{{gardenpart.elemheight*zoom}}px;top:100px;left:50px; position: absolute">
@@ -9,8 +8,8 @@
                      style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*zoom }}px; height: {{ pastplanting.elemheight*zoom }}px; top: {{ pastplanting.elemtop*zoom }}px; left: {{ pastplanting.elemleft*zoom }}px;"
                         />
         </section>
-    <div dragtool class="col-md-4">
-        <br />
+
+   <div dragtool="{{date}}" class="col-md-4">
         <form class="form-horizontal" data-ng-submit="updatePlantings()" novalidate>
             <fieldset>
                 <div class="input-group">

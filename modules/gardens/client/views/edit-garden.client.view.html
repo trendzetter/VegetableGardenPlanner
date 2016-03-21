@@ -2,7 +2,7 @@
 <div data-ng-controller="GardenversionsController" data-ng-init="findOneVersion()" garden id="garden" style="z-index: 1040; width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px; top: {{ garden.elemtop }}px; left: {{ garden.elemleft }}px;" class="layoutgarden" >
     <div gardenpart  ng-repeat="gardenpart in gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" ></div>
 </div>
-<form  data-ng-controller="EditformController" dragtool="2" class="form-horizontal" data-ng-submit="updateGarden()" novalidate>
+<form  data-ng-controller="EditformController" dragtool="selectedDate" class="form-horizontal" data-ng-submit="updateGarden()" novalidate>
     <fieldset>
           <br />
           <input type="submit" value="Update" class="btn btn-primary">

@@ -10,7 +10,7 @@ body {
 	width: 100% !important;
 	margin: 0;
 
-	padding-left: 50px;
+/*	padding-left: 50px;*/
 	padding-top: 100px;
 }
 .ruler {
@@ -25,10 +25,11 @@ body {
 
 .hRule {
 	position: absolute;
-	width: 100%;
+	width: 97%;
 	background-image: url('/modules/gardens/client/img/meetlat_h.gif');
     top:75px;height: 25px;
 	z-index: 9;
+    margin-left: 50px;
 }
 
 .hRule1 {
@@ -37,7 +38,7 @@ body {
     z-index: 9;
     top:50px;
     height: 25px;
-    margin-left: -4px;
+    padding-left: 46px;
 }
 
 .hRuleBox {
@@ -66,10 +67,10 @@ body {
 
 .vRule {
 	position: absolute;
-	min-height: 100%;
+	min-height: 97%;
     background-image: url('/modules/gardens/client/img/meetlat_v.gif');
 	z-index: 9;
-    top:100px;width: 25px; left: 25px; height: 100%;
+    top:100px;width: 25px; left: 25px; height: 97%;
 }
 .corner {
 	position: absolute;

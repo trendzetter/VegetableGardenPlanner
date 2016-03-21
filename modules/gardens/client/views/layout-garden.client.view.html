@@ -6,7 +6,7 @@
              id="id{{gardenpart._id}}" gardenpart='layout' ng-repeat="gardenpart in gardenparts"  ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="box-shadow:0px 0px 0px 3px blue inset;width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" />
     <div data-ng-controller="ToolboxController" ng-init="toolboxInit()">
 
-        <div  toolbox dragtool="4" id="toolbox" >
+        <div  toolbox dragtool="{{selectedDate}}" id="toolbox" >
                 <form style="padding:20px" class="form-horizontal" data-ng-submit="updateParts()" novalidate >
                     <fieldset>
                             <input type="submit" value="Update" class="btn btn-primary">

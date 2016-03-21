@@ -134,33 +134,34 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       Gardenpart.createParts({
         bk: garden.bk,
         selectedDate: $stateParams.selectedDate
-      }, newparts);
-
-      //Update the modified parts
-      //Filter new parts
-      var filtered = gardenparts.filter(function(x) {
-        return newparts.indexOf(x) < 0;
-      });
-      var modified = [];
-      for (i = 0; i < filtered.length; i++) {
-        if (filtered[i].modified) {
-          delete filtered[i].modified;
-          modified.push(filtered[i]);
-        }
-      }
-      if (modified.length > 0)
-        Gardenpart.updateParts({
+      }, newparts,function(){
+        Gardenpart.deleteParts({
           bk: garden.bk,
           selectedDate: $stateParams.selectedDate
-        }, modified);
-
-      Gardenpart.deleteParts({
-        bk: garden.bk,
-        selectedDate: $stateParams.selectedDate
-      }, delparts);
-      $state.go('viewGarden', {
-        bk: garden.bk,
-        selectedDate: $scope.selectedDate
+        }, delparts,function(){
+          //Update the modified parts
+          //Filter new parts
+          var filtered = gardenparts.filter(function(x) {
+            return newparts.indexOf(x) < 0;
+          });
+          var modified = [];
+          for (i = 0; i < filtered.length; i++) {
+            if (filtered[i].modified) {
+              delete filtered[i].modified;
+              modified.push(filtered[i]);
+            }
+          }
+          //if (modified.length > 0)
+            Gardenpart.updateParts({
+              bk: garden.bk,
+              selectedDate: $stateParams.selectedDate
+            }, modified,function(){
+              $state.go('viewGarden', {
+                bk: garden.bk,
+                selectedDate: $scope.selectedDate
+              });
+            });
+        });
       });
     };
 

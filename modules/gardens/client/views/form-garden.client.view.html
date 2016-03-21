@@ -3,7 +3,7 @@
 <div gardenpart  ng-repeat="gardenpart in vm.garden.gardenparts" ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" ></div>
 </div>
 <layer style="postion:absolute">
-  <form dragtool="2" class="form-horizontal" name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>
+  <form dragtool="{{vm.selectedDate}}" class="form-horizontal" name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>
     <fieldset>
       <label class="control-label" for="ruleset">Regelset: (optioneel)</label>
       <div class="controls">
@@ -62,27 +62,3 @@
     </fieldset>
   </form>
 </layer>
-<!--  <div class="page-header">
-    <h1>{{vm.garden._id ? 'Edit Garden' : 'New Garden'}}</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="vm.form.gardenForm" class="form-horizontal" ng-submit="vm.save(vm.form.gardenForm.$valid)" novalidate>
-      <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="title">Title</label>
-          <input name="title" type="text" ng-model="vm.garden.title" id="title" class="form-control" placeholder="Title" required>
-          <div ng-messages="vm.form.gardenForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Garden title is required.</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="content">Content</label>
-          <textarea name="content" data-ng-model="vm.garden.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.garden._id ? 'Update' : 'Create'}}</button>
-        </div>
-
-      </fieldset>
-    </form>
-  </div>-->
