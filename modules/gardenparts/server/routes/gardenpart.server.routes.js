@@ -10,5 +10,8 @@ module.exports = function(app) {
     .put(gardenpart.update)
     .delete(gardenpart.delete);
 
+  app.route('/api/gardenpart/:gardenpartbk/:selectedDate/:plant').all(gardenpartPolicy.isAllowed)
+      .get(gardenpart.read);
+
   app.param('gardenpartbk', gardenpart.gardenpartByBK);
 };

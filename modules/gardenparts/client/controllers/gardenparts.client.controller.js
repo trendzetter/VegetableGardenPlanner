@@ -152,6 +152,15 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
         'doy': day
       });
       $scope.plantvarieties.$promise.then(function(plantvarieties) {
+        if($scope.gardenpart.plant !== undefined){
+          plantvarieties.unshift($scope.gardenpart.plant);
+          var i =1;
+          while(i<plantvarieties.length && plantvarieties[i]._id !== $scope.gardenpart.plant._id){
+            i++;
+          }
+          plantvarieties.splice(i,1);
+        }
+
         for (var i = 0; i < plantvarieties.length; i++) {
           var plant = plantvarieties[i];
 
@@ -179,50 +188,52 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
 
     // Find existing Gardenpart
     $scope.findOne = function() {
-      $scope.getPlantvarieties();
+      console.log('stateparams.plant: '+$stateParams.plant);
       $scope.gardenpart = Gardenpart.get({
         bk: $stateParams.bk,
-        selectedDate: $stateParams.selectedDate
+        selectedDate: $stateParams.selectedDate,
+        plant: $stateParams.plant
       });
       // promise then gardenpart.gardenbk
       $scope.gardenpart.$promise.then(function(gardenpart) {
-
+        $scope.getPlantvarieties();
         //TODO: check if the whole gardenobject is required
         $scope.garden = Gardens.get({
           bk: gardenpart.garden,
           selectedDate: $stateParams.selectedDate
-        });
-        //Add the plantings
-        var plantings = gardenpart.plantings;
-        var gardenparttop = parseInt(gardenpart.elemtop);
-        var gardenpartleft = parseInt(gardenpart.elemleft);
-        for (var i = 0; i < plantings.length; i++) {
-          plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
-          plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
-        }
-        $scope.plantings = gardenpart.plantings;
+        }, function(garden){
+          //Add the plantings
+          var plantings = gardenpart.plantings;
+          var gardenparttop = parseInt(gardenpart.elemtop);
+          var gardenpartleft = parseInt(gardenpart.elemleft);
+          for (var i = 0; i < plantings.length; i++) {
+            plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
+            plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
+          }
+          $scope.plantings = gardenpart.plantings;
 
-        $scope.ruleSet = RuleSets.get({
-          'ruleSetId': '5688553504e0daf62b4b8906'
-        });
-
-        $scope.ruleSet.$promise.then(function(ruleSet) {
-          $scope.pastplantings = PastPlantings.get({
-            bk: $stateParams.bk,
-            selectedDate: $stateParams.selectedDate
+          $scope.ruleSet = RuleSets.get({
+            'ruleSetId': garden.ruleset
           });
-          $scope.pastplantings.$promise.then(function(pastp) {
-            //Add the pastplantings
-            var pp = $scope.pastplantings;
-            for (var j = 0; j < pp.length; j++) {
-              var planting = pp[j];
-              planting.elemtop = parseInt(planting.elemtop) - gardenparttop;
-              planting.elemleft = parseInt(planting.elemleft) - gardenpartleft;
-              //assign a cropgroup to the past plantings
-              planting.cropgroup = cropgroupByCrop(planting.plantVariety.crop);
-            }
-            $scope.rotationAdvice($scope.crops[0]._id);
-            $scope.$emit('plantingsLoaded');
+
+          $scope.ruleSet.$promise.then(function(ruleSet) {
+            $scope.pastplantings = PastPlantings.get({
+              bk: $stateParams.bk,
+              selectedDate: $stateParams.selectedDate
+            });
+            $scope.pastplantings.$promise.then(function(pastp) {
+              //Add the pastplantings
+              var pp = $scope.pastplantings;
+              for (var j = 0; j < pp.length; j++) {
+                var planting = pp[j];
+                planting.elemtop = parseInt(planting.elemtop) - gardenparttop;
+                planting.elemleft = parseInt(planting.elemleft) - gardenpartleft;
+                //assign a cropgroup to the past plantings
+                planting.cropgroup = cropgroupByCrop(planting.plantVariety.crop);
+              }
+              $scope.rotationAdvice($scope.crops[0]._id);
+              $scope.$emit('plantingsLoaded');
+            });
           });
         });
       });

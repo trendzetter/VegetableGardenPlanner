@@ -6,7 +6,7 @@ angular.module('gardenparts').config(['$stateProvider',
     // Gardenparts state routing
     $stateProvider.
     state('editGardenpart', {
-      url: '/gardenparts/:bk/:selectedDate',
+      url: '/gardenparts/:bk/:selectedDate/:plant',
       templateUrl: 'modules/gardenparts/client/views/edit-gardenpart.client.view.html'
     });
   }

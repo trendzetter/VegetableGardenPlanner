@@ -14,6 +14,7 @@
     vm.garden = garden;
     vm.authentication = Authentication;
     vm.selectedDate = $stateParams.selectedDate;
+    vm.plant = $stateParams.plant;
     vm.error = null;
     vm.form = {};
 

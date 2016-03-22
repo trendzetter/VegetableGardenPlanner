@@ -122,6 +122,8 @@
           for (var k = 0; k < pastplantings.length; k++) {
             var pastplanting = pastplantings[k];
             if (partbottomTop > pastplanting.elemtop && pastplanting.elemtop >= part.elemtop && partrightLeft > pastplanting.elemleft && pastplanting.elemleft >= part.elemleft) {
+              pastplanting.elemtop = parseInt(pastplanting.elemtop) - parseInt(part.elemtop);
+              pastplanting.elemleft = parseInt(pastplanting.elemleft) - parseInt(part.elemleft);
               part.pastplantings.push(pastplanting);
             }
           }

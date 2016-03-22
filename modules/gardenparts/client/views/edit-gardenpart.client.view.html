@@ -29,12 +29,27 @@
                 </div>
             </fieldset>
         </form>
-        <uib-accordion id="crops">
-            <uib-accordion-group ng-repeat="crop in crops" heading="{{crop.name}}" ng-init="status.open = $first"  is-open="status.open" ng-click="cropClicked(crop._id)">
-                <uib-accordion id="plantvarieties">
-                    <uib-accordion-group ng-repeat="plantvariety in crop.plantvarieties" ng-init="file=plantvariety.image" heading="{{plantvariety.name}}" ng-init="status.open = $first" is-open="status.open">
-                      <img plantvarietyimage ng-click="plantVarietyClicked()" class="thumb ng-hide" ng-src="{{plantvariety.image}}" ng-show="file != null" >
-                      Afstand tussen de rijen: {{ plantvariety.cmBetweenRow }}
+        <uib-accordion id="crops" close-others="oneAtATime">
+              <uib-accordion-group ng-repeat="crop in crops" heading="" ng-init="crop.open = $first" is-open="crop.open"  ng-click="cropClicked(crop._id)">
+              <uib-accordion-heading ng-click="cropClicked(crop._id)">
+                <div>
+                   {{crop.name}}
+                   <i class="pull-right glyphicon"
+                      ng-class="{'glyphicon-chevron-down': crop.open, 'glyphicon-chevron-right': !crop.open}">
+                   </i>
+                 </div>
+                </uib-accordion-heading>
+                <uib-accordion id="plantvarieties"  close-others="oneAtATime">
+                    <uib-accordion-group ng-repeat="plantvariety in crop.plantvarieties" ng-init="plantvariety.open = $first" heading="{{plantvariety.name}}" ng-init="plantvariety.open = $first" is-open="plantvariety.open">
+                      <uib-accordion-heading ng-click="plantvariety.open=!plantvariety.open">
+                        <div>
+                           {{plantvariety.name}}
+                           <i class="pull-right glyphicon"
+                              ng-class="{'glyphicon-chevron-down':plantvariety.open, 'glyphicon-chevron-right': !plantvariety.open}">
+                           </i>
+                         </div>
+                      </uib-accordion-heading>
+                      <img plantvarietyimage ng-click="plantVarietyClicked()" class="thumb" ng-src="{{plantvariety.image}}" >
                     </uib-accordion-group>
                  </uib-accordion>
             </uib-accordion-group>

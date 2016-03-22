@@ -17,6 +17,9 @@ exports.invokeRolesPolicies = function() {
     allows: [{
       resources: '/api/gardenpart/:gardenpartbk/:selectedDate',
       permissions: ['put', 'get', 'delete']
+    },{
+      resources: '/api/gardenpart/:gardenpartbk/:selectedDate/:plant',
+      permissions: ['get']
     }]
   }]);
 };

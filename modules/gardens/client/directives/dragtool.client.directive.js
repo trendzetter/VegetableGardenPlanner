@@ -16,7 +16,7 @@ angular.module('gardens').directive('dragtool', [
         elem.css(css);
         elem.draggable(draggableConfig);
         elem.addClass('col-md-2 panel panel-default dragtool');
-        elem.prepend('            <div class="panel-heading glyphicon glyphicon-move" style="width: 100%">'+attrs.dragtool+'</div');
+        elem.prepend('            <div class="panel-heading glyphicon glyphicon-move" style="width: 100%">'+attrs.dragtool+'</div>');
       }
     };
   }

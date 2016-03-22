@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
   Gardenpart = mongoose.model('Gardenpart'),
   Planting = mongoose.model('Planting'),
+  PlantVariety = mongoose.model('PlantVariety'),
   _ = require('lodash');
 
 var addPlantings = function(next, req) {
@@ -119,7 +120,18 @@ var addPlantings = function(next, req) {
     if (err) return next(err);
     req.gardenpart.plantings = plantings;
     console.log('gardenpart plantings: ' + req.gardenpart.plantings);
-    next();
+
+    if(req.params.plant !== undefined){
+      PlantVariety.findOne({'_id':req.params.plant}).populate('crop','_id name').exec(function(err, variety) {
+        if (err) return next(err);
+        if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
+        req.gardenpart.plant = variety;
+        next();
+      });
+    }else{
+      next();
+    }
+
   }).populate('plantVariety');
 };
 
