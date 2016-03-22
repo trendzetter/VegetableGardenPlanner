@@ -29,7 +29,7 @@
                 </div>
             </fieldset>
         </form>
-        <uib-accordion id="crops" close-others="oneAtATime">
+        <uib-accordion id="crops" close-others="true">
               <uib-accordion-group ng-repeat="crop in crops" heading="" ng-init="crop.open = $first" is-open="crop.open"  ng-click="cropClicked(crop._id)">
               <uib-accordion-heading ng-click="cropClicked(crop._id)">
                 <div>
@@ -39,7 +39,7 @@
                    </i>
                  </div>
                 </uib-accordion-heading>
-                <uib-accordion id="plantvarieties"  close-others="oneAtATime">
+                <uib-accordion id="plantvarieties" close-others="true">
                     <uib-accordion-group ng-repeat="plantvariety in crop.plantvarieties" ng-init="plantvariety.open = $first" heading="{{plantvariety.name}}" ng-init="plantvariety.open = $first" is-open="plantvariety.open">
                       <uib-accordion-heading ng-click="plantvariety.open=!plantvariety.open">
                         <div>
