@@ -154,11 +154,11 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
       $scope.plantvarieties.$promise.then(function(plantvarieties) {
         if($scope.gardenpart.plant !== undefined){
           plantvarieties.unshift($scope.gardenpart.plant);
-          var i =1;
-          while(i<plantvarieties.length && plantvarieties[i]._id !== $scope.gardenpart.plant._id){
-            i++;
+          var index =1;
+          while(index<plantvarieties.length && plantvarieties[index]._id !== $scope.gardenpart.plant._id){
+            index++;
           }
-          plantvarieties.splice(i,1);
+          plantvarieties.splice(index,1);
         }
 
         for (var i = 0; i < plantvarieties.length; i++) {
