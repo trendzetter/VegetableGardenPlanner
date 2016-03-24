@@ -4,7 +4,7 @@
   <div class="page-header">
     <h1 ng-bind="vm.ruleset.title"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.ruleset.user._id">
+  <div class="pull-right" ng-show="vm.ruleset.isCurrentUserOwner">
     <a class="btn btn-primary" ui-sref="rulesets.edit({ ruleSetId: vm.ruleset._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>

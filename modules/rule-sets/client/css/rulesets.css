@@ -1,0 +1,11 @@
+/*stop jumping crops during dragging in groups*/
+.btn-success {
+  position: relative;
+}
+
+.odd {
+  background-color: #e6e6e6;
+}
+.even {
+  background-color: #f2f2f2;
+}

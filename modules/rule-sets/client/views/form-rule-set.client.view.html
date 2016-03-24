@@ -17,8 +17,21 @@
         <div class="form-group">
             <label class="control-label" for="name">Orden de gewassen in groentengroepen:</label>
             <div class="controls">
+              <div ng-if="vm.ruleset._id" class="panel panel-default col-md-6">
+                <div class="panel-heading">
+                  Te ordenen:
+                </div>
+                <div class="panel-body" data-dragon="crop in vm.ordercrops">
+                  <div class="btn btn-xs btn-success" >{{crop.name}}</div>
+                </div>
+              </div>
               <div class="panel panel-default col-md-6" ng-repeat="cropgroup in vm.ruleset.cropgroups">
-                <div class="panel-heading"><input type="text" ng-model="cropgroup.name" /></div>
+                <div class="panel-heading">
+                  <input type="text" ng-model="cropgroup.name" />
+                  <a ng-click="vm.removeGroup($index)" class="btn btn-default pull-right">
+                    <i class="glyphicon glyphicon-remove-circle" ></i>
+                  </a>
+                </div>
                 <div class="panel-body" data-dragon="crop in cropgroup.crops">
                   <div class="btn btn-xs btn-success" >{{crop.name}}</div>
                 </div>
@@ -30,7 +43,7 @@
           </div>
           <br />
         <div class="form-group">
-        <div class="controls" ng-repeat="rule in vm.ruleset.rotationrules">
+        <div style="clear: both" class="controls" ng-repeat="rule in vm.ruleset.rotationrules" ng-class-odd="'odd'" ng-class-even="'even'">
             Type van regel:   <select  data-ng-model="rule.ruletype">
                                 <option value="SuccessiveCrop">Opeenvolgende gewassen</option>
                                 <option value="YearsBetweenCultivation">Jaren tussen teelten</option>
@@ -40,12 +53,16 @@
             <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" >Years: <select  data-ng-model="rule.yearsBetween" to-number>
                 <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
             </select></span>
+            <a ng-click="vm.removeRule($index)" class="btn btn-default pull-right">
+              <i class="glyphicon glyphicon-remove-circle" ></i>
+            </a>
         </div>
         <div class="controls">
             <input class="btn btn-default" ng-click="newRule()" value="Regel toevoegen">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.ruleset._id ? 'Update' : 'Create'}}</button>
+          <a class="btn btn-default" ui-sref="rulesets.list" >Annuleren</a>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>

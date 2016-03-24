@@ -79,7 +79,13 @@ exports.create = function(req, res) {
  * Show the current Rule set
  */
 exports.read = function(req, res) {
-  res.jsonp(req.ruleSet);
+  // convert mongoose document to JSON
+  var ruleset = req.ruleSet ? req.ruleSet.toJSON() : {};
+
+  // Add a custom field to the Article, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  ruleset.isCurrentUserOwner = req.user && ruleset.user && ruleset.user._id.toString() === req.user._id.toString() ? true : false;
+  res.jsonp(ruleset);
 };
 
 /**

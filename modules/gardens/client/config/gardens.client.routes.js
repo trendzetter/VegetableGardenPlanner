@@ -98,6 +98,7 @@
         var partbottomTop = parseInt(part.elemtop) + parseInt(part.elemheight);
         var partrightLeft = parseInt(part.elemleft) + parseInt(part.elemwidth);
 
+
         //Adding the plantings to the gardenparts
         part.plantings = [];
         var toRemove = [];
@@ -116,6 +117,10 @@
           plantings.splice(toRemove.pop(), 1);
         }
 
+        //convert position to relative for all gardenparts
+        part.elemtop = parseInt(part.elemtop) - gardentop;
+        part.elemleft = parseInt(part.elemleft) - gardenleft;
+
         if(pastplantings){
           //Adding the past plantings to the gardenpart
           part.pastplantings = [];
@@ -129,9 +134,7 @@
           }
         }
 
-        //convert position to relative for all gardenparts
-        part.elemtop = parseInt(part.elemtop) - gardentop;
-        part.elemleft = parseInt(part.elemleft) - gardenleft;
+
       }
       return garden;
     });
