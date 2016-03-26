@@ -100,8 +100,6 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
           });
         });
       });
-
-      $location.path('gardens/' + gardenpart.garden + '/' + $stateParams.selectedDate);
     };
 
     $scope.$on('addPlantvariety', function(event, plantvariety) {
