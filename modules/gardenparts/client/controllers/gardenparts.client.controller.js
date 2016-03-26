@@ -80,20 +80,22 @@ angular.module('gardenparts').controller('GardenpartsController', ['$scope', '$s
         plantings[i].elemleft = parseInt(plantings[i].elemleft) + parseInt(gardenpart.elemleft);
         plantings[i].plantVariety = plantings[i].plantVariety._id;
       }
-
+      for (i = 0; i < $scope.harvests.length; i++) {
+        $scope.harvests[i].$save();
+      }
       Plantings.createPlantings({
         bk: gardenpart.garden,
         selectedDate: $stateParams.selectedDate
       }, $scope.newplantings, function(){
-        Plantings.cancelPlantings({
+        var cancelPlantings = Plantings.cancelPlantings({
           bk: gardenpart.garden,
           selectedDate: $stateParams.selectedDate
         }, $scope.cancelPlantings,function(){
-          for (i = 0; i < $scope.harvests.length; i++) {
-            $scope.harvests[i].$save();
-          }
+          console.log("cancelPlantings success");
+        });
+        cancelPlantings.$promise.then(function(){
           $state.go('viewGarden', {
-            bk: gardenpart.garden,
+            bk: $scope.gardenpart.garden,
             selectedDate: $stateParams.selectedDate
           });
         });
