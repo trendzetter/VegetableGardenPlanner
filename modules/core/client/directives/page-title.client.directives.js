@@ -25,7 +25,7 @@
       }
 
       function getTitle(currentState) {
-        var applicationCoreTitle = 'MEAN.js';
+        var applicationCoreTitle = 'Vegetable Garden Planner';
         var workingState = currentState;
         if (currentState.data && currentState.data.pageTitle) {
           workingState = (typeof workingState.locals !== 'undefined') ? workingState.locals.globals : workingState;
