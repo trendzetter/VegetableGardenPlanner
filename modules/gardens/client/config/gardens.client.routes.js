@@ -23,7 +23,7 @@
      .state('createGarden', {
       url: '/gardens/create',
       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
-      controller: 'GardensNgController',
+      controller: 'GardensController',
       controllerAs: 'vm',
       resolve: {
         gardenResolve: newGarden
@@ -36,7 +36,7 @@
     .state('viewGarden', {
       url: '/gardens/:bk/:selectedDate',
       templateUrl: 'modules/gardens/client/views/view-garden.client.view.html',
-      controller: 'GardensNgController',
+      controller: 'GardensController',
       controllerAs: 'vm',
       resolve: {
         gardenResolve: getGarden
@@ -62,7 +62,7 @@
     state('editGarden', {
       url: '/gardens/:bk/edit/:selectedDate',
       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
-      controller: 'GardensNgController',
+      controller: 'GardensController',
       controllerAs: 'vm',
       resolve: {
         gardenResolve: getGarden

@@ -3,11 +3,11 @@
 
   angular
     .module('gardens')
-    .controller('GardensNgController', GardensNgController);
+    .controller('GardensController', GardensController);
 
-  GardensNgController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService','Users','RuleSetsService'];
+  GardensController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService','Users','RuleSetsService'];
 
-  function GardensNgController($scope, $state, garden, Authentication,$stateParams,GardenpartsService,Users,RuleSetsService) {
+  function GardensController($scope, $state, garden, Authentication,$stateParams,GardenpartsService,Users,RuleSetsService) {
 
     var vm = this;
 
