@@ -5,12 +5,16 @@
  */
 var mongoose = require('mongoose'),
   Gardenpart = mongoose.model('Gardenpart'),
+  Garden = mongoose.model('Garden'),
   Planting = mongoose.model('Planting'),
   PlantVariety = mongoose.model('PlantVariety'),
+  RuleSet = mongoose.model('RuleSet'),
   _ = require('lodash');
 
 var addPlantings = function(next, req) {
   console.log('Addplanings!' + req.gardenpart.garden);
+  var dateArray = req.params.selectedDate.split('-');
+  var plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
   var rightCornerLeft = req.gardenpart.elemleft + req.gardenpart.elemwidth;
   var bottomCornerTop = req.gardenpart.elemtop + req.gardenpart.elemheight;
   Planting.find({
@@ -21,7 +25,7 @@ var addPlantings = function(next, req) {
       {
         $or: [{
           'validTo': {
-            $gt: req.params.selectedDate
+            $gt: plantBackUntil
           }
         }, {
           'validTo': null
@@ -118,20 +122,43 @@ var addPlantings = function(next, req) {
   },
   function(err, plantings) {
     if (err) return next(err);
-    req.gardenpart.plantings = plantings;
+
     console.log('gardenpart plantings: ' + req.gardenpart.plantings);
-
-    if(req.params.plant !== undefined){
-      PlantVariety.findOne({'_id':req.params.plant}).populate('crop','_id name').exec(function(err, variety) {
-        if (err) return next(err);
-        if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
-        req.gardenpart.plant = variety;
-        next();
-      });
-    }else{
-      next();
+    req.gardenpart.pastplantings = [];
+    var selectedDate = new Date(req.params.selectedDate);
+    var index = 0;
+    while(index<plantings.length){
+      if(plantings[index].validTo <= selectedDate){
+        var plantingArray = plantings.splice(index,1);
+        req.gardenpart.pastplantings.push(plantingArray[0]);
+      }else{
+        index++;
+      }
     }
+    req.gardenpart.plantings = plantings;
 
+    Garden.findOne({
+      validFrom: {
+        $lte: req.params.selectedDate
+      },
+      bk: req.gardenpart.garden
+    }).exec(function(err,garden){
+      req.gardenpart.garden = garden;
+
+      RuleSet.findOne({'_id':garden.ruleset}).exec(function(err,ruleset){
+        req.gardenpart.ruleset = ruleset;
+        if(req.params.plant !== undefined){
+          PlantVariety.findOne({'_id':req.params.plant}).populate('crop','_id name').exec(function(err, variety) {
+            if (err) return next(err);
+            if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
+            req.gardenpart.plant = variety;
+            next();
+          });
+        }else{
+          next();
+        }
+      });
+    });
   }).populate('plantVariety');
 };
 
@@ -172,6 +199,7 @@ exports.list = function(req, res) {
 };
 
 exports.gardenpartByBK = function(req, res, next, gardenpartbk) {
+  var populate = [{path: 'user', select: 'displayName'}];
   Gardenpart.findOne({
     validFrom: {
       $lte: req.params.selectedDate
@@ -180,7 +208,7 @@ exports.gardenpartByBK = function(req, res, next, gardenpartbk) {
       $gt: req.params.selectedDate
     },
     bk: gardenpartbk
-  }).populate('user', 'displayName').sort('-validFrom').lean().exec(function(err, gardenpart) {
+  }).populate(populate).sort('-validFrom').lean().exec(function(err, gardenpart) {
     if (err) return next(err);
     if (!gardenpart) return next(new Error('Failed to load Gardenpart ' + gardenpartbk));
     req.gardenpart = gardenpart;

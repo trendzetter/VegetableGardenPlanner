@@ -17,14 +17,14 @@ angular.module('gardenparts').directive('planting', ['$timeout',
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
         var updateCoordinates = function() {
-          var co = getCoordinates(element, scope.zoom);
-          scope.updatePlantingCoordinates(co.top / scope.zoom, co.left / scope.zoom, co.width / scope.zoom, co.height / scope.zoom);
+          var co = getCoordinates(element, scope.vm.zoom);
+          scope.updatePlantingCoordinates(co.top / scope.vm.zoom, co.left / scope.vm.zoom, co.width / scope.vm.zoom, co.height / scope.vm.zoom);
           scope.$apply();
         };
 
         var updateCoordinatesStop = function() {
-          var co = getCoordinates(element, scope.zoom);
-          scope.updatePlantingCoordinatesStop(co.top / scope.zoom, co.left / scope.zoom, co.width / scope.zoom, co.height / scope.zoom);
+          var co = getCoordinates(element, scope.vm.zoom);
+          scope.updatePlantingCoordinatesStop(co.top / scope.vm.zoom, co.left / scope.vm.zoom, co.width / scope.vm.zoom, co.height / scope.vm.zoom);
           scope.$apply();
         };
 
@@ -33,12 +33,12 @@ angular.module('gardenparts').directive('planting', ['$timeout',
             stop: updateCoordinatesStop,
             drag: updateCoordinates,
             animate: true,
-            grid: [1 * scope.zoom, 1 * scope.zoom],
+            grid: [1 * scope.vm.zoom, 1 * scope.vm.zoom],
             containment: 'parent',
             revert: 'valid',
             snap: '.planting ',
             snapmode: 'outer',
-            snapTolerance: 5 * scope.zoom
+            snapTolerance: 5 * scope.vm.zoom
           };
           element.draggable(draggableConfig);
         };
@@ -47,7 +47,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
           var resizableConfig = {
             stop: updateCoordinatesStop,
             resize: updateCoordinates,
-            grid: [scope.planting.cmInRow * scope.zoom, scope.planting.cmBetweenRow * scope.zoom],
+            grid: [scope.planting.cmInRow * scope.vm.zoom, scope.planting.cmBetweenRow * scope.vm.zoom],
             handles: 'all',
             containment: 'parent',
             autoHide: true,
@@ -99,7 +99,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
             scope.planting.orientation = 'horizontal';
             scope.horizontal = Math.round(scope.planting.cmInRow);
             scope.vertical = Math.round(scope.planting.cmBetweenRow);
-            element.resizable('option', 'grid', [scope.planting.cmInRow * scope.zoom, scope.planting.cmBetweenRow * scope.zoom]);
+            element.resizable('option', 'grid', [scope.planting.cmInRow * scope.vm.zoom, scope.planting.cmBetweenRow * scope.vm.zoom]);
 
             numberPlantsVertical = Math.floor(scope.planting.elemheight / scope.planting.cmBetweenRow);
             if (numberPlantsVertical === 0) numberPlantsVertical = 1;
@@ -113,7 +113,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
             scope.horizontal = Math.round(scope.planting.cmBetweenRow);
             scope.vertical = Math.round(scope.planting.cmInRow);
             scope.planting.orientation = 'vertical';
-            element.resizable('option', 'grid', [scope.planting.cmBetweenRow * scope.zoom, scope.planting.cmInRow * scope.zoom]);
+            element.resizable('option', 'grid', [scope.planting.cmBetweenRow * scope.vm.zoom, scope.planting.cmInRow * scope.vm.zoom]);
             //GOOD WAY
             numberPlantsVertical = Math.floor(scope.planting.elemheight / scope.planting.cmInRow);
             if (numberPlantsVertical === 0) numberPlantsVertical = 1;

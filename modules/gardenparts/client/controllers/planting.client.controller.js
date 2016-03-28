@@ -18,7 +18,7 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
       }]);
       $scope.menuOptions.push(null); // Dividier
       $scope.menuOptions.push(['Cancel', function() {
-        var planting = $scope.plantings.splice($scope.$index, 1);
+        var planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
         $scope.cancelNewPlanting(planting);
       }]);
     } else {
@@ -40,14 +40,14 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
           console.log('planting harvest result: ' + JSON.stringify(harvest));
           //if(result){
           $scope.harvests.push(harvest);
-          $scope.plantings.splice($scope.$index, 1);
+          $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
           //  }
         }, function() {
           console.log('Modal dismissed at: ' + new Date());
         });
       }]);
       $scope.menuOptions.push(['Cancel', function() {
-        var planting = $scope.plantings.splice($scope.$index, 1);
+        var planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
         $scope.cancelPlanting(planting);
       }]);
     }
