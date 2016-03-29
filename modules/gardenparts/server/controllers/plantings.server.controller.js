@@ -40,7 +40,7 @@ var errorHandler = function(err) {
 /**
  * Create Plantings
  */
-exports.create = function(req, res) {
+/*exports.create = function(req, res) {
   var plantings = req.body;
 //  var resplantings = [];
   for (var index = 0; index < plantings.length; ++index) {
@@ -52,6 +52,31 @@ exports.create = function(req, res) {
 //    resplantings.push(planting);
   }
   return res.jsonp('');
+};*/
+
+/**
+ * Update Plantings
+ */
+exports.update = function(req, res) {
+  var plantings = req.body.newplantings;
+//  var resplantings = [];
+  for (var index = 0; index < plantings.length; ++index) {
+    var planting = new Planting(plantings[index]);
+    planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
+    planting.bottomCornerTop = planting.elemtop + planting.elemheight;
+    planting.bk = mongoose.Types.ObjectId();
+    planting.save();
+  }
+
+  var plantingids = req.body.cancelplantings;
+  Planting.remove({
+    _id: {
+      '$in': plantingids
+    }
+  }, function() {
+    res.jsonp();
+  });
+
 };
 
 /**
@@ -86,7 +111,7 @@ exports.create = function(req, res) {
 /**
  * Delete an Planting
  */
-exports.delete = function(req, res) {
+/*exports.delete = function(req, res) {
   var plantingids = req.body;
   Planting.remove({
     _id: {
@@ -95,7 +120,7 @@ exports.delete = function(req, res) {
   }, function() {
     res.jsonp();
   });
-};
+};*/
 
 /**
  * List of Plantings

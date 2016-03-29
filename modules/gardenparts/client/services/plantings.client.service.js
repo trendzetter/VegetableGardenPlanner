@@ -6,13 +6,8 @@ angular.module('gardenparts').factory('Plantings', ['$resource',
       selectedDate: '@selectedDate',
       bk: '@bk' //gardenId: '@_id',
     }, {
-      createPlantings: {
-        method: 'PUT',
-        isArray: true
-      },
-      cancelPlantings: {
-        method: 'POST',
-        isArray: true
+      updatePlantings: {
+        method: 'PUT'
       }
     });
   }

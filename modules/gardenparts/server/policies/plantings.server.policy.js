@@ -16,7 +16,7 @@ exports.invokeRolesPolicies = function() {
     roles: ['user'],
     allows: [{
       resources: '/api/plantings/:bk/:selectedDate',
-      permissions: ['post', 'put']
+      permissions: ['put']
     }]
   }]);
 };

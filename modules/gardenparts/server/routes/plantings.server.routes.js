@@ -6,7 +6,5 @@ module.exports = function(app) {
     plantings = require('../controllers/plantings.server.controller');
 
   app.route('/api/plantings/:bk/:selectedDate').all(plantingsPolicy.isAllowed)
-    //bk >> the gardenbk
-    .put(plantings.create)
-    .post(plantings.delete);
+    .put(plantings.update);
 };

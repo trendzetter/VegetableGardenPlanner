@@ -94,33 +94,29 @@
     };
 
     $scope.updatePlantings = function() {
+      var i;
       for (i = 0; i < $scope.harvests.length; i++) {
         $scope.harvests[i].$save();
       }
       //convert position to absolute for all plantings and put the id in place of the plantvariety
       var plantings = $scope.newplantings;
-      for (var i = 0; i < plantings.length; i++) {
+
+      for (i = 0; i < plantings.length; i++) {
         plantings[i].elemtop = parseInt(plantings[i].elemtop) + parseInt(vm.gardenpart.elemtop);
         plantings[i].elemleft = parseInt(plantings[i].elemleft) + parseInt(vm.gardenpart.elemleft);
         plantings[i].plantVariety = plantings[i].plantVariety._id;
       }
-     Plantings.createPlantings({
-        bk: vm.gardenpart.garden.bk,
-        selectedDate: $stateParams.selectedDate
-      }, $scope.newplantings, function(){
-        var cancelPlantings = Plantings.cancelPlantings({
-          bk: vm.gardenpart.garden.bk,
-          selectedDate: $stateParams.selectedDate
-        }, $scope.cancelPlantings,function(){
-          console.log("cancelPlantings success");
-        });
-        cancelPlantings.$promise.then(function(){
-          $state.go('viewGarden', {
-            bk: vm.gardenpart.garden.bk,
-            selectedDate: $stateParams.selectedDate
-          });
-        });
-      });
+
+      var updateplantings = {newplantings: $scope.newplantings,cancelplantings:$scope.cancelPlantings};
+      Plantings.updatePlantings({
+         bk: vm.gardenpart.garden.bk,
+         selectedDate: $stateParams.selectedDate
+       },updateplantings,function(){
+         $state.go('viewGarden', {
+           bk: vm.gardenpart.garden.bk,
+           selectedDate: $stateParams.selectedDate
+         });
+       });
 
     };
 
