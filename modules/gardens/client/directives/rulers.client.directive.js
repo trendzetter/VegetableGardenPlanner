@@ -11,7 +11,6 @@ angular.module('gardens').directive('rulers', ['$timeout', '$window',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
         var parent = element.parent();
-        //	parent.height(700);
 
         var render = function(zoom) {
           if (typeof zoom === 'undefined')
@@ -36,12 +35,9 @@ angular.module('gardens').directive('rulers', ['$timeout', '$window',
 
 
         scope.$on('$destroy', function(event) {
-          console.log('destroying the background from rulers destroy' + event);
-          //  if(typeof scope.planting === 'undefined')
           parent.css('background', '');
         });
-        // var w = angular.element($window);
-        //  w.bind('resize',render);
+
         render();
         scope.$on('updatedZoom', function(event, zoom) {
           render(zoom);

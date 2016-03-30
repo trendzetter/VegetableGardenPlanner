@@ -5,9 +5,9 @@
     .module('gardenparts')
     .controller('GardenpartsController', GardenpartsController);
 
-  GardenpartsController.$inject = ['$scope', '$state', '$stateParams', 'gardenpartResolve', 'Authentication', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings'];
+  GardenpartsController.$inject = ['$scope','$state', '$stateParams', 'gardenpartResolve', 'Authentication', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings'];
 
-  function GardenpartsController($scope, $state, $stateParams, gardenpart, Authentication, Gardenpart, Plantvarieties, Plantings, PastPlantings) {
+  function GardenpartsController($scope,$state, $stateParams, gardenpart, Authentication, Gardenpart, Plantvarieties, Plantings, PastPlantings) {
 
     var vm = this;
 
@@ -204,6 +204,7 @@
         }
 
         $scope.rotationAdvice(vm.crops[0]._id);
+        $scope.$broadcast('plantingsLoaded');
       });
     }
   }
