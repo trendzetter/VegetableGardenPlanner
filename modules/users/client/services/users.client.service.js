@@ -1,8 +1,14 @@
-'use strict';
+(function () {
+  'use strict';
 
-// Users service used for communicating with the users REST endpoint
-angular.module('users').factory('Users', ['$resource',
-  function ($resource) {
+  // Users service used for communicating with the users REST endpoint
+  angular
+    .module('users.services')
+    .factory('UsersService', UsersService);
+
+  UsersService.$inject = ['$resource'];
+
+  function UsersService($resource) {
     return $resource('api/users', {}, {
       update: {
         method: 'PUT'
@@ -12,11 +18,15 @@ angular.module('users').factory('Users', ['$resource',
       }
     });
   }
-]);
 
-//TODO this should be Users service
-angular.module('users.admin').factory('Admin', ['$resource',
-  function ($resource) {
+  // TODO this should be Users service
+  angular
+    .module('users.admin.services')
+    .factory('AdminService', AdminService);
+
+  AdminService.$inject = ['$resource'];
+
+  function AdminService($resource) {
     return $resource('api/users/:userId', {
       userId: '@_id'
     }, {
@@ -25,4 +35,4 @@ angular.module('users.admin').factory('Admin', ['$resource',
       }
     });
   }
-]);
+}());

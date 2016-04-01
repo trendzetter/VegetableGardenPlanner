@@ -19,7 +19,7 @@ module.exports = {
     options: {
       // Stream defaults to process.stdout
       // Uncomment/comment to toggle the logging to a log on the file system
-      //stream: {
+      // stream: {
       //  directoryPath: process.cwd(),
       //  fileName: 'access.log',
       //  rotatingLogs: { // for more info on rotating logs - https://github.com/holidayextras/file-stream-rotator#usage
@@ -28,7 +28,7 @@ module.exports = {
       //    frequency: 'daily',
       //    verbose: false
       //  }
-      //}
+      // }
     }
   },
   app: {
@@ -77,9 +77,9 @@ module.exports = {
   },
   livereload: true,
   seedDB: {
-    seed: process.env.MONGO_SEED === 'true' ? true : false,
+    seed: process.env.MONGO_SEED === 'true',
     options: {
-      logResults: process.env.MONGO_SEED_LOG_RESULTS === 'false' ? false : true,
+      logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
       seedUser: {
         username: process.env.MONGO_SEED_USER_USERNAME || 'user',
         provider: 'local',
