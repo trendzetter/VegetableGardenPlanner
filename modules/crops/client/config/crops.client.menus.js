@@ -5,7 +5,7 @@
     .module('crops')
     .run(menuConfig);
 
-  menuConfig.$inject = ['Menus'];
+  menuConfig.$inject = ['menuService'];
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {

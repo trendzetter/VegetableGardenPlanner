@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gardens').controller('EditformController', ['$scope', '$rootScope', 'Gardendata', 'Users', '$stateParams',
+angular.module('gardens').controller('EditformController', ['$scope', '$rootScope', 'Gardendata', 'UsersService', '$stateParams',
   function($scope, $rootScope, Gardendata, Users, $stateParams) {
     $scope.selectedDate = $stateParams.selectedDate;
 

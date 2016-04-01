@@ -1,11 +1,11 @@
 <section class="content">
   <section class="container">
-<section>
-  <div class="page-header">
-    <h1>Gardens</h1>
-  </div>
-  <div class="list-group">
-        <a ng-if="vm.plant" data-ng-repeat="garden in vm.gardens"  ui-sref="plantGarden({bk: garden.bk, selectedDate: vm.selectedDate, plant: vm.plant})" class="list-group-item">
+    <section>
+      <div class="page-header">
+        <h1>Gardens</h1>
+      </div>
+      <div class="list-group">
+        <a ng-if="vm.plant" data-ng-repeat="garden in vm.gardens" ui-sref="plantGarden({bk: garden.bk, selectedDate: vm.selectedDate, plant: vm.plant})" class="list-group-item">
           <small class="list-group-item-text">
             Posted on
             <span ng-bind="garden.created | date:'mediumDate'"></span>
@@ -16,7 +16,7 @@
           <h4 class="list-group-item-heading" ng-bind="garden.name"></h4>
           <p class="list-group-item-text" ng-bind="garden.content"></p>
         </a>
-        <a ng-if="!vm.plant" data-ng-repeat="garden in vm.gardens"  ui-sref="viewGarden({bk: garden.bk, selectedDate: vm.selectedDate, plant: vm.plant})" class="list-group-item">
+        <a ng-if="!vm.plant" data-ng-repeat="garden in vm.gardens" ui-sref="viewGarden({bk: garden.bk, selectedDate: vm.selectedDate, plant: vm.plant})" class="list-group-item">
           <small class="list-group-item-text">
             Posted on
             <span ng-bind="garden.created | date:'mediumDate'"></span>
@@ -29,8 +29,9 @@
         </a>
       </div>
       <div class="alert alert-warning text-center" ng-if="vm.gardens.$resolved && !vm.gardens.length">
-        No gardens yet, why don't you <a ui-sref="createGarden">create one</a>?
+        No gardens yet, why don't you
+        <a ui-sref="createGarden">create one</a>?
       </div>
     </section>
-    </section>
-    </section>
+  </section>
+</section>

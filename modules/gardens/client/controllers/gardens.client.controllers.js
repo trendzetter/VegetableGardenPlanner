@@ -5,7 +5,7 @@
     .module('gardens')
     .controller('GardensController', GardensController);
 
-  GardensController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService','Users','RuleSetsService'];
+  GardensController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication','$stateParams','GardenpartsService','UsersService','RuleSetsService'];
 
   function GardensController($scope, $state, garden, Authentication,$stateParams,GardenpartsService,Users,RuleSetsService) {
 

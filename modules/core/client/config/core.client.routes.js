@@ -8,7 +8,7 @@
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function routeConfig($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.rule(function ($injector, $location) {
+    /*$urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.path();
       var hasTrailingSlash = path.length > 1 && path[path.length - 1] === '/';
 
@@ -17,7 +17,7 @@
         var newPath = path.substr(0, path.length - 1);
         $location.replace().path(newPath);
       }
-    });
+    });*/
 
     // Redirect to 404 when route not found
     $urlRouterProvider.otherwise(function ($injector, $location) {
