@@ -1,6 +1,8 @@
 <section >
-    <label class="control-label" >{{ (planting.elemwidth/planting.cmBetweenRow*planting.elemheight/planting.cmInRow) | number: 0 }} {{planting.plantVariety.name}} </label>
-    <p>{{ planting.elemwidth }} X {{ planting.elemheight }}cm</p>
-    <p ng-if="planting.plantVariety.minGrowthDuration">Oogsten vanaf binnen {{daysHarvest}} dagen</p>
+    <label ng-if="planting.orientation==='vertical'" class="control-label" >{{ (planting.elemwidth/planting.cmBetweenRow*planting.elemheight/planting.cmInRow) | number: 0 }} ({{ (planting.elemwidth/planting.cmBetweenRow) | number:0}}x{{ (planting.elemheight/planting.cmInRow) |number:0}}) {{planting.plantVariety.name}} </label>
+    <label ng-if="planting.orientation==='horizontal'" class="control-label" >{{ (planting.elemwidth/planting.cmBetweenRow*planting.elemheight/planting.cmInRow) | number: 0 }} ({{ (planting.elemwidth/planting.cmInRow) |number:0}}x{{ (planting.elemheight/planting.cmBetweenRow) | number:0}}) {{planting.plantVariety.name}} </label>
+    <div>{{ planting.elemwidth }} X {{ planting.elemheight }} cm</div>
+    <div ng-if="planting.plantVariety.minGrowthDuration">Gezaaid op {{planting.validFrom | date:'dd-MM-yyyy' }}</div>
+    <div ng-if="planting.plantVariety.minGrowthDuration">Oogsten vanaf binnen {{daysHarvest}} dagen</div>
     <img class="thumb" ng-src="{{planting.plantVariety.image}}">
 </section>
