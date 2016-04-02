@@ -16,7 +16,7 @@
     getPlantvarieties();
 
     $scope.authentication = Authentication;
-    $scope.date = $stateParams.selectedDate;
+    vm.selectedDate = $stateParams.selectedDate;
     $scope.plantings = [];
     $scope.newplantings = [];
     $scope.cancelPlantings = [];
@@ -63,7 +63,7 @@
         var planting = gardenpart.pastplantings[i];
         planting.greenlevel = null;
         planting.redlevel = null;
-        var yearsApart = new Date(new Date($scope.date) - new Date(planting.validTo)).getFullYear() - 1970;
+        var yearsApart = new Date(new Date(vm.selectedDate) - new Date(planting.validTo)).getFullYear() - 1970;
         console.log('years apart: ' + yearsApart + ' date:' + planting.validTo);
         //opacity inverse linked to time past since planting
         planting.opacity = 1 - (yearsApart * yearsApart / 36);

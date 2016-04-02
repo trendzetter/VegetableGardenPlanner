@@ -159,7 +159,14 @@ var addPlantings = function(next, req) {
         }
       });
     });
-  }).populate('plantVariety');
+  }).populate({
+	path:     'plantVariety',
+  model: 'PlantVariety'
+/*	populate: {
+    path:  'crop',
+    model: 'Crop'
+  }*/
+  });
 };
 
 /**
