@@ -15,6 +15,7 @@ var addPlantings = function(next, req) {
   console.log('Addplanings!' + req.gardenpart.garden);
   var dateArray = req.params.selectedDate.split('-');
   var plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
+  var plantUntil = dateArray[0]+1 + '-' + dateArray[1] + '-' + dateArray[2];
   var rightCornerLeft = req.gardenpart.elemleft + req.gardenpart.elemwidth;
   var bottomCornerTop = req.gardenpart.elemtop + req.gardenpart.elemheight;
   Planting.find({
@@ -32,7 +33,7 @@ var addPlantings = function(next, req) {
         }]
       }, {
         validFrom: {
-          $lte: req.params.selectedDate
+          $lte: plantUntil
         }
       }, {
         $or: [
@@ -125,6 +126,7 @@ var addPlantings = function(next, req) {
 
     console.log('gardenpart plantings: ' + req.gardenpart.plantings);
     req.gardenpart.pastplantings = [];
+    req.gardenpart.futureplantings = [];
     var selectedDate = new Date(req.params.selectedDate);
     var index = 0;
     while(index<plantings.length){
@@ -132,7 +134,12 @@ var addPlantings = function(next, req) {
         var plantingArray = plantings.splice(index,1);
         req.gardenpart.pastplantings.push(plantingArray[0]);
       }else{
-        index++;
+        if(plantings[index].validFrom > selectedDate){
+            var plantingArray = plantings.splice(index,1);
+            req.gardenpart.futureplantings.push(plantingArray[0]);
+        }else{
+            index++;
+        }
       }
     }
     req.gardenpart.plantings = plantings;
