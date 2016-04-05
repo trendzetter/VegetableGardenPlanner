@@ -39,7 +39,13 @@
         var plantings = gardenpart.plantings;
         var gardenparttop = parseInt(gardenpart.elemtop);
         var gardenpartleft = parseInt(gardenpart.elemleft);
-        for (var i = 0; i < plantings.length; i++) {
+        var i;
+        for (i = 0; i < plantings.length; i++) {
+          plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
+          plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
+        }
+        plantings = gardenpart.futureplantings;
+        for (i = 0; i < plantings.length; i++) {
           plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
           plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
         }

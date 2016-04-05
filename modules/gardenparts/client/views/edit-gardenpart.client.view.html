@@ -1,12 +1,12 @@
 <rulers style="transition: all 0.7s ease-out 0s;"/>
 <section class="container">
         <section class="plantingpart" zoomable style="width:{{vm.gardenpart.elemwidth*vm.zoom}}px;height:{{vm.gardenpart.elemheight*vm.zoom}}px;top:100px;left:50px; position: absolute">
+                <div uib-popover-template="'modules/gardenparts/client/views/pop-future-planting.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
+                    planting context-menu="menuOptions" ng-controller="PlantingController" ng-repeat="planting in vm.gardenpart.futureplantings" ng-init="planting=planting"
+                     style="z-index: 15; opacity: 0.6; background: url('/api/image/{{horizontal*vm.zoom}}/{{vertical*vm.zoom}}/{{planting.orientation}}') repeat scroll 0 0 rgba(0, 0, 0, 0); box-shadow:0px 0px 0px 3px blue inset; width: {{ planting.elemwidth*vm.zoom }}px; height: {{ planting.elemheight*vm.zoom }}px; top: {{ planting.elemtop*vm.zoom }}px; left: {{ planting.elemleft*vm.zoom }}px;" />
                 <div uib-popover-template="'modules/gardenparts/client/views/popover.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
                     planting context-menu="menuOptions" ng-controller="PlantingController" ng-repeat="planting in vm.gardenpart.plantings" ng-init="planting=planting"
                      style="z-index: 15; opacity: 1; background: url('/api/image/{{horizontal*vm.zoom}}/{{vertical*vm.zoom}}/{{planting.orientation}}') repeat scroll 0 0 rgba(0, 0, 0, 0); box-shadow:0px 0px 0px 3px blue inset; width: {{ planting.elemwidth*vm.zoom }}px; height: {{ planting.elemheight*vm.zoom }}px; top: {{ planting.elemtop*vm.zoom }}px; left: {{ planting.elemleft*vm.zoom }}px;" />
-                <div uib-popover-template="'modules/gardenparts/client/views/popover.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
-                    planting context-menu="menuOptions" ng-controller="PlantingController" ng-repeat="planting in vm.gardenpart.futureplantings" ng-init="planting=planting"
-                     style="z-index: 15; opacity: 0.6; background: url('/api/image/{{horizontal*vm.zoom}}/{{vertical*vm.zoom}}/{{planting.orientation}}') repeat scroll 0 0 rgba(0, 0, 0, 0); box-shadow:0px 0px 0px 3px blue inset; width: {{ planting.elemwidth*vm.zoom }}px; height: {{ planting.elemheight*vm.zoom }}px; top: {{ planting.elemtop*vm.zoom }}px; left: {{ planting.elemleft*vm.zoom }}px;" />
                 <div class="planting" ng-repeat="pastplanting in vm.gardenpart.pastplantings" ng-init="pastplanting=pastplanting"
                      style="background: rgba({{pastplanting.redlevel}}, {{pastplanting.greenlevel}}, 0, {{ pastplanting.opacity }}) 0 0; width: {{ pastplanting.elemwidth*vm.zoom }}px; height: {{ pastplanting.elemheight*vm.zoom }}px; top: {{ pastplanting.elemtop*vm.zoom }}px; left: {{ pastplanting.elemleft*vm.zoom }}px;"
                         />
