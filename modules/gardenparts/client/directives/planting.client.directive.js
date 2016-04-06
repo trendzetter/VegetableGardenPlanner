@@ -17,12 +17,14 @@ angular.module('gardenparts').directive('planting', ['$timeout',
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
         // Calculate the time to harvest
-        var selectedDdate = new Date(scope.vm.selectedDate);
+        var selectedDate = new Date(scope.vm.selectedDate);
         var plantingValid = new Date(scope.planting.validFrom);
-        var timeDiff = Math.abs(selectedDdate.getTime() - plantingValid.getTime());
+        var timeDiff = Math.abs(selectedDate.getTime() - plantingValid.getTime());
         var dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        scope.daysHarvest = scope.planting.plantVariety.minGrowthDuration-dayDifference;
-
+        var daysHarvest = scope.planting.plantVariety.minGrowthDuration-dayDifference;
+        scope.dateHarvest = new Date();
+        scope.dateHarvest.setDate(selectedDate.getDate() + daysHarvest);
+        
         var updateCoordinates = function() {
           var co = getCoordinates(element, scope.vm.zoom);
           scope.updatePlantingCoordinates(co.top / scope.vm.zoom, co.left / scope.vm.zoom, co.width / scope.vm.zoom, co.height / scope.vm.zoom);

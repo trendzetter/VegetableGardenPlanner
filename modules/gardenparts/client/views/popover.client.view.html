@@ -3,6 +3,6 @@
     <label ng-if="planting.orientation==='horizontal'" class="control-label" >{{ (planting.elemwidth/planting.cmBetweenRow*planting.elemheight/planting.cmInRow) | number: 0 }} ({{ (planting.elemheight/planting.cmBetweenRow) | number:0}}x{{ (planting.elemwidth/planting.cmInRow) |number:0}}) {{planting.plantVariety.name}} </label>
     <div>{{ planting.elemwidth }} X {{ planting.elemheight }} cm</div>
     <div>Gezaaid op {{planting.validFrom | date:'dd-MM-yyyy' }}</div>
-    <div ng-if="planting.plantVariety.minGrowthDuration">Oogsten vanaf binnen {{daysHarvest}} dagen</div>
+    <div ng-if="planting.plantVariety.minGrowthDuration">Oogsten vanaf {{dateHarvest | date:'dd-MM-yyyy'}}</div>
     <img class="thumb" ng-src="{{planting.plantVariety.image}}">
 </section>
