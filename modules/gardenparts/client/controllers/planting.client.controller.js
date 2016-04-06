@@ -23,7 +23,8 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
       }]);
     } else {
       /* For existing plantings */
-      $scope.menuOptions.push(['Harvest', function() {
+      if(!$scope.planting.future){
+        $scope.menuOptions.push(['Harvest', function() {
         var size = 'lg';
         var modalInstance = $uibModal.open({
           templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
@@ -46,8 +47,16 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
           console.log('Modal dismissed at: ' + new Date());
         });
       }]);
+      }
+
       $scope.menuOptions.push(['Cancel', function() {
-        var planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+        var planting;
+        if($scope.planting.future){
+            planting = $scope.vm.gardenpart.futureplantings.splice($scope.$index, 1);
+        }else{
+            planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+        }
+        
         $scope.cancelPlanting(planting);
       }]);
     }

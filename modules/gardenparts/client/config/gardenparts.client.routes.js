@@ -48,6 +48,7 @@
         for (i = 0; i < plantings.length; i++) {
           plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
           plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
+          plantings[i].future = true;
         }
     });
 

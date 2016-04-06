@@ -25,7 +25,6 @@
     vm.crops = [];
 
     $scope.cropClicked = function(crop) {
-      console.log('crop: ' + JSON.stringify(crop));
       $scope.rotationAdvice(crop);
     };
 
@@ -37,7 +36,6 @@
       planting.elemleft = parseInt(planting.elemleft) - gardenpart.elemleft;
       //assign a cropgroup to the past plantings
       planting.cropgroup = cropgroupByCrop(planting.plantVariety.crop);
-      console.log('planting.variety '+planting.plantVariety.name+' planting.cropgroup: '+ planting.cropgroup);
     }
 
     function cropgroupByCrop(crop) {
@@ -144,29 +142,20 @@
     };
 
     $scope.cancelPlanting = function(planting) {
-      console.log('planting'+planting);
       $scope.cancelPlantings.push(planting[0]._id);
     };
 
     function getPlantvarieties() {
-      console.log('$stateParams.selectedDate' + $stateParams.selectedDate);
       var datearray = $stateParams.selectedDate.split('-');
-      console.log('datearray: ' + datearray);
       var now = new Date();
       now.setYear(datearray[0]);
-      console.log('year: ' + datearray[0]);
       var month = datearray[1] - 1;
       now.setMonth(month);
-      console.log('month: ' + month);
       now.setDate(datearray[2]);
-      console.log('dag: ' + datearray[2]);
       var start = new Date(now.getFullYear(), 0, 0);
-      console.log('start: ' + start);
-      console.log('now: ' + now);
       var diff = now - start;
       var oneDay = 1000 * 60 * 60 * 24;
       var day = Math.floor(diff / oneDay);
-      console.log('doy: ' + day);
       vm.plantvarieties = Plantvarieties.get({
         'doy': day
       });
