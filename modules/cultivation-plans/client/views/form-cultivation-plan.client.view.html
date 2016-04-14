@@ -1,0 +1,66 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>{{vm.cultivationPlan._id ? 'Edit Cultivation Plan' : 'New Cultivation Plan'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.cultivationPlanForm" class="form-horizontal" ng-submit="vm.save(vm.form.cultivationPlanForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Naam</label>
+          <input name="name" type="text" ng-model="vm.cultivationPlan.name" id="name" class="form-control" placeholder="Naam" required>
+          <div ng-messages="vm.form.cultivationPlanForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cultivation Plan name is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="crop">Gewas</label>
+          <select name="crop"  id="crop" ng-options="crop._id as crop.name for crop in vm.crops" ng-model="vm.cultivationPlan.crop._id" class="form-control" required></select>
+          <div ng-messages="vm.form.cultivationPlanForm.crop.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Cultivation Plan crop is required.</p>
+          </div>
+        </div> 
+        <div class="form-group">
+          <label class="control-label" for="description">Omschrijving</label>
+          <textarea name="description" data-ng-model="vm.cultivationPlan.description" id="description" class="form-control" cols="30" rows="3" placeholder="omschrijving"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="steps">Stappen</label>
+         <div style="clear: both" class="controls" ng-repeat="step in vm.cultivationPlan.steps" ng-class-odd="'odd'" ng-class-even="'even'" id="steps">
+            <a ng-click="vm.removeStep($index)" class="btn btn-default pull-right">
+              <i class="glyphicon glyphicon-remove-circle" ></i>
+            </a>
+             {{ $index+1}}
+            <input name="name" type="text" ng-model="step.name" id="name" placeholder="Naam" required>
+            <div ng-messages="vm.form.cultivationPlanForm.steps[$index].name.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Cultivation step name is required.</p>
+            </div>
+            <label class="control-label" for="description">Beschrijving</label>
+            <textarea name="description" data-ng-model="step.description" id="description" class="form-control" placeholder="Beschrijf wat er in deze stap gebeurd."></textarea>
+            <!--Type van regel:   <select  data-ng-model="rule.steptype">
+                                <option value="SuccessiveCrop">Opeenvolgende gewassen</option>
+                                <option value="YearsBetweenCultivation">Jaren tussen teelten</option>
+                            </select>
+            Groentengroep: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup"></select>
+            Vorige groetengroep: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup"></select>
+            <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" >Years: <select  data-ng-model="rule.yearsBetween" to-number>
+                <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            </select></span>-->
+        </div>
+        <div class="controls">
+            <input class="btn btn-default" ng-click="vm.newStep()" value="Stap toevoegen">
+        </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.cultivationPlan._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+</section>
+</section>

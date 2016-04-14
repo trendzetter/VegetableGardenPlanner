@@ -9,7 +9,7 @@
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {
-      title: 'Plant varieties',
+      title: 'Plant varieteiten',
       state: 'plant-varieties',
       type: 'dropdown',
       roles: ['*']
@@ -17,13 +17,13 @@
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'plant-varieties', {
-      title: 'List plant varieties',
+      title: 'Lijst varieteiten',
       state: 'plant-varieties.list'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'plant-varieties', {
-      title: 'Add plant variety',
+      title: 'Variëteit toevoegen',
       state: 'plant-varieties.create',
       roles: ['user']
     });

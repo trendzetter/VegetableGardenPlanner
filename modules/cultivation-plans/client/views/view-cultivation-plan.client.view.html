@@ -1,0 +1,27 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.cultivationPlan.title"></h1>
+  </div>
+  <div class="pull-right" ng-show="vm.cultivationPlan.isCurrentUserOwner">
+    <a class="btn btn-primary" ui-sref="cultivationPlans.edit({ cultivationPlanId: vm.cultivationPlan._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.cultivationPlan.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.cultivationPlan.user" ng-bind="vm.cultivationPlan.user.displayName"></span>
+      <span ng-if="!vm.cultivationPlan.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.cultivationPlan.content"></p>
+</section>
+</section>
+</section>

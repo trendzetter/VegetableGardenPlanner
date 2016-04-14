@@ -105,19 +105,19 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       }
       garden.keepers = leankeepers;
       console.log('garden.keepers' + garden.keepers);
-      if($state.$current.data && $state.$current.data.name==='gardens.create') $stateParams.selectedDate=$scope.selectedDate;
-      garden.selectedDate  = $stateParams.selectedDate;
+      if ($state.$current.data && $state.$current.data.name === 'gardens.create') $stateParams.selectedDate = $scope.selectedDate;
+      garden.selectedDate = $stateParams.selectedDate;
       garden.$update({
+        selectedDate: $scope.selectedDate
+      }, function(garden) {
+        console.log('success, got data: ', garden);
+        $state.go('viewGarden', {
+          bk: garden.bk,
           selectedDate: $scope.selectedDate
-        },function (garden) {
-           console.log('success, got data: ', garden);
-           $state.go('viewGarden', {
-             bk: garden.bk,
-             selectedDate: $scope.selectedDate
-           });
-         }, function(errorResponse) {
-           $scope.error = errorResponse.data.message;
-         });
+        });
+      }, function(errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
     });
 
     // Update existing Gardenparts
@@ -134,11 +134,11 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       Gardenpart.createParts({
         bk: garden.bk,
         selectedDate: $stateParams.selectedDate
-      }, newparts,function(){
+      }, newparts, function() {
         Gardenpart.deleteParts({
           bk: garden.bk,
           selectedDate: $stateParams.selectedDate
-        }, delparts,function(){
+        }, delparts, function() {
           //Update the modified parts
           //Filter new parts
           var filtered = gardenparts.filter(function(x) {
@@ -152,15 +152,15 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
             }
           }
           //if (modified.length > 0)
-            Gardenpart.updateParts({
+          Gardenpart.updateParts({
+            bk: garden.bk,
+            selectedDate: $stateParams.selectedDate
+          }, modified, function() {
+            $state.go('viewGarden', {
               bk: garden.bk,
-              selectedDate: $stateParams.selectedDate
-            }, modified,function(){
-              $state.go('viewGarden', {
-                bk: garden.bk,
-                selectedDate: $scope.selectedDate
-              });
+              selectedDate: $scope.selectedDate
             });
+          });
         });
       });
     };

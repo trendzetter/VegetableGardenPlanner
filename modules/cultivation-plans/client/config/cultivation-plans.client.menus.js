@@ -2,24 +2,30 @@
   'use strict';
 
   angular
-    .module('rule-sets')
+    .module('cultivation-plans')
     .run(menuConfig);
 
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
-
+   /* menuService.addMenuItem('topbar', {
+      title: 'Teelwijzen',
+      state: 'cultivation-plans',
+      type: 'dropdown',
+      roles: ['*']
+    });
+*/
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Lijst rotatieschema\'s',
-      state: 'rulesets.list'
+      title: 'Lijst teelwijzen',
+      state: 'cultivation-plans.list'
     });
 
     // Add the dropdown create item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Rotatieschema creëren',
-      state: 'rulesets.create',
+      title: 'Teelwijze toevoegen',
+      state: 'cultivation-plans.create',
       roles: ['user']
     });
   }
-})();
+}());

@@ -1,13 +1,13 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('rule-sets')
     .controller('RuleSetsController', RuleSetsController);
 
-  RuleSetsController.$inject = ['$scope', '$state', 'ruleSetResolve', 'Authentication','CropsService'];
+  RuleSetsController.$inject = ['$scope', '$state', 'ruleSetResolve', 'Authentication', 'CropsService'];
 
-  function RuleSetsController($scope, $state, ruleset, Authentication,Crops) {
+  function RuleSetsController($scope, $state, ruleset, Authentication, Crops) {
     var vm = this;
     vm.ruleset = ruleset;
     vm.authentication = Authentication;
@@ -21,59 +21,59 @@
     vm.crops = Crops.query();
     vm.crops.$promise.then(function(crops) {
       var cropgroup;
-      if (!ruleset._id){
+      if (!ruleset._id) {
         console.log('nieuwe ruleset');
         vm.ruleset.cropgroups = [];
         vm.ruleset.rotationrules = [];
         newRule();
         loop:
-        for(var i=0;i<crops.length;i++){
-          for(var j=0;j<vm.ruleset.cropgroups.length;j++){
-            if(vm.ruleset.cropgroups[j].name === crops[i].plantfamily.name){
-              vm.ruleset.cropgroups[j].crops.push(crops[i]);
-              continue loop;
+          for (var i = 0; i < crops.length; i++) {
+            for (var j = 0; j < vm.ruleset.cropgroups.length; j++) {
+              if (vm.ruleset.cropgroups[j].name === crops[i].plantfamily.name) {
+                vm.ruleset.cropgroups[j].crops.push(crops[i]);
+                continue loop;
+              }
             }
+            cropgroup = newCropgroup(crops[i].plantfamily.name);
+            cropgroup.crops.push(crops[i]);
           }
-          cropgroup = newCropgroup(crops[i].plantfamily.name);
-          cropgroup.crops.push(crops[i]);
-        }
       } else {
-      for(var l=0;l<vm.ruleset.cropgroups.length;l++){
-        cropgroup = vm.ruleset.cropgroups[l];
-        for(var k=0;k<cropgroup.crops.length;k++){
-          var index = crops.indexOf(cropgroup.crops[k]);
-          crops.splice(index,1);
+        for (var l = 0; l < vm.ruleset.cropgroups.length; l++) {
+          cropgroup = vm.ruleset.cropgroups[l];
+          for (var k = 0; k < cropgroup.crops.length; k++) {
+            var index = crops.indexOf(cropgroup.crops[k]);
+            crops.splice(index, 1);
+          }
         }
+        vm.ordercrops = crops;
       }
-      vm.ordercrops = crops;
-    }
     });
 
-    function removeRule(index){
-      console.log('remove rule:'+index);
-      vm.ruleset.rotationrules.splice(index,1);
+    function removeRule(index) {
+      console.log('remove rule:' + index);
+      vm.ruleset.rotationrules.splice(index, 1);
     }
 
-    function removeGroup(index){
-      console.log('removeGroup:'+index);
+    function removeGroup(index) {
+      console.log('removeGroup:' + index);
       var count = 0;
       var cropgroup = vm.ruleset.cropgroups[index];
-      while(count !== vm.ruleset.rotationrules.length){
-        if(vm.ruleset.rotationrules[count].previousCropgroup === cropgroup._id || vm.ruleset.rotationrules[count].cropgroup === cropgroup._id ){
-          vm.ruleset.rotationrules.splice(count,1);
-        }else{
+      while (count !== vm.ruleset.rotationrules.length) {
+        if (vm.ruleset.rotationrules[count].previousCropgroup === cropgroup._id || vm.ruleset.rotationrules[count].cropgroup === cropgroup._id) {
+          vm.ruleset.rotationrules.splice(count, 1);
+        } else {
           count++;
         }
       }
-      while(vm.ruleset.cropgroups[index].crops.length>0){
+      while (vm.ruleset.cropgroups[index].crops.length > 0) {
         vm.ordercrops.push(vm.ruleset.cropgroups[index].crops.pop());
       }
-      vm.ruleset.cropgroups.splice(index,1);
+      vm.ruleset.cropgroups.splice(index, 1);
     }
 
-    function newCropgroup (name){
+    function newCropgroup(name) {
       var cropgroup = {};
-      if(name === undefined){
+      if (name === undefined) {
         cropgroup.name = 'Geef de groep een naam';
       } else {
         cropgroup.name = name;
@@ -86,7 +86,7 @@
 
     $scope.newCropgroup = newCropgroup;
 
-    function newRule(){
+    function newRule() {
       var rule = {};
       vm.ruleset.rotationrules.push(rule);
     }

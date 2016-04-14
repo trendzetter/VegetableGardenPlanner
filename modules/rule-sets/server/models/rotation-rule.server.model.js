@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
@@ -10,10 +11,6 @@ var mongoose = require('mongoose'),
  * Rotation rule Schema
  */
 var RotationRuleSchema = new Schema({
-  appVersion: {
-    type: String,
-    default: GLOBAL.version
-  },
   ruletype: {
     type: String,
     enum: ['SuccessiveCrop', 'YearsBetweenCultivation']
@@ -31,14 +28,6 @@ var RotationRuleSchema = new Schema({
   previousCropgroup: {
     type: Schema.ObjectId,
     ref: 'Cropgroup'
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
   }
 });
 

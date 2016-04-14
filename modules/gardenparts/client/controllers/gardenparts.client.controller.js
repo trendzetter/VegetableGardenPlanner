@@ -1,13 +1,13 @@
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('gardenparts')
     .controller('GardenpartsController', GardenpartsController);
 
-  GardenpartsController.$inject = ['$scope','$state', '$stateParams', 'gardenpartResolve', 'Authentication', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings'];
+  GardenpartsController.$inject = ['$scope', '$state', '$stateParams', 'gardenpartResolve', 'Authentication', 'GardenpartService', 'Plantvarieties', 'Plantings', 'PastPlantings'];
 
-  function GardenpartsController($scope,$state, $stateParams, gardenpart, Authentication, Gardenpart, Plantvarieties, Plantings, PastPlantings) {
+  function GardenpartsController($scope, $state, $stateParams, gardenpart, Authentication, Gardenpart, Plantvarieties, Plantings, PastPlantings) {
 
     var vm = this;
 
@@ -54,7 +54,7 @@
     }
 
     $scope.rotationAdvice = function(crop) {
-      console.log('calculating the advice! crop:'+ crop);
+      console.log('calculating the advice! crop:' + crop);
       var cropgroup = cropgroupByCrop(crop);
       console.log('calculating the advice! cropgroup:' + cropgroup);
       for (var i = 0; i < gardenpart.pastplantings.length; i++) {
@@ -105,16 +105,19 @@
         plantings[i].plantVariety = plantings[i].plantVariety._id;
       }
 
-      var updateplantings = {newplantings: $scope.newplantings,cancelplantings:$scope.cancelPlantings};
+      var updateplantings = {
+        newplantings: $scope.newplantings,
+        cancelplantings: $scope.cancelPlantings
+      };
       Plantings.updatePlantings({
-         bk: vm.gardenpart.garden.bk,
-         selectedDate: $stateParams.selectedDate
-       },updateplantings,function(){
-         $state.go('viewGarden', {
-           bk: vm.gardenpart.garden.bk,
-           selectedDate: $stateParams.selectedDate
-         });
-       });
+        bk: vm.gardenpart.garden.bk,
+        selectedDate: $stateParams.selectedDate
+      }, updateplantings, function() {
+        $state.go('viewGarden', {
+          bk: vm.gardenpart.garden.bk,
+          selectedDate: $stateParams.selectedDate
+        });
+      });
 
     };
 
@@ -160,13 +163,13 @@
         'doy': day
       });
       vm.plantvarieties.$promise.then(function(plantvarieties) {
-        if(vm.gardenpart.plant !== undefined){
+        if (vm.gardenpart.plant !== undefined) {
           plantvarieties.unshift(vm.gardenpart.plant);
-          var index =1;
-          while(index<plantvarieties.length && plantvarieties[index]._id !== vm.gardenpart.plant._id){
+          var index = 1;
+          while (index < plantvarieties.length && plantvarieties[index]._id !== vm.gardenpart.plant._id) {
             index++;
           }
-          plantvarieties.splice(index,1);
+          plantvarieties.splice(index, 1);
         }
 
         for (var i = 0; i < plantvarieties.length; i++) {

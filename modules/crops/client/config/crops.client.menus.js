@@ -9,21 +9,21 @@
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {
-      title: 'Manage',
-      state: 'manage',
+      title: 'Systeem',
+      state: 'system',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user','admin']
     });
 
     // Add the dropdown list item
-    Menus.addSubMenuItem('topbar', 'manage', {
-      title: 'List crops',
+    Menus.addSubMenuItem('topbar', 'system', {
+      title: 'Lijst gewassen',
       state: 'crops.list'
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'manage', {
-      title: 'Add crop',
+    Menus.addSubMenuItem('topbar', 'system', {
+      title: 'Gewas toevoegen',
       state: 'crops.create',
       roles: ['user']
     });

@@ -17,7 +17,7 @@ angular.module('gardens').directive('garden', ['$state',
       restrict: 'A',
       link: function postLink(scope, elem, attrs) {
         scope.$on('updatedZoom', function(event, zoom) {
-          console.log('gardenDirective received zoom '+zoom);
+          console.log('gardenDirective received zoom ' + zoom);
           scope.vm.zoom = zoom;
         });
         var mode = attrs.garden;
@@ -30,38 +30,38 @@ angular.module('gardens').directive('garden', ['$state',
             scope.$apply();
           });
         } else {
-        //  scope.$on('gardenpartsLoaded', function() {
-            var topmin = Number.MAX_VALUE;
-            var offsettop = Number.MIN_VALUE;
-            var leftmin = Number.MAX_VALUE;
-            var offsetleft = Number.MIN_VALUE;
-            angular.forEach(scope.vm.garden.gardenparts, function(gardenpart, key) {
-              if (topmin > gardenpart.elemtop) {
-                topmin = gardenpart.elemtop;
-              }
-              if (leftmin > gardenpart.elemleft) {
-                leftmin = gardenpart.elemleft;
-              }
-              var partoffsettop = gardenpart.elemtop + gardenpart.elemheight;
-              if (offsettop < partoffsettop) {
-                offsettop = partoffsettop;
-              }
-              var partoffsetleft = gardenpart.elemleft + gardenpart.elemwidth;
-              if (offsetleft < partoffsetleft) {
-                offsetleft = partoffsetleft;
-              }
-            });
-            scope.minHeight = offsettop - topmin;
-            scope.minWidth = offsetleft - leftmin;
-            scope.initialMinHeight = offsettop - topmin;
-            scope.initialMinWidth = offsetleft - leftmin;
-            scope.initialTop = scope.vm.garden.elemtop;
-            scope.initialLeft = scope.vm.garden.elemleft;
-            scope.initialHeight = scope.vm.garden.elemheight;
-            scope.initialWidth = scope.vm.garden.elemwidth;
-            resizableConfig.minHeight = scope.minHeight;
-            resizableConfig.minWidth = scope.minWidth;
-//          });
+          //  scope.$on('gardenpartsLoaded', function() {
+          var topmin = Number.MAX_VALUE;
+          var offsettop = Number.MIN_VALUE;
+          var leftmin = Number.MAX_VALUE;
+          var offsetleft = Number.MIN_VALUE;
+          angular.forEach(scope.vm.garden.gardenparts, function(gardenpart, key) {
+            if (topmin > gardenpart.elemtop) {
+              topmin = gardenpart.elemtop;
+            }
+            if (leftmin > gardenpart.elemleft) {
+              leftmin = gardenpart.elemleft;
+            }
+            var partoffsettop = gardenpart.elemtop + gardenpart.elemheight;
+            if (offsettop < partoffsettop) {
+              offsettop = partoffsettop;
+            }
+            var partoffsetleft = gardenpart.elemleft + gardenpart.elemwidth;
+            if (offsetleft < partoffsetleft) {
+              offsetleft = partoffsetleft;
+            }
+          });
+          scope.minHeight = offsettop - topmin;
+          scope.minWidth = offsetleft - leftmin;
+          scope.initialMinHeight = offsettop - topmin;
+          scope.initialMinWidth = offsetleft - leftmin;
+          scope.initialTop = scope.vm.garden.elemtop;
+          scope.initialLeft = scope.vm.garden.elemleft;
+          scope.initialHeight = scope.vm.garden.elemheight;
+          scope.initialWidth = scope.vm.garden.elemwidth;
+          resizableConfig.minHeight = scope.minHeight;
+          resizableConfig.minWidth = scope.minWidth;
+          //          });
         }
 
         elem.resizable(resizableConfig);

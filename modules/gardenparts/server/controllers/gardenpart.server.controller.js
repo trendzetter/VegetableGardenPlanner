@@ -49,7 +49,7 @@ var addPlantings = function(next, req) {
               }
             }, {
               'elemtop': {
-                $gte: req.gardenpart.elemtop
+                $gt: req.gardenpart.elemtop
               }
             }, {
               'elemtop': {
@@ -69,7 +69,7 @@ var addPlantings = function(next, req) {
               }
             }, {
               'elemtop': {
-                $gte: req.gardenpart.elemtop
+                $gt: req.gardenpart.elemtop
               }
             }, {
               'elemtop': {
@@ -89,7 +89,7 @@ var addPlantings = function(next, req) {
               }
             }, {
               'bottomCornerTop': {
-                $gte: req.gardenpart.elemtop
+                $gt: req.gardenpart.elemtop
               }
             }, {
               'bottomCornerTop': {
@@ -109,7 +109,7 @@ var addPlantings = function(next, req) {
               }
             }, {
               'bottomCornerTop': {
-                $gte: req.gardenpart.elemtop
+                $gt: req.gardenpart.elemtop
               }
             }, {
               'bottomCornerTop': {

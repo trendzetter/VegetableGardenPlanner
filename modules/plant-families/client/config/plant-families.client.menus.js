@@ -8,22 +8,16 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(Menus) {
- /*   Menus.addMenuItem('topbar', {
-      title: 'Plant families',
-      state: 'plantfamilies',
-      type: 'dropdown',
-      roles: ['*']
-    });*/
 
     // Add the dropdown list item
-    Menus.addSubMenuItem('topbar', 'manage', {
-      title: 'List plant families',
+    Menus.addSubMenuItem('topbar', 'system', {
+      title: 'Lijst planten families',
       state: 'plantfamilies.list'
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'manage', {
-      title: 'Add plant family',
+    Menus.addSubMenuItem('topbar', 'system', {
+      title: 'Plant familie toevoegen',
       state: 'plantfamilies.create',
       roles: ['user']
     });
