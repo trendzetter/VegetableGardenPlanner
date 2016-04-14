@@ -11,7 +11,8 @@
   function menuConfig(menuService) {
     menuService.addSubMenuItem('topbar', 'system', {
       title: 'Manage Users',
-      state: 'admin.users'
+      state: 'admin.users',
+      roles: ['admin']
     });
   }
 }());
