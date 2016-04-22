@@ -5,7 +5,7 @@
     <h1 ng-bind="vm.cultivationPlan.title"></h1>
   </div>
   <div class="pull-right" ng-show="vm.cultivationPlan.isCurrentUserOwner">
-    <a class="btn btn-primary" ui-sref="cultivationPlans.edit({ cultivationPlanId: vm.cultivationPlan._id })">
+    <a class="btn btn-primary" ui-sref="cultivation-plans.edit({ cultivationPlanId: vm.cultivationPlan._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
     <a class="btn btn-primary" ng-click="vm.remove()">

@@ -12,6 +12,11 @@
   }, {
     update: {
       method: 'PUT'
+    },
+    getCrop: {
+      method: 'GET',
+      url: 'api/plant-varieties/get-crop/:cropId',
+      isArray: true
     }
   });
   }

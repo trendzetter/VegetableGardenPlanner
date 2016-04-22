@@ -7,7 +7,7 @@ var cultivationPlansPolicy = require('../policies/cultivation-plans.server.polic
   cultivationPlans = require('../controllers/cultivation-plans.server.controller');
 
 module.exports = function (app) {
-  // Articles collection routes
+  // cultivationPlan collection routes
   app.route('/api/cultivation-plans').all(cultivationPlansPolicy.isAllowed)
     .get(cultivationPlans.list)
     .post(cultivationPlans.create);

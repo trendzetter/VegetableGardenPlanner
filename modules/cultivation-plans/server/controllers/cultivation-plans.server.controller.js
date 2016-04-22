@@ -14,6 +14,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var cultivationPlan = new CultivationPlan(req.body);
   cultivationPlan.user = req.user;
+  cultivationPlan.variety = new mongoose.Types.ObjectId(cultivationPlan.variety);
 
   cultivationPlan.save(function (err) {
     if (err) {
@@ -102,8 +103,8 @@ exports.cultivationPlanByID = function (req, res, next, id) {
       message: 'CultivationPlan is invalid'
     });
   }
-
-  CultivationPlan.findById(id).populate('user', 'displayName').exec(function (err, cultivationPlan) {
+  var populateQuery = [{path:'user', select: 'displayName'}, {path:'crop', select:'name'}, {path:'variety', select:'name'}];
+  CultivationPlan.findById(id).populate(populateQuery).exec(function (err, cultivationPlan) {
     if (err) {
       return next(err);
     } else if (!cultivationPlan) {

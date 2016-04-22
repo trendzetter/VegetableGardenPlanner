@@ -8,9 +8,9 @@ var mongoose = require('mongoose'),
   
   
 var CultivationStepSchema = new Schema({
-  name: {
+  title: {
     type: String,
-    required: 'Please fill Cropgroup name',
+    required: 'Please fill cultivation step title',
     trim: true
   },
   description: {
@@ -22,9 +22,13 @@ var CultivationStepSchema = new Schema({
     type: String,
     required: 'Please select an icon'
   },
-  duration: {
+  minduration: {
     type: Number,
-    required: 'Please indicated the duration'
+    required: 'Please indicated the minimal duration'
+  },
+  maxduration: {
+    type: Number,
+    required: 'Please indicated the maximum duration'
   },
   inplace: {
     type: Boolean
@@ -41,7 +45,7 @@ var CultivationPlanSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  name: {
+  title: {
     type: String,
     default: '',
     trim: true,
@@ -50,6 +54,10 @@ var CultivationPlanSchema = new Schema({
   crop: {
     type: Schema.ObjectId,
     ref: 'Crop'
+  },
+  variety: {
+    type: Schema.ObjectId,
+    ref: 'PlantVariety'
   },
   description: {
     type: String,

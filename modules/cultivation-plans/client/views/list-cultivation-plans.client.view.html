@@ -5,16 +5,16 @@
     <h1>Cultivation Plans</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="article in vm.cultivationPlans" ui-sref="cultivation-plans.view({ articleId: article._id })" class="list-group-item">
+    <a ng-repeat="cultivationPlan in vm.cultivationPlans" ui-sref="cultivation-plans.view({ cultivationPlanId: cultivationPlan._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
-        <span ng-bind="article.created | date:'mediumDate'"></span>
+        <span ng-bind="cultivationPlan.created | date:'mediumDate'"></span>
         by
-        <span ng-if="article.user" ng-bind="article.user.displayName"></span>
-        <span ng-if="!article.user">Deleted User</span>
+        <span ng-if="cultivationPlan.user" ng-bind="cultivationPlan.user.displayName"></span>
+        <span ng-if="!cultivationPlan.user">Deleted User</span>
       </small>
-      <h4 class="list-group-item-heading" ng-bind="article.title"></h4>
-      <p class="list-group-item-text" ng-bind="article.content"></p>
+      <h4 class="list-group-item-heading" ng-bind="cultivationPlan.title"></h4>
+      <p class="list-group-item-text" ng-bind="cultivationPlan.description"></p>
     </a>
   </div>
   <div class="alert alert-warning text-center" ng-if="vm.cultivationPlans.$resolved && !vm.cultivationPlans.length">

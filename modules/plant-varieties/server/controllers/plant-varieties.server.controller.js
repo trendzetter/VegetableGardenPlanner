@@ -134,7 +134,22 @@ exports.delete = function(req, res) {
  * List of Plant varieties
  */
 exports.list = function(req, res) {
-  PlantVariety.find().sort('-created').populate('user', 'displayName').populate('crop', 'name').exec(function(err, plantVarieties) {
+  PlantVariety.find().sort('name').populate('user', 'displayName').populate('crop', 'name').exec(function(err, plantVarieties) {
+    if (err) {
+      return res.send(400, {
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(plantVarieties);
+    }
+  });
+};
+
+/**
+ * List of Plant varieties
+ */
+exports.getCrop = function(req, res) {
+  PlantVariety.find({crop: req.params.cropId}).sort('name').exec(function(err, plantVarieties) {
     if (err) {
       return res.send(400, {
         message: getErrorMessage(err)

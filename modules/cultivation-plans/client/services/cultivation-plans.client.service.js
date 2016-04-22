@@ -8,8 +8,8 @@
   CultivationPlansService.$inject = ['$resource'];
 
   function CultivationPlansService($resource) {
-    return $resource('api/cultivation-plans/:articleId', {
-      articleId: '@_id'
+    return $resource('api/cultivation-plans/:cultivationPlanId', {
+      cultivationPlanId: '@_id'
     }, {
       update: {
         method: 'PUT'
