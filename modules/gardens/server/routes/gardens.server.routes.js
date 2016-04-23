@@ -16,7 +16,7 @@ module.exports = function(app) {
   app.route('/api/gardens').all(gardensPolicy.isAllowed)
     .post(gardens.create);
 
-    app.route('/api/gardens/plant/:selectedDate/:plant').all(gardensPolicy.isAllowed)
+  app.route('/api/gardens/plant/:selectedDate/:plant').all(gardensPolicy.isAllowed)
       .get(gardens.list);
 
   app.route('/api/gardens/:selectedDate').all(gardensPolicy.isAllowed)

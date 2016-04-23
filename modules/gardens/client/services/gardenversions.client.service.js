@@ -1,6 +1,6 @@
 'use strict';
 
-//Gardenversions service used to communicate Gardenversions REST endpoints
+// Gardenversions service used to communicate Gardenversions REST endpoints
 angular.module('gardens').factory('Gardenversions', ['$resource', '$stateParams',
   function($resource, $stateParams) {
     if ($stateParams.selectedDate === undefined) {

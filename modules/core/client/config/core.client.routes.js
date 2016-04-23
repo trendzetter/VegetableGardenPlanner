@@ -8,7 +8,7 @@
   routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function routeConfig($stateProvider, $urlRouterProvider) {
-    /*$urlRouterProvider.rule(function ($injector, $location) {
+    /* $urlRouterProvider.rule(function ($injector, $location) {
       var path = $location.path();
       var hasTrailingSlash = path.length > 1 && path[path.length - 1] === '/';
 

@@ -51,8 +51,9 @@ exports.create = function(req, res) {
   var issues = req.body.issues;
   var gotchas = req.body.gotchas;
   var harvest = new Harvest();
+  var i;
   // harvest.issues = [];
-  for (var i = 0; i < issues.length; i++) {
+  for (i = 0; i < issues.length; i++) {
     if (typeof issues[i].text !== 'undefined') {
       var issue = new Issue(issues[i]);
       issue.save();

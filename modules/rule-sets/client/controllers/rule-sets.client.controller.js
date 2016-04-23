@@ -5,9 +5,9 @@
     .module('rule-sets')
     .controller('RuleSetsController', RuleSetsController);
 
-  RuleSetsController.$inject = ['$scope', '$state', 'ruleSetResolve', 'Authentication', 'CropsService'];
+  RuleSetsController.$inject = ['$scope', '$state', '$window', 'ruleSetResolve', 'Authentication', 'CropsService'];
 
-  function RuleSetsController($scope, $state, ruleset, Authentication, Crops) {
+  function RuleSetsController($scope, $state, $window, ruleset, Authentication, Crops) {
     var vm = this;
     vm.ruleset = ruleset;
     vm.authentication = Authentication;
@@ -95,7 +95,7 @@
 
     // Remove existing Article
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.ruleset.$remove($state.go('rulesets.list'));
       }
     }
@@ -125,4 +125,4 @@
       }
     }
   }
-})();
+}());

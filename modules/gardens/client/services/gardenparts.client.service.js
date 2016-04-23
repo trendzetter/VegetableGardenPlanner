@@ -5,20 +5,20 @@
   .module('gardens.services')
   .factory('GardenpartsService', GardenpartsService);
 
-  GardenpartsService.$inject = ['$resource','$stateParams'];
+  GardenpartsService.$inject = ['$resource', '$stateParams'];
 
-  function GardenpartsService($resource,$stateParams) {
+  function GardenpartsService($resource, $stateParams) {
     return $resource('api/gardenparts/:bk/:selectedDate', {
       bk: '@bk',
       selectedDate: $stateParams.selectedDate
     }, {
       createParts: {
         method: 'PUT',
-        isArray : true
+        isArray: true
       },
       updateParts: {
         method: 'POST',
-        isArray : true
+        isArray: true
       },
       deleteParts: {
         method: 'POST',
@@ -27,4 +27,4 @@
       }
     });
   }
-})();
+}());

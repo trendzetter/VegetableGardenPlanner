@@ -1,6 +1,6 @@
 'use strict';
 
-/**
+/* *
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
@@ -8,10 +8,10 @@ var mongoose = require('mongoose'),
   Planting = mongoose.model('Planting'),
   _ = require('lodash');
 
-/**
+/* *
  * Get the error message from error object
  */
-/*var getErrorMessage = function(err) {
+/* var getErrorMessage = function(err) {
   var message = '';
 
   if (err.code) {
@@ -37,10 +37,10 @@ var errorHandler = function(err) {
   return err;
 };*/
 
-/**
+/* *
  * Create Plantings
  */
-/*exports.create = function(req, res) {
+/* exports.create = function(req, res) {
   var plantings = req.body;
 //  var resplantings = [];
   for (var index = 0; index < plantings.length; ++index) {
@@ -54,7 +54,7 @@ var errorHandler = function(err) {
   return res.jsonp('');
 };*/
 
-/**
+/* *
  * Update Plantings
  */
 exports.update = function(req, res) {
@@ -64,7 +64,7 @@ exports.update = function(req, res) {
     var planting = new Planting(plantings[index]);
     planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
     planting.bottomCornerTop = planting.elemtop + planting.elemheight;
-    planting.bk = mongoose.Types.ObjectId();
+    planting.bk = new mongoose.Types.ObjectId();
     planting.save();
   }
 
@@ -79,17 +79,17 @@ exports.update = function(req, res) {
 
 };
 
-/**
+/* *
  * Show the current Planting
  */
-/*exports.read = function(req, res) {
+/* exports.read = function(req, res) {
 
 };*/
 
-/**
+/* *
  * Update Plantings
  */
-/*exports.update = function(req, res) {
+/* exports.update = function(req, res) {
   var plantings = req.body;
   var updateOld = function(err, planting) {
     planting.validTo = req.params.selectedDate;
@@ -108,10 +108,10 @@ exports.update = function(req, res) {
   res.jsonp(plantings);
 };*/
 
-/**
+/* *
  * Delete an Planting
  */
-/*exports.delete = function(req, res) {
+/* exports.delete = function(req, res) {
   var plantingids = req.body;
   Planting.remove({
     _id: {
@@ -122,10 +122,10 @@ exports.update = function(req, res) {
   });
 };*/
 
-/**
+/* *
  * List of Plantings
  */
-/*exports.list = function(req, res) {
+/* exports.list = function(req, res) {
 
 };
 
@@ -143,10 +143,10 @@ exports.gardenByBK = function(req, res, next, gardenbk) {
   });
 };*/
 
-/**
+/* *
  * Garden authorization middleware
  */
-/*exports.hasAuthorization = function(req, res, next) {
+/* exports.hasAuthorization = function(req, res, next) {
   if (req.garden.user.id !== req.user.id && req.garden.user._id.toString() !== req.user.id) {
     return res.send(403, 'User is not authorized');
   }

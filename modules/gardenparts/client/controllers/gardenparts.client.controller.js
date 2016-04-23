@@ -28,13 +28,13 @@
       $scope.rotationAdvice(crop);
     };
 
-    //Add the pastplantings
+    // Add the pastplantings
     var pp = gardenpart.pastplantings;
     for (var j = 0; j < pp.length; j++) {
       var planting = pp[j];
       planting.elemtop = parseInt(planting.elemtop) - gardenpart.elemtop;
       planting.elemleft = parseInt(planting.elemleft) - gardenpart.elemleft;
-      //assign a cropgroup to the past plantings
+      // assign a cropgroup to the past plantings
       planting.cropgroup = cropgroupByCrop(planting.plantVariety.crop);
     }
 
@@ -63,7 +63,7 @@
         planting.redlevel = null;
         var yearsApart = new Date(new Date(vm.selectedDate) - new Date(planting.validTo)).getFullYear() - 1970;
         console.log('years apart: ' + yearsApart + ' date:' + planting.validTo);
-        //opacity inverse linked to time past since planting
+        // opacity inverse linked to time past since planting
         planting.opacity = 1 - (yearsApart * yearsApart / 36);
 
         if (yearsApart < 2 && cropgroup === planting.cropgroup) {
@@ -96,7 +96,7 @@
       for (i = 0; i < $scope.harvests.length; i++) {
         $scope.harvests[i].$save();
       }
-      //convert position to absolute for all plantings and put the id in place of the plantvariety
+      // convert position to absolute for all plantings and put the id in place of the plantvariety
       var plantings = $scope.newplantings;
 
       for (i = 0; i < plantings.length; i++) {
@@ -180,7 +180,7 @@
           while (newCrop === true && j < vm.crops.length) {
             var crop = vm.crops[j];
             if (crop._id === plant.crop._id) {
-              plant.crop = plant.crop._id; //Avoid recursion
+              plant.crop = plant.crop._id; // Avoid recursion
               newCrop = false;
               crop.plantvarieties.push(plant);
             }
@@ -188,7 +188,7 @@
           }
           if (newCrop) {
             var addcrop = plant.crop;
-            plant.crop = plant.crop._id; //Avoid recursion
+            plant.crop = plant.crop._id; // Avoid recursion
             addcrop.plantvarieties = [];
             addcrop.plantvarieties.push(plant);
             vm.crops.push(addcrop);
@@ -200,4 +200,4 @@
       });
     }
   }
-})();
+}());

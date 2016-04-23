@@ -33,7 +33,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle : 'Add plant family'
+          pageTitle: 'Add plant family'
         }
       })
       .state('plantfamilies.edit', {
@@ -57,7 +57,7 @@
         resolve: {
           plantFamilyResolve: getPlantFamily
         },
-        data:{
+        data: {
           pageTitle: 'Plant family {{ plantFamilyResolve.name }}'
         }
       });
@@ -76,4 +76,4 @@
   function newPlantFamily(PlantFamilyService) {
     return new PlantFamilyService();
   }
-})();
+}());

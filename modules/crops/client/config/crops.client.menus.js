@@ -12,7 +12,7 @@
       title: 'Systeem',
       state: 'system',
       type: 'dropdown',
-      roles: ['user','admin']
+      roles: ['user', 'admin']
     });
 
     // Add the dropdown list item
@@ -28,4 +28,4 @@
       roles: ['user']
     });
   }
-})();
+}());

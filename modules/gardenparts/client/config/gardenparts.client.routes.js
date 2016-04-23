@@ -20,14 +20,14 @@
       },
       data: {
         roles: ['user', 'admin'],
-        pageTitle : 'Edit gardenpart'
+        pageTitle: 'Edit gardenpart'
       }
     });
   }
 
-  getGardenpart.$inject = ['GardenpartService','$stateParams','GardensService','RuleSetsService','PastPlantings'];
+  getGardenpart.$inject = ['GardenpartService', '$stateParams', 'GardensService', 'RuleSetsService', 'PastPlantings'];
 
-  function getGardenpart(GardenpartService,$stateParams,Gardens,RuleSets,PastPlantings) {
+  function getGardenpart(GardenpartService, $stateParams, Gardens, RuleSets, PastPlantings) {
     var gardenpart = GardenpartService.get({
       bk: $stateParams.bk,
       selectedDate: $stateParams.selectedDate,
@@ -36,22 +36,22 @@
 
     // promise then gardenpart.gardenbk
     gardenpart.$promise.then(function(gardenpart) {
-        var plantings = gardenpart.plantings;
-        var gardenparttop = parseInt(gardenpart.elemtop);
-        var gardenpartleft = parseInt(gardenpart.elemleft);
-        var i;
-        for (i = 0; i < plantings.length; i++) {
-          plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
-          plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
-        }
-        plantings = gardenpart.futureplantings;
-        for (i = 0; i < plantings.length; i++) {
-          plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
-          plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
-          plantings[i].future = true;
-        }
+      var plantings = gardenpart.plantings;
+      var gardenparttop = parseInt(gardenpart.elemtop);
+      var gardenpartleft = parseInt(gardenpart.elemleft);
+      var i;
+      for (i = 0; i < plantings.length; i++) {
+        plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
+        plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
+      }
+      plantings = gardenpart.futureplantings;
+      for (i = 0; i < plantings.length; i++) {
+        plantings[i].elemtop = parseInt(plantings[i].elemtop) - gardenparttop;
+        plantings[i].elemleft = parseInt(plantings[i].elemleft) - gardenpartleft;
+        plantings[i].future = true;
+      }
     });
 
     return gardenpart.$promise;
   }
-})();
+}());

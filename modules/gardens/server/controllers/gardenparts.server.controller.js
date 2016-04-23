@@ -47,7 +47,7 @@ exports.create = function(req, res) {
   for (var index = 0; index < parts.length; ++index) {
     console.log('creating a gardenpart!');
     var gardenpart = new Gardenpart(parts[index]);
-    gardenpart.bk = mongoose.Types.ObjectId();
+    gardenpart.bk = new mongoose.Types.ObjectId();
     gardenpart.validTo = new Date(100000000 * 86400000);
     console.log(gardenpart);
     gardenpart.save();
@@ -80,7 +80,7 @@ exports.update = function(req, res) {
     var newpart = new Gardenpart(part);
     console.log('update controller gardenparts oldpart: ' + JSON.stringify(newpart));
     newpart.validFrom = req.params.selectedDate;
-    newpart._id = mongoose.Types.ObjectId();
+    newpart._id = new mongoose.Types.ObjectId();
     newpart.save();
 
     Gardenpart.findById(part._id, updateOld);

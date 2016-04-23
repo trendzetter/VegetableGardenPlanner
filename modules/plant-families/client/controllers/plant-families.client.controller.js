@@ -5,9 +5,9 @@
     .module('plantfamilies')
     .controller('PlantFamiliesController', PlantFamiliesController);
 
-  PlantFamiliesController.$inject = ['$scope', '$state', 'plantFamilyResolve', 'Authentication'];
+  PlantFamiliesController.$inject = ['$scope', '$state', '$window', 'plantFamilyResolve', 'Authentication'];
 
-  function PlantFamiliesController($scope, $state, plantfamily, Authentication) {
+  function PlantFamiliesController($scope, $state, $window, plantfamily, Authentication) {
     var vm = this;
 
     vm.plantfamily = plantfamily;
@@ -19,7 +19,7 @@
 
     // Remove existing Article
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.plantfamily.$remove($state.go('plantfamilies.list'));
       }
     }
@@ -49,4 +49,4 @@
       }
     }
   }
-})();
+}());

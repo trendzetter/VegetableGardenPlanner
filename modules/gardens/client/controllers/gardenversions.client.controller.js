@@ -19,14 +19,14 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
     $scope.updateCoordinates = function(top, left, height, width) {
       var cancel = false;
       if (top !== $scope.garden.elemtop) {
-        //Controleren of alle parts erin passen
+        // Controleren of alle parts erin passen
         angular.forEach($scope.gardenparts, function(gardenpart, key) {
           var newposition = gardenpart.elemtop - (top - $scope.garden.elemtop);
           if (newposition < 0) {
             cancel = true;
           }
         });
-        //En wijzigingen doorvoeren aan gardenparts en garden
+        // En wijzigingen doorvoeren aan gardenparts en garden
         if (!cancel) {
           angular.forEach($scope.gardenparts, function(gardenpart, key) {
             var newposition = gardenpart.elemtop - (top - $scope.garden.elemtop);
@@ -34,7 +34,7 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
           });
           $scope.garden.elemtop = top;
           $scope.minHeight = $scope.initialMinHeight + ($scope.initialTop - top);
-          //Of een correctie doen aan de hoogte.
+          // Of een correctie doen aan de hoogte.
         } else {
           height = $scope.garden.elemheight;
         }
@@ -42,14 +42,14 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       }
 
       if (left !== $scope.garden.elemleft && !cancel) {
-        //Controleren of alle parts erin passen
+        // Controleren of alle parts erin passen
         angular.forEach($scope.gardenparts, function(gardenpart, key) {
           var newposition = gardenpart.elemleft - (left - $scope.garden.elemleft);
           if (newposition < 0) {
             cancel = true;
           }
         });
-        //En wijzigingen doorvoeren aan gardenparts en garden
+        // En wijzigingen doorvoeren aan gardenparts en garden
         if (!cancel) {
           angular.forEach($scope.gardenparts, function(gardenpart, key) {
             var newposition = gardenpart.elemleft - (left - $scope.garden.elemleft);
@@ -57,7 +57,7 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
           });
           $scope.garden.elemleft = left;
           $scope.minWidth = $scope.initialMinWidth + ($scope.initialLeft - left);
-          //Of een correctie doen aan de breedte.
+          // Of een correctie doen aan de breedte.
         } else {
           width = $scope.garden.elemwidth;
         }
@@ -125,8 +125,9 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
       var garden = $scope.garden;
       newparts._id = garden._id;
       var gardenparts = $scope.gardenparts;
-      //convert position to absolute for all gardenparts
-      for (var i = 0; i < gardenparts.length; i++) {
+      // convert position to absolute for all gardenparts
+      var i;
+      for (i = 0; i < gardenparts.length; i++) {
         gardenparts[i].elemtop = parseInt(gardenparts[i].elemtop) + parseInt(garden.elemtop);
         gardenparts[i].elemleft = parseInt(gardenparts[i].elemleft) + parseInt(garden.elemleft);
       }
@@ -139,8 +140,8 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
           bk: garden.bk,
           selectedDate: $stateParams.selectedDate
         }, delparts, function() {
-          //Update the modified parts
-          //Filter new parts
+          // Update the modified parts
+          // Filter new parts
           var filtered = gardenparts.filter(function(x) {
             return newparts.indexOf(x) < 0;
           });
@@ -151,7 +152,7 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
               modified.push(filtered[i]);
             }
           }
-          //if (modified.length > 0)
+          // if (modified.length > 0)
           Gardenpart.updateParts({
             bk: garden.bk,
             selectedDate: $stateParams.selectedDate
@@ -176,7 +177,7 @@ angular.module('gardens').controller('GardenversionsController', ['$scope', '$st
 
       $scope.garden.$promise.then(function(garden) {
         var gardenparts = garden.gardenparts;
-        //convert position to relative for all gardenparts
+        // convert position to relative for all gardenparts
         var gardentop = parseInt(garden.elemtop);
         var gardenleft = parseInt(garden.elemleft);
         for (var i = 0; i < gardenparts.length; i++) {

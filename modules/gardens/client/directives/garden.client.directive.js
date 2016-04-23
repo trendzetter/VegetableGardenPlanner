@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/* global $:false */
 
 angular.module('gardens').directive('garden', ['$state',
   function($state) {

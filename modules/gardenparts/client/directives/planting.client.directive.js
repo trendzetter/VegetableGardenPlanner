@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/* global $:false */
 var getCoordinates = function(elem) {
   var el = $(elem);
   var co = {};
@@ -21,10 +21,10 @@ angular.module('gardenparts').directive('planting', ['$timeout',
         var plantingValid = new Date(scope.planting.validFrom);
         var timeDiff = Math.abs(selectedDate.getTime() - plantingValid.getTime());
         var dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        var daysHarvest = scope.planting.plantVariety.minGrowthDuration-dayDifference;
+        var daysHarvest = scope.planting.plantVariety.minGrowthDuration - dayDifference;
         scope.dateHarvest = new Date();
         scope.dateHarvest.setDate(selectedDate.getDate() + daysHarvest);
-        
+
         var updateCoordinates = function() {
           var co = getCoordinates(element, scope.vm.zoom);
           scope.updatePlantingCoordinates(co.top / scope.vm.zoom, co.left / scope.vm.zoom, co.width / scope.vm.zoom, co.height / scope.vm.zoom);
@@ -77,7 +77,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
         element.addClass('planting');
 
         scope.$on('updatedZoom', function() {
-          //only new plantings can be repositioned
+          // only new plantings can be repositioned
           if (typeof scope.planting._id === 'undefined') {
             $timeout(function() {
               makeDraggable();
@@ -86,7 +86,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
           }
         });
 
-        //only new plantings can be repositioned
+        // only new plantings can be repositioned
         if (typeof scope.planting._id === 'undefined') {
           element.effect('pulsate', function() {
             scope.opacity = 1;
@@ -123,7 +123,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
             scope.vertical = Math.round(scope.planting.cmInRow);
             scope.planting.orientation = 'vertical';
             element.resizable('option', 'grid', [scope.planting.cmBetweenRow * scope.vm.zoom, scope.planting.cmInRow * scope.vm.zoom]);
-            //GOOD WAY
+            // GOOD WAY
             numberPlantsVertical = Math.floor(scope.planting.elemheight / scope.planting.cmInRow);
             if (numberPlantsVertical === 0) numberPlantsVertical = 1;
             numberPlantsHorizontal = Math.floor(scope.planting.elemwidth / scope.planting.cmBetweenRow);

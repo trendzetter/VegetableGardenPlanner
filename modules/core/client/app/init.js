@@ -41,7 +41,7 @@
 
     // Then init the app
     // Record previous state
-    /*$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    /* $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       storePreviousState(fromState, fromParams);
     });
 

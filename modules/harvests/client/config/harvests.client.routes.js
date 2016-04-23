@@ -1,6 +1,6 @@
 'use strict';
 
-//Setting up route
+// Setting up route
 angular.module('harvests').config(['$stateProvider',
   function($stateProvider) {
     // Harvests state routing

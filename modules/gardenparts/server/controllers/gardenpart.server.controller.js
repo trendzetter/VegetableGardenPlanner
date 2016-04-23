@@ -14,15 +14,15 @@ var mongoose = require('mongoose'),
 var addPlantings = function(next, req) {
   console.log('Addplanings!' + req.gardenpart.garden);
   var dateArray = req.params.selectedDate.split('-');
-  var plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
-  var plantUntil = dateArray[0]+1 + '-' + dateArray[1] + '-' + dateArray[2];
+  var plantBackUntil = (dateArray[0] - 6) + '-' + dateArray[1] + '-' + dateArray[2];
+  var plantUntil = (dateArray[0] + 1) + '-' + dateArray[1] + '-' + dateArray[2];
   var rightCornerLeft = req.gardenpart.elemleft + req.gardenpart.elemwidth;
   var bottomCornerTop = req.gardenpart.elemtop + req.gardenpart.elemheight;
   Planting.find({
     $and: [{
       garden: req.gardenpart.garden
     },
-      //Is planting valid?
+      // Is planting valid?
       {
         $or: [{
           'validTo': {
@@ -37,7 +37,7 @@ var addPlantings = function(next, req) {
         }
       }, {
         $or: [
-          //Is rightTopCorner in gardenpart?
+          // Is rightTopCorner in gardenpart?
           {
             $and: [{
               'elemleft': {
@@ -57,7 +57,7 @@ var addPlantings = function(next, req) {
               }
             }]
           },
-          //Is leftTopCorner in gardenpart?
+          // Is leftTopCorner in gardenpart?
           {
             $and: [{
               'rightCornerLeft': {
@@ -77,7 +77,7 @@ var addPlantings = function(next, req) {
               }
             }]
           },
-            //Is leftBottomCorner in gardenpart?
+            // Is leftBottomCorner in gardenpart?
           {
             $and: [{
               'elemleft': {
@@ -97,7 +97,7 @@ var addPlantings = function(next, req) {
               }
             }]
           },
-            //Is rightBottomCorner in gardenpart?
+            // Is rightBottomCorner in gardenpart?
           {
             $and: [{
               'rightCornerLeft': {
@@ -129,16 +129,17 @@ var addPlantings = function(next, req) {
     req.gardenpart.futureplantings = [];
     var selectedDate = new Date(req.params.selectedDate);
     var index = 0;
-    while(index<plantings.length){
-      if(plantings[index].validTo <= selectedDate){
-        var plantingArray = plantings.splice(index,1);
+    while (index < plantings.length) {
+      var plantingArray;
+      if (plantings[index].validTo <= selectedDate) {
+        plantingArray = plantings.splice(index, 1);
         req.gardenpart.pastplantings.push(plantingArray[0]);
-      }else{
-        if(plantings[index].validFrom > selectedDate){
-            var plantingArray = plantings.splice(index,1);
-            req.gardenpart.futureplantings.push(plantingArray[0]);
-        }else{
-            index++;
+      } else {
+        if (plantings[index].validFrom > selectedDate) {
+          plantingArray = plantings.splice(index, 1);
+          req.gardenpart.futureplantings.push(plantingArray[0]);
+        } else {
+          index++;
         }
       }
     }
@@ -149,26 +150,26 @@ var addPlantings = function(next, req) {
         $lte: req.params.selectedDate
       },
       bk: req.gardenpart.garden
-    }).exec(function(err,garden){
+    }).exec(function(err, garden) {
       req.gardenpart.garden = garden;
 
-      RuleSet.findOne({'_id':garden.ruleset}).exec(function(err,ruleset){
+      RuleSet.findOne({ '_id': garden.ruleset }).exec(function(err, ruleset) {
         req.gardenpart.ruleset = ruleset;
-        if(req.params.plant !== undefined){
-          PlantVariety.findOne({'_id':req.params.plant}).populate('crop','_id name').exec(function(err, variety) {
+        if (req.params.plant !== undefined) {
+          PlantVariety.findOne({ '_id': req.params.plant }).populate('crop', '_id name').exec(function(err, variety) {
             if (err) return next(err);
             if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
             req.gardenpart.plant = variety;
             next();
           });
-        }else{
+        } else {
           next();
         }
       });
     });
   }).populate({
-	path:     'plantVariety',
-  model: 'PlantVariety'
+    path: 'plantVariety',
+    model: 'PlantVariety'
 /*	populate: {
     path:  'crop',
     model: 'Crop'
@@ -213,7 +214,7 @@ exports.list = function(req, res) {
 };
 
 exports.gardenpartByBK = function(req, res, next, gardenpartbk) {
-  var populate = [{path: 'user', select: 'displayName'}];
+  var populate = [{ path: 'user', select: 'displayName' }];
   Gardenpart.findOne({
     validFrom: {
       $lte: req.params.selectedDate

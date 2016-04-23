@@ -5,8 +5,7 @@
  */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-  
-  
+
 var CultivationStepSchema = new Schema({
   title: {
     type: String,

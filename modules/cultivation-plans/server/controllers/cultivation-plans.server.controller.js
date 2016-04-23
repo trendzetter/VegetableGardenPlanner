@@ -103,7 +103,7 @@ exports.cultivationPlanByID = function (req, res, next, id) {
       message: 'CultivationPlan is invalid'
     });
   }
-  var populateQuery = [{path:'user', select: 'displayName'}, {path:'crop', select:'name'}, {path:'variety', select:'name'}];
+  var populateQuery = [{ path: 'user', select: 'displayName' }, { path: 'crop', select: 'name' }, { path: 'variety', select: 'name' }];
   CultivationPlan.findById(id).populate(populateQuery).exec(function (err, cultivationPlan) {
     if (err) {
       return next(err);

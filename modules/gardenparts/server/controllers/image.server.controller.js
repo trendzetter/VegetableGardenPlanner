@@ -22,7 +22,7 @@ exports.read = function(req, res, next) {
     .resize(req.params.width, req.params.height, '!')
     .stream(function streamOut(err, stdout, stderr) {
       if (err) return next(err);
-      stdout.pipe(res); //pipe to response
+      stdout.pipe(res); // pipe to response
       stdout.on('error', next);
     });
 };

@@ -40,13 +40,13 @@ var addParts = function(next, req) {
   var bottomCornerTop = req.garden.elemtop + req.garden.elemheight;
   var plantBackUntil;
   console.log('req.params.plant:' + req.params.plant);
-  if(req.params.plant !== undefined){
+  if (req.params.plant !== undefined) {
     var dateArray = req.params.selectedDate.split('-');
-    plantBackUntil = dateArray[0]-6 + '-' + dateArray[1] + '-' + dateArray[2];
-  }else{
+    plantBackUntil = (dateArray[0] - 6) + '-' + dateArray[1] + '-' + dateArray[2];
+  } else {
     plantBackUntil = req.params.selectedDate;
   }
-    console.log('plantBackUntil:' + plantBackUntil+req.params.plant);
+  console.log('plantBackUntil:' + plantBackUntil + req.params.plant);
   Gardenparts.find({
     $and: [{
       validFrom: {
@@ -64,7 +64,7 @@ var addParts = function(next, req) {
       }]
     }, {
       $or: [
-        //mogelijkheid 3
+        // mogelijkheid 3
         {
           $and: [{
             'elemleft': {
@@ -84,7 +84,7 @@ var addParts = function(next, req) {
             }
           }]
         },
-        //TODO top- and bottomcorner
+        // TODO top- and bottomcorner
         {
           $and: [{
             'elemleft': {
@@ -128,7 +128,7 @@ var addParts = function(next, req) {
         }]
       }, {
         $or: [
-          //mogelijkheid 3
+          // mogelijkheid 3
           {
             $and: [{
               'elemleft': {
@@ -148,7 +148,7 @@ var addParts = function(next, req) {
               }
             }]
           },
-          //TODO top- and bottomcorner
+          // TODO top- and bottomcorner
           {
             $and: [{
               'elemleft': {
@@ -173,29 +173,29 @@ var addParts = function(next, req) {
     }).populate('plantVariety').exec(function(err, plantings) {
       if (err) return next(err);
 
-      if(req.params.plant !== undefined){
-        //put the past plantings in a seperate array for rotationadvice
+      if (req.params.plant !== undefined) {
+        // put the past plantings in a seperate array for rotationadvice
         req.garden.pastplantings = [];
         var selectedDate = new Date(req.params.selectedDate);
         var index = 0;
-        while(index<plantings.length){
-          if(plantings[index].validTo <= selectedDate){
-            var plantingArray = plantings.splice(index,1);
+        while (index < plantings.length) {
+          if (plantings[index].validTo <= selectedDate) {
+            var plantingArray = plantings.splice(index, 1);
             req.garden.pastplantings.push(plantingArray[0]);
-          }else{
+          } else {
             index++;
           }
         }
         req.garden.plantings = plantings;
 
-        //Add the selected plantVariety for rotationadvice
-        PlantVarieties.findOne({'_id':req.params.plant}).exec(function(err, plantVariety) {
+        // Add the selected plantVariety for rotationadvice
+        PlantVarieties.findOne({ '_id': req.params.plant }).exec(function(err, plantVariety) {
           req.garden.plantVariety = plantVariety;
           next();
         });
         console.log(req.garden.pastplantings);
 
-      }else{
+      } else {
         req.garden.plantings = plantings;
         next();
       }
@@ -208,7 +208,7 @@ var addParts = function(next, req) {
  */
 exports.create = function(req, res) {
   var garden = new Garden(req.body);
-  garden.bk = mongoose.Types.ObjectId();
+  garden.bk = new mongoose.Types.ObjectId();
   garden.user = req.user;
   garden.save(function(err) {
     if (err) {
@@ -225,9 +225,10 @@ exports.create = function(req, res) {
  * Show the current Garden
  */
 exports.read = function(req, res) {
-  // Add a custom field to the Article, for determining if the current User is the "owner".
-  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  req.garden.isAllowedEdit = req.user && req.garden.user && req.garden.user._id.toString() === req.user._id.toString() ? true : false;
+  //  Add a custom field to the Article, for determining if the current User is the "owner".
+  //  NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
+  req.garden.isAllowedEdit = !!(req.user && req.garden.user && req.garden.user._id.toString() === req.user._id.toString());
+
   res.jsonp(req.garden);
 };
 
@@ -235,17 +236,17 @@ exports.read = function(req, res) {
  * Update a Garden
  */
 exports.update = function(req, res) {
-  //Deze garden komt uit de database via de 'middleware'
+  // Deze garden komt uit de database via de 'middleware'
   var garden = req.garden;
   var keepers = req.body.keepers;
-    console.log('garden.keepers'+JSON.stringify(keepers));
+  console.log('garden.keepers' + JSON.stringify(keepers));
   var oldvalid = req.garden.validFrom;
   var storevalid = oldvalid.getFullYear() + '-' + ('0' + (oldvalid.getMonth() + 1)).substr(-2) + '-' + ('0' + oldvalid.getDate()).substr(-2);
   garden.keepers = [];
   for (var i = 0; i < keepers.length; i++) {
-    garden.keepers.push(mongoose.Types.ObjectId(keepers[i]));
+    garden.keepers.push(new mongoose.Types.ObjectId(keepers[i]));
   }
-  //Set the access for all versions of the garden
+  // Set the access for all versions of the garden
   Garden.update({
     bk: garden.bk
   }, {
@@ -253,29 +254,29 @@ exports.update = function(req, res) {
       'keepers': garden.keepers,
       'ruleset': new ObjectId(req.body.ruleset)
     }
-  }, {multi: true}, function(){
+  }, { multi: true }, function() {
     console.log('keepers, ruleset success');
-  },function(){
+  }, function() {
     console.log('keepers,ruleset failed');
   });
 
-  //Hier worden de gegevens van de webservice toegevoegd
+  // Hier worden de gegevens van de webservice toegevoegd
   garden = _.extend(garden, req.body);
   var newvalid = req.garden.validFrom;
 
   if (storevalid !== newvalid) {
 
-    //  create a new version
+    //   create a new version
     var validFrom = garden.validFrom;
-    garden.user = req.garden.user._id; //Overschrijven van de user met de userid
+    garden.user = req.garden.user._id; // Overschrijven van de user met de userid
     garden = new Garden(req.garden);
     garden.validFrom = validFrom;
     garden.created = new Date();
-    garden._id = mongoose.Types.ObjectId();
+    garden._id = new mongoose.Types.ObjectId();
 
-    // We need to  update the validTo of the gardenversion with an earlier date (if existing) and the
-    // validfrom of a gardenversion with a later date
-    //Update a previous version
+    //  We need to  update the validTo of the gardenversion with an earlier date (if existing) and the
+    //  validfrom of a gardenversion with a later date
+    // Update a previous version
     Garden.findOne({
       validFrom: {
         $lt: req.params.selectedDate
@@ -283,7 +284,7 @@ exports.update = function(req, res) {
       bk: garden.bk
     }).sort({
       validFrom: -1
-    }).exec(function(err, prevgarden) { // ,
+    }).exec(function(err, prevgarden) { //  ,
       if (err) {
         console.log('err in garden.Server.controller: ' + err);
       }
@@ -305,7 +306,7 @@ exports.update = function(req, res) {
       bk: garden.bk
     }).sort({
       validFrom: 1
-    }).exec(function(err, nextgarden) { // ,
+    }).exec(function(err, nextgarden) { //  ,
       if (err) {
         console.log('err in garden.Server.controller: ' + err);
       }

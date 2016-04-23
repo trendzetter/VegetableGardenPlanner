@@ -32,7 +32,7 @@
           ruleSetResolve: newRuleset
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['user', 'admin']
       //    pageTitle : 'Add Rule set'
         }
       })
@@ -57,7 +57,7 @@
         resolve: {
           ruleSetResolve: getRuleSet
         },
-        data:{
+        data: {
           pageTitle: 'Rule set {{ ruleSetResolve.name }}'
         }
       });
@@ -76,4 +76,4 @@
   function newRuleset(RuleSetsService) {
     return new RuleSetsService();
   }
-})();
+}());

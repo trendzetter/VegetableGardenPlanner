@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/* global $:false */
 angular.module('plant-varieties').directive('doypicker', [
   function() {
     return {

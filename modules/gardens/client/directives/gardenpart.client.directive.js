@@ -1,5 +1,5 @@
 'use strict';
-/*global $:false */
+/* global $:false */
 var getCoordinates = function(elem) {
   var el = $(elem);
   var co = {};

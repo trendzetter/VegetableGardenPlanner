@@ -21,18 +21,18 @@
       }
     })
      .state('createGarden', {
-      url: '/gardens/create',
-      templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
-      controller: 'GardensController',
-      controllerAs: 'vm',
-      resolve: {
-        gardenResolve: newGarden
-      },
-      data: {
-        roles: ['user', 'admin'],
-        pageTitle : 'Create garden'
-      }
-    })
+       url: '/gardens/create',
+       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
+       controller: 'GardensController',
+       controllerAs: 'vm',
+       resolve: {
+         gardenResolve: newGarden
+       },
+       data: {
+         roles: ['user', 'admin'],
+         pageTitle: 'Create garden'
+       }
+     })
     .state('viewGarden', {
       url: '/gardens/:bk/:selectedDate',
       templateUrl: 'modules/gardens/client/views/view-garden.client.view.html',
@@ -43,7 +43,7 @@
       },
       data: {
         roles: ['user', 'admin'],
-        pageTitle : 'View garden'
+        pageTitle: 'View garden'
       }
     }).
     state('plantGarden', {
@@ -56,7 +56,7 @@
       },
       data: {
         roles: ['user', 'admin'],
-        pageTitle : 'Plant garden'
+        pageTitle: 'Plant garden'
       }
     }).
     state('editGarden', {
@@ -69,7 +69,7 @@
       },
       data: {
         roles: ['user', 'admin'],
-        pageTitle : 'Edit garden'
+        pageTitle: 'Edit garden'
       }
     }).
     state('designGarden', {
@@ -85,7 +85,7 @@
       bk: $stateParams.bk,
       selectedDate: $stateParams.selectedDate,
       plant: $stateParams.plant
-  });
+    });
     garden.$promise.then(function(garden) {
       var gardentop = parseInt(garden.elemtop);
       var gardenleft = parseInt(garden.elemleft);
@@ -99,13 +99,13 @@
         var partrightLeft = parseInt(part.elemleft) + parseInt(part.elemwidth);
 
 
-        //Adding the plantings to the gardenparts
+        // Adding the plantings to the gardenparts
         part.plantings = [];
         var toRemove = [];
         for (var j = 0; j < plantings.length; j++) {
           var planting = plantings[j];
           if (partbottomTop > planting.elemtop && planting.elemtop >= part.elemtop && partrightLeft > planting.elemleft && planting.elemleft >= part.elemleft) {
-            //convert position to relative for all plantings and add to gardenparts
+            // convert position to relative for all plantings and add to gardenparts
             planting.elemtop = parseInt(planting.elemtop) - parseInt(part.elemtop);
             planting.elemleft = parseInt(planting.elemleft) - parseInt(part.elemleft);
             part.plantings.push(planting);
@@ -117,12 +117,12 @@
           plantings.splice(toRemove.pop(), 1);
         }
 
-        //convert position to relative for all gardenparts
+        // convert position to relative for all gardenparts
         part.elemtop = parseInt(part.elemtop) - gardentop;
         part.elemleft = parseInt(part.elemleft) - gardenleft;
 
-        if(pastplantings){
-          //Adding the past plantings to the gardenpart
+        if (pastplantings) {
+          // Adding the past plantings to the gardenpart
           part.pastplantings = [];
           for (var k = 0; k < pastplantings.length; k++) {
             var pastplanting = pastplantings[k];
@@ -146,4 +146,4 @@
   function newGarden(GardensService) {
     return new GardensService();
   }
-})();
+}());

@@ -1,7 +1,7 @@
 'use strict';
 
 // Harvests controller
-angular.module('harvests').controller('HarvestsController', ['$scope', '$uibModalInstance', '$stateParams', '$location', 'Authentication', 'Harvests', 'planting', //planting van resolve in aanmaak modal
+angular.module('harvests').controller('HarvestsController', ['$scope', '$uibModalInstance', '$stateParams', '$location', 'Authentication', 'Harvests', 'planting', // planting van resolve in aanmaak modal
   function($scope, $uibModalInstance, $stateParams, $location, Authentication, Harvests, planting) {
 
     $scope.newHarvest = function() {
@@ -35,7 +35,8 @@ angular.module('harvests').controller('HarvestsController', ['$scope', '$uibModa
       planting.validTo = $stateParams.selectedDate;
       var har = $scope.harvest;
       var issues = [];
-      for (var i = 0; i < har.issues.length; i++) {
+      var i;
+      for (i = 0; i < har.issues.length; i++) {
         har.issues[i].plantvariety = har.issues[i].plantvariety._id;
       }
       for (i = 0; i < har.gotchas.length; i++) {

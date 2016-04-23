@@ -16,7 +16,7 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/plant-varieties',
-      permissions: ['get','post']
+      permissions: ['get', 'post']
     }, {
       resources: '/api/plant-varieties/group-by-crop/:doy',
       permissions: ['get']
@@ -25,7 +25,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get']
     }, {
       resources: '/api/plant-varieties/:plantVarietyId',
-      permissions: ['get','put','delete']
+      permissions: ['get', 'put', 'delete']
     }]
   }, {
     roles: ['guest'],

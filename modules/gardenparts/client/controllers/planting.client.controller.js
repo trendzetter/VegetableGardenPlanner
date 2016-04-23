@@ -23,40 +23,40 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
       }]);
     } else {
       /* For existing plantings */
-      if(!$scope.planting.future){
+      if (!$scope.planting.future) {
         $scope.menuOptions.push(['Harvest', function() {
-        var size = 'lg';
-        var modalInstance = $uibModal.open({
-          templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
-          controller: 'HarvestsController',
-          size: size,
-          resolve: {
-            planting: function() {
-              return $scope.planting;
+          var size = 'lg';
+          var modalInstance = $uibModal.open({
+            templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
+            controller: 'HarvestsController',
+            size: size,
+            resolve: {
+              planting: function() {
+                return $scope.planting;
+              }
             }
-          }
-        });
+          });
 
-        modalInstance.result.then(function(harvest) {
-          console.log('planting harvest result: ' + JSON.stringify(harvest));
-          //if(result){
-          $scope.harvests.push(harvest);
-          $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+          modalInstance.result.then(function(harvest) {
+            console.log('planting harvest result: ' + JSON.stringify(harvest));
+          // if(result){
+            $scope.harvests.push(harvest);
+            $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
           //  }
-        }, function() {
-          console.log('Modal dismissed at: ' + new Date());
-        });
-      }]);
+          }, function() {
+            console.log('Modal dismissed at: ' + new Date());
+          });
+        }]);
       }
 
       $scope.menuOptions.push(['Cancel', function() {
         var planting;
-        if($scope.planting.future){
-            planting = $scope.vm.gardenpart.futureplantings.splice($scope.$index, 1);
-        }else{
-            planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+        if ($scope.planting.future) {
+          planting = $scope.vm.gardenpart.futureplantings.splice($scope.$index, 1);
+        } else {
+          planting = $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
         }
-        
+
         $scope.cancelPlanting(planting);
       }]);
     }

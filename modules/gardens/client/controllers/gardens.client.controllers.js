@@ -5,9 +5,9 @@
     .module('gardens')
     .controller('GardensController', GardensController);
 
-  GardensController.$inject = ['$scope', '$state', 'gardenResolve', 'Authentication', '$stateParams', 'GardenpartsService', 'UsersService', 'RuleSetsService'];
+  GardensController.$inject = ['$scope', '$state', '$window', 'gardenResolve', 'Authentication', '$stateParams', 'GardenpartsService', 'UsersService', 'RuleSetsService'];
 
-  function GardensController($scope, $state, garden, Authentication, $stateParams, GardenpartsService, Users, RuleSetsService) {
+  function GardensController($scope, $state, $window, garden, Authentication, $stateParams, GardenpartsService, Users, RuleSetsService) {
 
     var vm = this;
 
@@ -32,14 +32,14 @@
 
         var cancel = false;
         if (top !== vm.garden.elemtop) {
-          //Controleren of alle parts erin passen
+          // Controleren of alle parts erin passen
           angular.forEach(vm.garden.gardenparts, function(gardenpart, key) {
             var newposition = gardenpart.elemtop - (top - vm.garden.elemtop);
             if (newposition < 0) {
               cancel = true;
             }
           });
-          //En wijzigingen doorvoeren aan gardenparts en garden
+          // En wijzigingen doorvoeren aan gardenparts en garden
           if (!cancel) {
             angular.forEach(vm.garden.gardenparts, function(gardenpart, key) {
               var newposition = gardenpart.elemtop - (top - vm.garden.elemtop);
@@ -47,21 +47,21 @@
             });
             vm.garden.elemtop = top;
             $scope.minHeight = $scope.initialMinHeight + ($scope.initialTop - top);
-            //Of een correctie doen aan de hoogte.
+            // Of een correctie doen aan de hoogte.
           } else {
             height = vm.garden.elemheight;
           }
 
         }
         if (left !== vm.garden.elemleft && !cancel) {
-          //Controleren of alle parts erin passen
+          // Controleren of alle parts erin passen
           angular.forEach(vm.garden.gardenparts, function(gardenpart, key) {
             var newposition = gardenpart.elemleft - (left - vm.garden.elemleft);
             if (newposition < 0) {
               cancel = true;
             }
           });
-          //En wijzigingen doorvoeren aan gardenparts en garden
+          // En wijzigingen doorvoeren aan gardenparts en garden
           if (!cancel) {
             angular.forEach(vm.garden.gardenparts, function(gardenpart, key) {
               var newposition = gardenpart.elemleft - (left - vm.garden.elemleft);
@@ -69,7 +69,7 @@
             });
             vm.garden.elemleft = left;
             $scope.minWidth = $scope.initialMinWidth + ($scope.initialLeft - left);
-            //Of een correctie doen aan de breedte.
+            // Of een correctie doen aan de breedte.
           } else {
             width = vm.garden.elemwidth;
           }
@@ -121,7 +121,7 @@
 
     // Remove existing garden
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.garden.$remove($state.go('gardens.list'));
       }
     }
@@ -131,8 +131,9 @@
       var garden = vm.garden;
       //  var newparts._id = garden._id;
       var gardenparts = vm.garden.gardenparts;
-      //convert position to absolute for all gardenparts
-      for (var i = 0; i < gardenparts.length; i++) {
+      // convert position to absolute for all gardenparts
+      var i;
+      for (i = 0; i < gardenparts.length; i++) {
         gardenparts[i].elemtop = parseInt(gardenparts[i].elemtop) + parseInt(garden.elemtop);
         gardenparts[i].elemleft = parseInt(gardenparts[i].elemleft) + parseInt(garden.elemleft);
       }
@@ -205,4 +206,4 @@
       vm.error = res.data.message;
     }
   }
-})();
+}());

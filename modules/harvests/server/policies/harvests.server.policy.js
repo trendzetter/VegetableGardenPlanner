@@ -19,7 +19,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/harvests/:harvestId',
-      permissions: ['get','put','delete']
+      permissions: ['get', 'put', 'delete']
     }]
   }]);
 };

@@ -5,23 +5,24 @@
     .module('cultivation-plans')
     .controller('CultivationStepController', CultivationStepController);
 
-  CultivationStepController.$inject = ['$scope', 'FileUploader', 'Cropper','$timeout'];
+  CultivationStepController.$inject = ['$scope', 'FileUploader', 'Cropper', '$timeout'];
 
-  function CultivationStepController($scope, FileUploader, Cropper,$timeout) {
+  function CultivationStepController($scope, FileUploader, Cropper, $timeout) {
     /**
      * Object is used to pass options to initalize a cropper.
      * More on options - https://github.com/fengyuanchen/cropper#options
      */
-    var file, data;
+    var file,
+      data;
     $scope.options = {
-        maximize: true,
-        aspectRatio: $scope.iconRatio,
+      maximize: true,
+      aspectRatio: $scope.iconRatio,
         // aspectRatio: 16 / 9,
-        crop: function(dataNew) {
-            data = dataNew;
-            $scope.scale($scope.iconScale);
-            //$scope.scale(128);
-        }
+      crop: function(dataNew) {
+        data = dataNew;
+        $scope.scale($scope.iconScale);
+            // $scope.scale(128);
+      }
     };
  /*  $scope.$on('changeVariety', function(){
         var variety = JSON.parse($scope.vm.cultivationPlan.variety);
@@ -36,7 +37,7 @@
     $scope.preview = function() {
       if (!file || !data) return;
       Cropper.crop(file, data).then(Cropper.encode).then(function(dataUrl) {
-        ($scope.step|| ($scope.step = {})).icon = dataUrl;
+        ($scope.step || ($scope.step = {})).icon = dataUrl;
       });
     };
 
@@ -75,11 +76,11 @@
 
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function(fileItem) {
-      //$timeout(hideCropper);
+      // $timeout(hideCropper);
       Cropper.encode((file = fileItem._file)).then(function(dataUrl) {
         $scope.dataUrl = dataUrl;
         $timeout(showCropper); // wait for $digest to set icon's src
       });
     };
-    }
+  }
 }());

@@ -21,8 +21,8 @@ angular.module('gardens').directive('rulers', ['$timeout', '$window',
           $timeout(function() {
             scope.nrhbox = $window.innerWidth / 50;
             scope.nrvbox = $window.innerHeight / 50;
-
-            for (var i = 0; i < scope.nrhbox; i++) {
+            var i;
+            for (i = 0; i < scope.nrhbox; i++) {
               scope.hboxes.push(Math.round((i * 50) / zoom));
             }
             for (i = 0; i < scope.nrvbox; i++) {

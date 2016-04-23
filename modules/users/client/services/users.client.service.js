@@ -13,7 +13,7 @@
       update: {
         method: 'PUT'
       },
-      get:{
+      get: {
         url: 'users/id/:name'
       }
     });

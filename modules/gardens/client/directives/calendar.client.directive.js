@@ -1,7 +1,7 @@
 'use strict';
-/*global $:false */
-angular.module('gardens').directive('calendar', ['$state','$stateParams',
-  function($state,$stateParams) {
+/* global $:false */
+angular.module('gardens').directive('calendar', ['$state', '$stateParams',
+  function($state, $stateParams) {
     return {
       require: 'ngModel',
       link: function(scope, el, attr, ngModel) {
@@ -15,8 +15,8 @@ angular.module('gardens').directive('calendar', ['$state','$stateParams',
               scope.setDate(dateText);
               var mode = attr.calendar;
 
-              if($state.current.name === 'plantGarden'){
-                console.log('calendar $state.current.name :' + $state.current.name );
+              if ($state.current.name === 'plantGarden') {
+                console.log('calendar $state.current.name :' + $state.current.name);
                 $state.go('plantGarden', {
                   bk: scope.vm.garden.bk,
                   selectedDate: dateText,
@@ -25,7 +25,7 @@ angular.module('gardens').directive('calendar', ['$state','$stateParams',
                 return;
               }
 
-              //In view reload met tuin op die datum
+              // In view reload met tuin op die datum
               if (mode === 'view' || mode === 'edit') {
                 $state.go('viewGarden', {
                   bk: scope.vm.garden.bk,

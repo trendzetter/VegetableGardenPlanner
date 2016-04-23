@@ -44,7 +44,8 @@
      * Object is used to pass options to initalize a cropper.
      * More on options - https://github.com/fengyuanchen/cropper#options
      */
-    var file, data;
+    var file,
+      data;
     $scope.options = {
       maximize: true,
       aspectRatio: 1 / 1,
@@ -102,7 +103,7 @@
 
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function(fileItem) {
-      //$timeout(hideCropper);
+      // $timeout(hideCropper);
       Cropper.encode((file = fileItem._file)).then(function(dataUrl) {
         $scope.dataUrl = dataUrl;
         $timeout(showCropper); // wait for $digest to set image's src
@@ -111,7 +112,7 @@
 
     // Remove existing PlantVariety
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.plantvariety.$remove($state.go('plant-varieties.list'));
       }
     }
@@ -141,4 +142,4 @@
       }
     }
   }
-})();
+}());

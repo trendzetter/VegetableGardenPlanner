@@ -12,4 +12,4 @@
 
     vm.plantfamilies = PlantFamilyService.query();
   }
-})();
+}());

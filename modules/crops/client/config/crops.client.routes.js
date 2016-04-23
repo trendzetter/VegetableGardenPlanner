@@ -57,7 +57,7 @@
         resolve: {
           cropResolve: getCrop
         },
-        data:{
+        data: {
           pageTitle: 'Crop {{ articleResolve.name }}'
         }
       });
@@ -76,4 +76,4 @@
   function newCrop(CropsService) {
     return new CropsService();
   }
-})();
+}());

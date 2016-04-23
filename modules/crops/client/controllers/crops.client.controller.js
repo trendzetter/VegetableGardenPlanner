@@ -5,9 +5,9 @@
     .module('crops')
     .controller('CropsController', CropsController);
 
-  CropsController.$inject = ['$scope', '$state', 'cropResolve', 'Authentication', 'PlantFamilyService'];
+  CropsController.$inject = ['$scope', '$state', '$window', 'cropResolve', 'Authentication', 'PlantFamilyService'];
 
-  function CropsController($scope, $state, crop, Authentication, PlantFamilyService) {
+  function CropsController($scope, $state, $window, crop, Authentication, PlantFamilyService) {
     var vm = this;
 
     vm.crop = crop;
@@ -17,14 +17,14 @@
     vm.remove = remove;
     vm.save = save;
 
-    //adding the list of plantfamilies
+    // adding the list of plantfamilies
     //  if($state.current.name === 'crops.edit'){
     vm.plantfamilies = PlantFamilyService.query();
-    //}
+    // }
 
     // Remove existing Crop
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if ($window.confirm('Are you sure you want to delete?')) {
         vm.crop.$remove($state.go('crops.list'));
       }
     }
@@ -54,4 +54,4 @@
       }
     }
   }
-})();
+}());

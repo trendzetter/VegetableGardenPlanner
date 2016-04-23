@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   app.route('/api/plant-varieties/group-by-crop/:doy').all(plantVarietiesPolicy.isAllowed)
     .get(plantVarieties.groupByCrop);
-    
+
   app.route('/api/plant-varieties/get-crop/:cropId').all(plantVarietiesPolicy.isAllowed)
     .get(plantVarieties.getCrop);
 

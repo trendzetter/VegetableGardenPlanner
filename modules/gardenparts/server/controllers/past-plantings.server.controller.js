@@ -20,7 +20,7 @@ var addPastPlantings = function(next, req) {
     $and: [{
       garden: req.gardenpart.garden
     },
-      //Is planting valid?
+      // Is planting valid?
       {
         'validTo': {
           $lte: req.params.selectedDate
@@ -31,7 +31,7 @@ var addPastPlantings = function(next, req) {
         }
       }, {
         $or: [
-          //Is rightTopCorner in gardenpart?
+          // Is rightTopCorner in gardenpart?
           {
             $and: [{
               'elemleft': {
@@ -51,7 +51,7 @@ var addPastPlantings = function(next, req) {
               }
             }]
           },
-            //Is leftTopCorner in gardenpart?
+            // Is leftTopCorner in gardenpart?
           {
             $and: [{
               'rightCornerLeft': {
@@ -71,7 +71,7 @@ var addPastPlantings = function(next, req) {
               }
             }]
           },
-          //Is leftBottomCorner in gardenpart?
+          // Is leftBottomCorner in gardenpart?
           {
             $and: [{
               'elemleft': {
@@ -91,7 +91,7 @@ var addPastPlantings = function(next, req) {
               }
             }]
           },
-          //Is rightBottomCorner in gardenpart?
+          // Is rightBottomCorner in gardenpart?
           {
             $and: [{
               'rightCornerLeft': {

@@ -33,7 +33,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle : 'Add plant variety'
+          pageTitle: 'Add plant variety'
         }
       })
       .state('plant-varieties.edit', {
@@ -57,7 +57,7 @@
         resolve: {
           plantVarietyResolve: getPlantVariety
         },
-        data:{
+        data: {
           pageTitle: 'Plant variety {{ plantVarietyResolve.title }}'
         }
       });
@@ -76,4 +76,4 @@
   function newPlantVariety(PlantVarietiesService) {
     return new PlantVarietiesService();
   }
-})();
+}());

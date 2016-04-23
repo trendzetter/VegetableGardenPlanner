@@ -23,7 +23,7 @@ angular.module('gardens').controller('FormController', ['$scope', 'Gardendata', 
     if ($scope.vm.garden && $scope.vm.garden.selectedDate === 'undefined') {
       var today = new Date();
       $scope.vm.garden.selectedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).substr(-2) + '-' + ('0' + today.getDate()).substr(-2);
-      console.log('selected date! '+$scope.garden.selectedDate);
+      console.log('selected date! ' + $scope.garden.selectedDate);
     }
 
   }

@@ -5,9 +5,9 @@
     .module('cultivation-plans')
     .controller('CultivationPlansController', CultivationPlansController);
 
-  CultivationPlansController.$inject = ['$scope', '$state', 'cultivationPlanResolve', '$window', 'Authentication','CropsService','PlantVarietiesService'];
+  CultivationPlansController.$inject = ['$scope', '$state', 'cultivationPlanResolve', '$window', 'Authentication', 'CropsService', 'PlantVarietiesService'];
 
-  function CultivationPlansController($scope, $state, cultivationPlan, $window, Authentication,Crops,PlantVarieties) {
+  function CultivationPlansController($scope, $state, cultivationPlan, $window, Authentication, Crops, PlantVarieties) {
     var vm = this;
 
     vm.cultivationPlan = cultivationPlan;
@@ -18,41 +18,46 @@
     vm.save = save;
     vm.crops = Crops.query();
     
-    function changeCrop(){
-        vm.varieties = PlantVarieties.getCrop({cropId: vm.cultivationPlan.crop._id});
+    if (cultivationPlan._id !== undefined) {
+        vm.varieties = PlantVarieties.getCrop({ cropId: vm.cultivationPlan.crop._id });
+        
     }
-    
+
+    function changeCrop() {
+      vm.varieties = PlantVarieties.getCrop({ cropId: vm.cultivationPlan.crop._id });
+    }
+
     vm.changeCrop = changeCrop;
-    
-    function changeVariety(){
-        var variety =JSON.parse(vm.cultivationPlan.variety);
-        console.log('variety: '+JSON.parse($scope.vm.cultivationPlan.variety));
-        $scope.iconRatio = variety.cmInRow/variety.cmBetweenRow;
-        $scope.iconScale = variety.cmInRow * 2;
-        vm.cultivationPlan.steps = [];
-        newStep();
+
+    function changeVariety() {
+      var variety = JSON.parse(vm.cultivationPlan.variety);
+      console.log('variety: ' + JSON.parse($scope.vm.cultivationPlan.variety));
+      $scope.iconRatio = variety.cmInRow / variety.cmBetweenRow;
+      $scope.iconScale = variety.cmInRow * 2;
+      vm.cultivationPlan.steps = [];
+      newStep();
     }
-    
+
     vm.changeVariety = changeVariety;
-    
+
     vm.crops.$promise.then(function(crops) {
       if (!cultivationPlan._id) {
         vm.cultivationPlan.steps = [];
       }
     });
-    
+
     function newStep() {
       var step = {};
       vm.cultivationPlan.steps.push(step);
     }
 
     vm.newStep = newStep;
-    
+
     function removeStep(index) {
       console.log('remove step:' + index);
       vm.cultivationPlan.steps.splice(index, 1);
     }
-    
+
     vm.removeStep = removeStep;
 
     // Remove existing CultivationPlan
@@ -64,9 +69,9 @@
 
     // Save CultivationPlan
     function save(isValid) {
-      var variety =JSON.parse(vm.cultivationPlan.variety);
+      var variety = JSON.parse(vm.cultivationPlan.variety);
       vm.cultivationPlan.variety = variety._id;
-        
+
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cultivationPlanForm');
         return false;

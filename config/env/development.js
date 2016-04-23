@@ -68,7 +68,7 @@ module.exports = {
   mailer: {
     from: process.env.MAILER_FROM || 'joris.willems@gmail.com',
     options: {
-      host: process.env.MAILER_SERVICE_PROVIDER || 'uit.telenet.be',
+      host: process.env.MAILER_SERVICE_PROVIDER || 'uit.telenet.be'
     /*  auth: {
         user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
         pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'

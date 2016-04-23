@@ -12,4 +12,4 @@
 
     vm.crops = CropsService.query();
   }
-})();
+}());

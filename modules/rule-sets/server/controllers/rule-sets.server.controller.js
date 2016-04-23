@@ -45,7 +45,7 @@ exports.create = function(req, res) {
     var refs = [];
     var cropgroup = cropgroups[i];
     for (var j = 0; j < cropgroup.crops.length; j++) {
-      var ref = mongoose.Types.ObjectId(cropgroup.crops[j]);
+      var ref = new mongoose.Types.ObjectId(cropgroup.crops[j]);
       refs.push(ref);
     }
     cropgroup.crops = refs;
@@ -53,10 +53,10 @@ exports.create = function(req, res) {
     for (var k = 0; k < rules.length; k++) {
       var rule = rules[k];
       if (rule.cropgroup.name === cropgroup.name) {
-        rule.cropgroup = mongoose.Types.ObjectId(cropgroup._id);
+        rule.cropgroup = new mongoose.Types.ObjectId(cropgroup._id);
       }
       if (rule.previousCropgroup.name === cropgroup.name) {
-        rule.previousCropgroup = mongoose.Types.ObjectId(cropgroup._id);
+        rule.previousCropgroup = new mongoose.Types.ObjectId(cropgroup._id);
       }
     }
   }
@@ -84,7 +84,8 @@ exports.read = function(req, res) {
 
   // Add a custom field to the Article, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Article model.
-  ruleset.isCurrentUserOwner = req.user && ruleset.user && ruleset.user._id.toString() === req.user._id.toString() ? true : false;
+  ruleset.isCurrentUserOwner = !!(req.user && ruleset.user && ruleset.user._id.toString() === req.user._id.toString());
+
   res.jsonp(ruleset);
 };
 

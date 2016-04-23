@@ -41,7 +41,7 @@ exports.update = function (req, res) {
 
   crop.title = req.body.title;
   crop.content = req.body.content;
-  crop.plantfamily = mongoose.Types.ObjectId(req.body.plantfamily._id);
+  crop.plantfamily = new mongoose.Types.ObjectId(req.body.plantfamily._id);
 
   crop.save(function (err) {
     if (err) {
@@ -75,7 +75,7 @@ exports.delete = function (req, res) {
  * List of Crops
  */
 exports.list = function (req, res) {
-  Crop.find().sort('-created').populate('user', 'displayName').populate('plantfamily','name').exec(function (err, crops) {
+  Crop.find().sort('-created').populate('user', 'displayName').populate('plantfamily', 'name').exec(function (err, crops) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -97,7 +97,7 @@ exports.cropByID = function (req, res, next, id) {
     });
   }
 
-  Crop.findById(id).populate('user', 'displayName').populate('plantfamily','name').exec(function (err, crop) {
+  Crop.findById(id).populate('user', 'displayName').populate('plantfamily', 'name').exec(function (err, crop) {
     if (err) {
       return next(err);
     } else if (!crop) {
