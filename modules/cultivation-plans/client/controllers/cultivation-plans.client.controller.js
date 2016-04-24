@@ -16,11 +16,17 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.crops = Crops.query();
     
-    if (cultivationPlan._id !== undefined) {
-        vm.varieties = PlantVarieties.getCrop({ cropId: vm.cultivationPlan.crop._id });
-        
+    if (cultivationPlan._id === undefined) {
+        vm.crops = Crops.query();
+        vm.crops.$promise.then(function(crops) {
+            if (!cultivationPlan._id) {
+                vm.cultivationPlan.steps = [];
+            }
+        });
+    } else {
+      $scope.iconRatio = cultivationPlan.variety.cmInRow / cultivationPlan.variety.cmBetweenRow;
+      $scope.iconScale = cultivationPlan.variety.cmInRow * 2;
     }
 
     function changeCrop() {
@@ -39,12 +45,6 @@
     }
 
     vm.changeVariety = changeVariety;
-
-    vm.crops.$promise.then(function(crops) {
-      if (!cultivationPlan._id) {
-        vm.cultivationPlan.steps = [];
-      }
-    });
 
     function newStep() {
       var step = {};
@@ -69,9 +69,6 @@
 
     // Save CultivationPlan
     function save(isValid) {
-      var variety = JSON.parse(vm.cultivationPlan.variety);
-      vm.cultivationPlan.variety = variety._id;
-
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.cultivationPlanForm');
         return false;
@@ -81,6 +78,8 @@
       if (vm.cultivationPlan._id) {
         vm.cultivationPlan.$update(successCallback, errorCallback);
       } else {
+        var variety = JSON.parse(vm.cultivationPlan.variety);
+        vm.cultivationPlan.variety = variety._id;
         vm.cultivationPlan.$save(successCallback, errorCallback);
       }
 

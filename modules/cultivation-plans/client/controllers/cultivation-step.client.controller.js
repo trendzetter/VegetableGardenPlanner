@@ -76,7 +76,7 @@
 
     // Called after the user selected a new picture file
     $scope.uploader.onAfterAddingFile = function(fileItem) {
-      // $timeout(hideCropper);
+      $timeout(hideCropper);
       Cropper.encode((file = fileItem._file)).then(function(dataUrl) {
         $scope.dataUrl = dataUrl;
         $timeout(showCropper); // wait for $digest to set icon's src

@@ -14,22 +14,28 @@
             <p class="help-block error-text" ng-message="required">Cultivation Plan title is required.</p>
           </div>
         </div>
-        <div class="form-group" show-errors>
+        <div id="divCrop" class="form-group" show-errors>
           <label class="control-label" for="crop">Gewas</label>
-          <select name="crop" ng-change="vm.changeCrop()" id="crop" ng-options="crop._id as crop.name for crop in vm.crops" ng-model="vm.cultivationPlan.crop._id" class="form-control" required></select>
+          <select ng-show="!vm.cultivationPlan._id" name="crop" ng-change="vm.changeCrop()" id="crop" ng-options="crop._id as crop.name for crop in vm.crops" ng-model="vm.cultivationPlan.crop._id" class="form-control" required></select>
+          <select ng-show="vm.cultivationPlan._id" name="crop" id="crop" ng-model="vm.cultivationPlan.crop._id" class="form-control" required disabled>
+              <option name="crop" value="{{vm.cultivationPlan.crop._id}}" selected>{{vm.cultivationPlan.crop.name}}</option>
+          </select>
           <div ng-messages="vm.form.cultivationPlanForm.crop.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Cultivation Plan crop is required.</p>
           </div>
         </div>
-        <div ng-if="vm.cultivationPlan.crop._id" class="form-group" show-errors>
+        <div  id="divVariety" ng-if="vm.cultivationPlan.crop._id" class="form-group" show-errors>
           <label class="control-label" for="variety">Varieteit</label>
           <!--<select name="variety" ng-change="vm.changeVariety()" id="variety" ng-options="variety._id as variety.name for variety in vm.varieties" ng-model="vm.cultivationPlan.variety._id" class="form-control" required></select>-->
-          <!--<select name="variety" id="variety" ng-change="vm.changeVariety()" ng-model="vm.cultivationPlan.variety" class="form-control" required>
-               <option ng-repeat="variety in vm.varieties" value="{{variety}}">{{variety.name}}</option>
-          </select>-->
-          <div class="controls">
+          <select ng-show="vm.cultivationPlan._id" name="variety" id="variety" ng-model="vm.cultivationPlan.variety" class="form-control" disabled required>
+               <option  name="variety" id="variety" ng-if="vm.cultivationPlan._id" value="{{vm.cultivationPlan.variety._id}}" selected>{{vm.cultivationPlan.variety.name}}</option>
+          </select>
+          <select ng-show="!vm.cultivationPlan._id" name="variety" id="variety" ng-change="vm.changeVariety()" ng-model="vm.cultivationPlan.variety" class="form-control" required>
+            <option ng-repeat="variety in vm.varieties" value="{{variety}}">{{variety.name}}</option>
+          </select>
+          <!--<div class="controls">
             <select name="variety" data-ng-options="variety._id as variety.name for variety in vm.varieties" data-ng-model="vm.cultivationPlan.variety._id"></select>
-          </div>
+          </div>-->
           <div ng-messages="vm.form.cultivationPlanForm.variety.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Cultivation Plan plant variety is required.</p>
           </div>
