@@ -24,6 +24,7 @@
                 vm.cultivationPlan.steps = [];
             }
         });
+        vm.cultivationPlan.validForOtherVarieties = true;
     } else {
       $scope.iconRatio = cultivationPlan.variety.cmInRow / cultivationPlan.variety.cmBetweenRow;
       $scope.iconScale = cultivationPlan.variety.cmInRow * 2;
@@ -48,6 +49,7 @@
 
     function newStep() {
       var step = {};
+      step.inplace = true;
       vm.cultivationPlan.steps.push(step);
     }
 

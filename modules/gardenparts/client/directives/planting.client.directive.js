@@ -74,7 +74,11 @@ angular.module('gardenparts').directive('planting', ['$timeout',
         element.on('click', function() {
           element.effect('highlight');
         });
-        element.addClass('planting');
+        if (attrs['planting']==='future') {
+            element.addClass('future-planting');
+        } else {
+          element.addClass('planting');  
+        }
 
         scope.$on('updatedZoom', function() {
           // only new plantings can be repositioned
@@ -98,8 +102,10 @@ angular.module('gardenparts').directive('planting', ['$timeout',
           scope.opacity = 0.5;
         }
 
-        // All plantings are NOT droppable (revert:'valid')
-        element.droppable();
+        // Current plantings are NOT droppable (revert:'valid')
+        if (attrs['planting'] !== 'future') {
+            element.droppable();
+        }
 
         scope.rotate = function() {
           var numberPlantsVertical;

@@ -2,6 +2,10 @@
     position: absolute;
 }
 
+.future-planting {
+    position: absolute;
+}
+
 .newPlanting {
     color:  rgba(0, 0, 255, 1);
 }

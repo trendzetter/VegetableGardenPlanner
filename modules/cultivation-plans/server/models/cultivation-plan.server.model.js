@@ -58,6 +58,11 @@ var CultivationPlanSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'PlantVariety'
   },
+  validForOtherVarieties: {
+    type: Boolean,
+    required: true,
+    default: true
+  },
   description: {
     type: String,
     default: '',
