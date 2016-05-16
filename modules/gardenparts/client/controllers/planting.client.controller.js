@@ -1,7 +1,11 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibModal',
-  function($scope, $uibModal) {
+angular
+  .module('gardenparts')
+  .controller('PlantingController', PlantingController);
+  PlantingController.$inject = ['$scope', '$uibModal'];
+  function PlantingController($scope, $uibModal) {
     if ($scope.planting.orientation === 'vertical') {
       $scope.horizontal = Math.round($scope.planting.cmBetweenRow);
       $scope.vertical = Math.round($scope.planting.cmInRow);
@@ -48,6 +52,30 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
           });
         }]);
       }
+      
+      $scope.menuOptions.push(['Pas teeltwijze toe', function() {
+        var size = 'lg';
+          var modalInstance = $uibModal.open({
+            templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
+            controller: 'CultivationPlansListController',
+            size: size,
+            resolve: {
+              planting: function() {
+                return $scope.planting;
+              }
+            }
+          });
+
+          modalInstance.result.then(function(harvest) {
+            console.log('planting harvest result: ' + JSON.stringify(harvest));
+          // if(result){
+            $scope.harvests.push(harvest);
+            $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+          //  }
+          }, function() {
+            console.log('Modal dismissed at: ' + new Date());
+          });
+      }]);
 
       $scope.menuOptions.push(['Cancel', function() {
         var planting;
@@ -84,4 +112,4 @@ angular.module('gardenparts').controller('PlantingController', ['$scope', '$uibM
       $scope.updatePlantingCoordinates(top, left, width, height);
     };
   }
-]);
+}());

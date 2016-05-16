@@ -21,7 +21,20 @@
       <span ng-if="!vm.cultivationPlan.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.cultivationPlan.content"></p>
+  <p class="lead" ng-bind="vm.cultivationPlan.description"></p>
+  <p class="content">
+    <label>Gewas:</label>
+    <span ng-bind="vm.cultivationPlan.crop.name"></span>
+    <label>Varieteit:</label>
+    <span ng-bind="vm.cultivationPlan.variety.name"></span>
+  </p>
+  <p ng-repeat="step in vm.cultivationPlan.steps" ng-class-odd="'odd'" ng-class-even="'even'" class="panel panel-default">
+      <label>Stap {{$index + 1}}: {{step.title}}</label> ter plaatse? {{step.inplace?"Ja":"Nee"}}<br>
+      <span>Minimale duur: {{step.minduration}} dagen. Maximale duur: {{step.maxduration}}</span><br>
+      Beschrijving: <span ng-bind="step.description"></span><br>
+
+      <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;"><br>
+  </p>
 </section>
 </section>
 </section>

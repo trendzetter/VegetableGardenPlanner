@@ -30,7 +30,13 @@ exports.create = function (req, res) {
  * Show the current crop
  */
 exports.read = function (req, res) {
-  res.json(req.crop);
+  // convert mongoose document to JSON
+  var crop = req.crop ? req.crop.toJSON() : {};
+
+  // Add a custom field to the crop, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the crop model.
+  crop.isCurrentUserOwner = !!(req.user && crop.user && crop.user._id.toString() === req.user._id.toString());
+  res.json(crop);
 };
 
 /**
@@ -39,8 +45,7 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var crop = req.crop;
 
-  crop.title = req.body.title;
-  crop.content = req.body.content;
+  crop.name = req.body.name;
   crop.plantfamily = new mongoose.Types.ObjectId(req.body.plantfamily._id);
 
   crop.save(function (err) {

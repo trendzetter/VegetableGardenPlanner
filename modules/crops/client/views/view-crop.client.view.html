@@ -4,7 +4,7 @@
   <div class="page-header">
     <h1 ng-bind="vm.crop.name"></h1>
   </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.crop.user._id">
+  <div class="pull-right" ng-show="vm.crop.isCurrentUserOwner">
     <a class="btn btn-primary" ui-sref="crops.edit({ cropId: vm.crop._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
