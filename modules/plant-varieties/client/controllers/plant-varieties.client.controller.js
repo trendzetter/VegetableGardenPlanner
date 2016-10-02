@@ -19,9 +19,10 @@
 
     if ($state.current.name === 'plant-varieties.view') {
       var year = new Date().getFullYear();
-      var date = new Date(year, 0);
-      vm.DOYstartSow = new Date(date.setDate(plantvariety.DOYstartSow));
-      vm.DOYendSow = new Date(date.setDate(plantvariety.DOYendSow));
+      var dateStart = new Date(year, 0);
+      vm.DOYstartSow = new Date(dateStart.setDate(plantvariety.DOYstartSow));
+      var dateEnd = new Date(year, 0);
+      vm.DOYendSow = new Date(dateEnd.setDate(plantvariety.DOYendSow));
       var today = new Date();
       if (vm.DOYendSow < today) {
         console.log('Zaaien is al voorbij vm.DOYendSow: ' + vm.DOYendSow + '< today: ' + today);
