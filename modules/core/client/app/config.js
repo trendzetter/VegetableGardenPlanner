@@ -4,9 +4,12 @@
   var applicationModuleName = 'mean';
 
   var service = {
+    applicationEnvironment: window.env,
     applicationModuleName: applicationModuleName,
+
     applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ui.bootstrap.contextMenu', 'angularFileUpload',
-      'dragon-drop', 'ngCropper'],
+      'dragon-drop', 'ngCropper', 'ngFileUpload', 'ngImgCrop'],
+
     registerModule: registerModule
   };
 

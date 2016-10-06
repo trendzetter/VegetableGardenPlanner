@@ -9,7 +9,9 @@ module.exports = {
   },
   port: process.env.PORT || 3000,
   host: process.env.HOST || '0.0.0.0',
-  templateEngine: 'swig',
+  // DOMAIN config should be set to the fully qualified application accessible
+  // URL. For example: https://www.myapp.com (including port if required).
+  domain: process.env.DOMAIN,
   // Session Cookie settings
   sessionCookie: {
     // session expiration is set by default to 24 hours
@@ -24,21 +26,15 @@ module.exports = {
   },
   // sessionSecret should be changed for security measures and concerns
   sessionSecret: process.env.SESSION_SECRET || 'MEAN',
-  // sessionKey is set to the generic sessionId key used by PHP applications
-  // for obsecurity reasons
+  // sessionKey is the cookie session name
   sessionKey: 'sessionId',
   sessionCollection: 'sessions',
   // Lusca config
   csrf: {
     csrf: false,
-    csp: { /* Content Security Policy object */},
+    csp: false,
     xframe: 'SAMEORIGIN',
     p3p: 'ABCDEF',
-    hsts: {
-      maxAge: 31536000, // Forces HTTPS for one year
-      includeSubDomains: true,
-      preload: true
-    },
     xssProtection: true
   },
   logo: 'modules/core/client/img/brand/logo.png',
@@ -50,5 +46,15 @@ module.exports = {
         fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
       }
     }
+  },
+  shared: {
+    owasp: {
+      allowPassphrases: true,
+      maxLength: 128,
+      minLength: 10,
+      minPhraseLength: 20,
+      minOptionalTestsToPass: 4
+    }
   }
+
 };

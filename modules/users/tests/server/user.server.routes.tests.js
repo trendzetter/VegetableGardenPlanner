@@ -1,6 +1,7 @@
 'use strict';
 
-var should = require('should'),
+var semver = require('semver'),
+  should = require('should'),
   request = require('supertest'),
   path = require('path'),
   mongoose = require('mongoose'),
@@ -13,6 +14,7 @@ var should = require('should'),
 var app,
   agent,
   credentials,
+  credentialsEmail,
   user,
   _user,
   admin;
@@ -31,9 +33,15 @@ describe('User CRUD tests', function () {
   });
 
   beforeEach(function (done) {
-    // Create user credentials
+    // Create user credentials with username
     credentials = {
-      username: 'username',
+      usernameOrEmail: 'username',
+      password: 'M3@n.jsI$Aw3$0m3'
+    };
+
+    // Create user credentials with email
+    credentialsEmail = {
+      usernameOrEmail: 'test@test.com',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
@@ -43,7 +51,7 @@ describe('User CRUD tests', function () {
       lastName: 'Name',
       displayName: 'Full Name',
       email: 'test@test.com',
-      username: credentials.username,
+      username: credentials.usernameOrEmail,
       password: credentials.password,
       provider: 'local'
     };
@@ -82,7 +90,8 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should be able to login successfully and logout successfully', function (done) {
+  it('should be able to login with username and email successfully and logout successfully', function (done) {
+    // Login with username
     agent.post('/api/auth/signin')
       .send(credentials)
       .expect(200)
@@ -104,13 +113,24 @@ describe('User CRUD tests', function () {
 
             // NodeJS v4 changed the status code representation so we must check
             // before asserting, to be comptabile with all node versions.
-            if (process.version.indexOf('v4') === 0 || process.version.indexOf('v5') === 0) {
+            if (semver.satisfies(process.versions.node, '>=4.0.0')) {
               signoutRes.text.should.equal('Found. Redirecting to /');
             } else {
               signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
             }
 
-            return done();
+            // Login with username
+            agent.post('/api/auth/signin')
+              .send(credentials)
+              .expect(200)
+              .end(function (signinErr, signinRes) {
+                // Handle signin error
+                if (signinErr) {
+                  return done(signinErr);
+                }
+
+                return done();
+              });
           });
       });
   });
@@ -259,7 +279,6 @@ describe('User CRUD tests', function () {
           }
 
           agent.delete('/api/users/' + user._id)
-            // .send(userUpdate)
             .expect(200)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
@@ -711,11 +730,11 @@ describe('User CRUD tests', function () {
     _user2.email = 'user2_email@test.com';
 
     var credentials2 = {
-      username: 'username2',
+      usernameOrEmail: 'username2',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
-    _user2.username = credentials2.username;
+    _user2.username = credentials2.usernameOrEmail;
     _user2.password = credentials2.password;
 
     var user2 = new User(_user2);
@@ -763,11 +782,11 @@ describe('User CRUD tests', function () {
     _user2.email = 'user2_email@test.com';
 
     var credentials2 = {
-      username: 'username2',
+      usernameOrEmail: 'username2',
       password: 'M3@n.jsI$Aw3$0m3'
     };
 
-    _user2.username = credentials2.username;
+    _user2.username = credentials2.usernameOrEmail;
     _user2.password = credentials2.password;
 
     var user2 = new User(_user2);
@@ -802,6 +821,54 @@ describe('User CRUD tests', function () {
               userInfoRes.body.message.should.equal('Email already exists');
 
               return done();
+            });
+        });
+    });
+  });
+
+  it('should not be able to update secure fields', function (done) {
+    var resetPasswordToken = 'password-reset-token';
+    user.resetPasswordToken = resetPasswordToken;
+
+    user.save(function (saveErr) {
+      if (saveErr) {
+        return done(saveErr);
+      }
+      agent.post('/api/auth/signin')
+        .send(credentials)
+        .expect(200)
+        .end(function (signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) {
+            return done(signinErr);
+          }
+          var userUpdate = {
+            password: 'Aw3$0m3P@ssWord',
+            salt: 'newsaltphrase',
+            created: new Date(2000, 9, 9),
+            resetPasswordToken: 'tweeked-reset-token'
+          };
+
+          // Get own user details
+          agent.put('/api/users')
+            .send(userUpdate)
+            .expect(200)
+            .end(function (err, res) {
+              if (err) {
+                return done(err);
+              }
+
+              User.findById(user._id, function (dbErr, updatedUser) {
+                if (dbErr) {
+                  return done(dbErr);
+                }
+
+                updatedUser.password.should.be.equal(user.password);
+                updatedUser.salt.should.be.equal(user.salt);
+                updatedUser.created.getTime().should.be.equal(user.created.getTime());
+                updatedUser.resetPasswordToken.should.be.equal(resetPasswordToken);
+                done();
+              });
             });
         });
     });

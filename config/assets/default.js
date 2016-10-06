@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint comma-dangle:[0, "only-multiline"] */
+
 module.exports = {
   client: {
     lib: {
@@ -10,6 +12,7 @@ module.exports = {
         'public/lib/jquery-ui/themes/smoothness/jquery-ui.css',
         'public/lib/cropper/dist/cropper.css',
         'public/lib/ng-cropper/dist/ngCropper.all.css'
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css'
         // endbower
       ],
       js: [
@@ -17,9 +20,13 @@ module.exports = {
         'public/lib/jquery/dist/jquery.js',
         'public/lib/jquery-ui/jquery-ui.js',
         'public/lib/angular/angular.js',
-        'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-animate/angular-animate.js',
+        'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+        'public/lib/ng-file-upload/ng-file-upload.js',
+        'public/lib/ng-img-crop/compile/unminified/ng-img-crop.js',
         'public/lib/angular-messages/angular-messages.js',
+        'public/lib/angular-mocks/angular-mocks.js',
+        'public/lib/angular-resource/angular-resource.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-bootstrap-contextmenu/contextMenu.js',
@@ -57,7 +64,6 @@ module.exports = {
     templates: ['build/templates.js']
   },
   server: {
-    gruntConfig: ['gruntfile.js'],
     gulpConfig: ['gulpfile.js'],
     allJS: ['server.js', 'config/**/*.js', 'modules/*/server/**/*.js'],
     models: 'modules/*/server/models/**/*.js',

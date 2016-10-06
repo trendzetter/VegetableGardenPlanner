@@ -48,15 +48,27 @@
       }));
 
       describe('$scope.signin()', function () {
-        it('should login with a correct user and password', function () {
+        it('should login with a correct username and password', function () {
           // Test expected GET request
-          $httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
+          $httpBackend.when('POST', 'api/auth/signin').respond(200, { username: 'Fred' });
 
           scope.vm.signin(true);
           $httpBackend.flush();
 
           // Test scope value
-          expect(scope.vm.authentication.user).toEqual('Fred');
+          expect(scope.vm.authentication.user.username).toEqual('Fred');
+          expect($location.url()).toEqual('/');
+        });
+
+        it('should login with a correct email and password', function () {
+          // Test expected GET request
+          $httpBackend.when('POST', 'api/auth/signin').respond(200, { email: 'Fred@email.com' });
+
+          scope.vm.signin(true);
+          $httpBackend.flush();
+
+          // Test scope value
+          expect(scope.vm.authentication.user.email).toEqual('Fred@email.com');
           expect($location.url()).toEqual('/');
         });
 
@@ -75,7 +87,7 @@
             spyOn($state, 'go');
 
             // Test expected GET request
-            $httpBackend.when('POST', '/api/auth/signin').respond(200, 'Fred');
+            $httpBackend.when('POST', 'api/auth/signin').respond(200, 'Fred');
 
             scope.vm.signin(true);
             $httpBackend.flush();
@@ -88,7 +100,7 @@
 
         it('should fail to log in with nothing', function () {
           // Test expected POST request
-          $httpBackend.expectPOST('/api/auth/signin').respond(400, {
+          $httpBackend.expectPOST('api/auth/signin').respond(400, {
             'message': 'Missing credentials'
           });
 
@@ -101,11 +113,11 @@
 
         it('should fail to log in with wrong credentials', function () {
           // Foo/Bar combo assumed to not exist
-          scope.vm.authentication.user = 'Foo';
+          scope.vm.authentication.user = { username: 'Foo' };
           scope.vm.credentials = 'Bar';
 
           // Test expected POST request
-          $httpBackend.expectPOST('/api/auth/signin').respond(400, {
+          $httpBackend.expectPOST('api/auth/signin').respond(400, {
             'message': 'Unknown user'
           });
 
@@ -121,20 +133,20 @@
         it('should register with correct data', function () {
           // Test expected GET request
           scope.vm.authentication.user = 'Fred';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'Fred');
+          $httpBackend.when('POST', 'api/auth/signup').respond(200, { username: 'Fred' });
 
           scope.vm.signup(true);
           $httpBackend.flush();
 
           // test scope value
-          expect(scope.vm.authentication.user).toBe('Fred');
+          expect(scope.vm.authentication.user.username).toBe('Fred');
           expect(scope.vm.error).toEqual(null);
           expect($location.url()).toBe('/');
         });
 
         it('should fail to register with duplicate Username', function () {
           // Test expected POST request
-          $httpBackend.when('POST', '/api/auth/signup').respond(400, {
+          $httpBackend.when('POST', 'api/auth/signup').respond(400, {
             'message': 'Username already exists'
           });
 

@@ -4,11 +4,16 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
+  path = require('path'),
+  config = require(path.resolve('./config/config')),
   Schema = mongoose.Schema,
   crypto = require('crypto'),
   validator = require('validator'),
   generatePassword = require('generate-password'),
   owasp = require('owasp-password-strength-test');
+
+owasp.config(config.shared.owasp);
+
 
 /**
  * A Validation function for local strategy properties
@@ -46,7 +51,10 @@ var UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
+    index: {
+      unique: true,
+      sparse: true // For this to work on a previously indexed field, the index must be dropped & the application restarted.
+    },
     lowercase: true,
     trim: true,
     default: '',
@@ -132,7 +140,7 @@ UserSchema.pre('validate', function (next) {
  */
 UserSchema.methods.hashPassword = function (password) {
   if (this.salt && password) {
-    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
+    return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64, 'SHA1').toString('base64');
   } else {
     return password;
   }
