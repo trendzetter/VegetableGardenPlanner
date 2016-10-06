@@ -95,6 +95,21 @@ exports.list = function (req, res) {
 };
 
 /**
+ * List of CultivationPlans for variety
+ */
+exports.getByVariety = function (req, res) {
+  CultivationPlan.find({variety: req.param.varietyId}).sort('-created').populate('user', 'displayName').exec(function (err, cultivationPlans) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(cultivationPlans);
+    }
+  });
+};
+
+/**
  * CultivationPlan middleware
  */
 exports.cultivationPlanByID = function (req, res, next, id) {

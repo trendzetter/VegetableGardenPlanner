@@ -4,8 +4,8 @@
 angular
   .module('gardenparts')
   .controller('PlantingController', PlantingController);
-  PlantingController.$inject = ['$scope', '$uibModal'];
-  function PlantingController($scope, $uibModal) {
+  PlantingController.$inject = ['$scope', '$uibModal', '$uibModal', 'CultivationPlansService'];
+  function PlantingController($scope, harvestModal, cultivationPlanModal, CultivationPlansService) {
     if ($scope.planting.orientation === 'vertical') {
       $scope.horizontal = Math.round($scope.planting.cmBetweenRow);
       $scope.vertical = Math.round($scope.planting.cmInRow);
@@ -30,7 +30,7 @@ angular
       if (!$scope.planting.future) {
         $scope.menuOptions.push(['Harvest', function() {
           var size = 'lg';
-          var modalInstance = $uibModal.open({
+          var modalInstance = harvestModal.open({
             templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
             controller: 'HarvestsController',
             size: size,
@@ -55,13 +55,15 @@ angular
       
       $scope.menuOptions.push(['Pas teeltwijze toe', function() {
         var size = 'lg';
-          var modalInstance = $uibModal.open({
+        var cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
+        cps.$promise.then(function(cultivationPlans){
+            var modalInstance = cultivationPlanModal.open({
             templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
-            controller: 'CultivationPlansListController',
+            controller: 'SelectCultivationPlanController',
             size: size,
             resolve: {
-              planting: function() {
-                return $scope.planting;
+              cultivationPlans: function() {
+                return cultivationPlans;
               }
             }
           });
@@ -75,6 +77,8 @@ angular
           }, function() {
             console.log('Modal dismissed at: ' + new Date());
           });
+        })
+
       }]);
 
       $scope.menuOptions.push(['Cancel', function() {

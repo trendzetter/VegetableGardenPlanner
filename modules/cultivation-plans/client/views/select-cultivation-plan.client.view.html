@@ -1,12 +1,17 @@
 
     <div class="modal-header">
-        <h1>Selecteer teeltplan</h1>
+        <h1>Selecteer teeltwijze</h1>
+        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button> 
     </div>
-    <div class="modal-body">
-         <p>Some text in the modal.</p>
-         <p ng-repeat="cultivationPlan in planting.cultivationPlans" class="panel-group-item">
-             test
+    <div class="modal-body" >
+         <p ng-repeat="cultivationPlan in cultivationPlans" class="panel-group-item" ng-class-odd="odd" ng-class-even="even" >
+             test{{cultivationPlan.title}}
          </p>
+        <div class="alert alert-warning text-center" ng-if="cultivationPlans.$resolved && !cultivationPlans.length">
+            No cultivation plans yet, why don't you <a ng-click="createNew()" >create one</a>?
+            
+        </div>
+        
            <!-- <div class="panel-group">
                 <a ng-repeat="cultivationPlan in vm.cultivationPlans" ui-sref="cultivation-plans.view({ cultivationPlanId: cultivationPlan._id })" class="panel-group-item">
                 <small class="panel-group-item-text">

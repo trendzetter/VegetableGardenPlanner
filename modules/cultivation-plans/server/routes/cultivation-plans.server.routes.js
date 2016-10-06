@@ -11,6 +11,9 @@ module.exports = function (app) {
   app.route('/api/cultivation-plans').all(cultivationPlansPolicy.isAllowed)
     .get(cultivationPlans.list)
     .post(cultivationPlans.create);
+    
+  app.route('/api/cultivation-plans/plantvariety/:plantvarietyId').all(cultivationPlansPolicy.isAllowed)
+    .get(cultivationPlans.getByVariety);
 
   // Single cultivationPlan routes
   app.route('/api/cultivation-plans/:cultivationPlanId').all(cultivationPlansPolicy.isAllowed)

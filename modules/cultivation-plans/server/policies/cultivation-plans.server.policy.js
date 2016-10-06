@@ -29,6 +29,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/cultivation-plans/:cultivationPlanId',
       permissions: ['get']
+    }, {
+      resources: '/api/cultivation-plans/plantvariety/:plantvarietyId',
+      permissions: ['get']
     }]
   }, {
     roles: ['guest'],

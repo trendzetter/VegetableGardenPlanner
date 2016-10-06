@@ -5,11 +5,15 @@
     .module('cultivation-plans')
     .controller('SelectCultivationPlanController', SelectCultivationPlanController);
 
-  SelectCultivationPlanController.$inject = ['CultivationPlansService','planting'];
+  SelectCultivationPlanController.$inject = ['$scope', 'cultivationPlans', '$uibModalInstance', '$state'];
 
-  function SelectCultivationPlanController(CultivationPlansService,planting) {
+  function SelectCultivationPlanController($scope,cultivationPlans,$uibModalInstance, $state) {
     var vm = this;
-
-    planting.cultivationPlans = CultivationPlansService.query(); //{ crop: planting.plantvariety.crop }
+    $scope.cultivationPlans = cultivationPlans;
+    
+    $scope.createNew = function () {
+        $uibModalInstance.dismiss('cancel');
+        $state.go('cultivation-plans.create');
+    };
   }
 }());

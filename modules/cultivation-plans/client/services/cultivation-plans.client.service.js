@@ -13,6 +13,11 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      getByVariety:{
+          method: 'GET',
+          url: 'api/cultivation-plans/plantvariety/:varietyId',
+          isArray: 'true'
       }
     });
   }
