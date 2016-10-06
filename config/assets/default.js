@@ -11,7 +11,7 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/jquery-ui/themes/smoothness/jquery-ui.css',
         'public/lib/cropper/dist/cropper.css',
-        'public/lib/ng-cropper/dist/ngCropper.all.css'
+        'public/lib/ng-cropper/dist/ngCropper.all.css',
         'public/lib/ng-img-crop/compile/unminified/ng-img-crop.css'
         // endbower
       ],
