@@ -103,7 +103,7 @@ angular
     };
 
     $scope.updatePlantingCoordinatesStop = function(top, left, width, height) {
-      var change = {};
+     /* var change = {};
       change.type = 'updateCoordinates';
       var planting = $scope.planting;
       change.planting = planting;
@@ -112,7 +112,7 @@ angular
         left: planting.elemleft,
         width: planting.elemwidth,
         height: planting.elemheight
-      };
+      };*/
       $scope.updatePlantingCoordinates(top, left, width, height);
     };
   }

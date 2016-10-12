@@ -98,7 +98,7 @@ exports.list = function (req, res) {
  * List of CultivationPlans for variety
  */
 exports.getByVariety = function (req, res) {
-  CultivationPlan.find({variety: req.param.varietyId}).sort('-created').populate('user', 'displayName').exec(function (err, cultivationPlans) {
+  CultivationPlan.find({variety: req.params.plantvarietyId}).sort('-created').populate('user', 'displayName').exec(function (err, cultivationPlans) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -106,6 +106,7 @@ exports.getByVariety = function (req, res) {
     } else {
       res.json(cultivationPlans);
     }
+    
   });
 };
 

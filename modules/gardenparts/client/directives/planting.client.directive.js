@@ -92,10 +92,11 @@ angular.module('gardenparts').directive('planting', ['$timeout',
 
         // only new plantings can be repositioned
         if (typeof scope.planting._id === 'undefined') {
-          element.effect('pulsate', function() {
             scope.opacity = 1;
             element.addClass('newPlanting');
-          });
+          /*element.effect('pulsate', function() {
+
+          });*/
           makeResizable();
           makeDraggable();
         } else {
