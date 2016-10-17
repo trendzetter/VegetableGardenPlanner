@@ -12,6 +12,7 @@
 
     vm.cultivationPlan = cultivationPlan;
     vm.authentication = Authentication;
+    vm.authentication.isAdmin = Authentication.user.roles.indexOf('admin')!=-1;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
@@ -78,6 +79,7 @@
 
       // TODO: move create/update logic to service
       if (vm.cultivationPlan._id) {
+          console.log(vm.cultivationPlan.systemDefault);
         vm.cultivationPlan.$update(successCallback, errorCallback);
       } else {
         var variety = JSON.parse(vm.cultivationPlan.variety);

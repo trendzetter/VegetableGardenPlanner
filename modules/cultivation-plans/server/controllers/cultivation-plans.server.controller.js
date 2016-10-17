@@ -50,6 +50,8 @@ exports.update = function (req, res) {
   cultivationPlan.title = req.body.title;
   cultivationPlan.description = req.body.description;
   cultivationPlan.steps = req.body.steps;
+  cultivationPlan.validForOtherVarieties = req.body.validForOtherVarieties;
+  cultivationPlan.systemDefault = req.body.systemDefault;
 
   cultivationPlan.save(function (err) {
     if (err) {

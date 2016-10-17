@@ -37,7 +37,8 @@
           </div>
         </div>
         <div class="form-group" ng-if="vm.cultivationPlan.crop._id">
-          Ook gebruiken bij andere varieteiten: <input type="checkbox" ng-model="vm.cultivationPlan.validForOtherVarieties" class="controls" required>
+          Ook gebruiken bij andere varieteiten: <input type="checkbox" ng-model="vm.cultivationPlan.validForOtherVarieties" class="controls" >
+          <p ng-if="vm.authentication.isAdmin">Standaard voor site: <input type="checkbox" ng-model="vm.cultivationPlan.systemDefault" class="controls" ></p>{{vm.cultivationPlan.systemDefault}}
         </div>
         <div class="form-group">
           <label class="control-label" for="description">Omschrijving</label>

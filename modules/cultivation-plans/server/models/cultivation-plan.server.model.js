@@ -63,6 +63,11 @@ var CultivationPlanSchema = new Schema({
     required: true,
     default: true
   },
+  systemDefault: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   description: {
     type: String,
     default: '',
