@@ -14,9 +14,48 @@ angular
       $scope.vertical = Math.round($scope.planting.cmBetweenRow);
     }
 
+    /*
+    * the context menu
+    */
     $scope.menuOptions = [];
+    var teeltwijze = ['Pas teeltwijze toe', function() {
+        var size = 'lg';
+       /* var cps;
+        if(typeof $scope.planting.plantVariety._id === 'undefined'){
+          console.log('$scope.planting.plantVariety._id'+ $scope.planting.plantVariety._id);
+          cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
+        }else{
+          cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
+        }*/
+        var cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
+        console.log('$scope.planting.plantVariety._id'+ $scope.planting.plantVariety._id);
+        cps.$promise.then(function(cultivationPlans){
+            var modalInstance = cultivationPlanModal.open({
+            templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
+            controller: 'SelectCultivationPlanController',
+            size: size,
+            resolve: {
+              cultivationPlans: function() {
+                return cultivationPlans;
+              }
+            }
+          });
+
+          modalInstance.result.then(function(harvest) {
+            console.log('planting harvest result: ' + JSON.stringify(harvest));
+          // if(result){
+            $scope.harvests.push(harvest);
+            $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
+          //  }
+          }, function() {
+            console.log('Modal dismissed at: ' + new Date());
+          });
+        })
+      }];
     /* For new plantings */
     if (typeof $scope.planting._id === 'undefined') {
+
+      $scope.menuOptions.push(teeltwijze);
       $scope.menuOptions.push(['Rotate', function() {
         $scope.rotate();
       }]);
@@ -53,33 +92,7 @@ angular
         }]);
       }
       
-      $scope.menuOptions.push(['Pas teeltwijze toe', function() {
-        var size = 'lg';
-        var cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
-        cps.$promise.then(function(cultivationPlans){
-            var modalInstance = cultivationPlanModal.open({
-            templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
-            controller: 'SelectCultivationPlanController',
-            size: size,
-            resolve: {
-              cultivationPlans: function() {
-                return cultivationPlans;
-              }
-            }
-          });
-
-          modalInstance.result.then(function(harvest) {
-            console.log('planting harvest result: ' + JSON.stringify(harvest));
-          // if(result){
-            $scope.harvests.push(harvest);
-            $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
-          //  }
-          }, function() {
-            console.log('Modal dismissed at: ' + new Date());
-          });
-        })
-
-      }]);
+      $scope.menuOptions.push(teeltwijze);
 
       $scope.menuOptions.push(['Cancel', function() {
         var planting;

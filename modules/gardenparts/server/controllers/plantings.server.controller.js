@@ -56,10 +56,11 @@ var errorHandler = function(err) {
 
 /* *
  * Update Plantings
+ * Saves the changes from within the gardenpart view
  */
 exports.update = function(req, res) {
   var plantings = req.body.newplantings;
-//  var resplantings = [];
+  console.log("req.user"+req.user);
   for (var index = 0; index < plantings.length; ++index) {
     var planting = new Planting(plantings[index]);
     planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
