@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var config = require('../config'),
+  cron = require('./cron'),
   mongoose = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
@@ -50,7 +51,10 @@ module.exports.start = function start(callback) {
       console.log('--');
 
       if (callback) callback(app, db, config);
-    });
+        });
+
+        // Start the crontasks
+      cron.create();
 
   });
 
