@@ -41,12 +41,9 @@ angular
             }
           });
 
-          modalInstance.result.then(function(harvest) {
-            console.log('planting harvest result: ' + JSON.stringify(harvest));
-          // if(result){
-            $scope.harvests.push(harvest);
-            $scope.vm.gardenpart.plantings.splice($scope.$index, 1);
-          //  }
+          modalInstance.result.then(function(cultivationPlan) {
+            $scope.planting.cultivationPlan = cultivationPlan;
+            console.log('planting cultivationplan result: ' + JSON.stringify($scope.planting));
           }, function() {
             console.log('Modal dismissed at: ' + new Date());
           });

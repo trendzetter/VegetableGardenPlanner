@@ -9,10 +9,13 @@
 
   function SelectCultivationPlanController($scope,cultivationPlans,$uibModalInstance, $state) {
     var vm = this;
+    $scope.vm = vm;
     $scope.cultivationPlans = cultivationPlans;
+    //vm.selectedPlan;
 
     $scope.applyCultivationPlan = function(){
-      console.log('apply from selectCultivationplanController');
+      console.log('apply from selectCultivationplanController' + vm.selectedPlan);
+      $uibModalInstance.close(vm.selectedPlan);
     }
     
     $scope.createNew = function () {

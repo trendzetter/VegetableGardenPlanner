@@ -28,6 +28,10 @@ var PlantingSchema = new Schema({
     ref: 'PlantVariety',
     required: 'Please select a plant variety'
   },
+  cultivationPlan: {
+    type: Schema.ObjectId,
+    ref: 'cultivationPlan'
+  },
   harvest: {
     type: Schema.ObjectId,
     ref: 'Harvest'
