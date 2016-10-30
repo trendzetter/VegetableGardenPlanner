@@ -60,7 +60,6 @@ var errorHandler = function(err) {
  */
 exports.update = function(req, res) {
   var plantings = req.body.newplantings;
-  console.log("req.user"+req.user);
   for (var index = 0; index < plantings.length; ++index) {
     var planting = new Planting(plantings[index]);
     planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
@@ -77,6 +76,20 @@ exports.update = function(req, res) {
   }, function() {
     res.jsonp();
   });
+
+  var changedPlans = req.body.changedPlans;
+  console.log("changedPlans"+JSON.stringify(changedPlans));
+  for(var plantingid in changedPlans){
+    console.log('planting '+plantingid+ ' plan '+changedPlans[plantingid]);
+    Planting.update({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}},function(err){
+        if(err){
+            console.log("Something wrong when updating data!");
+        }
+
+        console.log('err in cultivationplan update: '.err);
+    });
+  }
+
 
 };
 

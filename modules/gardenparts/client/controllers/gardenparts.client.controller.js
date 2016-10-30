@@ -21,7 +21,8 @@
     $scope.newplantings = [];
     $scope.cancelPlantings = [];
     $scope.harvests = [];
-    $scope.changes = [];
+    $scope.changedPlans = {};
+    //$scope.changes = [];
     vm.crops = [];
 
     $scope.cropClicked = function(crop) {
@@ -107,7 +108,8 @@
 
       var updateplantings = {
         newplantings: $scope.newplantings,
-        cancelplantings: $scope.cancelPlantings
+        cancelplantings: $scope.cancelPlantings,
+        changedPlans: $scope.changedPlans
       };
       Plantings.updatePlantings({
         bk: vm.gardenpart.garden.bk,

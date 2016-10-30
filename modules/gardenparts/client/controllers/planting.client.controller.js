@@ -18,7 +18,7 @@ angular
     * the context menu
     */
     $scope.menuOptions = [];
-    var teeltwijze = ['Pas teeltwijze toe', function() {
+    var cultivationPlan = ['Pas cultivationPlan toe', function() {
         var size = 'lg';
        /* var cps;
         if(typeof $scope.planting.plantVariety._id === 'undefined'){
@@ -28,22 +28,26 @@ angular
           cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
         }*/
         var cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
-        console.log('$scope.planting.plantVariety._id'+ $scope.planting.plantVariety._id);
         cps.$promise.then(function(cultivationPlans){
+          var planting = $scope.planting;
+            planting.cultivationPlans = cultivationPlans;
             var modalInstance = cultivationPlanModal.open({
             templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
             controller: 'SelectCultivationPlanController',
             size: size,
             resolve: {
-              cultivationPlans: function() {
-                return cultivationPlans;
+              planting: function() {
+                return planting;
               }
             }
           });
 
-          modalInstance.result.then(function(cultivationPlan) {
-            $scope.planting.cultivationPlan = cultivationPlan;
-            console.log('planting cultivationplan result: ' + JSON.stringify($scope.planting));
+          modalInstance.result.then(function(planting) {
+            delete planting.cultivationPlans;
+            if(planting.currentPlan != planting.cultivationPlan) {
+              console.log('cultivationplan has changed!');
+              $scope.changedPlans[planting._id] = planting.cultivationPlan;
+            }
           }, function() {
             console.log('Modal dismissed at: ' + new Date());
           });
@@ -52,7 +56,7 @@ angular
     /* For new plantings */
     if (typeof $scope.planting._id === 'undefined') {
 
-      $scope.menuOptions.push(teeltwijze);
+      $scope.menuOptions.push(cultivationPlan);
       $scope.menuOptions.push(['Rotate', function() {
         $scope.rotate();
       }]);
@@ -89,7 +93,7 @@ angular
         }]);
       }
       
-      $scope.menuOptions.push(teeltwijze);
+      $scope.menuOptions.push(cultivationPlan);
 
       $scope.menuOptions.push(['Cancel', function() {
         var planting;

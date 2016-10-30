@@ -7,7 +7,7 @@
          <form class="form-horizontal" data-ng-submit="applyCultivationPlan()" novalidate>
             <fieldset>
          <p ng-repeat="cultivationPlan in cultivationPlans" class="panel-group-item" ng-class-odd="odd" ng-class-even="even" >
-                <input type="radio" name="cultivationPlans" ng-value="cultivationPlan._id" ng-model="vm.selectedPlan" />
+                <input type="radio" name="cultivationPlans" value="{{cultivationPlan._id}}" ng-value="cultivationPlan._id" ng-model="planting.cultivationPlan" />
                 {{cultivationPlan.title}}
          </p>
         <div class="panel-group">
