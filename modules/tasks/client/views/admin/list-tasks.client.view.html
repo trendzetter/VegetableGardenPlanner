@@ -1,0 +1,28 @@
+﻿<section class="content">
+  <section class="container">
+    <section>
+  <div class="page-header">
+    <h1>
+      Tasks2
+      <a class="btn btn-primary pull-right" data-ui-sref="admin.tasks.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="task in vm.tasks" data-ui-sref="admin.tasks.edit({taskId: task._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="task.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="task.user" ng-bind="task.user.displayName"></span>
+        <span ng-if="!task.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="task.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="task.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="tasks.$resolved && !tasks.length">
+    No tasks yet, why don't you <a data-ui-sref="admin.tasks.create">create one</a>?
+  </div>
+</section></section></section>

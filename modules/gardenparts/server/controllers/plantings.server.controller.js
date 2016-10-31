@@ -81,12 +81,19 @@ exports.update = function(req, res) {
   console.log("changedPlans"+JSON.stringify(changedPlans));
   for(var plantingid in changedPlans){
     console.log('planting '+plantingid+ ' plan '+changedPlans[plantingid]);
-    Planting.update({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}},function(err){
+    Planting.findOneAndUpdate({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}}, {new: true},function(err,planting){
         if(err){
             console.log("Something wrong when updating data!");
         }
 
-        console.log('err in cultivationplan update: '.err);
+        console.log('plantingcultivationplan update: '+JSON.stringify(planting));
+
+        Planting.populate(planting, {
+        path: 'cultivationPlan',
+        select: 'steps'
+      }, function(err, planting) {
+                console.log('plantingcultivationplan update: '+JSON.stringify(planting));
+      });
     });
   }
 

@@ -30,7 +30,7 @@ var PlantingSchema = new Schema({
   },
   cultivationPlan: {
     type: Schema.ObjectId,
-    ref: 'cultivationPlan'
+    ref: 'CultivationPlan'
   },
   harvest: {
     type: Schema.ObjectId,

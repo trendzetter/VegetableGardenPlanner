@@ -9,11 +9,11 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-      .state('admin.articles', {
+ /*     .state('admin.articles', {
         abstract: true,
         url: '/articles',
         template: '<ui-view/>'
-      })
+      })*/
       .state('admin.articles.list', {
         url: '',
         templateUrl: 'modules/articles/client/views/admin/list-articles.client.view.html',
