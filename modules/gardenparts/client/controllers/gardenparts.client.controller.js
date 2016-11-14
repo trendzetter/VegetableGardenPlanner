@@ -107,7 +107,7 @@
       }
 
       var updateplantings = {
-        newplantings: $scope.newplantings,
+        newplantings: plantings,
         cancelplantings: $scope.cancelPlantings,
         changedPlans: $scope.changedPlans
       };

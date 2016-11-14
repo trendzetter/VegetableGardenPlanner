@@ -16,6 +16,7 @@ module.exports = function (app) {
   app.route('/api/tasks/:taskId').all(tasksPolicy.isAllowed)
     .get(tasks.read)
     .put(tasks.update)
+    .post(tasks.confirm)
     .delete(tasks.delete);
 
   // Finish by binding the task middleware

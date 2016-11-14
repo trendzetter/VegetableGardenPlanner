@@ -23,6 +23,15 @@
           pageTitle: 'Tasks List'
         }
       })
+      .state('tasks.confirm', {
+        url: '/confirmFinished/:taskId',
+        templateUrl: 'modules/tasks/client/views/list-tasks.client.view.html',
+        controller: 'TasksListController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Tasks List'
+        }
+      })
       .state('tasks.view', {
         url: '/:taskId',
         templateUrl: 'modules/tasks/client/views/view-task.client.view.html',

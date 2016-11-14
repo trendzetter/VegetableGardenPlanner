@@ -11,8 +11,14 @@
     var vm = this;
 
     vm.task = task;
+    vm.step = task.cultivationPlan.steps[task.step];
     vm.authentication = Authentication;
     vm.error = null;
+
+    $scope.confirmTask = function(){
+      console.log('confirm task: '+task);
+      task.$confirm();
+    }
 
   }
 }());

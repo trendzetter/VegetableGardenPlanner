@@ -14,20 +14,37 @@ var TaskSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
-    type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
-  },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  garden: {
+    type: Schema.ObjectId,
+    ref: 'Garden'
+  },
+  planting: {
+    type: Schema.ObjectId,
+    ref: 'Planting'
+  },
+  status: {
+    type: String,
+    enum: ['NEW','PENDING','FINISHED','UNKNOWN'],
+    default: 'NEW'
+  },
+  cultivationPlan: {
+    type: Schema.ObjectId,
+    ref: 'CultivationPlan'
+  },
+  step: {
+    type: Number,
+    default: 0
+  },
+  assignedBy: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  assignmentMessage: {
+    type: String
   }
 });
 

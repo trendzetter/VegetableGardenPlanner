@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 //  Garden = mongoose.model('Garden'),
   Planting = mongoose.model('Planting'),
+  Task = mongoose.model('Task'),
+  user,
   _ = require('lodash');
 
 /* *
@@ -59,12 +61,16 @@ var errorHandler = function(err) {
  * Saves the changes from within the gardenpart view
  */
 exports.update = function(req, res) {
+  user = req.user;
   var plantings = req.body.newplantings;
   for (var index = 0; index < plantings.length; ++index) {
     var planting = new Planting(plantings[index]);
     planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
     planting.bottomCornerTop = planting.elemtop + planting.elemheight;
     planting.bk = new mongoose.Types.ObjectId();
+    if(typeof planting.cultivationPlan != 'undefined' ){
+      createTask(planting);
+    }
     planting.save();
   }
 
@@ -80,26 +86,34 @@ exports.update = function(req, res) {
   var changedPlans = req.body.changedPlans;
   console.log("changedPlans"+JSON.stringify(changedPlans));
   for(var plantingid in changedPlans){
-    console.log('planting '+plantingid+ ' plan '+changedPlans[plantingid]);
-    Planting.findOneAndUpdate({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}}, {new: true},function(err,planting){
-        if(err){
-            console.log("Something wrong when updating data!");
-        }
-
-        console.log('plantingcultivationplan update: '+JSON.stringify(planting));
-
-        Planting.populate(planting, {
-        path: 'cultivationPlan',
-        select: 'steps'
-      }, function(err, planting) {
-                console.log('plantingcultivationplan update: '+JSON.stringify(planting));
-      });
-    });
+    Planting.findOneAndUpdate({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}}, {new: true},populateAndCreateTask);
   }
-
-
 };
 
+function populateAndCreateTask(err,planting){
+        if(err){
+            console.log('Something wrong when updating data!' + err);
+        }
+
+        console.log('plantingcultivationplan update: '+JSON.stringify(planting)+'\n user:'+JSON.stringify(user));
+
+        Planting.populate(planting, {
+          path: 'cultivationPlan',
+          select: 'steps'
+          }, function(err, planting) {
+            console.log('plantingcultivationplan update: '+JSON.stringify(planting));
+            createTask(planting);
+          });
+    }
+
+function createTask(planting){
+  var task = new Task();
+  task.user = user;
+  task.garden = planting.garden;
+  task.planting = planting._id;
+  task.cultivationPlan = planting.cultivationPlan;
+  task.save();
+}            
 /* *
  * Show the current Planting
  */

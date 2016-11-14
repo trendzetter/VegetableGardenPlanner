@@ -40,6 +40,37 @@ exports.read = function (req, res) {
   res.json(task);
 };
 
+exports.confirm = function (req, res) {
+  // convert mongoose document to JSON
+  var task = req.task;
+  
+  task.status = 'FINISHED';
+  console.log('task: '+ JSON.stringify(task));
+  task.save();
+
+  if(task.step < task.cultivationPlan.steps.length){
+    // create a task for the next step of the cultivationPlan
+    var newtask = new Task();
+    newtask.user = req.user;
+    newtask.status = 'NEW';
+    newtask.step = task.step+1;
+    newtask.cultivationPlan = new mongoose.Types.ObjectId(task.cultivationPlan._id);
+    newtask.garden = task.garden;
+    newtask.planting = task. planting;                  
+    newtask.save(function (err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(newtask);
+    }
+  });
+  } else {
+    res.json(task);
+  }
+};
+
 /**
  * Update an task
  */
@@ -81,7 +112,7 @@ exports.delete = function (req, res) {
  * List of Tasks
  */
 exports.list = function (req, res) {
-  Task.find().sort('-created').populate('user', 'displayName').exec(function (err, tasks) {
+  Task.find({status: 'NEW'}).sort('-created').populate('user', 'displayName').exec(function (err, tasks) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -103,7 +134,7 @@ exports.taskByID = function (req, res, next, id) {
     });
   }
 
-  Task.findById(id).populate('user', 'displayName').exec(function (err, task) {
+  Task.findById(id).populate('user cultivationPlan').exec(function (err, task) {
     if (err) {
       return next(err);
     } else if (!task) {

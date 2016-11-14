@@ -13,6 +13,9 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      confirm: {
+        method: 'POST'
       }
     });
 

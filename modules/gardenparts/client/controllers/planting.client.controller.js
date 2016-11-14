@@ -44,7 +44,7 @@ angular
 
           modalInstance.result.then(function(planting) {
             delete planting.cultivationPlans;
-            if(planting.currentPlan != planting.cultivationPlan) {
+            if(planting.currentPlan != planting.cultivationPlan && typeof planting._id !== 'undefined') {
               console.log('cultivationplan has changed!');
               $scope.changedPlans[planting._id] = planting.cultivationPlan;
             }
