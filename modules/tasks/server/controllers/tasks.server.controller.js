@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Task = mongoose.model('Task'),
+  PlantVariety = mongoose.model('PlantVariety'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -112,15 +113,32 @@ exports.delete = function (req, res) {
  * List of Tasks
  */
 exports.list = function (req, res) {
-  Task.find({status: 'NEW'}).sort('-created').populate('user', 'displayName').exec(function (err, tasks) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(tasks);
+  var data = {};
+  Task.find({status: 'NEW',validFrom: {'$lte': Date.now()}}).sort('-created').populate('cultivationPlan').exec(function (err, tasks) {
+    var varietiesobj = {};
+    for(var i = 0; i < tasks.length; i++){
+        var id = tasks[i].cultivationPlan.variety;
+        varietiesobj[id] = true;
     }
-  });
+
+    var varietyids = Object.keys(varietiesobj);
+    console.log('varietyids: '+ varietyids);
+
+    PlantVariety.find({_id: {$in: varietyids}}).exec(function(err,varieties){
+      console.log('crops: '+JSON.stringify(varieties));
+      data.varieties = varieties;
+              if (err) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          } else {
+            data.tasks = tasks;
+            res.json(data);
+          }
+    });
+
+
+      });
 };
 
 /**

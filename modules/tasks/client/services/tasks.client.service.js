@@ -16,6 +16,9 @@
       },
       confirm: {
         method: 'POST'
+      },
+      query: {
+        isArray: false
       }
     });
 

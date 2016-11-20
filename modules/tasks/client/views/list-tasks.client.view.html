@@ -6,14 +6,8 @@
   </div>
   <div class="list-group">
     <a ng-repeat="task in vm.tasks" ui-sref="tasks.view({ taskId: task._id })" class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="task.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="task.user" ng-bind="task.user.displayName"></span>
-        <span ng-if="!task.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="task.title"></h4>
+      <img ng-src="{{vm.varieties[task.cultivationPlan.variety].image}}" />
+      <h4 class="list-group-item-heading" ng-bind="task.cultivationPlan.steps[task.step].title"></h4><p ng-bind="vm.varieties[task.cultivationPlan.variety].name"> 
       <p class="list-group-item-text" ng-bind="task.content"></p>
     </a>
   </div>

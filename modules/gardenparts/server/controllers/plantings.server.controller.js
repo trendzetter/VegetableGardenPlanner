@@ -112,6 +112,7 @@ function createTask(planting){
   task.garden = planting.garden;
   task.planting = planting._id;
   task.cultivationPlan = planting.cultivationPlan;
+  task.validFrom = planting.validFrom;
   task.save();
 }            
 /* *

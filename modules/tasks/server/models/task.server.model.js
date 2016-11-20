@@ -39,6 +39,9 @@ var TaskSchema = new Schema({
     type: Number,
     default: 0
   },
+  validFrom: {
+    type: Date
+  },
   assignedBy: {
     type: Schema.ObjectId,
     ref: 'User'
