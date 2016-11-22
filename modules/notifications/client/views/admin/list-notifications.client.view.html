@@ -1,0 +1,26 @@
+﻿<section>
+  <div class="page-header">
+    <h1>
+      Notifications
+      <a class="btn btn-primary pull-right" data-ui-sref="admin.notifications.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="notification in vm.notifications" data-ui-sref="admin.notifications.edit({notificationId: notification._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="notification.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="notification.user" ng-bind="notification.user.displayName"></span>
+        <span ng-if="!notification.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="notification.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="notification.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="notifications.$resolved && !notifications.length">
+    No notifications yet, why don't you <a data-ui-sref="admin.notifications.create">create one</a>?
+  </div>
+</section>
