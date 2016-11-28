@@ -3,8 +3,8 @@
 /**
  * Module dependencies
  */
-var config = require('../config/lib/config'),
-  cron = require('node-cron'),
+var cron =require('node-cron'),
+  config = require('../../../../config/config'),
   path = require('path'),
   mongoose = require('mongoose'),
   Task = mongoose.model('Task'),
@@ -59,7 +59,7 @@ exports.invokeTask = function (req, res) {
                   //create notification for new task
                   var notification = new Notification();
                   notification.title = task.cultivationPlan.steps[newtask.step].title;
-                  notification.content = 'De volgede stap van het teeltplan is begonnen. Bekijk de details hier. http://' + config.domain + '/tasks/'+newtask._id;
+                  notification.content = 'De volgede stap van het teeltplan is begonnen. Bekijk de details hier. ' + config.domain + '/tasks/'+newtask._id;
                   notification.task = newtask._id;
                   notification.user = newtask.user;
                   notification.save();

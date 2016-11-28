@@ -114,7 +114,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   var data = {};
-  Task.find({status: 'NEW',validFrom: {'$lte': Date.now()}}).sort('-created').populate('cultivationPlan').exec(function (err, tasks) {
+  Task.find({status: 'NEW',validFrom: {'$lte': Date.now()},user: req.user}).sort('-created').populate('cultivationPlan').exec(function (err, tasks) {
     var varietiesobj = {};
     for(var i = 0; i < tasks.length; i++){
         var id = tasks[i].cultivationPlan.variety;

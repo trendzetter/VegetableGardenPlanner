@@ -32,6 +32,12 @@ var NotificationSchema = new Schema({
   task: {
     type: Schema.ObjectId,
     ref: 'Task'
+  },
+  read: {
+    type: Boolean
+  },
+  sendEmail: {
+    type: Boolean
   }
 });
 

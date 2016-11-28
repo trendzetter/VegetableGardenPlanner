@@ -27,6 +27,10 @@
           </div>
         </div>
         <div class="form-group" show-errors>
+          <label for="emailNotifiction">Email notification</label>
+          <input id="emailNotifiction" name="emailNotifiction" type="checkbox" ng-model="vm.user.emailNotification">
+        </div>
+        <div class="form-group" show-errors>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="vm.user.username" placeholder="Username" lowercase required>
           <div ng-messages="vm.userForm.username.$error" role="alert">

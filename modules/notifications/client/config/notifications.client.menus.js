@@ -12,14 +12,14 @@
       title: 'Notifications',
       state: 'notifications',
       type: 'dropdown',
-      roles: ['*']
+      roles: ['user']
     });
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'notifications', {
       title: 'List Notifications',
       state: 'notifications.list',
-      roles: ['*']
+      roles: ['user']
     });
   }
 }());
