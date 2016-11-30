@@ -179,11 +179,26 @@ var addParts = function(next, req) {
         var selectedDate = new Date(req.params.selectedDate);
         var index = 0;
         while (index < plantings.length) {
-          if (plantings[index].validTo <= selectedDate) {
+          var planting = plantings[index];
+          if (planting.validTo <= selectedDate) {
             var plantingArray = plantings.splice(index, 1);
             req.garden.pastplantings.push(plantingArray[0]);
           } else {
-            index++;
+            if(planting.plantVariety.maxGrowthDuration){
+              var maxdate = new Date(planting.validFrom);
+              maxdate.setDate(new Date(maxdate.getDate()+ planting.plantVariety.maxGrowthDuration));
+              console.log('maxdate =' + JSON.stringify(maxdate) + JSON.stringify(selectedDate));
+              if (maxdate < selectedDate ) {
+                console.log('pushing to pastplantings');
+                var plantingArray = plantings.splice(index, 1);
+                req.garden.pastplantings.push(plantingArray[0]);
+              }else{
+                index++;
+              }
+            }else{
+              index++;
+            }
+
           }
         }
         req.garden.plantings = plantings;
