@@ -79,7 +79,7 @@ module.exports = {
     sandbox: false
   },
   mailer: {
-    from: process.env.MAILER_FROM || 'joris.willems@gmail.com',
+    from: process.env.MAILER_FROM || 'info@vegetablegardenplanner.org',
     options: {
       host: process.env.MAILER_SERVICE_PROVIDER || 'uit.telenet.be'
   /*    auth: {

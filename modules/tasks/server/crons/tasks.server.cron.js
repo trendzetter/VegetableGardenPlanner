@@ -18,8 +18,8 @@ function daydiff(first, second) {
  * Create a cron
  */
 exports.invokeTask = function (req, res) {
-  var task = cron.schedule('0,30 * * * * *', function () {
-    console.log('You will see this message every minute from taskscron');
+  var task = cron.schedule('0 0 0 * * *', function () {
+    console.log('You will see this message every day from taskscron');
     var now = new Date();
     var gardenids = [];
     Garden.find({ validFrom: { '$lte': now }, validTo: null }).select('bk name').exec(function (err, gardens) {
