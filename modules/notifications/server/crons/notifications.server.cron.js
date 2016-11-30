@@ -68,8 +68,8 @@ exports.invokeTask = function (req, res) {
                   var user = users[i];
                   console.log('user'+JSON.stringify(user) );
                   Notification.find({user: user._id,sendEmail: null}).select('content').exec(function(err,notifications){
-                    for(var j = 0; i < notifications.length; i++){
-                      var notification =  notifications[1];
+                    for(var j = 0; j < notifications.length; j++){
+                      var notification =  notifications[j];
                       console.log('notification'+JSON.stringify(notification) );
                             email.to = user.email;
                           text = text.replace('{{name}}', user.displayName);
