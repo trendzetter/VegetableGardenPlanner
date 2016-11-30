@@ -133,7 +133,7 @@ var addPlantings = function(next, req) {
           var planting = plantings[index];
           if (planting.validTo <= selectedDate) {
             var plantingArray = plantings.splice(index, 1);
-            req.garden.pastplantings.push(plantingArray[0]);
+            req.gardenpart.pastplantings.push(plantingArray[0]);
           } else {
             if(planting.plantVariety.maxGrowthDuration){
               var maxdate = new Date(planting.validFrom);
