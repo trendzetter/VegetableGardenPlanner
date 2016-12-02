@@ -7,10 +7,6 @@ module.exports = {
     lib: {
       css: [
         // bower:css
-        'public/lib/bootstrap/dist/css/bootstrap.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
-        'public/lib/jquery-ui/themes/smoothness/jquery-ui.css',
-        'public/lib/cropper/dist/cropper.min.css',
         'public/lib/ng-cropper/dist/ngCropper.all.min.css',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
         // endbower
