@@ -10,10 +10,10 @@
   function TasksListController(TasksService) {
     var vm = this;
     var data = TasksService.query();
-    data.$promise.then(function(){
-      vm.tasks = data.tasks ;
+    data.$promise.then(function() {
+      vm.tasks = data.tasks;
       vm.varieties = {};
-      for(var i = 0 ; i < data.varieties.length ; i ++ ){
+      for (var i = 0; i < data.varieties.length; i ++) {
         vm.varieties[data.varieties[i]._id] = data.varieties[i];
       }
     });

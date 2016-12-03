@@ -184,18 +184,18 @@ var addParts = function(next, req) {
             var plantingArray = plantings.splice(index, 1);
             req.garden.pastplantings.push(plantingArray[0]);
           } else {
-            if(planting.plantVariety.maxGrowthDuration){
+            if (planting.plantVariety.maxGrowthDuration) {
               var maxdate = new Date(planting.validFrom);
-              maxdate.setDate(new Date(maxdate.getDate()+ planting.plantVariety.maxGrowthDuration));
+              maxdate.setDate(new Date(maxdate.getDate() + planting.plantVariety.maxGrowthDuration));
               console.log('maxdate =' + JSON.stringify(maxdate) + JSON.stringify(selectedDate));
-              if (maxdate < selectedDate ) {
+              if (maxdate < selectedDate) {
                 console.log('pushing to pastplantings');
                 var plantingArray = plantings.splice(index, 1);
                 req.garden.pastplantings.push(plantingArray[0]);
-              }else{
+              } else {
                 index++;
               }
-            }else{
+            } else {
               index++;
             }
 

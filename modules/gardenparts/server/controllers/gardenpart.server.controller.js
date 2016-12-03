@@ -130,23 +130,23 @@ var addPlantings = function(next, req) {
     var selectedDate = new Date(req.params.selectedDate);
     var index = 0;
     while (index < plantings.length) {
-          var planting = plantings[index];
-          if (planting.validTo <= selectedDate) {
+      var planting = plantings[index];
+      if (planting.validTo <= selectedDate) {
             var plantingArray = plantings.splice(index, 1);
             req.gardenpart.pastplantings.push(plantingArray[0]);
           } else {
-            if(planting.plantVariety.maxGrowthDuration && req.params.plant !== undefined){
+            if (planting.plantVariety.maxGrowthDuration && req.params.plant !== undefined) {
               var maxdate = new Date(planting.validFrom);
-              maxdate.setDate(new Date(maxdate.getDate()+ planting.plantVariety.maxGrowthDuration));
+              maxdate.setDate(new Date(maxdate.getDate() + planting.plantVariety.maxGrowthDuration));
               console.log('maxdate =' + JSON.stringify(maxdate) + JSON.stringify(selectedDate));
-              if (maxdate < selectedDate ) {
+              if (maxdate < selectedDate) {
                 console.log('pushing to pastplantings');
                 var plantingArray = plantings.splice(index, 1);
                 req.gardenpart.pastplantings.push(plantingArray[0]);
-              }else{
+              } else {
                 index++;
               }
-            }else{
+            } else {
               index++;
             }
 

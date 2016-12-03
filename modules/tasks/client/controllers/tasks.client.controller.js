@@ -15,10 +15,10 @@
     vm.authentication = Authentication;
     vm.error = null;
 
-    $scope.confirmTask = function(){
-      console.log('confirm task: '+task);
+    $scope.confirmTask = function() {
+      console.log('confirm task: ' + task);
       task.$confirm();
-    }
+    };
 
   }
 }());

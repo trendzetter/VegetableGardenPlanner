@@ -22,7 +22,7 @@
     $scope.cancelPlantings = [];
     $scope.harvests = [];
     $scope.changedPlans = {};
-    //$scope.changes = [];
+    // $scope.changes = [];
     vm.crops = [];
 
     $scope.cropClicked = function(crop) {

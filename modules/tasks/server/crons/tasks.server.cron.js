@@ -3,7 +3,7 @@
 /**
  * Module dependencies
  */
-var cron =require('node-cron'),
+var cron = require('node-cron'),
   config = require('../../../../config/config'),
   path = require('path'),
   mongoose = require('mongoose'),
@@ -55,11 +55,11 @@ exports.invokeTask = function (req, res) {
                 newtask.status = 'NEW';
                 newtask.validFrom = now;
                 newtask.user = task.user;
-                newtask.save(function(err,newtask){
-                  //create notification for new task
+                newtask.save(function(err, newtask) {
+                  // create notification for new task
                   var notification = new Notification();
                   notification.title = task.cultivationPlan.steps[newtask.step].title;
-                  notification.content = 'De volgede stap van het teeltplan is begonnen. Bekijk de details hier. ' + config.domain + '/tasks/'+newtask._id;
+                  notification.content = 'De volgede stap van het teeltplan is begonnen. Bekijk de details hier. ' + config.domain + '/tasks/' + newtask._id;
                   notification.task = newtask._id;
                   notification.user = newtask.user;
                   notification.save();
@@ -69,13 +69,13 @@ exports.invokeTask = function (req, res) {
               }
             } else {
               if (task.cultivationPlan.steps[task.step].minduration === diffDays) {
-                //create notification warning that it's about time to move to the next step
-                  var notification = new Notification();
-                  notification.title = task.cultivationPlan.steps[task.step].title;
-                  notification.content = 'Vanaf nu mag je naar de volgende stap gaan in het teeltplan. Bekijk de details van de huidige stap. http://' + config.domain + '/tasks/'+task._id;
-                  notification.task = task._id;
-                  notification.user = task.user;
-                  notification.save()
+                // create notification warning that it's about time to move to the next step
+                var notification = new Notification();
+                notification.title = task.cultivationPlan.steps[task.step].title;
+                notification.content = 'Vanaf nu mag je naar de volgende stap gaan in het teeltplan. Bekijk de details van de huidige stap. http://' + config.domain + '/tasks/' + task._id;
+                notification.task = task._id;
+                notification.user = task.user;
+                notification.save();
               }
             }
           }

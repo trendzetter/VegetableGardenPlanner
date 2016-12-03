@@ -12,20 +12,20 @@
 
     vm.cultivationPlan = cultivationPlan;
     vm.authentication = Authentication;
-    vm.authentication.isAdmin = Authentication.user.roles.indexOf('admin')!=-1;
+    vm.authentication.isAdmin = Authentication.user.roles.indexOf('admin') != -1;
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    
+
     if (cultivationPlan._id === undefined) {
-        vm.crops = Crops.query();
-        vm.crops.$promise.then(function(crops) {
-            if (!cultivationPlan._id) {
-                vm.cultivationPlan.steps = [];
+      vm.crops = Crops.query();
+      vm.crops.$promise.then(function(crops) {
+          if (!cultivationPlan._id) {
+              vm.cultivationPlan.steps = [];
             }
         });
-        vm.cultivationPlan.validForOtherVarieties = true;
+      vm.cultivationPlan.validForOtherVarieties = true;
     } else {
       $scope.iconRatio = cultivationPlan.variety.cmInRow / cultivationPlan.variety.cmBetweenRow;
       $scope.iconScale = cultivationPlan.variety.cmInRow * 2;
@@ -79,7 +79,7 @@
 
       // TODO: move create/update logic to service
       if (vm.cultivationPlan._id) {
-          console.log(vm.cultivationPlan.systemDefault);
+        console.log(vm.cultivationPlan.systemDefault);
         vm.cultivationPlan.$update(successCallback, errorCallback);
       } else {
         var variety = JSON.parse(vm.cultivationPlan.variety);

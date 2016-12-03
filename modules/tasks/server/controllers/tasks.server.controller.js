@@ -44,29 +44,29 @@ exports.read = function (req, res) {
 exports.confirm = function (req, res) {
   // convert mongoose document to JSON
   var task = req.task;
-  
+
   task.status = 'FINISHED';
-  console.log('task: '+ JSON.stringify(task));
+  console.log('task: ' + JSON.stringify(task));
   task.save();
 
-  if(task.step < task.cultivationPlan.steps.length){
+  if (task.step < task.cultivationPlan.steps.length) {
     // create a task for the next step of the cultivationPlan
     var newtask = new Task();
     newtask.user = req.user;
     newtask.status = 'NEW';
-    newtask.step = task.step+1;
+    newtask.step = task.step + 1;
     newtask.cultivationPlan = new mongoose.Types.ObjectId(task.cultivationPlan._id);
     newtask.garden = task.garden;
-    newtask.planting = task. planting;                  
+    newtask.planting = task. planting;
     newtask.save(function (err) {
-    if (err) {
+      if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
       res.json(newtask);
     }
-  });
+    });
   } else {
     res.json(task);
   }
@@ -114,31 +114,31 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   var data = {};
-  Task.find({status: 'NEW',validFrom: {'$lte': Date.now()},user: req.user}).sort('-created').populate('cultivationPlan').exec(function (err, tasks) {
+  Task.find({ status: 'NEW', validFrom: { '$lte': Date.now() }, user: req.user }).sort('-created').populate('cultivationPlan').exec(function (err, tasks) {
     var varietiesobj = {};
-    for(var i = 0; i < tasks.length; i++){
-        var id = tasks[i].cultivationPlan.variety;
-        varietiesobj[id] = true;
+    for (var i = 0; i < tasks.length; i++) {
+      var id = tasks[i].cultivationPlan.variety;
+      varietiesobj[id] = true;
     }
 
     var varietyids = Object.keys(varietiesobj);
-    console.log('varietyids: '+ varietyids);
+    console.log('varietyids: ' + varietyids);
 
-    PlantVariety.find({_id: {$in: varietyids}}).exec(function(err,varieties){
-      console.log('crops: '+JSON.stringify(varieties));
+    PlantVariety.find({ _id: { $in: varietyids } }).exec(function(err, varieties) {
+      console.log('crops: ' + JSON.stringify(varieties));
       data.varieties = varieties;
-              if (err) {
-            return res.status(400).send({
+      if (err) {
+                return res.status(400).send({
               message: errorHandler.getErrorMessage(err)
             });
-          } else {
-            data.tasks = tasks;
-            res.json(data);
-          }
+              } else {
+                data.tasks = tasks;
+                res.json(data);
+              }
     });
 
 
-      });
+  });
 };
 
 /**

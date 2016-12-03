@@ -15,9 +15,9 @@
         method: 'PUT'
       },
       getByVariety:{
-          method: 'GET',
-          url: 'api/cultivation-plans/plantvariety/:varietyId',
-          isArray: 'true'
+        method: 'GET',
+        url: 'api/cultivation-plans/plantvariety/:varietyId',
+        isArray: 'true'
       }
     });
   }

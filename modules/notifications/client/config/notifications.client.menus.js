@@ -1,13 +1,13 @@
  (function () {
-  'use strict';
+   'use strict';
 
-  angular
+   angular
     .module('notifications')
     .run(menuConfig);
 
-  menuConfig.$inject = ['menuService'];
+   menuConfig.$inject = ['menuService'];
 
-  function menuConfig(menuService) {
+   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
       title: 'Notifications',
       state: 'notifications',
@@ -22,4 +22,4 @@
       roles: ['user']
     });
   }
-}());
+ }());

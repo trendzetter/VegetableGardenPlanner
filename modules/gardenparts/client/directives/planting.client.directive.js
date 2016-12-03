@@ -74,10 +74,10 @@ angular.module('gardenparts').directive('planting', ['$timeout',
         element.on('click', function() {
           element.effect('highlight');
         });
-        if (attrs['planting']==='future') {
-            element.addClass('future-planting');
+        if (attrs['planting'] === 'future') {
+          element.addClass('future-planting');
         } else {
-          element.addClass('planting');  
+          element.addClass('planting');
         }
 
         scope.$on('updatedZoom', function() {
@@ -92,9 +92,9 @@ angular.module('gardenparts').directive('planting', ['$timeout',
 
         // only new plantings can be repositioned
         if (typeof scope.planting._id === 'undefined') {
-            scope.opacity = 1;
-            element.addClass('newPlanting');
-          /*element.effect('pulsate', function() {
+          scope.opacity = 1;
+          element.addClass('newPlanting');
+          /* element.effect('pulsate', function() {
 
           });*/
           makeResizable();
@@ -105,7 +105,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
 
         // Current plantings are NOT droppable (revert:'valid')
         if (attrs['planting'] !== 'future') {
-            element.droppable();
+          element.droppable();
         }
 
         scope.rotate = function() {

@@ -28,7 +28,7 @@ var TaskSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['NEW','PENDING','FINISHED','UNKNOWN'],
+    enum: ['NEW', 'PENDING', 'FINISHED', 'UNKNOWN'],
     default: 'NEW'
   },
   cultivationPlan: {

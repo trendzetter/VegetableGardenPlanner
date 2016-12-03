@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-angular
+  angular
   .module('gardenparts')
   .controller('PlantingController', PlantingController);
   PlantingController.$inject = ['$scope', '$uibModal', '$uibModal', 'CultivationPlansService'];
@@ -19,7 +19,7 @@ angular
     */
     $scope.menuOptions = [];
     var cultivationPlan = ['Pas cultivationPlan toe', function() {
-        var size = 'lg';
+      var size = 'lg';
        /* var cps;
         if(typeof $scope.planting.plantVariety._id === 'undefined'){
           console.log('$scope.planting.plantVariety._id'+ $scope.planting.plantVariety._id);
@@ -27,32 +27,32 @@ angular
         }else{
           cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
         }*/
-        var cps = CultivationPlansService.getByVariety({varietyId: $scope.planting.plantVariety._id});
-        cps.$promise.then(function(cultivationPlans){
+      var cps = CultivationPlansService.getByVariety({ varietyId: $scope.planting.plantVariety._id });
+      cps.$promise.then(function(cultivationPlans) {
           var planting = $scope.planting;
-            planting.cultivationPlans = cultivationPlans;
-            var modalInstance = cultivationPlanModal.open({
-            templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
-            controller: 'SelectCultivationPlanController',
-            size: size,
-            resolve: {
+          planting.cultivationPlans = cultivationPlans;
+          var modalInstance = cultivationPlanModal.open({
+              templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
+              controller: 'SelectCultivationPlanController',
+              size: size,
+              resolve: {
               planting: function() {
                 return planting;
               }
             }
-          });
+            });
 
           modalInstance.result.then(function(planting) {
             delete planting.cultivationPlans;
-            if(planting.currentPlan != planting.cultivationPlan && typeof planting._id !== 'undefined') {
+            if (planting.currentPlan != planting.cultivationPlan && typeof planting._id !== 'undefined') {
               console.log('cultivationplan has changed!');
               $scope.changedPlans[planting._id] = planting.cultivationPlan;
             }
           }, function() {
             console.log('Modal dismissed at: ' + new Date());
           });
-        })
-      }];
+        });
+    }];
     /* For new plantings */
     if (typeof $scope.planting._id === 'undefined') {
 
@@ -92,7 +92,7 @@ angular
           });
         }]);
       }
-      
+
       $scope.menuOptions.push(cultivationPlan);
 
       $scope.menuOptions.push(['Cancel', function() {

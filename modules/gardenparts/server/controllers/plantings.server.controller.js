@@ -68,7 +68,7 @@ exports.update = function(req, res) {
     planting.rightCornerLeft = planting.elemleft + planting.elemwidth;
     planting.bottomCornerTop = planting.elemtop + planting.elemheight;
     planting.bk = new mongoose.Types.ObjectId();
-    if(typeof planting.cultivationPlan != 'undefined' ){
+    if (typeof planting.cultivationPlan != 'undefined') {
       createTask(planting);
     }
     planting.save();
@@ -84,29 +84,29 @@ exports.update = function(req, res) {
   });
 
   var changedPlans = req.body.changedPlans;
-  console.log("changedPlans"+JSON.stringify(changedPlans));
-  for(var plantingid in changedPlans){
-    Planting.findOneAndUpdate({_id: plantingid}, {$set: {cultivationPlan: changedPlans[plantingid]}}, {new: true},populateAndCreateTask);
+  console.log("changedPlans" + JSON.stringify(changedPlans));
+  for (var plantingid in changedPlans) {
+    Planting.findOneAndUpdate({ _id: plantingid }, { $set: { cultivationPlan: changedPlans[plantingid] } }, { new: true }, populateAndCreateTask);
   }
 };
 
-function populateAndCreateTask(err,planting){
-        if(err){
-            console.log('Something wrong when updating data!' + err);
+function populateAndCreateTask(err, planting) {
+  if (err) {
+          console.log('Something wrong when updating data!' + err);
         }
 
-        console.log('plantingcultivationplan update: '+JSON.stringify(planting)+'\n user:'+JSON.stringify(user));
+  console.log('plantingcultivationplan update: ' + JSON.stringify(planting) + '\n user:' + JSON.stringify(user));
 
-        Planting.populate(planting, {
+  Planting.populate(planting, {
           path: 'cultivationPlan',
           select: 'steps'
-          }, function(err, planting) {
-            console.log('plantingcultivationplan update: '+JSON.stringify(planting));
+        }, function(err, planting) {
+            console.log('plantingcultivationplan update: ' + JSON.stringify(planting));
             createTask(planting);
           });
-    }
+}
 
-function createTask(planting){
+function createTask(planting) {
   var task = new Task();
   task.user = user;
   task.garden = planting.garden;
@@ -114,7 +114,7 @@ function createTask(planting){
   task.cultivationPlan = planting.cultivationPlan;
   task.validFrom = planting.validFrom;
   task.save();
-}            
+}
 /* *
  * Show the current Planting
  */

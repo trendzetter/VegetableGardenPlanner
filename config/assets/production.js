@@ -10,6 +10,8 @@ module.exports = {
         'public/lib/ng-cropper/dist/ngCropper.all.min.css',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
         // endbower
+        'public/lib/bootstrap/dist/css/bootstrap.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',

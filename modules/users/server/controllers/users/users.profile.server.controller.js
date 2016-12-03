@@ -13,7 +13,7 @@ var _ = require('lodash'),
   User = mongoose.model('User'),
   validator = require('validator');
 
-var whitelistedFields = ['firstName', 'lastName', 'email', 'username','emailNotification'];
+var whitelistedFields = ['firstName', 'lastName', 'email', 'username', 'emailNotification'];
 
 /**
  * Update user details
