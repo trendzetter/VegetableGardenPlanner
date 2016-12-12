@@ -29,6 +29,16 @@
         <a ui-sref="authentication.signin">Sign In</a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right" >
+      <li ui-sref-active="active">
+      <button ng-click="changeLang('en')">English</button>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" >
+      <li ui-sref-active="active">
+      <button ng-click="changeLang('nl')">Nederlands</button>
+      </li>
+    </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication.user">
       <li class="dropdown" uib-dropdown>
         <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">

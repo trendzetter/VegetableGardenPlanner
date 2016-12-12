@@ -8,7 +8,7 @@
     applicationModuleName: applicationModuleName,
 
     applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ui.bootstrap.contextMenu', 'angularFileUpload',
-      'dragon-drop', 'ngCropper', 'ngFileUpload', 'ngImgCrop'],
+      'dragon-drop', 'ngCropper', 'ngFileUpload', 'ngImgCrop','pascalprecht.translate'],
 
     registerModule: registerModule
   };
