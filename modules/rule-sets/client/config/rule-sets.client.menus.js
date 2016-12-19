@@ -11,13 +11,13 @@
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Lijst rotatieschema\'s',
+      title: 'list_rule_sets',
       state: 'rulesets.list'
     });
 
     // Add the dropdown create item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Rotatieschema creëren',
+      title: 'create_rule_set',
       state: 'rulesets.create',
       roles: ['user']
     });

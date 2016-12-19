@@ -17,13 +17,13 @@
 */
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Lijst teelwijzen',
+      title: 'list_cultivation_plans',
       state: 'cultivation-plans.list'
     });
 
     // Add the dropdown create item
     menuService.addSubMenuItem('topbar', 'system', {
-      title: 'Teelwijze toevoegen',
+      title: 'add_cultivation_plan',
       state: 'cultivation-plans.create',
       roles: ['user']
     });

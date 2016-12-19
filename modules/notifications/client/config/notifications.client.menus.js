@@ -9,7 +9,7 @@
 
    function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'Notifications',
+      title: 'notifications',
       state: 'notifications',
       type: 'dropdown',
       roles: ['user']
@@ -17,7 +17,7 @@
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'notifications', {
-      title: 'List Notifications',
+      title: 'list_notifications',
       state: 'notifications.list',
       roles: ['user']
     });

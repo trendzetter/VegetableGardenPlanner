@@ -17,6 +17,7 @@
       });
     //  $translateProvider.useLocalStorage();
       $translateProvider.preferredLanguage('en');
+      $translateProvider.useSanitizeValueStrategy('escape');
 
     $locationProvider.html5Mode(true).hashPrefix('!');
 

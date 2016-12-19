@@ -9,7 +9,7 @@
 
   function menuConfig(Menus) {
     Menus.addMenuItem('topbar', {
-      title: 'Systeem',
+      title: 'system',
       state: 'system',
       type: 'dropdown',
       roles: ['user', 'admin']
@@ -17,13 +17,13 @@
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'system', {
-      title: 'Lijst gewassen',
+      title: 'list_crops',
       state: 'crops.list'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'system', {
-      title: 'Gewas toevoegen',
+      title: 'add_crop',
       state: 'crops.create',
       roles: ['user']
     });
