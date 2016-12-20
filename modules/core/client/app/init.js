@@ -15,7 +15,7 @@
         prefix: 'i18n/',
         suffix: '.json'
       });
-    //  $translateProvider.useLocalStorage();
+      $translateProvider.useLocalStorage();
       $translateProvider.preferredLanguage('en');
       $translateProvider.useSanitizeValueStrategy('escape');
 

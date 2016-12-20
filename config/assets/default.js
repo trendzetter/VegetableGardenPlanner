@@ -20,6 +20,7 @@ module.exports = {
         'public/lib/jquery/dist/jquery.js',
         'public/lib/jquery-ui/jquery-ui.js',
         'public/lib/angular/angular.js',
+        'public/lib/angular-cookies/angular-cookies.js',
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/ng-file-upload/ng-file-upload.js',
@@ -36,7 +37,8 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-translate/angular-translate.js',
         'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
-        'public/lib/angular-translate/angular-translate-loader-storage-local.js'
+        'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+        'public/lib/angular-translate-storage-local/angular-translate-storage-local.js'
         // endbower
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
