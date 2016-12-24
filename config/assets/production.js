@@ -32,6 +32,10 @@ module.exports = {
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
+        'public/lib/angular-translate/angular-translate.min.js',
+        'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
+        'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+        'public/lib/angular-translate-storage-local/angular-translate-storage-local.min.js'
         // endbower
       ]
     },

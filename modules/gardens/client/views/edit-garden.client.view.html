@@ -12,18 +12,18 @@
             </a>
 
         <div class="input-group">
-            <label class="control-label" for="name">Name</label>
+            <label class="control-label" for="name" translate>name</label>
             <div class="controls">
                 <input type="text" data-ng-model="garden.name" id="name" class="form-control" placeholder="Name" required>
             </div>
-            <label class="control-label" for="name">Keepers</label>
+            <label class="control-label" for="name" translate>keepers</label>
             <div class="controls">
               <input type="text" myenter data-ng-model="newkeeper" />
             </div>
             <div class="controls">
                 <span ng-repeat="keeper in garden.keepers" >{{keeper.username}}<el ng-show="!$last">,<el></span>
             </div>
-            <label class="control-label" for="name">Visitors</label>
+            <label class="control-label" for="name" translate>visitors</label>
             <div class="controls">
               <input type="text" myenter data-ng-model="newvisitor" />
             </div>

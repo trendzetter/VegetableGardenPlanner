@@ -9,9 +9,8 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.task.created | date:'mediumDate'"></span>
-      by
+      <span translate>{{ 'created_on'|translate:{date:vm.task.created} }}</span>
+      <span translate>to</span>
       <span ng-if="vm.task.user" ng-bind="vm.task.user.displayName"></span>
       <span ng-if="!vm.task.user">Deleted User</span>
     </em>
