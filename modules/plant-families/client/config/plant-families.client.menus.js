@@ -11,13 +11,13 @@
 
     // Add the dropdown list item
     Menus.addSubMenuItem('topbar', 'system', {
-      title: 'Lijst planten families',
+      title: 'list_plant_families',
       state: 'plantfamilies.list'
     });
 
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'system', {
-      title: 'Plant familie toevoegen',
+      title: 'add_plant_family',
       state: 'plantfamilies.create',
       roles: ['user']
     });

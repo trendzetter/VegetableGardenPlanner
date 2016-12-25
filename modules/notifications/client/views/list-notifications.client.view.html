@@ -7,8 +7,8 @@
   <div class="list-group">
     <a ng-repeat="notification in vm.notifications" ui-sref="notifications.view({ notificationId: notification._id })" class="list-group-item">
       <small class="list-group-item-text">
-            <span translate>{{ 'posted_on'|translate:{date:notification.created} }}</span>
-            <span translate>by</span>
+            <span translate>{{ 'created_on'|translate:{date:notification.created} }}</span>
+            <span translate>to</span>
         <span ng-if="notification.user" ng-bind="notification.user.displayName"></span>
         <span ng-if="!notification.user">Deleted User</span>
       </small>

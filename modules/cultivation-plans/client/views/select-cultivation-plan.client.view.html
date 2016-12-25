@@ -7,11 +7,11 @@
          <form class="form-horizontal" data-ng-submit="applyCultivationPlan()" novalidate>
             <fieldset>
          <p ng-repeat="cultivationPlan in cultivationPlans" class="panel-group-item" ng-class-odd="odd" ng-class-even="even" >
-                <input type="radio" name="cultivationPlans" value="{{cultivationPlan._id}}" ng-value="cultivationPlan._id" ng-model="planting.cultivationPlan" />
+                <input type="radio" name="cultivationPlans" value="{{cultivationPlan._id}}" ng-value="cultivationPlan._id" ng-model="planting.cultivationPlan" ></input>
                 {{cultivationPlan.title}}
          </p>
         <div class="panel-group">
-            <input type="submit" class="btn btn-default" value="Toepassen" ng-if="cultivationPlans.$resolved && cultivationPlans.length">
+            <input type="submit" class="btn btn-default" value="Toepassen" ng-if="cultivationPlans.$resolved && cultivationPlans.length"></input>
         </div>
         <div class="alert alert-warning text-center" ng-if="cultivationPlans.$resolved && !cultivationPlans.length">
             No cultivation plans yet, why don't you <a ng-click="createNew()" >create one</a>?

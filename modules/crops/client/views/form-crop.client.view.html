@@ -2,23 +2,27 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1>{{vm.crop._id ? 'Edit crop' : 'New crop'}}</h1>
+    <h1 translate>{{vm.crop._id ? 'edit_crop' : 'add_crop'}}</h1>
   </div>
   <div class="col-md-12">
     <form name="vm.form.cropForm" class="form-horizontal" ng-submit="vm.save(vm.form.cropForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="name">Name</label>
-          <input name="name" type="text" ng-model="vm.crop.name" id="name" class="form-control" placeholder="Name" required>
+          <label class="control-label" for="name" translate>name</label>
+          <input name="name" type="text" ng-model="vm.crop.name" id="name" class="form-control" placeholder="Name" required ></input> 
           <div ng-messages="vm.form.cropForm.name.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Crop name is required.</p>
+            <p class="help-block error-text" ng-message="required" translate>crop_name_is_required</p>
           </div>
         </div>
-        <div class="controls">
-            <select data-ng-options="plantfamily._id as plantfamily.name for plantfamily in vm.plantfamilies" data-ng-model="vm.crop.plantfamily._id"></select>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="plantfamily" translate>plant_family</label>
+          <select name="plantfamily" data-ng-options="plantfamily._id as plantfamily.name for plantfamily in vm.plantfamilies" data-ng-model="vm.crop.plantfamily._id" required></select>
+          <div ng-messages="vm.form.cropForm.plantfamily.$error" role="alert">
+            <p class="help-block error-text" ng-message="required" translate>plantfamily_name_is_required</p>
+          </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.crop._id ? 'Update' : 'Create'}}</button>
+          <button type="submit" class="btn btn-default" translate>{{vm.crop._id ? 'update' : 'add'}}</button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>

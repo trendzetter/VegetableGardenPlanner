@@ -13,9 +13,8 @@
   <div class="list-group">
     <a ng-repeat="plantvariety in vm.pagedItems" ui-sref="plant-varieties.view({ plantVarietyId: plantvariety._id })" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="plantvariety.created | date:'mediumDate'"></span>
-        by
+            <span translate>{{ 'created_on'|translate:{date:plantvariety.created} }}</span>
+            <span translate>by</span>
         <span ng-if="plantvariety.user" ng-bind="plantvariety.user.displayName"></span>
         <span ng-if="!plantvariety.user">Deleted User</span>
       </small>

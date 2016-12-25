@@ -2,30 +2,30 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1>{{vm.cultivationPlan._id ? 'Teeltwijze bewerken' : 'Nieuw teeltwijze'}}</h1>
+    <h1 translate>{{vm.cultivationPlan._id ? 'edit_cultivation_plan' : 'create_cultivation_plan'}}</h1>
   </div>
   <div class="col-md-12">
     <form name="vm.form.cultivationPlanForm" class="form-horizontal" ng-submit="vm.save(vm.form.cultivationPlanForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="title">Titel</label>
-          <input name="title" type="text" ng-model="vm.cultivationPlan.title" id="title" class="form-control" placeholder="Title" required>
+          <label class="control-label" for="title" translate></label>
+          <input name="title" type="text" ng-model="vm.cultivationPlan.title" id="title" class="form-control" placeholder="Title" required></input>
           <div ng-messages="vm.form.cultivationPlanForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">teeltwijze titel is vereist.</p>
+            <p class="help-block error-text" ng-message="required" translate>title_is_required</p>
           </div>
         </div>
         <div id="divCrop" class="form-group" show-errors>
-          <label class="control-label" for="crop">Gewas</label>
+          <label class="control-label" for="crop" translate>crop</label>
           <select ng-show="!vm.cultivationPlan._id" name="crop" ng-change="vm.changeCrop()" id="crop" ng-options="crop._id as crop.name for crop in vm.crops" ng-model="vm.cultivationPlan.crop._id" class="form-control" required></select>
           <select ng-show="vm.cultivationPlan._id" name="crop" id="crop" ng-model="vm.cultivationPlan.crop._id" class="form-control" required disabled>
               <option name="crop" value="{{vm.cultivationPlan.crop._id}}" selected>{{vm.cultivationPlan.crop.name}}</option>
           </select>
           <div ng-messages="vm.form.cultivationPlanForm.crop.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">teeltwijze crop is vereist.</p>
+            <p class="help-block error-text" ng-message="required" translate>crop_is_required</p>
           </div>
         </div>
         <div  id="divVariety" ng-if="vm.cultivationPlan.crop._id" class="form-group" show-errors>
-          <label class="control-label" for="variety">Varieteit</label>
+          <label class="control-label" for="variety" translate>variety</label>
           <select ng-show="vm.cultivationPlan._id" name="variety" id="variety" ng-model="vm.cultivationPlan.variety" class="form-control" disabled required>
                <option  name="variety" id="variety" ng-if="vm.cultivationPlan._id" value="{{vm.cultivationPlan.variety._id}}" selected>{{vm.cultivationPlan.variety.name}}</option>
           </select>
@@ -33,19 +33,19 @@
             <option ng-repeat="variety in vm.varieties" value="{{variety}}">{{variety.name}}</option>
           </select>
           <div ng-messages="vm.form.cultivationPlanForm.variety.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">teeltwijze plantvarieteit is vereist.</p>
+            <p class="help-block error-text" ng-message="required" translate>variety_is_required</p>
           </div>
         </div>
         <div class="form-group" ng-if="vm.cultivationPlan.crop._id">
-          Ook gebruiken bij andere varieteiten: <input type="checkbox" ng-model="vm.cultivationPlan.validForOtherVarieties" class="controls" >
-          <p ng-if="vm.authentication.isAdmin">Standaard voor site: <input type="checkbox" ng-model="vm.cultivationPlan.systemDefault" class="controls" ></p>{{vm.cultivationPlan.systemDefault}}
+          <span translate>also_use_with_other_varieties</span><input type="checkbox" ng-model="vm.cultivationPlan.validForOtherVarieties" class="controls" >
+          <p ng-if="vm.authentication.isAdmin">Standard for site: <input type="checkbox" ng-model="vm.cultivationPlan.systemDefault" class="controls" ></p>
         </div>
         <div class="form-group">
-          <label class="control-label" for="description">Omschrijving</label>
-          <textarea name="description" data-ng-model="vm.cultivationPlan.description" id="description" class="form-control" cols="30" rows="3" placeholder="omschrijving"></textarea>
+          <label class="control-label" for="description" translate>description</label>
+          <textarea name="description" data-ng-model="vm.cultivationPlan.description" id="description" class="form-control" cols="30" rows="3" placeholder="description"></textarea>
         </div>
         <div class="form-group" ng-if="vm.cultivationPlan.variety">
-            <label class="control-label" for="steps">Stappen</label>
+            <label class="control-label" for="steps" translate>steps</label>
          <div style="clear: both" class="controls panel panel-default" ng-repeat="step in vm.cultivationPlan.steps" ng-controller="CultivationStepController" ng-class-odd="'odd'" ng-class-even="'even'" id="steps">
             <div class="panel-header">
                 <div class="input-group row col-md-12" show-errors>
@@ -53,60 +53,60 @@
                         <i class="glyphicon glyphicon-remove-circle col-md-1" ></i>
                     </a>
                     <label class="col-md-1 control-label" for="stepTitle{{$index}}">{{ $index+1 }}:</label>
-                    <input class="col-md-6 controls" type="text" ng-model="step.title" id="stepTitle{{$index}}" name="stepTitle{{$index}}" placeholder="Titel" required>
+                    <input class="col-md-6 controls" type="text" ng-model="step.title" id="stepTitle{{$index}}" name="stepTitle{{$index}}" placeholder="Titel" required></input>
                     <div ng-messages="vm.form.cultivationPlanForm['stepTitle'+$index].$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Teelt stap titel is vereist.</p>
+                        <p class="help-block error-text" ng-message="required" translate>step_title_is_required</p>
                     </div>
-                    <div class="col-md-4"><label>Ter plaatse: </label><input type="checkbox" ng-model="step.inplace"></div>
+                    <div class="col-md-4"><label translate>in_place</label><input type="checkbox" ng-model="step.inplace"></div>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="row col-md-12">  
                     <div class="col-md-6">
                         <div class="input-group" show-errors>
-                            <label class="control-label" for="minduration{{$index}}">Minimale duur: </label>
-                            <input name="minduration{{$index}}" type="text" ng-model="step.minduration" id="minduration{{$index}}" required> dagen.
+                            <label class="control-label" for="minduration{{$index}}" translate>minimal_duration</label>
+                            <input name="minduration{{$index}}" type="text" ng-model="step.minduration" id="minduration{{$index}}" required></input> dagen.
                             <div ng-messages="vm.form.cultivationPlanForm['minduration'+$index].$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Teelt stap minimum duur in dagen is vereist.</p>
+                                <p class="help-block error-text" ng-message="required" translate>step_minimum_duration_is_required</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group" show-errors>
-                            <label class="control-label" for="maxduration{{$index}}">Maximale duur: </label>
-                            <input name="maxduration{{$index}}" type="text" ng-model="step.maxduration" id="maxduration{{$index}}" required>
+                            <label class="control-label" for="maxduration{{$index}}" translate>maximal_duration</label>
+                            <input name="maxduration{{$index}}" type="text" ng-model="step.maxduration" id="maxduration{{$index}}" required></input>
                             <div ng-messages="vm.form.cultivationPlanForm['maxduration'+$index].$error" role="alert">
-                                <p class="help-block error-text" ng-message="required">Teelt stap minimum duur in dagen is vereist.</p>
+                                <p class="help-block error-text" ng-message="required" translate>step_maximum_duration_is_required</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <label class="control-label" for="description">Beschrijving</label>
+                <label class="control-label" for="description" translate>description</label>
                 <textarea name="description" data-ng-model="step.description" id="description" class="form-control" placeholder="Beschrijf wat er in deze stap gebeurd."></textarea>         
                 <div class="col-md-12">
-                    <label class="control-label">Icoon:</label>
-                    Selecteer afbeelding <input class="btn btn-default btn-file" type="file" nv-file-select uploader="uploader" class="ng-pristine ng-invalid ng-invalid-required">
-                    <label ng-if="!step.icon && !vm.cultivationPlan._id" class="label-warning">* icoon is vereist</label>
+                    <label class="control-label" translate>icon</label>
+                    <span translate>select_image</span><input class="btn btn-default btn-file" type="file" nv-file-select uploader="uploader" class="ng-pristine ng-invalid ng-invalid-required">
+                    <label ng-if="!step.icon && !vm.cultivationPlan._id" class="label-warning" translate>icon_is_required</label>
                 </div>
                 <div class="text-center img-container col-md-4">
-                    <label class="control-label" >Verhoudingen bijsnijden:</label>
+                    <label class="control-label" translate>cut_image</label>
                 <img ng-cropper ng-cropper-options="options" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:150px">
                 </div>
                 <div class="preview-container col-md-4 pull-right input-group">
-                    <label class="control-label" >Voorbeeld</label>
+                    <label class="control-label" translate>preview</label>
                     <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;" required>
                 </div>
             </div>
         </div>
         <div class="controls" ng-if="vm.cultivationPlan.variety" style="clear:both">
-            <input class="btn btn-default" ng-click="vm.newStep()" value="Stap toevoegen">
+            <button type="button" class="btn btn-normal" ng-click="vm.newStep()" translate>add_step</button>
         </div>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
         <div class="form-group" ng-if="vm.cultivationPlan.variety">
-          <button type="submit" class="btn btn-default">{{vm.cultivationPlan._id ? 'Aanpassen' : 'Aanmaken'}}</button>
+          <button type="submit" class="btn btn-default" translate>{{vm.cultivationPlan._id ? 'update' : 'create'}}</button>
         </div>
       </fieldset>
     </form>

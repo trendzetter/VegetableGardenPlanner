@@ -2,14 +2,13 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1>Cultivation Plans</h1>
+    <h1 translate>cultivation_plans</h1>
   </div>
   <div class="list-group">
     <a ng-repeat="cultivationPlan in vm.cultivationPlans" ui-sref="cultivation-plans.view({ cultivationPlanId: cultivationPlan._id })" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="cultivationPlan.created | date:'mediumDate'"></span>
-        by
+        <span translate>{{ 'posted_on'|translate:{date:cultivationPlan.created} }}</span>
+        <span translate>by</span>
         <span ng-if="cultivationPlan.user" ng-bind="cultivationPlan.user.displayName"></span>
         <span ng-if="!cultivationPlan.user">Deleted User</span>
       </small>

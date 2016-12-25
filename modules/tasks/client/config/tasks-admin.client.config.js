@@ -1,4 +1,4 @@
-﻿(function () {
+﻿/*(function () {
   'use strict';
 
   // Configuring the Tasks Admin module
@@ -14,4 +14,4 @@
       state: 'admin.tasks.list'
     });
   }
-}());
+}());*/
