@@ -173,6 +173,7 @@ var addParts = function(next, req) {
     }).populate('plantVariety').exec(function(err, plantings) {
       if (err) return next(err);
 
+      //When specificly choosing to plant a specific crop
       if (req.params.plant !== undefined) {
         // put the past plantings in a seperate array for rotationadvice
         req.garden.pastplantings = [];
@@ -184,6 +185,7 @@ var addParts = function(next, req) {
             var plantingArray = plantings.splice(index, 1);
             req.garden.pastplantings.push(plantingArray[0]);
           } else {
+            //If the plants are there longer than the max duration we assume they are no longer there
             if (planting.plantVariety.maxGrowthDuration) {
               var maxdate = new Date(planting.validFrom);
               maxdate.setDate(new Date(maxdate.getDate() + planting.plantVariety.maxGrowthDuration));
