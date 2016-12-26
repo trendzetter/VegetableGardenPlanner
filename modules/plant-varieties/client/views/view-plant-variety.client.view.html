@@ -51,9 +51,8 @@
     </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.plantvariety.created | date:'mediumDate'"></span>
-      by
+        <span translate>{{ 'posted_on'|translate:{date:vm.plantvariety.created} }}</span>
+        <span translate>by</span>
       <span ng-if="vm.plantvariety.user" ng-bind="vm.plantvariety.user.displayName"></span>
       <span ng-if="!vm.plantvariety.user">Deleted User</span>
     </em>

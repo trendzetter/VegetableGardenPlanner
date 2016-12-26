@@ -34,9 +34,8 @@
           </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.ruleset.created | date:'mediumDate'"></span>
-      by
+        <span translate>{{ 'posted_on'|translate:{date:vm.ruleset.created} }}</span>
+        <span translate>by</span>
       <span ng-if="vm.ruleset.user" ng-bind="vm.ruleset.user.displayName"></span>
       <span ng-if="!vm.ruleset.user">Deleted User</span>
     </em>

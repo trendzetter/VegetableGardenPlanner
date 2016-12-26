@@ -6,9 +6,8 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.notification.created | date:'mediumDate'"></span>
-      by
+         <span translate>{{ 'posted_on'|translate:{date:vm.notification.created} }}</span>
+        <span translate>by</span>
       <span ng-if="vm.notification.user" ng-bind="vm.notification.user.displayName"></span>
       <span ng-if="!vm.notification.user">Deleted User</span>
     </em>

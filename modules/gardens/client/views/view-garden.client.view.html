@@ -40,9 +40,8 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.garden.created | date:'mediumDate'"></span>
-      by
+        <span translate>{{ 'posted_on'|translate:{date:vm.garden.created} }}</span>
+        <span translate>by</span>
       <span ng-if="vm.garden.user" ng-bind="vm.garden.user.displayName"></span>
       <span ng-if="!vm.garden.user">Deleted User</span>
     </em>

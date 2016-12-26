@@ -14,9 +14,8 @@
   </div>
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.cultivationPlan.created | date:'mediumDate'"></span>
-      by
+        <span translate>{{ 'posted_on'|translate:{date:cultivationPlan.created} }}</span>
+        <span translate>by</span>
       <span ng-if="vm.cultivationPlan.user" ng-bind="vm.cultivationPlan.user.displayName"></span>
       <span ng-if="!vm.cultivationPlan.user">Deleted User</span>
     </em>
