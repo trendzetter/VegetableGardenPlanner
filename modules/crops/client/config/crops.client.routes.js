@@ -46,7 +46,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'Edit crop {{ cropResolve.name }}'
+          pageTitle: 'edit_crop'
         }
       })
       .state('crops.view', {
@@ -58,7 +58,7 @@
           cropResolve: getCrop
         },
         data: {
-          pageTitle: 'Crop {{ articleResolve.name }}'
+          pageTitle: 'view_crop'
         }
       });
   }

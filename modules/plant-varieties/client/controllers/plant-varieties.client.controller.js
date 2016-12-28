@@ -121,6 +121,7 @@
     // Save PlantVariety
     function save(isValid) {
       if (!isValid) {
+              console.log('save!');
         $scope.$broadcast('show-errors-check-validity', 'vm.form.plantvarietyForm');
         return false;
       }

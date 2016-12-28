@@ -145,5 +145,13 @@
   "edit_plant_family": "Edit Plant Family",
   "plant_family_name_is_required": "Plant family name is required.",
   "vegetable_garden_planner": "VegetableGardenPlanner",
-  "brand_image": "modules/core/client/img/brand/en.png"
+  "brand_image": "modules/core/client/img/brand/en.png",
+  "edit_crop": "Edit Crop",
+  "view_crop": "View Crop",
+  "doy_end_sow_is_required": "Day of the year to end sowing is required.",
+  "doy_start_sow_is_required": "Day of the year to start sowing is required.",
+  "max_growth_duration_is_required": "Maximum number of days growth is required.",
+  "min_growth_duration_is_required": "Minimum number of days growth is required.",
+  "cm_in_row_is_required": "Cm between plants in a row is required.",
+  "cm_between_row_is_required": "Cm between rows is required."
 }

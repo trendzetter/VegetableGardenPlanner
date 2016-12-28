@@ -145,5 +145,13 @@
   "edit_plant_family": "Bewerk plantenfamilie",
   "plant_family_name_is_required": "Plantenfamilienaam is vereist.",
   "vegetable_garden_planner": "MoestuinPlanner",
-  "brand_image": "modules/core/client/img/brand/nl.png"
+  "brand_image": "modules/core/client/img/brand/nl.png",
+  "edit_crop": "Bewerk gewas",
+  "view_crop": "Bekijk gewas",
+  "doy_end_sow_is_required": "Dag van het jaar om te stoppen met zaaien is vereist.",
+  "doy_start_sow_is_required": "Dag van het jaar om te starten met zaaien is vereist.",
+  "max_growth_duration_is_required": "Maximum aantal dagen groei is vereist.",
+  "min_growth_duration_is_required": "Minimum aantal dagen groei is vereist.",
+  "cm_in_row_is_required": "Cm tussen planten in een rij is vereist.",
+  "cm_between_row_is_required": "Cm tussen de rijen is vereist."
 }

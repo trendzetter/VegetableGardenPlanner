@@ -11,39 +11,60 @@
               <label class="control-label" for="name" translate>name</label>
               <input name="title" type="text" ng-model="vm.plantvariety.name" id="name" class="form-control" placeholder="Naam" required></input>
               <div ng-messages="vm.form.plantvarietyForm.name.$error" role="alert">
-                <p class="help-block error-text" ng-message="required">plant_variety_name_is_required</p>
+                <p class="help-block error-text" ng-message="required" translate>plant_variety_name_is_required</p>
               </div>
             </div>
-            <label class="control-label" for="crop" translate>crop</label>
-            <div class="controls">
-              <select data-ng-options="crop._id as crop.name for crop in vm.crops" data-ng-model="vm.plantvariety.crop" id="crop"></select>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="crop" translate>crop</label>
+              <select name="crop" data-ng-options="crop._id as crop.name for crop in vm.crops" data-ng-model="vm.plantvariety.crop" id="crop" required></select>
+              <div ng-messages="vm.form.plantvarietyForm.crop.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>crop_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="DOYstartSow" translate>start_doy</label>
-            <div class="controls">
-              <input doypicker type="text" data-ng-model="vm.plantvariety.DOYstartSow" id="DOYstartSow" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="DOYstartSow" translate>start_doy</label>
+              <input name="DOYstartSow" doypicker type="text" data-ng-model="vm.plantvariety.DOYstartSow" id="DOYstartSow" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.DOYstartSow.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>doy_start_sow_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="DOYendSow" translate>end_doy</label>
-            <div class="controls">
-              <input doypicker  type="text" data-ng-model="vm.plantvariety.DOYendSow" id="DOYendSow" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="DOYendSow" translate>end_doy</label>
+              <input name="DOYendSow" doypicker  type="text" data-ng-model="vm.plantvariety.DOYendSow" id="DOYendSow" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.DOYendSow.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>doy_end_sow_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="minGrowthDuration" translate>minimal_growth_duration</label>
-            <div class="controls">
-              <input   type="text" data-ng-model="vm.plantvariety.minGrowthDuration" id="minGrowthDuration" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="minGrowthDuration" translate>minimal_growth_duration</label>
+              <input  name="minGrowthDuration" type="text" data-ng-model="vm.plantvariety.minGrowthDuration" id="minGrowthDuration" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.minGrowthDuration.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>min_growth_duration_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="maxGrowthDuration" translate>maximum_growth_duration</label>
-            <div class="controls">
-              <input type="text" data-ng-model="vm.plantvariety.maxGrowthDuration" id="maxGrowthDuration" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="maxGrowthDuration" translate>maximum_growth_duration</label>
+              <input name="maxGrowthDuration" type="text" data-ng-model="vm.plantvariety.maxGrowthDuration" id="maxGrowthDuration" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.maxGrowthDuration.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>max_growth_duration_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="cmInRow" translate>cm_plants_in_row</label>
-            <div class="controls">
-              <input   type="text" data-ng-model="vm.plantvariety.cmInRow" id="cmInRow" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="cmInRow" translate>cm_plants_in_row</label>
+              <input name="cmInRow" type="text" data-ng-model="vm.plantvariety.cmInRow" id="cmInRow" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.cmBetweenRow.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>cm_in_row_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="cmBetweenRow" translate>cm_betweem_rows</label>
-            <div class="controls">
-              <input type="text" data-ng-model="vm.plantvariety.cmBetweenRow" id="cmBetweenRow" class="form-control" required></input>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="cmBetweenRow" translate>cm_betweem_rows</label> 
+              <input name="cmBetweenRow" type="text" data-ng-model="vm.plantvariety.cmBetweenRow" id="cmBetweenRow" class="form-control" required></input>
+              <div ng-messages="vm.form.plantvarietyForm.cmBetweenRow.$error" role="alert">
+                <p class="help-block error-text" ng-message="required" translate>cm_between_row_is_required</p>
+              </div>
             </div>
-            <label class="control-label" for="file" translate>image</label>
             <div class="text-center form-group">
+              <label class="control-label" for="file" translate>image</label>
               <div class="text-center img-container col-md-4">
                 <img ng-cropper ng-cropper-options="options" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:300px">
               </div>

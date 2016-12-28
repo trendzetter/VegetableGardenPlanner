@@ -21,9 +21,16 @@
         $translate('vegetable_garden_planner').then(function (applicationCoreTitle) {
         if (toState.data && toState.data.pageTitle) {
           var stateTitle = $interpolate(toState.data.pageTitle)($state.$current.locals.globals);
-          $translate(stateTitle).then(function (translation) {
-            element.html(applicationCoreTitle + ' - ' + translation);
-          });
+          if(toState.data.name){
+            $translate(stateTitle, '{name: \'' + toState.data.name + '\'}').then(function (translation) {
+              element.html(applicationCoreTitle + ' - ' + translation);
+            });
+          }else{
+            $translate(stateTitle).then(function (translation) {
+              element.html(applicationCoreTitle + ' - ' + translation);
+            });
+          }
+
         } else {
             element.html(applicationCoreTitle);
         }
