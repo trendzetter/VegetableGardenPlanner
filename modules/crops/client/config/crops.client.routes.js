@@ -20,7 +20,7 @@
         controller: 'CropsListController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Crops list'
+          pageTitle: 'list_crops'
         }
       })
       .state('crops.create', {
@@ -33,7 +33,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'Add crop'
+          pageTitle: 'add_crop'
         }
       })
       .state('crops.edit', {

@@ -143,5 +143,7 @@
   "add_rule": "Regel toevoegen",
   "add_crop_group": "Groetengroep toevoegen",
   "edit_plant_family": "Bewerk plantenfamilie",
-  "plant_family_name_is_required": "Plantenfamilienaam is vereist."
+  "plant_family_name_is_required": "Plantenfamilienaam is vereist.",
+  "vegetable_garden_planner": "MoestuinPlanner",
+  "brand_image": "modules/core/client/img/brand/nl.png"
 }

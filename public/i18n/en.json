@@ -143,5 +143,7 @@
   "add_rule": "Add rule",
   "add_crop_group": "Add crop group",
   "edit_plant_family": "Edit Plant Family",
-  "plant_family_name_is_required": "Plant family name is required."
+  "plant_family_name_is_required": "Plant family name is required.",
+  "vegetable_garden_planner": "VegetableGardenPlanner",
+  "brand_image": "modules/core/client/img/brand/en.png"
 }

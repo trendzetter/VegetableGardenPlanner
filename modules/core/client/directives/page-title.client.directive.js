@@ -4,9 +4,9 @@
   angular.module('core')
     .directive('pageTitle', pageTitle);
 
-  pageTitle.$inject = ['$rootScope', '$interpolate', '$state'];
+  pageTitle.$inject = ['$rootScope', '$interpolate', '$state','$translate'];
 
-  function pageTitle($rootScope, $interpolate, $state) {
+  function pageTitle($rootScope, $interpolate, $state,$translate) {
     var directive = {
       restrict: 'A',
       link: link
@@ -18,14 +18,16 @@
       $rootScope.$on('$stateChangeSuccess', listener);
 
       function listener(event, toState) {
-        var applicationCoreTitle = 'MEAN.js',
-          separeteBy = ' - ';
+        $translate('vegetable_garden_planner').then(function (applicationCoreTitle) {
         if (toState.data && toState.data.pageTitle) {
           var stateTitle = $interpolate(toState.data.pageTitle)($state.$current.locals.globals);
-          element.html(applicationCoreTitle + separeteBy + stateTitle);
+          $translate(stateTitle).then(function (translation) {
+            element.html(applicationCoreTitle + ' - ' + translation);
+          });
         } else {
-          element.html(applicationCoreTitle);
+            element.html(applicationCoreTitle);
         }
+        });
       }
     }
   }
