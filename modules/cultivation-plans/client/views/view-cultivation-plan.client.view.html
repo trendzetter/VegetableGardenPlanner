@@ -27,13 +27,26 @@
     <label>Varieteit:</label>
     <span ng-bind="vm.cultivationPlan.variety.name"></span>
   </p>
-  <p ng-repeat="step in vm.cultivationPlan.steps" ng-class-odd="'odd'" ng-class-even="'even'" class="panel panel-default">
-      <label>Stap {{$index + 1}}: {{step.title}}</label> ter plaatse? {{step.inplace?"Ja":"Nee"}}<br>
+  <div ng-repeat="step in vm.cultivationPlan.steps" ng-class-odd="'odd'" ng-class-even="'even'" class="panel panel-default">
+      <!--<label>Stap {{$index + 1}}: {{step.title}}</label> ter plaatse? {{step.inplace?"Ja":"Nee"}}<br>
       <span>Minimale duur: {{step.minduration}} dagen. Maximale duur: {{step.maxduration}}</span><br>
       Beschrijving: <span ng-bind="step.description"></span><br>
 
-      <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;"><br>
-  </p>
+      <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;"><br>-->
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" ng-src="{{step.icon}}" >
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Stap {{$index + 1}}: {{step.title}}</h4>
+          ter plaatse? {{step.inplace?"Ja":"Nee"}}<br>
+          <span>Minimale duur: {{step.minduration}} dagen. Maximale duur: {{step.maxduration}}</span><br>
+          Beschrijving: <span ng-bind="step.description"></span><br>
+        </div>
+      </div>
+  </div>
 </section>
 </section>
 </section>
