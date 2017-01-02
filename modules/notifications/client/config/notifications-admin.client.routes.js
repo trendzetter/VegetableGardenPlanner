@@ -16,7 +16,7 @@
       })*/
       .state('admin.notifications.list', {
         url: '',
-        templateUrl: 'modules/notifications/client/views/admin/list-notifications.client.view.html',
+        templateUrl: '/modules/notifications/client/views/admin/list-notifications.client.view.html',
         controller: 'NotificationsAdminListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('admin.notifications.create', {
         url: '/create',
-        templateUrl: 'modules/notifications/client/views/admin/form-notification.client.view.html',
+        templateUrl: '/modules/notifications/client/views/admin/form-notification.client.view.html',
         controller: 'NotificationsAdminController',
         controllerAs: 'vm',
         data: {
@@ -37,7 +37,7 @@
       })
       .state('admin.notifications.edit', {
         url: '/:notificationId/edit',
-        templateUrl: 'modules/notifications/client/views/admin/form-notification.client.view.html',
+        templateUrl: '/modules/notifications/client/views/admin/form-notification.client.view.html',
         controller: 'NotificationsAdminController',
         controllerAs: 'vm',
         data: {

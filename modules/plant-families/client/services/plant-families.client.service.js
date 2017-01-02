@@ -8,7 +8,7 @@
   PlantFamilyService.$inject = ['$resource'];
 
   function PlantFamilyService($resource) {
-    return $resource('api/plant-families/:plantFamilyId', {
+    return $resource('/api/plant-families/:plantFamilyId', {
       plantFamilyId: '@_id'
     }, {
       update: {

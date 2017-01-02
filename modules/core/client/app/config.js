@@ -7,8 +7,8 @@
     applicationEnvironment: window.env,
     applicationModuleName: applicationModuleName,
 
-    applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ui.bootstrap.contextMenu', 'angularFileUpload',
-      'dragon-drop', 'ngCropper', 'ngFileUpload', 'ngImgCrop','ngCookies','pascalprecht.translate'],
+    applicationModuleVendorDependencies: ['ngResource', 'ngAnimate', 'ngMessages', 'ui.router', 'ui.bootstrap', 'ui.bootstrap.contextMenu', 'angularFileUpload'
+     , 'dragon-drop' , 'ngCropper', 'ngFileUpload', 'ngCookies','pascalprecht.translate', 'ui-notification'],
 
     registerModule: registerModule
   };

@@ -16,7 +16,7 @@
       })
       .state('plant-varieties.list', {
         url: '',
-        templateUrl: 'modules/plant-varieties/client/views/list-plant-varieties.client.view.html',
+        templateUrl: '/modules/plant-varieties/client/views/list-plant-varieties.client.view.html',
         controller: 'PlantVarietiesListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('plant-varieties.create', {
         url: '/create',
-        templateUrl: 'modules/plant-varieties/client/views/form-plant-variety.client.view.html',
+        templateUrl: '/modules/plant-varieties/client/views/form-plant-variety.client.view.html',
         controller: 'PlantVarietiesController',
         controllerAs: 'vm',
         resolve: {
@@ -38,7 +38,7 @@
       })
       .state('plant-varieties.edit', {
         url: '/:plantVarietyId/edit',
-        templateUrl: 'modules/plant-varieties/client/views/form-plant-variety.client.view.html',
+        templateUrl: '/modules/plant-varieties/client/views/form-plant-variety.client.view.html',
         controller: 'PlantVarietiesController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('plant-varieties.view', {
         url: '/:plantVarietyId',
-        templateUrl: 'modules/plant-varieties/client/views/view-plant-variety.client.view.html',
+        templateUrl: '/modules/plant-varieties/client/views/view-plant-variety.client.view.html',
         controller: 'PlantVarietiesController',
         controllerAs: 'vm',
         resolve: {

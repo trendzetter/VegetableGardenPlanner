@@ -8,7 +8,7 @@
   TasksService.$inject = ['$resource'];
 
   function TasksService($resource) {
-    var Task = $resource('api/tasks/:taskId', {
+    var Task = $resource('/api/tasks/:taskId', {
       taskId: '@_id'
     }, {
       update: {

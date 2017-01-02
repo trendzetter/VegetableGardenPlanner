@@ -12,7 +12,7 @@
     $stateProvider
     .state('listGardens', {
       url: '/gardens/list/:plant/:selectedDate',
-      templateUrl: 'modules/gardens/client/views/list-gardens.client.view.html',
+      templateUrl: '/modules/gardens/client/views/list-gardens.client.view.html',
       controller: 'GardensListController',
       controllerAs: 'vm',
       data: {
@@ -22,7 +22,7 @@
     })
      .state('createGarden', {
        url: '/gardens/create',
-       templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
+       templateUrl: '/modules/gardens/client/views/form-garden.client.view.html',
        controller: 'GardensController',
        controllerAs: 'vm',
        resolve: {
@@ -35,7 +35,7 @@
      })
     .state('viewGarden', {
       url: '/gardens/:bk/:selectedDate',
-      templateUrl: 'modules/gardens/client/views/view-garden.client.view.html',
+      templateUrl: '/modules/gardens/client/views/view-garden.client.view.html',
       controller: 'GardensController',
       controllerAs: 'vm',
       resolve: {
@@ -48,7 +48,7 @@
     }).
     state('plantGarden', {
       url: '/gardens/plant/:bk/:selectedDate/:plant',
-      templateUrl: 'modules/gardens/client/views/view-garden.client.view.html',
+      templateUrl: '/modules/gardens/client/views/view-garden.client.view.html',
       controller: 'PlantGardenController',
       controllerAs: 'vm',
       resolve: {
@@ -61,7 +61,7 @@
     }).
     state('editGarden', {
       url: '/gardens/:bk/edit/:selectedDate',
-      templateUrl: 'modules/gardens/client/views/form-garden.client.view.html',
+      templateUrl: '/modules/gardens/client/views/form-garden.client.view.html',
       controller: 'GardensController',
       controllerAs: 'vm',
       resolve: {
@@ -74,7 +74,7 @@
     }).
     state('designGarden', {
       url: '/gardens/:gardenId/layout/:selectedDate',
-      templateUrl: 'modules/gardens/client/views/layout-garden.client.view.html'
+      templateUrl: '/modules/gardens/client/views/layout-garden.client.view.html'
     });
   }
 

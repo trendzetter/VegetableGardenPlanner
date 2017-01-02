@@ -32,7 +32,7 @@
           var planting = $scope.planting;
           planting.cultivationPlans = cultivationPlans;
           var modalInstance = cultivationPlanModal.open({
-              templateUrl: 'modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
+              templateUrl: '/modules/cultivation-plans/client/views/select-cultivation-plan.client.view.html',
               controller: 'SelectCultivationPlanController',
               size: size,
               resolve: {
@@ -74,7 +74,7 @@
         $scope.menuOptions.push(['Harvest', function() {
           var size = 'lg';
           var modalInstance = harvestModal.open({
-            templateUrl: 'modules/harvests/client/views/create-harvest.client.view.html',
+            templateUrl: '/modules/harvests/client/views/create-harvest.client.view.html',
             controller: 'HarvestsController',
             size: size,
             resolve: {

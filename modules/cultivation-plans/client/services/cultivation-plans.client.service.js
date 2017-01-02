@@ -8,7 +8,7 @@
   CultivationPlansService.$inject = ['$resource'];
 
   function CultivationPlansService($resource) {
-    return $resource('api/cultivation-plans/:cultivationPlanId', {
+    return $resource('/api/cultivation-plans/:cultivationPlanId', {
       cultivationPlanId: '@_id'
     }, {
       update: {
@@ -16,7 +16,7 @@
       },
       getByVariety:{
         method: 'GET',
-        url: 'api/cultivation-plans/plantvariety/:varietyId',
+        url: '/api/cultivation-plans/plantvariety/:varietyId',
         isArray: 'true'
       }
     });

@@ -8,7 +8,7 @@
   GardenpartsService.$inject = ['$resource', '$stateParams'];
 
   function GardenpartsService($resource, $stateParams) {
-    return $resource('api/gardenparts/:bk/:selectedDate', {
+    return $resource('/api/gardenparts/:bk/:selectedDate', {
       bk: '@bk',
       selectedDate: $stateParams.selectedDate
     }, {

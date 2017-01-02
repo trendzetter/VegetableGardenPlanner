@@ -8,7 +8,7 @@
   CropsService.$inject = ['$resource'];
 
   function CropsService($resource) {
-    return $resource('api/crops/:cropId', {
+    return $resource('/api/crops/:cropId', {
       cropId: '@_id'
     }, {
       update: {

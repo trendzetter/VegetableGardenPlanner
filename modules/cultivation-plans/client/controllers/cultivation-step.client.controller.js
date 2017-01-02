@@ -24,11 +24,6 @@
             // $scope.scale(128);
       }
     };
- /*  $scope.$on('changeVariety', function(){
-        var variety = JSON.parse($scope.vm.cultivationPlan.variety);
-        console.log('variety.cmBetweenRow / variety.cmInRow:' + $scope.vm.cultivationPlan.variety._id + $scope.vm.cultivationPlan.variety);
-
-    })*/
 
     /**
      * When there is a cropped icon to show encode it to base64 string and

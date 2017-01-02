@@ -16,7 +16,7 @@
       })
       .state('plantfamilies.list', {
         url: '',
-        templateUrl: 'modules/plant-families/client/views/list-plant-families.client.view.html',
+        templateUrl: '/modules/plant-families/client/views/list-plant-families.client.view.html',
         controller: 'PlantFamiliesListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('plantfamilies.create', {
         url: '/create',
-        templateUrl: 'modules/plant-families/client/views/form-plant-family.client.view.html',
+        templateUrl: '/modules/plant-families/client/views/form-plant-family.client.view.html',
         controller: 'PlantFamiliesController',
         controllerAs: 'vm',
         resolve: {
@@ -38,7 +38,7 @@
       })
       .state('plantfamilies.edit', {
         url: '/:plantFamilyId/edit',
-        templateUrl: 'modules/plant-families/client/views/form-plant-family.client.view.html',
+        templateUrl: '/modules/plant-families/client/views/form-plant-family.client.view.html',
         controller: 'PlantFamiliesController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('plantfamilies.view', {
         url: '/:plantFamilyId',
-        templateUrl: 'modules/plant-families/client/views/view-plant-family.client.view.html',
+        templateUrl: '/modules/plant-families/client/views/view-plant-family.client.view.html',
         controller: 'PlantFamiliesController',
         controllerAs: 'vm',
         resolve: {

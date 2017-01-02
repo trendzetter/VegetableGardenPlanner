@@ -12,7 +12,7 @@
     $stateProvider.
     state('editGardenpart', {
       url: '/gardenparts/:bk/:selectedDate/:plant',
-      templateUrl: 'modules/gardenparts/client/views/edit-gardenpart.client.view.html',
+      templateUrl: '/modules/gardenparts/client/views/edit-gardenpart.client.view.html',
       controller: 'GardenpartsController',
       controllerAs: 'vm',
       resolve: {

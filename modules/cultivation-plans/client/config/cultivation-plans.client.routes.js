@@ -16,7 +16,7 @@
       })
       .state('cultivation-plans.list', {
         url: '',
-        templateUrl: 'modules/cultivation-plans/client/views/list-cultivation-plans.client.view.html',
+        templateUrl: '/modules/cultivation-plans/client/views/list-cultivation-plans.client.view.html',
         controller: 'CultivationPlansListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('cultivation-plans.create', {
         url: '/create',
-        templateUrl: 'modules/cultivation-plans/client/views/form-cultivation-plan.client.view.html',
+        templateUrl: '/modules/cultivation-plans/client/views/form-cultivation-plan.client.view.html',
         controller: 'CultivationPlansController',
         controllerAs: 'vm',
         resolve: {
@@ -38,7 +38,7 @@
       })
       .state('cultivation-plans.edit', {
         url: '/:cultivationPlanId/edit',
-        templateUrl: 'modules/cultivation-plans/client/views/form-cultivation-plan.client.view.html',
+        templateUrl: '/modules/cultivation-plans/client/views/form-cultivation-plan.client.view.html',
         controller: 'CultivationPlansController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('cultivation-plans.view', {
         url: '/:cultivationPlanId',
-        templateUrl: 'modules/cultivation-plans/client/views/view-cultivation-plan.client.view.html',
+        templateUrl: '/modules/cultivation-plans/client/views/view-cultivation-plan.client.view.html',
         controller: 'CultivationPlansController',
         controllerAs: 'vm',
         resolve: {

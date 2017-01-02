@@ -16,7 +16,7 @@
       })
       .state('rulesets.list', {
         url: '',
-        templateUrl: 'modules/rule-sets/client/views/list-rule-sets.client.view.html',
+        templateUrl: '/modules/rule-sets/client/views/list-rule-sets.client.view.html',
         controller: 'RuleSetsListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('rulesets.create', {
         url: '/create',
-        templateUrl: 'modules/rule-sets/client/views/form-rule-set.client.view.html',
+        templateUrl: '/modules/rule-sets/client/views/form-rule-set.client.view.html',
         controller: 'RuleSetsController',
         controllerAs: 'vm',
         resolve: {
@@ -38,7 +38,7 @@
       })
       .state('rulesets.edit', {
         url: '/:ruleSetId/edit',
-        templateUrl: 'modules/rule-sets/client/views/form-rule-set.client.view.html',
+        templateUrl: '/modules/rule-sets/client/views/form-rule-set.client.view.html',
         controller: 'RuleSetsController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('rulesets.view', {
         url: '/:ruleSetId',
-        templateUrl: 'modules/rule-sets/client/views/view-rule-set.client.view.html',
+        templateUrl: '/modules/rule-sets/client/views/view-rule-set.client.view.html',
         controller: 'RuleSetsController',
         controllerAs: 'vm',
         resolve: {

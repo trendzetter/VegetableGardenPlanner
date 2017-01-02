@@ -8,7 +8,7 @@
   NotificationsService.$inject = ['$resource'];
 
   function NotificationsService($resource) {
-    var Notification = $resource('api/notifications/:notificationId', {
+    var Notification = $resource('/api/notifications/:notificationId', {
       notificationId: '@_id'
     }, {
       update: {

@@ -16,7 +16,7 @@
       })
       .state('crops.list', {
         url: '',
-        templateUrl: 'modules/crops/client/views/list-crops.client.view.html',
+        templateUrl: '/modules/crops/client/views/list-crops.client.view.html',
         controller: 'CropsListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('crops.create', {
         url: '/create',
-        templateUrl: 'modules/crops/client/views/form-crop.client.view.html',
+        templateUrl: '/modules/crops/client/views/form-crop.client.view.html',
         controller: 'CropsController',
         controllerAs: 'vm',
         resolve: {
@@ -38,7 +38,7 @@
       })
       .state('crops.edit', {
         url: '/:cropId/edit',
-        templateUrl: 'modules/crops/client/views/form-crop.client.view.html',
+        templateUrl: '/modules/crops/client/views/form-crop.client.view.html',
         controller: 'CropsController',
         controllerAs: 'vm',
         resolve: {
@@ -51,7 +51,7 @@
       })
       .state('crops.view', {
         url: '/:cropId',
-        templateUrl: 'modules/crops/client/views/view-crop.client.view.html',
+        templateUrl: '/modules/crops/client/views/view-crop.client.view.html',
         controller: 'CropsController',
         controllerAs: 'vm',
         resolve: {

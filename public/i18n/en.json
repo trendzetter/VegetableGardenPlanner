@@ -145,7 +145,7 @@
   "edit_plant_family": "Edit Plant Family",
   "plant_family_name_is_required": "Plant family name is required.",
   "vegetable_garden_planner": "VegetableGardenPlanner",
-  "brand_image": "modules/core/client/img/brand/en.png",
+  "brand_image": "/modules/core/client/img/brand/en.png",
   "edit_crop": "Edit Crop",
   "view_crop": "View Crop",
   "doy_end_sow_is_required": "Day of the year to end sowing is required.",

@@ -16,7 +16,7 @@
       })
       .state('notifications.list', {
         url: '',
-        templateUrl: 'modules/notifications/client/views/list-notifications.client.view.html',
+        templateUrl: '/modules/notifications/client/views/list-notifications.client.view.html',
         controller: 'NotificationsListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('notifications.view', {
         url: '/:notificationId',
-        templateUrl: 'modules/notifications/client/views/view-notification.client.view.html',
+        templateUrl: '/modules/notifications/client/views/view-notification.client.view.html',
         controller: 'NotificationsController',
         controllerAs: 'vm',
         resolve: {

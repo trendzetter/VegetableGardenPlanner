@@ -12,7 +12,7 @@
 
   function bootstrapConfig($compileProvider, $locationProvider, $httpProvider, $logProvider, $translateProvider) {
     $translateProvider.useStaticFilesLoader({
-        prefix: 'i18n/',
+        prefix: '/i18n/',
         suffix: '.json'
       });
       $translateProvider.useLocalStorage();

@@ -16,7 +16,7 @@
       })
       .state('admin.tasks.list', {
         url: '',
-        templateUrl: 'modules/tasks/client/views/admin/list-tasks.client.view.html',
+        templateUrl: '/modules/tasks/client/views/admin/list-tasks.client.view.html',
         controller: 'TasksAdminListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('admin.tasks.create', {
         url: '/create',
-        templateUrl: 'modules/tasks/client/views/admin/form-task.client.view.html',
+        templateUrl: '/modules/tasks/client/views/admin/form-task.client.view.html',
         controller: 'TasksAdminController',
         controllerAs: 'vm',
         data: {
@@ -37,7 +37,7 @@
       })
       .state('admin.tasks.edit', {
         url: '/:taskId/edit',
-        templateUrl: 'modules/tasks/client/views/admin/form-task.client.view.html',
+        templateUrl: '/modules/tasks/client/views/admin/form-task.client.view.html',
         controller: 'TasksAdminController',
         controllerAs: 'vm',
         data: {
