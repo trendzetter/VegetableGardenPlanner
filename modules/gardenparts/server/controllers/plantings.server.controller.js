@@ -86,7 +86,7 @@ exports.update = function(req, res) {
   var changedPlans = req.body.changedPlans;
   console.log("changedPlans" + JSON.stringify(changedPlans));
   for (var plantingid in changedPlans) {
-    Planting.findOneAndUpdate({ _id: plantingid }, { $set: { cultivationPlan: changedPlans[plantingid] } }, { new: true }, populateAndCreateTask);
+    Planting.findOneAndUpdate({ _id: plantingid }, { $set: { cultivationPlan: changedPlans[plantingid], cultivationPlanStep: 0 } }, { new: true }, populateAndCreateTask);
   }
 };
 

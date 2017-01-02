@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
   Planting = mongoose.model('Planting'),
   PlantVariety = mongoose.model('PlantVariety'),
   RuleSet = mongoose.model('RuleSet'),
+  CultivationPlan = mongoose.model('CultivationPlan'),
   _ = require('lodash');
 
 var addPlantings = function(next, req) {
@@ -123,18 +124,18 @@ var addPlantings = function(next, req) {
   },
   function(err, plantings) {
     if (err) return next(err);
-
-    console.log('gardenpart plantings: ' + req.gardenpart.plantings);
     req.gardenpart.pastplantings = [];
     req.gardenpart.futureplantings = [];
     var selectedDate = new Date(req.params.selectedDate);
     var index = 0;
+    var retrievePlans = {};
     while (index < plantings.length) {
       var planting = plantings[index];
       if (planting.validTo <= selectedDate) {
             var plantingArray = plantings.splice(index, 1);
             req.gardenpart.pastplantings.push(plantingArray[0]);
           } else {
+            //When planning new plantings we assume the existing which have passed maxGrowthDuration are now pastplantings
             if (planting.plantVariety.maxGrowthDuration && req.params.plant !== undefined) {
               var maxdate = new Date(planting.validFrom);
               maxdate.setDate(new Date(maxdate.getDate() + planting.plantVariety.maxGrowthDuration));
@@ -144,38 +145,65 @@ var addPlantings = function(next, req) {
                 var plantingArray = plantings.splice(index, 1);
                 req.gardenpart.pastplantings.push(plantingArray[0]);
               } else {
+                //it's not a pastplanting
+                if(typeof planting.cultivationPlanStep !== 'undefined'){
+                  retrievePlans[planting.cultivationPlan] = true;
+                }
                 index++;
               }
             } else {
+                //it's not a pastplanting              
+                if(typeof planting.cultivationPlanStep !== 'undefined'){
+                  retrievePlans[planting.cultivationPlan] = true;
+                }
               index++;
             }
 
           }
     }
-    req.gardenpart.plantings = plantings;
-
-    Garden.findOne({
-      validFrom: {
-        $lte: req.params.selectedDate
-      },
-      bk: req.gardenpart.garden
-    }).exec(function(err, garden) {
-      req.gardenpart.garden = garden;
-
-      RuleSet.findOne({ '_id': garden.ruleset }).exec(function(err, ruleset) {
-        req.gardenpart.ruleset = ruleset;
-        if (req.params.plant !== undefined) {
-          PlantVariety.findOne({ '_id': req.params.plant }).populate('crop', '_id name').exec(function(err, variety) {
-            if (err) return next(err);
-            if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
-            req.gardenpart.plant = variety;
-            next();
-          });
-        } else {
-          next();
+    //REtrieve the cultivationPlans and assign the images
+    var planids = Object.keys(retrievePlans);
+    CultivationPlan.find({ _id: { $in: planids } }, 'steps').exec(function(err, plans) {
+      for(var i = 0; i < plantings.length; i++){
+        var planting = plantings[i];
+        if( typeof planting.cultivationPlanStep !== 'undefined' ){
+          var count = 0;
+          while(JSON.stringify(plans[count]._id) !== JSON.stringify(planting.cultivationPlan)){
+            count++;
+          }
+          planting.icon = plans[count].steps[planting.cultivationPlanStep].icon;
+                   console.log('planting '+planting);
         }
+      }
+
+      req.gardenpart.plantings = plantings;
+      Garden.findOne({
+        validFrom: {
+          $lte: req.params.selectedDate
+        },
+        bk: req.gardenpart.garden
+      }).exec(function(err, garden) {
+        req.gardenpart.garden = garden;
+
+        RuleSet.findOne({ '_id': garden.ruleset }).exec(function(err, ruleset) {
+          req.gardenpart.ruleset = ruleset;
+          
+          if (req.params.plant !== undefined) {
+            PlantVariety.findOne({ '_id': req.params.plant }).populate('crop', '_id name').exec(function(err, variety) {
+              if (err) return next(err);
+              if (!variety) return next(new Error('Failed to load plant plantVariety ' + req.params.plant));
+              req.gardenpart.plant = variety;
+              next();
+            });
+          } else {
+            next();
+          }
+        });
       });
+    
     });
+
+    
   }).populate({
     path: 'plantVariety',
     model: 'PlantVariety'

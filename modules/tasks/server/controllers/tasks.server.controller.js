@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Task = mongoose.model('Task'),
   PlantVariety = mongoose.model('PlantVariety'),
+  Planting = mongoose.model('Planting'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -57,13 +58,16 @@ exports.confirm = function (req, res) {
     newtask.step = task.step + 1;
     newtask.cultivationPlan = new mongoose.Types.ObjectId(task.cultivationPlan._id);
     newtask.garden = task.garden;
-    newtask.planting = task. planting;
+    newtask.planting = task.planting;
     newtask.save(function (err) {
       if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
+      Planting.findOneAndUpdate({'_id': task.planting},{'cultivationPlanStep': newtask.step},function(){
+        console.log('updating the planting after finish the task failed'); 
+      });
       res.json(newtask);
     }
     });

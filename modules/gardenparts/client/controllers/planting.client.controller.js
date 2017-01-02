@@ -48,6 +48,9 @@
               console.log('cultivationplan has changed!');
               $scope.changedPlans[planting._id] = planting.cultivationPlan;
             }
+            if (planting.currentPlan != planting.cultivationPlan){
+              planting.cultivationPlanStep = 0;
+            }
           }, function() {
             console.log('Modal dismissed at: ' + new Date());
           });

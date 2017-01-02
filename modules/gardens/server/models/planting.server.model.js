@@ -32,6 +32,12 @@ var PlantingSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'CultivationPlan'
   },
+  cultivationPlanStep: {
+    type: Number
+  },
+  icon: {
+    type: String
+  },
   harvest: {
     type: Schema.ObjectId,
     ref: 'Harvest'
