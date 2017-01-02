@@ -1,6 +1,6 @@
 [![MEAN.JS Logo](http://localhost:3000/modules/core/client/img/brand/en.png)](http://www.VegetableGardenPlanner.org/)
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/VegetableGardenPlanner)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/VegetableGardenPlanner)
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
 [![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
 [![Coverage Status](https://coveralls.io/repos/meanjs/mean/badge.svg?branch=master&service=github)](https://coveralls.io/github/meanjs/mean?branch=master)
