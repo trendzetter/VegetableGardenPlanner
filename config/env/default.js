@@ -7,6 +7,9 @@ module.exports = {
     keywords: 'food,garden,planner,vegetable,grow',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
   },
+  db: {
+    promise: global.Promise
+  },
   port: process.env.PORT || 3000,
   host: process.env.HOST || '0.0.0.0',
   // DOMAIN config should be set to the fully qualified application accessible
@@ -39,11 +42,16 @@ module.exports = {
   },
   logo: 'modules/core/client/img/brand/logo.png',
   favicon: 'modules/core/client/img/brand/favicon.ico',
+  illegalUsernames: ['meanjs', 'administrator', 'password', 'admin', 'user',
+    'unknown', 'anonymous', 'null', 'undefined', 'api'
+  ],
   uploads: {
-    profileUpload: {
-      dest: './modules/users/client/img/profile/uploads/', // Profile upload destination path
-      limits: {
-        fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
+    profile: {
+      image: {
+        dest: './modules/users/client/img/profile/uploads/',
+        limits: {
+          fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
+        }
       }
     }
   },

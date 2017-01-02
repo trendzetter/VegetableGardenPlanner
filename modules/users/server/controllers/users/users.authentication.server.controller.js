@@ -30,7 +30,7 @@ exports.signup = function (req, res) {
   // Then save the user
   user.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
@@ -55,7 +55,7 @@ exports.signup = function (req, res) {
 exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
-      res.status(400).send(info);
+      res.status(422).send(info);
     } else {
       // Remove sensitive data before login
       user.password = undefined;
@@ -85,6 +85,9 @@ exports.signout = function (req, res) {
  */
 exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
+    if (req.query && req.query.redirect_to)
+      req.session.redirect_to = req.query.redirect_to;
+
     // Authenticate
     passport.authenticate(strategy, scope)(req, res, next);
   };
@@ -119,6 +122,14 @@ exports.oauthCallback = function (strategy) {
  * Helper function to save or update a OAuth user profile
  */
 exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+  // Setup info object
+  var info = {};
+
+  // Set redirection path on session.
+  // Do not redirect to a signin or signup page
+  if (noReturnUrls.indexOf(req.session.redirect_to) === -1)
+    info.redirect_to = req.session.redirect_to;
+
   if (!req.user) {
     // Define a search query fields
     var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
@@ -137,15 +148,6 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
     var searchQuery = {
       $or: [mainProviderSearchQuery, additionalProviderSearchQuery]
     };
-
-    // Setup info object
-    var info = {};
-
-    // Set redirection path on session.
-    // Do not redirect to a signin or signup page
-    if (noReturnUrls.indexOf(req.query.redirect_to) === -1) {
-      info.redirect_to = req.query.redirect_to;
-    }
 
     User.findOne(searchQuery, function (err, user) {
       if (err) {
@@ -198,7 +200,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 
       // And save the user
       user.save(function (err) {
-        return done(err, user, '/settings/accounts');
+        return done(err, user, info);
       });
     } else {
       return done(new Error('User is already connected using this provider'), user);
@@ -231,7 +233,7 @@ exports.removeOAuthProvider = function (req, res, next) {
 
   user.save(function (err) {
     if (err) {
-      return res.status(400).send({
+      return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {

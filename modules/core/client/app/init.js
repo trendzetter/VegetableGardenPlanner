@@ -10,7 +10,7 @@
     .module(app.applicationModuleName)
     .config(bootstrapConfig);
 
-  function bootstrapConfig($compileProvider, $locationProvider, $httpProvider, $translateProvider) {
+  function bootstrapConfig($compileProvider, $locationProvider, $httpProvider, $logProvider, $translateProvider) {
     $translateProvider.useStaticFilesLoader({
         prefix: 'i18n/',
         suffix: '.json'
@@ -19,16 +19,20 @@
       $translateProvider.preferredLanguage('en');
       $translateProvider.useSanitizeValueStrategy('escape');
 
-    $locationProvider.html5Mode(true).hashPrefix('!');
+      $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+      }).hashPrefix('!');
 
     $httpProvider.interceptors.push('authInterceptor');
 
     // Disable debug data for production environment
     // @link https://docs.angularjs.org/guide/production
     $compileProvider.debugInfoEnabled(app.applicationEnvironment !== 'production');
+    $logProvider.debugEnabled(app.applicationEnvironment !== 'production');
   }
 
-  bootstrapConfig.$inject = ['$compileProvider', '$locationProvider', '$httpProvider','$translateProvider'];
+  bootstrapConfig.$inject = ['$compileProvider', '$locationProvider', '$httpProvider', '$logProvider','$translateProvider'];
 
   // Then define the init function for starting up the application
   angular.element(document).ready(init);

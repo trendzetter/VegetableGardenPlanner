@@ -31,7 +31,7 @@ exports.update = function (req, res) {
 
     user.save(function (err) {
       if (err) {
-        return res.status(400).send({
+        return res.status(422).send({
           message: errorHandler.getErrorMessage(err)
         });
       } else {
@@ -45,7 +45,7 @@ exports.update = function (req, res) {
       }
     });
   } else {
-    res.status(400).send({
+    res.status(401).send({
       message: 'User is not signed in'
     });
   }
@@ -56,12 +56,12 @@ exports.update = function (req, res) {
  */
 exports.changeProfilePicture = function (req, res) {
   var user = req.user;
-  var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageUrl;
 
   // Filtering to upload only images
-  upload.fileFilter = profileUploadFileFilter;
+  var multerConfig = config.uploads.profile.image;
+  multerConfig.fileFilter = require(path.resolve('./config/lib/multer')).imageFileFilter;
+  var upload = multer(multerConfig).single('newProfilePicture');
 
   if (user) {
     existingImageUrl = user.profileImageURL;
@@ -73,10 +73,10 @@ exports.changeProfilePicture = function (req, res) {
         res.json(user);
       })
       .catch(function (err) {
-        res.status(400).send(err);
+        res.status(422).send(err);
       });
   } else {
-    res.status(400).send({
+    res.status(401).send({
       message: 'User is not signed in'
     });
   }
@@ -95,7 +95,7 @@ exports.changeProfilePicture = function (req, res) {
 
   function updateUser () {
     return new Promise(function (resolve, reject) {
-      user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
+      user.profileImageURL = config.uploads.profile.image.dest + req.file.filename;
       user.save(function (err, theuser) {
         if (err) {
           reject(err);
@@ -129,7 +129,7 @@ exports.changeProfilePicture = function (req, res) {
     return new Promise(function (resolve, reject) {
       req.login(user, function (err) {
         if (err) {
-          reject(err);
+          res.status(400).send(err);
         } else {
           resolve();
         }

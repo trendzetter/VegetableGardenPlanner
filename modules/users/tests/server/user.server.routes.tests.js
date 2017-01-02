@@ -90,7 +90,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should be able to login with username and email successfully and logout successfully', function (done) {
+  it('should be able to login with username successfully and logout successfully', function (done) {
     // Login with username
     agent.post('/api/auth/signin')
       .send(credentials)
@@ -119,18 +119,41 @@ describe('User CRUD tests', function () {
               signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
             }
 
-            // Login with username
-            agent.post('/api/auth/signin')
-              .send(credentials)
-              .expect(200)
-              .end(function (signinErr, signinRes) {
-                // Handle signin error
-                if (signinErr) {
-                  return done(signinErr);
-                }
+            return done();
+          });
+      });
+  });
 
-                return done();
-              });
+  it('should be able to login with email successfully and logout successfully', function (done) {
+    // Login with username
+    agent.post('/api/auth/signin')
+      .send(credentialsEmail)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        // Logout
+        agent.get('/api/auth/signout')
+          .expect(302)
+          .end(function (signoutErr, signoutRes) {
+            if (signoutErr) {
+              return done(signoutErr);
+            }
+
+            signoutRes.redirect.should.equal(true);
+
+            // NodeJS v4 changed the status code representation so we must check
+            // before asserting, to be comptabile with all node versions.
+            if (semver.satisfies(process.versions.node, '>=4.0.0')) {
+              signoutRes.text.should.equal('Found. Redirecting to /');
+            } else {
+              signoutRes.text.should.equal('Moved Temporarily. Redirecting to /');
+            }
+
+            return done();
           });
       });
   });
@@ -328,7 +351,7 @@ describe('User CRUD tests', function () {
         .send({
           username: ''
         })
-        .expect(400)
+        .expect(422)
         .end(function (err, res) {
           // Handle error
           if (err) {
@@ -507,7 +530,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '1234567890-ABC-123-Aa$',
             currentPassword: credentials.password
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -536,7 +559,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '1234567890Aa$',
             currentPassword: 'some_wrong_passwordAa$'
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -565,7 +588,7 @@ describe('User CRUD tests', function () {
             verifyPassword: '',
             currentPassword: credentials.password
           })
-          .expect(400)
+          .expect(422)
           .end(function (err, res) {
             if (err) {
               return done(err);
@@ -577,7 +600,7 @@ describe('User CRUD tests', function () {
       });
   });
 
-  it('should not be able to change user own password if no new password is at all given', function (done) {
+  it('should not be able to change user own password if not signed in', function (done) {
 
     // Change password
     agent.post('/api/users/password')
@@ -586,7 +609,7 @@ describe('User CRUD tests', function () {
         verifyPassword: '1234567890Aa$',
         currentPassword: credentials.password
       })
-      .expect(400)
+      .expect(401)
       .end(function (err, res) {
         if (err) {
           return done(err);
@@ -759,7 +782,7 @@ describe('User CRUD tests', function () {
 
           agent.put('/api/users')
             .send(userUpdate)
-            .expect(400)
+            .expect(422)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
@@ -811,7 +834,7 @@ describe('User CRUD tests', function () {
 
           agent.put('/api/users')
             .send(userUpdate)
-            .expect(400)
+            .expect(422)
             .end(function (userInfoErr, userInfoRes) {
               if (userInfoErr) {
                 return done(userInfoErr);
@@ -888,7 +911,7 @@ describe('User CRUD tests', function () {
 
       agent.put('/api/users')
         .send(userUpdate)
-        .expect(400)
+        .expect(401)
         .end(function (userInfoErr, userInfoRes) {
           if (userInfoErr) {
             return done(userInfoErr);
@@ -906,7 +929,7 @@ describe('User CRUD tests', function () {
 
     agent.post('/api/users/picture')
       .send({})
-      .expect(400)
+      .expect(401)
       .end(function (userInfoErr, userInfoRes) {
         if (userInfoErr) {
           return done(userInfoErr);
@@ -931,7 +954,6 @@ describe('User CRUD tests', function () {
 
         agent.post('/api/users/picture')
           .attach('newProfilePicture', './modules/users/client/img/profile/default.png')
-          .send(credentials)
           .expect(200)
           .end(function (userInfoErr, userInfoRes) {
             // Handle change profile picture error
@@ -961,7 +983,47 @@ describe('User CRUD tests', function () {
         agent.post('/api/users/picture')
           .attach('fieldThatDoesntWork', './modules/users/client/img/profile/default.png')
           .send(credentials)
-          .expect(400)
+          .expect(422)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
+  it('should not be able to upload a non-image file as a profile picture', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr, signinRes) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/picture')
+          .attach('newProfilePicture', './modules/users/tests/server/img/text-file.txt')
+          .send(credentials)
+          .expect(422)
+          .end(function (userInfoErr, userInfoRes) {
+            done(userInfoErr);
+          });
+      });
+  });
+
+  it('should not be able to change profile picture to too big of a file', function (done) {
+    agent.post('/api/auth/signin')
+      .send(credentials)
+      .expect(200)
+      .end(function (signinErr) {
+        // Handle signin error
+        if (signinErr) {
+          return done(signinErr);
+        }
+
+        agent.post('/api/users/picture')
+          .attach('newProfilePicture', './modules/users/tests/server/img/too-big-file.png')
+          .send(credentials)
+          .expect(422)
           .end(function (userInfoErr, userInfoRes) {
             done(userInfoErr);
           });

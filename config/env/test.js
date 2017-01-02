@@ -28,12 +28,23 @@ module.exports = {
   app: {
     title: defaultEnvConfig.app.title + ' - Test Environment'
   },
+  uploads: {
+    profile: {
+      image: {
+        dest: './modules/users/client/img/profile/uploads/',
+        limits: {
+          fileSize: 100000 // Limit filesize (100kb) for testing purposes
+        }
+      }
+    }
+  },
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'APP_ID',
     clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
     callbackURL: '/api/auth/facebook/callback'
   },
   twitter: {
+    username: '@TWITTER_USERNAME',
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
     clientSecret: process.env.TWITTER_SECRET || 'CONSUMER_SECRET',
     callbackURL: '/api/auth/twitter/callback'
@@ -74,7 +85,7 @@ module.exports = {
     options: {
       logResults: process.env.MONGO_SEED_LOG_RESULTS !== 'false',
       seedUser: {
-        username: process.env.MONGO_SEED_USER_USERNAME || 'user',
+        username: process.env.MONGO_SEED_USER_USERNAME || 'seeduser',
         provider: 'local',
         email: process.env.MONGO_SEED_USER_EMAIL || 'user@localhost.com',
         firstName: 'User',
@@ -83,7 +94,7 @@ module.exports = {
         roles: ['user']
       },
       seedAdmin: {
-        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'admin',
+        username: process.env.MONGO_SEED_ADMIN_USERNAME || 'seedadmin',
         provider: 'local',
         email: process.env.MONGO_SEED_ADMIN_EMAIL || 'admin@localhost.com',
         firstName: 'Admin',

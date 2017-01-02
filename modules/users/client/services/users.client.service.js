@@ -9,7 +9,7 @@
   UsersService.$inject = ['$resource'];
 
   function UsersService($resource) {
-    var Users = $resource('api/users', {}, {
+    var Users = $resource('/api/users', {}, {
       update: {
         method: 'PUT'
       },
@@ -18,30 +18,30 @@
       },
       updatePassword: {
         method: 'POST',
-        url: 'api/users/password'
+        url: '/api/users/password'
       },
       deleteProvider: {
         method: 'DELETE',
-        url: 'api/users/accounts',
+        url: '/api/users/accounts',
         params: {
           provider: '@provider'
         }
       },
       sendPasswordResetToken: {
         method: 'POST',
-        url: 'api/auth/forgot'
+        url: '/api/auth/forgot'
       },
       resetPasswordWithToken: {
         method: 'POST',
-        url: 'api/auth/reset/:token'
+        url: '/api/auth/reset/:token'
       },
       signup: {
         method: 'POST',
-        url: 'api/auth/signup'
+        url: '/api/auth/signup'
       },
       signin: {
         method: 'POST',
-        url: 'api/auth/signin'
+        url: '/api/auth/signin'
       }
     });
 
@@ -81,7 +81,7 @@
   AdminService.$inject = ['$resource'];
 
   function AdminService($resource) {
-    return $resource('api/users/:userId', {
+    return $resource('/api/users/:userId', {
       userId: '@_id'
     }, {
       update: {

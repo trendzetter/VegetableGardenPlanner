@@ -8,7 +8,9 @@ module.exports = {
       css: [
         // bower:css
         'public/lib/ng-cropper/dist/ngCropper.all.min.css',
-        'public/lib/ng-img-crop/compile/minified/ng-img-crop.css',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
         // endbower
         'public/lib/jquery-ui/themes/smoothness/jquery-ui.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.min.css',
@@ -24,6 +26,7 @@ module.exports = {
         'public/lib/angular-messages/angular-messages.min.js',
         'public/lib/angular-mocks/angular-mocks.js',
         'public/lib/angular-resource/angular-resource.min.js',
+        'public/lib/angular-ui-notification/dist/angular-ui-notification.min.js',
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'public/lib/angular-file-upload/dist/angular-file-upload.min.js',
@@ -32,7 +35,6 @@ module.exports = {
         'public/lib/ng-cropper/dist/ngCropper.all.min.js',
         'public/lib/dragon-drop/dist/dragon-drop.min.js',
         'public/lib/ng-file-upload/ng-file-upload.min.js',
-        'public/lib/ng-img-crop/compile/minified/ng-img-crop.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-translate/angular-translate.min.js',
         'public/lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
