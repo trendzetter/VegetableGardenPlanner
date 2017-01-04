@@ -1,0 +1,37 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>{{vm.message._id ? 'Edit Message' : 'New Message'}}</h1>
+  </div>
+  <div class="pull-right">
+    <a ng-show="vm.message._id" class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.messageForm" class="form-horizontal" ng-submit="vm.save(vm.form.messageForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.message.title" id="title" class="form-control" placeholder="Title" required></input>
+          <div ng-messages="vm.form.messageForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Message title is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="content">Content</label>
+          <textarea name="content" data-ng-model="vm.message.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.message._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>
+</section>
+</section>
