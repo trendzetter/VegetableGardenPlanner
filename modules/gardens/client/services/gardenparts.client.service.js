@@ -22,7 +22,7 @@
       },
       deleteParts: {
         method: 'POST',
-        url: 'api/gardenparts/delete/:bk/:selectedDate',
+        url: '/api/gardenparts/delete/:bk/:selectedDate',
         isArray: true
       }
     });

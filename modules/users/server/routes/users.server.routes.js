@@ -7,7 +7,7 @@ module.exports = function(app) {
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
   // added for meangarden
-  app.route('/users/id/:name').get(users.getByName);
+  app.route('/api/users/id/:name').get(users.getByName);
 
   app.route('/api/users').put(users.update);
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);

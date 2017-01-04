@@ -14,7 +14,7 @@
         method: 'PUT'
       },
       get: {
-        url: 'users/id/:name'
+        url: '/api/users/id/:name'
       },
       updatePassword: {
         method: 'POST',
