@@ -153,5 +153,6 @@
   "max_growth_duration_is_required": "Maximum aantal dagen groei is vereist.",
   "min_growth_duration_is_required": "Minimum aantal dagen groei is vereist.",
   "cm_in_row_is_required": "Cm tussen planten in een rij is vereist.",
-  "cm_between_row_is_required": "Cm tussen de rijen is vereist."
+  "cm_between_row_is_required": "Cm tussen de rijen is vereist.",
+  "no_messages_yet": "Nog geen berichten. Je zal berichten onvangen als je teeltplannen toepast op je moestuin."
 }

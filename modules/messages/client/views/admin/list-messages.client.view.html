@@ -20,7 +20,7 @@
       <p class="list-group-item-text" data-ng-bind="message.content"></p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="messages.$resolved && !messages.length">
+  <div class="alert alert-warning text-center" data-ng-if="vm.messages.$resolved && !vm.messages.length">
     No messages yet, why don't you <a data-ui-sref="admin.messages.create">create one</a>?
   </div>
 </section>

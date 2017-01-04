@@ -153,5 +153,6 @@
   "max_growth_duration_is_required": "Maximum number of days growth is required.",
   "min_growth_duration_is_required": "Minimum number of days growth is required.",
   "cm_in_row_is_required": "Cm between plants in a row is required.",
-  "cm_between_row_is_required": "Cm between rows is required."
+  "cm_between_row_is_required": "Cm between rows is required.",
+  "no_messages_yet": "No messages yet. You will receive messages if you apply cutivationplans to your vegetable garden."
 }

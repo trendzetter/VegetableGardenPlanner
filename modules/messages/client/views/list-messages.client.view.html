@@ -16,6 +16,9 @@
       <p class="list-group-item-text" ng-bind="message.content"></p>
     </a>
   </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.messages.$resolved && !vm.messages.length" translate>
+    no_messages_yet
+  </div>
 </section>
 </section>
 </section>
