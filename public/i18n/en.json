@@ -154,5 +154,22 @@
   "min_growth_duration_is_required": "Minimum number of days growth is required.",
   "cm_in_row_is_required": "Cm between plants in a row is required.",
   "cm_between_row_is_required": "Cm between rows is required.",
-  "no_messages_yet": "No messages yet. You will receive messages if you apply cutivationplans to your vegetable garden."
+  "no_messages_yet": "No messages yet. You will receive messages if you apply cutivationplans to your vegetable garden.",
+  "intro": "Here you can design your own vegetable garden and keep track of all your plans. The program will assist you with the choices and notify you of important events.",
+  "discovery_what_others_sow": "Discover what others are sowing.",
+  "receive_message_when_plant": "Receive a message when to plant.",
+  "apply_crop_rotation": "Apply croprotation as a master without all the years of painful learning.",
+  "capital_design": "D",
+  "rest_design": "esign!",
+  "design_here": "Design ",
+  "your_own_vegetable_garden": "your own vegetable garden.",
+  "become_inspired": "Become inspired be other vegetable gardeners.",
+  "capital_discover": "D",
+  "rest_discover": "iscover!",
+  "capital_share": "S",
+  "rest_share": "hare!",
+  "share_knowledge": "Share knowledge and experience.",
+  "capital_enjoy": "E",
+  "rest_enjoy": "njoy!",
+  "everyone_grow_vegetables": "Everyone can grow vegetables!"
 }
