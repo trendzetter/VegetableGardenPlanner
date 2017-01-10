@@ -86,7 +86,7 @@
                 <div class="col-md-12">
                     <label class="control-label" translate>icon</label>
                     <span translate>select_image</span><input class="btn btn-default btn-file" type="file" nv-file-select uploader="uploader" class="ng-pristine ng-invalid ng-invalid-required">
-                    <label ng-if="!step.icon && !vm.cultivationPlan._id" class="label-warning" translate>icon_is_required</label>
+                    <!--<label ng-if="!step.icon && !vm.cultivationPlan._id" class="label-warning" translate>icon_is_required</label>-->
                 </div>
                 <div class="text-center img-container col-md-4">
                     <label class="control-label" translate>cut_image</label>
@@ -94,7 +94,8 @@
                 </div>
                 <div class="preview-container col-md-4 pull-right input-group">
                     <label class="control-label" translate>preview</label>
-                    <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;" required>
+                    <img ng-if="step.icon" ng-src="{{step.icon}}" style="border: solid 2px;" >
+                    <img ng-if="!step.icon" style="border: solid 2px;" src="/api/image/{{iconwidth}}/{{iconheight}}/horizontal" >
                 </div>
             </div>
         </div>

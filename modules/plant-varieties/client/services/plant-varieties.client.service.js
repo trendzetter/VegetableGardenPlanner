@@ -15,7 +15,7 @@
     },
     getCrop: {
       method: 'GET',
-      url: 'api/plant-varieties/get-crop/:cropId',
+      url: '/api/plant-varieties/get-crop/:cropId',
       isArray: true
     }
   });

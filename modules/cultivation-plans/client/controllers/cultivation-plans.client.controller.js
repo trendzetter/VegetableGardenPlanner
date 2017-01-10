@@ -29,6 +29,8 @@
     } else {
       $scope.iconRatio = cultivationPlan.variety.cmInRow / cultivationPlan.variety.cmBetweenRow;
       $scope.iconScale = cultivationPlan.variety.cmInRow * 2;
+      $scope.iconwidth = cultivationPlan.variety.cmInRow*2;
+      $scope.iconheight = cultivationPlan.variety.cmBetweenRow*2;
     }
 
     function changeCrop() {
@@ -39,9 +41,10 @@
 
     function changeVariety() {
       var variety = JSON.parse(vm.cultivationPlan.variety);
-      console.log('variety: ' + JSON.parse($scope.vm.cultivationPlan.variety));
       $scope.iconRatio = variety.cmInRow / variety.cmBetweenRow;
       $scope.iconScale = variety.cmInRow * 2;
+      $scope.iconwidth = variety.cmInRow*2;
+      $scope.iconheight = variety.cmBetweenRow*2;
       vm.cultivationPlan.steps = [];
       newStep();
     }

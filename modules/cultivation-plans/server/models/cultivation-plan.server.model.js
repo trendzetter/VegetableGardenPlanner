@@ -18,8 +18,7 @@ var CultivationStepSchema = new Schema({
     trim: true
   },
   icon: {
-    type: String,
-    required: 'Please select an icon'
+    type: String
   },
   minduration: {
     type: Number,
