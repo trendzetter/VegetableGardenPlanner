@@ -23,5 +23,9 @@
       $uibModalInstance.dismiss('cancel');
       $state.go('cultivation-plans.create');
     };
+
+    $scope.cancel = function () {
+      $uibModalInstance.dismiss('cancel');
+    };
   }
 }());

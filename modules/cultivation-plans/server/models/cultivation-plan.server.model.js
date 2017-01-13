@@ -20,6 +20,9 @@ var CultivationStepSchema = new Schema({
   icon: {
     type: String
   },
+  iconVertical: {
+    type: String
+  },
   minduration: {
     type: Number,
     required: 'Please indicated the minimal duration'

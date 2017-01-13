@@ -109,9 +109,9 @@ angular.module('gardens').directive('gardenpart', ['$timeout',
             };
             draggableConfig.drag = updateCoordinates;
             elem.draggable(draggableConfig);
-            elem.effect('pulsate', function() {
+         /*   elem.effect('pulsate', function() {
               scope.opacity = 1;
-            });
+            });*/
           }
         }
       }

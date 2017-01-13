@@ -1,6 +1,6 @@
 <rulers />
 <section data-ng-controller="GardenversionsController" data-ng-init="findOneVersion()"  id="garden" style="width: {{ garden.elemwidth }}px; height: {{ garden.elemheight }}px; top: {{ garden.elemtop }}px; left: {{ garden.elemleft }}px;" class="layoutgarden">
-      <!--  <div uib-popover-template="modules/gardens/client/views/popover.client.view.html" popover-placement="right" popover-template-trigger="mouseenter"-->
+
       <div uib-popover-template="'/modules/gardens/client/views/popover.client.view.html'" popover-placement="right" popover-trigger="mouseenter"
            context-menu="menuOptions"
              id="id{{gardenpart._id}}" gardenpart='layout' ng-repeat="gardenpart in gardenparts"  ng-controller="GardenpartController" ng-init="gardenpart=gardenpart" class="gardenpart" style="box-shadow:0px 0px 0px 3px blue inset;width: {{ gardenpart.elemwidth }}px; height: {{ gardenpart.elemheight }}px; top: {{ gardenpart.elemtop }}px; left: {{ gardenpart.elemleft }}px;" />

@@ -171,8 +171,12 @@ var addPlantings = function(next, req) {
           while(JSON.stringify(plans[count]._id) !== JSON.stringify(planting.cultivationPlan)){
             count++;
           }
-          planting.icon = plans[count].steps[planting.cultivationPlanStep].icon;
-                   console.log('planting '+planting);
+          if(planting.orientation === 'vertical'){
+            planting.icon = plans[count].steps[planting.cultivationPlanStep].iconVertical;
+          }else{
+            planting.icon = plans[count].steps[planting.cultivationPlanStep].icon;
+          }
+          console.log('planting '+planting);
         }
       }
 

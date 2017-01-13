@@ -17,14 +17,35 @@
     $scope.options = {
       maximize: true,
       aspectRatio: $scope.iconRatio,
-        // aspectRatio: 16 / 9,
       crop: function(dataNew) {
         data = dataNew;
         $scope.scale($scope.iconScale);
-            // $scope.scale(128);
       }
     };
 
+
+function rotateBase64Image90Degree(base64data) {
+  var canvas = document.getElementById("c");
+  var ctx = canvas.getContext("2d");
+  var image = new Image();
+        ($scope.step || ($scope.step = {})).icon = base64data;
+  image.src = base64data;
+  image.onload = function() {
+
+    canvas.width = image.height;
+    canvas.height = image.width;
+    ctx.rotate(90 * Math.PI / 180);
+    ctx.translate(0, -canvas.width);
+    ctx.drawImage(image, 0, 0); 
+    var dataUrl = canvas.toDataURL();    
+    $timeout(showIconVertical(dataUrl));
+  };
+}
+
+
+function showIconVertical(dataUrl){
+  $scope.step.iconVertical = dataUrl;
+}
     /**
      * When there is a cropped icon to show encode it to base64 string and
      * use as a source for an icon element.
@@ -32,7 +53,7 @@
     $scope.preview = function() {
       if (!file || !data) return;
       Cropper.crop(file, data).then(Cropper.encode).then(function(dataUrl) {
-        ($scope.step || ($scope.step = {})).icon = dataUrl;
+        rotateBase64Image90Degree(dataUrl);  
       });
     };
 
@@ -44,7 +65,7 @@
           });
         })
         .then(Cropper.encode).then(function(dataUrl) {
-          ($scope.step || ($scope.step = {})).icon = dataUrl;
+          rotateBase64Image90Degree(dataUrl);
         });
     };
 

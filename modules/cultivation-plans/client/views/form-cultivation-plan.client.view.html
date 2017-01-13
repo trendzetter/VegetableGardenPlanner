@@ -90,7 +90,13 @@
                 </div>
                 <div class="text-center img-container col-md-4">
                     <label class="control-label" translate>cut_image</label>
-                <img ng-cropper ng-cropper-options="options" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:150px">
+                <img ng-cropper ng-cropper ng-cropper-proxy="cropperProxy"  ng-cropper-options="options" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-src="{{dataUrl}}" ng-if="dataUrl" style="width:150px">
+                </div>
+                <div class="preview-container col-md-4 pull-right input-group">
+                    <label class="control-label" translate>preview vertical</label>
+                    <canvas id="c" style="display: none" />
+                    <img  ng-if="step.iconVertical" ng-src="{{step.iconVertical}}" style="border: solid 2px;" >
+                    <img ng-if="!step.iconVertical" style="border: solid 2px;" src="/api/image/{{iconheight}}/{{iconwidth}}/vertical" >
                 </div>
                 <div class="preview-container col-md-4 pull-right input-group">
                     <label class="control-label" translate>preview</label>

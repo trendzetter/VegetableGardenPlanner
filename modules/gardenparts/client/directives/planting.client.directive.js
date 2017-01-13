@@ -94,8 +94,7 @@ angular.module('gardenparts').directive('planting', ['$timeout',
         if (typeof scope.planting._id === 'undefined') {
           scope.opacity = 1;
           element.addClass('newPlanting');
-          /* element.effect('pulsate', function() {
-
+     /*      element.effect('pulsate', function() {
           });*/
           makeResizable();
           makeDraggable();
