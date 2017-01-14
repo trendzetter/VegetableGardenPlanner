@@ -24,6 +24,13 @@
           </div>
         </div>
         <div class="form-group" show-errors>
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" class="form-control" ng-model="vm.user.email" placeholder="Email" required />
+          <div ng-messages="vm.userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Email is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
           <label class="control-label" for="roles">Roles</label>
           <div class="controls">
             <input class="form-control" type="text" name="roles" ng-model="vm.user.roles" id="roles" ng-list required />
