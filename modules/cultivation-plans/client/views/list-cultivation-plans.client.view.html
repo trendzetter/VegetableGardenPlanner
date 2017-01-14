@@ -2,7 +2,12 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1 translate>cultivation_plans</h1>
+    <h1>
+      <el translate>cultivation_plans</el>
+      <a class="btn btn-primary pull-right" data-ui-sref="cultivation-plans.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
   </div>
   <div class="list-group">
     <a ng-repeat="cultivationPlan in vm.cultivationPlans" ui-sref="cultivation-plans.view({ cultivationPlanId: cultivationPlan._id })" class="list-group-item">

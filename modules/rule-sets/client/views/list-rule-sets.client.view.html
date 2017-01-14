@@ -2,7 +2,12 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1 translate>rule_sets</h1>
+    <h1>
+      <el translate>rule_sets</el>
+      <a class="btn btn-primary pull-right" data-ui-sref="rulesets.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
   </div>
   <div class="list-group">
     <a ng-repeat="ruleset in vm.rulesets" ui-sref="rulesets.view({ ruleSetId: ruleset._id })" class="list-group-item">

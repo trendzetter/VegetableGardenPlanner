@@ -16,10 +16,10 @@
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'system', {
+   /* Menus.addSubMenuItem('topbar', 'system', {
       title: 'add_plant_family',
       state: 'plantfamilies.create',
       roles: ['user']
-    });
+    });*/
   }
 }());

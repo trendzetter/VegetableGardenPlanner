@@ -22,10 +22,10 @@
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'system', {
+/*    menuService.addSubMenuItem('topbar', 'system', {
       title: 'add_cultivation_plan',
       state: 'cultivation-plans.create',
       roles: ['user']
-    });
+    });*/
   }
 }());

@@ -22,10 +22,10 @@
     });
 
     // Add the dropdown create item
-    Menus.addSubMenuItem('topbar', 'system', {
+  /*  Menus.addSubMenuItem('topbar', 'system', {
       title: 'add_crop',
       state: 'crops.create',
       roles: ['user']
-    });
+    });*/
   }
 }());

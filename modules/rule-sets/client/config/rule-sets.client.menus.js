@@ -16,10 +16,10 @@
     });
 
     // Add the dropdown create item
-    menuService.addSubMenuItem('topbar', 'system', {
+  /*  menuService.addSubMenuItem('topbar', 'system', {
       title: 'create_rule_set',
       state: 'rulesets.create',
       roles: ['user']
-    });
+    });*/
   }
 }());

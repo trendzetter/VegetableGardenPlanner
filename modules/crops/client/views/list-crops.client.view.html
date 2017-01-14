@@ -2,10 +2,22 @@
   <section class="container">
 <section>
   <div class="page-header">
-    <h1 translate>crops</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <h1>
+          <el translate>crops</el>
+          <a class="btn btn-primary pull-right" data-ui-sref="crops.create">
+            <i class="glyphicon glyphicon-plus"></i>
+          </a>
+        </h1>
+      </div>
+      <div class="col-md-4  pull-right" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+      </div>
+    </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="crop in vm.crops" ui-sref="crops.view({ cropId: crop._id })" class="list-group-item">
+    <a ng-repeat="crop in vm.pagedItems" ui-sref="crops.view({ cropId: crop._id })" class="list-group-item">
       <small class="list-group-item-text">
             <span translate>{{ 'posted_on'|translate:{date:crop.created} }}</span>
             <span translate>by</span>
@@ -16,6 +28,9 @@
       <p class="list-group-item-text" ng-bind="crop.plantfamily.name"></p>
     </a>
   </div>
+
+  <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+
   <div class="alert alert-warning text-center" ng-if="vm.crops.$resolved && !vm.crops.length">
     No crops yet, why don't you <a ui-sref="crops.create">create one</a>?
   </div>
