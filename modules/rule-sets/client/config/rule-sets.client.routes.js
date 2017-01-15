@@ -20,7 +20,7 @@
         controller: 'RuleSetsListController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Rule sets list'
+          pageTitle: 'rule_set_list'
         }
       })
       .state('rulesets.create', {
@@ -32,8 +32,8 @@
           ruleSetResolve: newRuleset
         },
         data: {
-          roles: ['user', 'admin']
-      //    pageTitle : 'Add Rule set'
+          roles: ['user', 'admin'],
+          pageTitle : 'add_rule_set'
         }
       })
       .state('rulesets.edit', {
@@ -46,7 +46,7 @@
         },
         data: {
           roles: ['user', 'admin'],
-          pageTitle: 'Edit Rule set {{ ruleSetResolve.name }}'
+          pageTitle: 'edit_rule_set'
         }
       })
       .state('rulesets.view', {
@@ -58,7 +58,7 @@
           ruleSetResolve: getRuleSet
         },
         data: {
-          pageTitle: 'Rule set {{ ruleSetResolve.name }}'
+          pageTitle: 'view_rule_set'
         }
       });
   }

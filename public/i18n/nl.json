@@ -139,7 +139,7 @@
   "years_between_cultivation": "Jaren tussen teelten",
   "crop_group": "Groentengroep: ",
   "previous_group":"Vorige groetengroep: ",
-  "years": "Jaren: ",
+  "years": " jaren voor ",
   "add_rule": "Regel toevoegen",
   "add_crop_group": "Groetengroep toevoegen",
   "edit_plant_family": "Bewerk plantenfamilie",
@@ -171,5 +171,12 @@
   "share_knowledge": "Deel je ervaringen en kennis.",
   "capital_enjoy": "G",
   "rest_enjoy": "eniet!",
-  "everyone_grow_vegetables": "Iedereen kan groenten kweken!"
+  "everyone_grow_vegetables": "Iedereen kan groenten kweken!",
+  "rule_set_list": "Lijst rotatieschema's",
+  "add_rule_set":"Rotatieschema toevoegen",
+  "view_rule_set": "Bekijk rotatieschema",
+  "after": "Na",
+  "wait": " wacht ",
+  "no": " geen ",
+  "crop_groups": "Groentengroepen: "
 }

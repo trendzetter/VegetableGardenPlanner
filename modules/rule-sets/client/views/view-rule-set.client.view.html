@@ -12,7 +12,7 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <label class="control-label" for="name">Groentengroepen:</label>
+  <label class="control-label" for="name" translate>crop_groups</label>
 <div class="controls">
   <div class="panel panel-default col-md-6" ng-repeat="cropgroup in vm.ruleset.cropgroups">
     <div class="panel-heading" data-ng-bind="cropgroup.name"></div>
@@ -22,15 +22,17 @@
   </div>
 </div>
           <div class="controls" ng-repeat="rule in vm.ruleset.rotationrules">
-              Type of rule:   <select  data-ng-model="rule.ruletype" disabled>
-              <option value="SuccessiveCrop">Successive crops</option>
-              <option value="YearsBetweenCultivation">Years between cultivations</option>
-          </select>
-              Cropgroup: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup" disabled></select>
-              Previous cropgroup: <select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup" disabled></select>
-              <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" >Years: <select ng-model="rule.yearsBetween" to-number>
-                <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
-              </select></span>
+              <span translate>rule_type</span>
+              <select  data-ng-model="rule.ruletype" disabled>
+                  <option value="SuccessiveCrop" translate>successive_crop</option>
+                  <option value="YearsBetweenCultivation" translate>years_between_cultivation</option>
+              </select>
+              <span translate>after</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup" disabled></select>
+              <span ng-hide="rule.ruletype!=='YearsBetweenCultivation'"><span translate>wait</span>
+              <input size="1" data-ng-model="rule.yearsBetween" disabled>
+               <!-- <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>-->
+              <span translate>years</span></span>
+              <span ng-hide="rule.ruletype==='YearsBetweenCultivation'" translate>no</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup" disabled></select>
           </div>
   <small>
     <em class="text-muted">

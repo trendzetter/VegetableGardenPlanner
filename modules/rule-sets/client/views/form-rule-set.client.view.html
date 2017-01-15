@@ -48,11 +48,11 @@
                                 <option value="SuccessiveCrop" translate>successive_crop</option>
                                 <option value="YearsBetweenCultivation" translate>years_between_cultivation</option>
                             </select>
-            <span translate>crop_group</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup"></select>
-            <span translate>previous_group</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup"></select>
-            <span ng-hide="rule.ruletype!='YearsBetweenCultivation'" translate>years</span><select data-ng-model="rule.yearsBetween" to-number>
+            <span translate>after</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.previousCropgroup"></select>
+            <span ng-hide="rule.ruletype!=='YearsBetweenCultivation'"><el translate>wait</el><select data-ng-model="rule.yearsBetween" to-number>
                 <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
-            </select></span>
+            </select><span translate>years</span></span>
+            <span ng-hide="rule.ruletype==='YearsBetweenCultivation'" translate>no</span><select data-ng-options="cropgroup._id as cropgroup.name for cropgroup in vm.ruleset.cropgroups" data-ng-model="rule.cropgroup"></select>
             <a ng-click="vm.removeRule($index)" class="btn btn-default pull-right">
               <i class="glyphicon glyphicon-remove-circle" ></i>
             </a>

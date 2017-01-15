@@ -44,7 +44,6 @@ function emailCallback(message) {
 
         if (err) {
           // errorCount++;
-          console.log('Error: ', err);
           if (config.mailer.options.debug) {
             console.log('Error: ', err);
           }
