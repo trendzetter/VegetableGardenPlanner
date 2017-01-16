@@ -1,0 +1,19 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.friend.title"></h1>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.friend.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.friend.user" ng-bind="vm.friend.user.displayName"></span>
+      <span ng-if="!vm.friend.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.friend.content"></p>
+</section>
+</section>
+</section>

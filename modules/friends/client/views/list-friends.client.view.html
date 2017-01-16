@@ -1,0 +1,25 @@
+<section class="content">
+  <section class="container">
+<section>
+  <div class="page-header">
+    <h1>Friends</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="friend in vm.friends" ui-sref="friends.view({ friendId: friend._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="friend.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="friend.user" ng-bind="friend.user.displayName"></span>
+        <span ng-if="!friend.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="friend.title"></h4>
+      <p class="list-group-item-text" ng-bind="friend.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.friends.$resolved && !vm.friends.length" >
+    <span translate>no_friends_yet</span><a ui-sref="friends.search" translate>search_for_friends</a><a ui-sref="friends.invite" translate>invite_friends</a>
+  </div>
+</section>
+</section>
+</section>

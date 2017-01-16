@@ -178,5 +178,9 @@
   "after": "Na",
   "wait": " wacht ",
   "no": " geen ",
-  "crop_groups": "Groentengroepen: "
+  "crop_groups": "Groentengroepen: ",
+  "no_friends_yet": "Je bent nog niet met je vrienden geconnecteerd.",
+  "search_for_friends": "Zoek je vrienden op ",
+  "invite_friends": "of nodig ze uit om mee te doen.",
+  "search_friends": "Vrienden zoeken:"
 }

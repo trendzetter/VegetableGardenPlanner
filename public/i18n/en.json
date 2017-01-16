@@ -178,5 +178,9 @@
   "after": "After",
   "wait": " wait ",
   "no": " no ",
-  "crop_groups": "Crop groups: "
+  "crop_groups": "Crop groups: ",
+  "no_friends_yet": "You haven't connected to your friends yet.",
+  "search_for_friends": "Search for friends ",
+  "invite_friends": "or invite them to join.",
+  "search_friends": "Search Friends:"
 }

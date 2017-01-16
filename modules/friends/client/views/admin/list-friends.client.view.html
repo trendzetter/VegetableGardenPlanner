@@ -1,0 +1,26 @@
+﻿<section>
+  <div class="page-header">
+    <h1>
+      Friends
+      <a class="btn btn-primary pull-right" data-ui-sref="admin.friends.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="friend in vm.friends" data-ui-sref="admin.friends.edit({friendId: friend._id})" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="friend.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="friend.user" ng-bind="friend.user.displayName"></span>
+        <span ng-if="!friend.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="friend.title"></h4>
+      <p class="list-group-item-text" data-ng-bind="friend.content"></p>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="friends.$resolved && !friends.length">
+    No friends yet, why don't you <a data-ui-sref="admin.friends.create">create one</a>?
+  </div>
+</section>
