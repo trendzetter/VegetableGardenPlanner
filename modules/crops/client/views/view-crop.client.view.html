@@ -12,8 +12,12 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <div class="" >
-    Planten familie: {{ vm.crop.plantfamily.name }}
+  <div>
+    Planten familie: <a ui-sref="plantfamilies.view({plantFamilyId: vm.crop.plantfamily._id})">{{ vm.crop.plantfamily.name }}</a>
+  </div>
+  <p class="lead">Varïeteiten</p>
+  <div ng-repeat="variety in vm.varieties">
+    <a ui-sref="plant-varieties.view({plantVarietyId: variety._id})">{{ variety.name }}</a>
   </div>
   <small>
     <em class="text-muted">

@@ -8,6 +8,18 @@ var path = require('path'),
   Crop = mongoose.model('Crop'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+exports.getFamily = function(req, res) {
+  Crop.find({ plantfamily: req.params.familyId }).sort('name').exec(function(err, crops) {
+    if (err) {
+      return res.send(400, {
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(crops);
+    }
+  });
+};
+
 /**
  * Create an crop
  */

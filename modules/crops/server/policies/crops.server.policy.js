@@ -27,6 +27,9 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/crops',
       permissions: ['get', 'post']
     }, {
+      resources: '/api/crops/get-family/:familyId',
+      permissions: ['get']
+    }, {
       resources: '/api/crops/:cropId',
       permissions: ['get']
     }]

@@ -5,9 +5,9 @@
     .module('plantfamilies')
     .controller('PlantFamiliesController', PlantFamiliesController);
 
-  PlantFamiliesController.$inject = ['$scope', '$state', '$window', 'plantFamilyResolve', 'Authentication'];
+  PlantFamiliesController.$inject = ['$scope', '$state', '$window', 'plantFamilyResolve', 'Authentication', 'CropsService'];
 
-  function PlantFamiliesController($scope, $state, $window, plantfamily, Authentication) {
+  function PlantFamiliesController($scope, $state, $window, plantfamily, Authentication,CropsService) {
     var vm = this;
 
     vm.plantfamily = plantfamily;
@@ -16,6 +16,10 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+
+    if ($state.current.name === 'plantfamilies.view') {
+      vm.crops = CropsService.getFamily({familyId:vm.plantfamily._id});
+    }
 
     // Remove existing Article
     function remove() {

@@ -5,9 +5,9 @@
     .module('crops')
     .controller('CropsController', CropsController);
 
-  CropsController.$inject = ['$scope', '$state', '$window', 'cropResolve', 'Authentication', 'PlantFamilyService'];
+  CropsController.$inject = ['$scope', '$state', '$window', 'cropResolve', 'Authentication', 'PlantFamilyService','PlantVarietiesService'];
 
-  function CropsController($scope, $state, $window, crop, Authentication, PlantFamilyService) {
+  function CropsController($scope, $state, $window, crop, Authentication, PlantFamilyService,PlantVarietiesService) {
     var vm = this;
 
     vm.crop = crop;
@@ -19,8 +19,11 @@
 
     // adding the list of plantfamilies
     //  if($state.current.name === 'crops.edit'){
-    vm.plantfamilies = PlantFamilyService.query();
-    // }
+    if ($state.current.name !== 'crops.view') {
+      vm.plantfamilies = PlantFamilyService.query();
+    }else{
+      vm.varieties = PlantVarietiesService.getCrop({cropId:vm.crop._id});
+    }
 
     // Remove existing Crop
     function remove() {

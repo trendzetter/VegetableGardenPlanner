@@ -12,6 +12,9 @@ module.exports = function (app) {
     .get(crops.list)
     .post(crops.create);
 
+  app.route('/api/crops/get-family/:familyId').all(cropsPolicy.isAllowed)
+    .get(crops.getFamily);
+
   // Single crop routes
   app.route('/api/crops/:cropId').all(cropsPolicy.isAllowed)
     .get(crops.read)

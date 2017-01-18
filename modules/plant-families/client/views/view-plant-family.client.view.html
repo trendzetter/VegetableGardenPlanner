@@ -12,6 +12,11 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
+  <p class="lead">Gewassen</p>
+  <div ng-repeat="crop in vm.crops">
+    <a ui-sref="crops.view({cropId: crop._id})">{{ crop.name }}</a>
+  </div>
+  <div>
   <small>
     <em class="text-muted">
         <span translate>{{ 'posted_on'|translate:{date:vm.plantfamily.created} }}</span>

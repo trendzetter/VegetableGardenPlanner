@@ -13,6 +13,11 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      getFamily: {
+      method: 'GET',
+      url: '/api/crops/get-family/:familyId',
+      isArray: true
       }
     });
   }
