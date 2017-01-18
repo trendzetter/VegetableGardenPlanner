@@ -52,15 +52,23 @@
       .state('plant-varieties.view', {
         url: '/:plantVarietyId',
         templateUrl: '/modules/plant-varieties/client/views/view-plant-variety.client.view.html',
-        controller: 'PlantVarietiesController',
+        controller: 'ViewVarietyController',
         controllerAs: 'vm',
         resolve: {
-          plantVarietyResolve: getPlantVariety
+          plantVarietyResolve: getPlantVarietyWithCrop
         },
         data: {
           pageTitle: 'Plant variety {{ plantVarietyResolve.title }}'
         }
       });
+  }
+
+  getPlantVarietyWithCrop.$inject = ['$stateParams', 'PlantVarietiesService'];
+
+  function getPlantVarietyWithCrop($stateParams, PlantVarietiesService) {
+    return PlantVarietiesService.getWithCrop({
+      varietyId: $stateParams.plantVarietyId
+    }).$promise;
   }
 
   getPlantVariety.$inject = ['$stateParams', 'PlantVarietiesService'];

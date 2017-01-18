@@ -23,7 +23,14 @@ module.exports = function(app) {
     .put(plantVarieties.update)
     .delete(plantVarieties.delete);
 
+  // Bypassing the middleware
+  app.route('/api/plant-varieties/with-crop/:varietyId').all(plantVarietiesPolicy.isAllowed)
+    .get(plantVarieties.read)
+
   // Finish by binding the Plant variety middleware
   app.param('plantVarietyId', plantVarieties.plantVarietyByID);
+
+    // Finish by binding the Plant variety middleware
+  app.param('varietyId', plantVarieties.varietyWithCrop);
 
 };

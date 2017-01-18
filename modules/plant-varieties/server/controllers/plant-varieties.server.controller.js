@@ -165,6 +165,15 @@ exports.getCrop = function(req, res) {
  * Plant variety middleware
  */
 exports.plantVarietyByID = function(req, res, next, id) {  
+  PlantVariety.findById(id).populate('user','displayName').exec(function(err, plantVariety) {
+    if (err) return next(err);
+    if (!plantVariety) return next(new Error('Failed to load Plant variety ' + id));
+    req.plantVariety = plantVariety;
+    next();
+  });
+};
+
+exports.varietyWithCrop = function(req, res, next, id) {  
   PlantVariety.findById(id).populate('user','displayName').populate('crop','name').exec(function(err, plantVariety) {
     if (err) return next(err);
     if (!plantVariety) return next(new Error('Failed to load Plant variety ' + id));

@@ -24,6 +24,9 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/plant-varieties/get-crop/:cropId',
       permissions: ['get']
     }, {
+      resources: '/api/plant-varieties/with-crop/:varietyId',
+      permissions: ['get']
+    }, {
       resources: '/api/plant-varieties/:plantVarietyId',
       permissions: ['get', 'put', 'delete']
     }]
