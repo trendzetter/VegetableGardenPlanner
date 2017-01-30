@@ -9,7 +9,7 @@
 
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'Friends',
+      title: 'friends',
       state: 'friends',
       type: 'dropdown',
       roles: ['user']

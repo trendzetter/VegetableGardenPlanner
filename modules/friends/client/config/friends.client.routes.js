@@ -24,7 +24,7 @@
         }
       })
       .state('friends.search', {
-        url: '',
+        url: '/search',
         templateUrl: '/modules/friends/client/views/search-friends.client.view.html',
         controller: 'FriendsSearchController',
         controllerAs: 'vm',

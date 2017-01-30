@@ -13,6 +13,11 @@
     }, {
       update: {
         method: 'PUT'
+      },
+      search: {
+        method: 'GET',
+        url: '/api/friends/search/:friendName',
+        isArray: true
       }
     });
 

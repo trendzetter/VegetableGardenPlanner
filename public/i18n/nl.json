@@ -155,7 +155,7 @@
   "cm_in_row_is_required": "Cm tussen planten in een rij is vereist.",
   "cm_between_row_is_required": "Cm tussen de rijen is vereist.",
   "no_messages_yet": "Nog geen berichten. Je zal berichten onvangen als je teeltplannen toepast op je moestuin.",
-  "intro": "Hier kan je je eigen groententuin ontwerpen en al je plannen bewaren. Het programma zal je assisteren in je keuzes en verwittigd je van belangrijke gebeurtenissen.",
+  "intro": "Hier kan je je eigen groententuin ontwerpen en al je plannen bewaren. Het programma zal je assisteren in je keuzes en verwittigd je over belangrijke gebeurtenissen.",
   "discovery_what_others_sow": "Ondek wat anderen zaaien.",
   "receive_message_when_plant": "Ontvang bericht wanneer te planten.",
   "apply_crop_rotation": "Pluk de vruchten van wisselteelt zonder vele mislukkingen als leergeld.",
@@ -182,5 +182,6 @@
   "no_friends_yet": "Je bent nog niet met je vrienden geconnecteerd.",
   "search_for_friends": "Zoek je vrienden op ",
   "invite_friends": "of nodig ze uit om mee te doen.",
-  "search_friends": "Vrienden zoeken:"
+  "search_friends": "Vrienden zoeken:",
+  "friends": "Vrienden"
 }
