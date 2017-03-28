@@ -28,7 +28,7 @@
 
     // Disable debug data for production environment
     // @link https://docs.angularjs.org/guide/production
-    $compileProvider.debugInfoEnabled(app.applicationEnvironment !== 'production');
+   // $compileProvider.debugInfoEnabled(app.applicationEnvironment !== 'production');
     $logProvider.debugEnabled(app.applicationEnvironment !== 'production');
   }
 

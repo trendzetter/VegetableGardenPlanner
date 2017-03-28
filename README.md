@@ -1,21 +1,18 @@
 [![VegetableGardenPlanner Logo](http://localhost:3000/modules/core/client/img/brand/en.png)](http://www.VegetableGardenPlanner.org/)
 
 [![Gitter]('https://badges.gitter.im/Join Chat.svg')](https://gitter.im/VegetableGardenPlanner)
-[![Build Status](https://travis-ci.org/VegetableGardenPlanner/mean.svg?branch=master)](https://travis-ci.org/VegetableGardenPlanner/mean)
-[![Dependencies Status](https://david-dm.org/VegetableGardenPlanner/mean.svg)](https://david-dm.org/VegetableGardenPlanner/mean)
-[![Coverage Status](https://coveralls.io/repos/VegetableGardenPlanner/mean/badge.svg?branch=master&service=github)](https://coveralls.io/github/VegetableGardenPlanner/mean?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/VegetableGardenPlanner/mean/badge.svg)](https://snyk.io/test/github/VegetableGardenPlanner/mean)
 
 ## Getting started
 Try our [running application](http://www.VegetableGardenPlanner.org) 
 
 ## Mission statement
-Our aim is to develop technology based answers to the problems of designing and maintaining food gardens. Combining wisdom of the crowds and algorithms our tools aim to assist with planning through virtualization in space and time of the food garden system. This allows to reduce the number of difficult choices to be made while undertaking such endeavor. The planner is used for automating the knowledge provided by users. Using the history of the food garden the system improves its assistance features such as crop rotational advice. Users can share their knowledge and show off their results. Community feedback allows us to recognize authority on specific subjects, in turn motivating users to provide the community the best expertise on cultivation planning. The system provides a quick and precise view on the past which supports improved human decisions as well as experiments with cultivation practices.  
-Over time our tools could expand into 3D, virtual reality and augmented reality for a more rich client experience. Open data on weather, soil and climate could be used to feed the algorithms and build a more complete virtualization. We could move into the field of robotics to build a food garden maintenance robot easing the work on the food garden even further and adding more sources of data for our planner using sensors on the bot.
+Our aim is to develop technology based answers to the problems of designing and maintaining vegetable gardens. Combining wisdom of the crowds and algorithms our tools aim to assist with planning through virtualization in space and time of the vegetable garden system. This allows to reduce the number of difficult choices to be made while starting and keeping a vegetable garden. The planner is used for automating the knowledge provided by users. Using the history of the vegetable garden the system improves its assistance features such as crop rotational advice. Users can share their knowledge and show off their results. Community feedback allows us to recognize authority on specific subjects, in turn motivating users to provide the community the best expertise on cultivation planning. The system provides a quick and precise view on the past which supports improved human decisions as well as experiments with cultivation practices.  
+Over time our tools could expand into 3D, virtual reality and augmented reality for a more rich client experience. Open data on weather, soil and climate could be used to feed the algorithms and build a more complete virtualization. We could move into the field of robotics to build a vegetable garden maintenance robot easing the work on the vegetable garden even further and adding more sources of data for our planner using sensors on the bot.
 Big issues such as internationalization still need to be addressed but our guiding principle is that when design choices need to made we try to pick the most universally applicable solution while keeping it simple enough to practically use now.
 
 ## Prerequisites for development
 Make sure you have installed all of the following prerequisites on your development machine:
+
 * Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
 
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
