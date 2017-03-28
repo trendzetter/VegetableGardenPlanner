@@ -1,6 +1,6 @@
-[![VegetableGardenPlanner Logo](http://localhost:3000/modules/core/client/img/brand/en.png)](http://www.VegetableGardenPlanner.org/)
+[![VegetableGardenPlanner Logo](http://www.vegetablegardenplanner.org/modules/core/client/img/brand/en.png)](http://www.VegetableGardenPlanner.org/)
 
-[![Gitter]('https://badges.gitter.im/Join Chat.svg')](https://gitter.im/VegetableGardenPlanner)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/VegetableGardenPlanner/Lobby)
 
 ## Getting started
 Try our [running application](http://www.VegetableGardenPlanner.org) 
@@ -128,9 +128,8 @@ You have VegetableGardenPlanner running, but there is a lot of stuff to understa
 In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep it updated by your request. You can also help us develop and improve the documentation by checking out the *gh-pages* branch of this repository.
 
 ## Community
-* Use the [Official Website](http://www.VegetableGardenPlanner.org) to learn about changes and the roadmap.
-* Discuss it in the new [Google Group](https://groups.google.com/d/forum/VegetableGardenPlanner)
-* Ping us on [Twitter](http://twitter.com/VegetableGardenPlanner) and [Facebook](http://facebook.com/VegetableGardenPlanner)
+* Use the [Official Website](http://www.VegetableGardenPlanner.org) to learn about changes.
+* Ping us on [Gitter](https://gitter.im/VegetableGardenPlanner/Lobby)
 
 ## Contributing
 We welcome pull requests from the community! Just be sure to read the [contributing](https://github.com/VegetableGardenPlanner/mean/blob/master/CONTRIBUTING.md) doc to get started.
