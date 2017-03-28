@@ -1,6 +1,6 @@
 [![VegetableGardenPlanner Logo](http://www.vegetablegardenplanner.org/modules/core/client/img/brand/en.png)](http://www.VegetableGardenPlanner.org/)
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/VegetableGardenPlanner/Lobby)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/VegetableGardenPlanner/Lobby)
 
 ## Getting started
 Try our [running application](http://www.VegetableGardenPlanner.org) 
