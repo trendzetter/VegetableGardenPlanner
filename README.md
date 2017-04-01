@@ -125,7 +125,7 @@ It is also possible to run any Gulp tasks using npm's run command and therefore 
 
 ## Getting Started With VegetableGardenPlanner
 You have VegetableGardenPlanner running, but there is a lot of stuff to understand. We recommend you go over the [Official Documentation](http://VegetableGardenPlanner.org/docs.html).
-In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep it updated by your request. You can also help us develop and improve the documentation by checking out the *gh-pages* branch of this repository.
+In the docs we'll try to explain both general concepts of and give you some guidelines to help you improve your system. We tried covering as many aspects as possible, and will keep it updated by your request.
 
 ## Community
 * Use the [Official Website](http://www.VegetableGardenPlanner.org) to learn about changes.
